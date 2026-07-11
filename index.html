@@ -32,15 +32,46 @@
         .menu-items { display: flex; flex-direction: column; gap: 20px; flex-grow: 1; }
         .menu-items a { font-size: 16px; font-weight: 600; border-bottom: 1px solid #f9f9f9; padding-bottom: 10px; }
         
-        /* Bar Login & Admin Note (Dinaikin Dikit) */
-        .sidebar-bottom { margin-top: auto; margin-bottom: 40px; } /* Jarak bawah ditambah biar tombol naik */
+        /* Bar Login & Admin Note */
+        .sidebar-bottom { margin-top: auto; margin-bottom: 40px; }
         .admin-note { font-size: 12px; color: #888888; text-align: center; margin-bottom: 10px; line-height: 1.4; }
         .login-bar { display: block; padding: 15px; background: #222222; color: #ffffff; text-align: center; border-radius: 8px; font-weight: 600; font-size: 16px; }
 
         /* Halaman Utama / Produk */
         .main-content { padding: 30px 20px; text-align: center; max-width: 500px; margin: auto; }
         .product-name { font-size: 28px; font-weight: 700; margin: 0 0 20px 0; }
-        .product-img { width: 100%; max-width: 320px; margin: 0 auto 20px auto; display: block; }
+        
+        /* === CSS CAROUSEL (TANPA BG HITAM) === */
+        .carousel-container {
+            width: 100%;
+            max-width: 320px;
+            margin: 0 auto 20px auto;
+            overflow: hidden; 
+        }
+        .carousel-track {
+            display: flex;
+            width: 200%;
+            -webkit-animation: slideAnimation 8s infinite ease-in-out;
+            animation: slideAnimation 8s infinite ease-in-out;
+        }
+        .carousel-slide {
+            width: 50%;
+            display: block;
+            flex-shrink: 0;
+        }
+
+        @-webkit-keyframes slideAnimation {
+            0%, 40% { -webkit-transform: translateX(0); transform: translateX(0); }
+            50%, 90% { -webkit-transform: translateX(-50%); transform: translateX(-50%); }
+            100% { -webkit-transform: translateX(0); transform: translateX(0); }
+        }
+
+        @keyframes slideAnimation {
+            0%, 40% { transform: translateX(0); }
+            50%, 90% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
+
         .price { font-size: 24px; font-weight: 700; color: #b30000; margin-bottom: 25px; }
         
         /* Tombol Beli */
@@ -86,8 +117,12 @@
     <div class="main-content" id="produk">
         <div class="product-name">VoidPods Pro</div>
         
-        <img src="https://i.ibb.co.com/gMs8J5pn/8504.png" alt="VoidPods Pro" class="product-img">
-        
+        <div class="carousel-container">
+            <div class="carousel-track">
+                <img src="https://i.ibb.co.com/gMs8J5pn/8504.png" alt="VoidPods Pro Black" class="carousel-slide">
+                <img src="https://i.ibb.co.com/S4RBg5cW/8618.png" alt="VoidPods Pro White" class="carousel-slide">
+            </div>
+        </div>
         <div class="price">IDR 249.000</div>
         
         <a href="form.html" class="btn-beli">Beli sekarang</a>
@@ -124,6 +159,7 @@
             overlay.classList.toggle('active');
         }
     </script>
-
 </body>
-                      </html>
+</html>
+
+        
