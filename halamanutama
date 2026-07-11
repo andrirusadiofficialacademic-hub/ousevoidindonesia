@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OUSEVOID | Official</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Base Setup dengan Font Fredoka */
+        body { margin: 0; font-family: 'Fredoka', sans-serif; color: #222222; background: #ffffff; }
+        a { text-decoration: none; color: inherit; }
+        
+        /* Header: Logo Kiri, Bar 3 Kanan */
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid #eeeeee; position: sticky; top: 0; background: #ffffff; z-index: 100; }
+        .logo { width: 130px; }
+        
+        /* Hamburger Menu (Bar 3) */
+        .menu-btn { display: flex; flex-direction: column; gap: 5px; cursor: pointer; z-index: 1002; padding: 5px; }
+        .menu-btn span { width: 24px; height: 3px; background: #222222; transition: 0.3s; border-radius: 2px; }
+        
+        /* Sidebar: Muncul dari Kanan */
+        .sidebar { position: fixed; top: 0; right: -300px; width: 260px; height: 100%; background: #ffffff; box-shadow: -2px 0 5px rgba(0,0,0,0.1); z-index: 1001; transition: right 0.3s ease; padding: 80px 20px 20px 20px; box-sizing: border-box; display: flex; flex-direction: column; }
+        .sidebar.active { right: 0; }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; display: none; opacity: 0; transition: 0.3s; }
+        .overlay.active { display: block; opacity: 1; }
+        
+        /* Menu Items */
+        .menu-items { display: flex; flex-direction: column; gap: 20px; flex-grow: 1; }
+        .menu-items a { font-size: 16px; font-weight: 600; border-bottom: 1px solid #f9f9f9; padding-bottom: 10px; }
+        
+        /* Bar Login & Admin Note (Dinaikin Dikit) */
+        .sidebar-bottom { margin-top: auto; margin-bottom: 40px; } /* Jarak bawah ditambah biar tombol naik */
+        .admin-note { font-size: 12px; color: #888888; text-align: center; margin-bottom: 10px; line-height: 1.4; }
+        .login-bar { display: block; padding: 15px; background: #222222; color: #ffffff; text-align: center; border-radius: 8px; font-weight: 600; font-size: 16px; }
+
+        /* Halaman Utama / Produk */
+        .main-content { padding: 30px 20px; text-align: center; max-width: 500px; margin: auto; }
+        .product-name { font-size: 28px; font-weight: 700; margin: 0 0 20px 0; }
+        .product-img { width: 100%; max-width: 320px; margin: 0 auto 20px auto; display: block; }
+        .price { font-size: 24px; font-weight: 700; color: #b30000; margin-bottom: 25px; }
+        
+        /* Tombol Beli */
+        .btn-beli { display: block; width: 100%; background: #222222; color: #ffffff; padding: 15px 0; border-radius: 8px; font-weight: 600; font-size: 16px; margin-bottom: 12px; }
+
+        /* Footer & Kontak */
+        .footer { padding: 40px 20px 30px 20px; background: #ffffff; text-align: left; font-size: 14px; color: #444444; line-height: 1.6; border-top: 1px solid #eeeeee; }
+        .footer-contact { margin-bottom: 30px; }
+        .footer-address { margin-bottom: 30px; font-size: 14px; }
+        .company-name { font-weight: 700; font-size: 16px; color: #111111; }
+        
+        /* Hak Cipta */
+        .copyright { font-size: 12px; color: #888888; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Logo" class="logo">
+        <div class="menu-btn" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+    <div class="sidebar" id="sidebar">
+        <div class="menu-items">
+            <a href="#produk" onclick="toggleMenu()">Produk</a>
+            <a href="#promo" onclick="toggleMenu()">Promo dan Diskon</a>
+            <a href="#faq" onclick="toggleMenu()">FAQ</a>
+            <a href="#dukungan" onclick="toggleMenu()">Dukungan</a>
+            <a href="#tentang-kami" onclick="toggleMenu()">Tentang Kami</a>
+        </div>
+        
+        <div class="sidebar-bottom">
+            <div class="admin-note">Akses admin untuk update produk dan layanan</div>
+            <a href="#login" class="login-bar" onclick="toggleMenu()">Login</a>
+        </div>
+    </div>
+
+    <div class="main-content" id="produk">
+        <div class="product-name">VoidPods Pro</div>
+        
+        <img src="https://i.ibb.co.com/gMs8J5pn/8504.png" alt="VoidPods Pro" class="product-img">
+        
+        <div class="price">IDR 249.000</div>
+        
+        <a href="form.html" class="btn-beli">Beli sekarang</a>
+    </div>
+
+    <div class="footer">
+        <div class="footer-contact">
+            Untuk penyampaian pesan, keluhan maupun pengaduan dapat menghubungi:<br><br>
+            <a href="https://wa.me/6285715000443" style="color: #25D366; font-weight: 700; font-size: 15px; display: inline-flex; align-items: center; gap: 8px;">
+                <svg style="width: 18px; height: 18px; fill: #25D366;" viewBox="0 0 24 24">
+                    <path d="M12.031 0C5.383 0 0 5.383 0 12.031c0 2.128.553 4.195 1.604 6.002L.197 23.353l5.474-1.436c1.737.95 3.705 1.452 5.753 1.452h.005c6.645 0 12.03-5.383 12.03-12.031S18.07 0 12.031 0zm0 21.365h-.004c-1.802 0-3.568-.484-5.116-1.401l-.367-.217-3.8.997 1.018-3.704-.238-.378C2.56 15.08 2.012 13.23 2.012 12.03c0-5.534 4.502-10.035 10.035-10.035 2.68 0 5.2 1.045 7.095 2.94a10.007 10.007 0 012.935 7.095c-.001 5.534-4.503 10.035-10.046 10.035zm5.503-7.524c-.302-.15-1.787-.882-2.064-.984-.277-.101-.48-.15-.682.152-.202.302-.78 1.002-.956 1.203-.176.202-.353.227-.655.076-2.027-.978-3.486-2.222-4.22-3.487-.106-.182-.01-.281.141-.43.136-.134.302-.352.453-.529.151-.176.201-.302.302-.503.101-.202.05-.378-.025-.529-.076-.151-.682-1.644-.935-2.25-.246-.593-.497-.513-.682-.522-.176-.009-.378-.009-.58-.009-.202 0-.529.076-.806.378-.277.302-1.057 1.032-1.057 2.518 0 1.486 1.082 2.923 1.233 3.125.151.202 2.13 3.253 5.161 4.557.72.311 1.28.497 1.718.636.723.23 1.382.197 1.9.12.583-.087 1.787-.73 2.039-1.435.251-.705.251-1.31.176-1.435-.075-.126-.277-.202-.579-.353z"/>
+                </svg>
+                +62 857 15000 443
+            </a>
+        </div>
+        
+        <div class="footer-address">
+            Kantor Pusat:<br>
+            <span class="company-name">PT Ousevoid Lintas Batas</span><br>
+            Jl. K.H. Zainul Arifin No. 71, Duri Pulo<br>
+            Kec. Gambir, Jakarta Pusat 10140
+        </div>
+        
+        <div class="copyright">
+            &copy; 2026 PT Ousevoid Lintas Batas. Hak Cipta Dilindungi Undang-Undang.
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+    </script>
+
+</body>
+</html>
