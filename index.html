@@ -7,22 +7,35 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        body { margin: 0; font-family: 'Fredoka', sans-serif; color: #222222; background: #ffffff; scroll-behavior: smooth; }
+        body { margin: 0; font-family: 'Inter', sans-serif; color: #222222; background: #ffffff; scroll-behavior: smooth; }
         a { text-decoration: none; color: inherit; cursor: pointer; }
         
-        .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid #eeeeee; position: sticky; top: 0; background: #ffffff; z-index: 100; }
-        .logo { width: 130px; }
+        /* Header & Logo */
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid #eeeeee; position: sticky; top: 0; background: #ffffff; z-index: 1000; }
+        .logo { width: 130px; background: transparent; }
         
-        .menu-btn { display: flex; flex-direction: column; gap: 5px; cursor: pointer; z-index: 1002; padding: 5px; }
-        .menu-btn span { width: 24px; height: 3px; background: #222222; transition: 0.3s; border-radius: 2px; }
+        /* Area Kanan Header (Keranjang + Menu) */
+        .header-right { display: flex; align-items: center; gap: 15px; position: relative; z-index: 9999; }
         
-        .sidebar { position: fixed; top: 0; right: -300px; width: 260px; height: 100%; background: #ffffff; box-shadow: -2px 0 5px rgba(0,0,0,0.1); z-index: 1001; transition: right 0.3s ease; padding: 80px 20px 20px 20px; box-sizing: border-box; display: flex; flex-direction: column; overflow-y: auto; }
+        /* Icon Keranjang */
+        .cart-btn { cursor: pointer; display: flex; align-items: center; justify-content: center; color: #222222; padding: 5px; transition: 0.2s; position: relative; z-index: 9999; }
+        .cart-btn:active { color: #b30000; }
+        .cart-btn svg { width: 24px; height: 24px; pointer-events: none; }
+
+        /* Tombol Menu Sidebar */
+        .menu-btn { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; position: relative; z-index: 9999; }
+        .menu-btn span { width: 24px; height: 3px; background: #222222; border-radius: 2px; display: block; }
+        
+        /* Sidebar & Overlay */
+        .sidebar { position: fixed; top: 0; right: -300px; width: 260px; height: 100%; background: #ffffff; box-shadow: -2px 0 5px rgba(0,0,0,0.1); z-index: 1002; transition: right 0.3s ease; padding: 80px 20px 20px 20px; box-sizing: border-box; display: flex; flex-direction: column; overflow-y: auto; }
         .sidebar.active { right: 0; }
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; display: none; opacity: 0; transition: 0.3s; }
-        .overlay.active { display: block; opacity: 1; }
+        
+        /* HARD FIX OVERLAY: Pakai display none biar aplikasinya gak nge-bug */
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1001; display: none; }
+        .overlay.active { display: block; }
         
         .menu-items { display: flex; flex-direction: column; gap: 15px; flex-grow: 1; }
         .menu-link { font-size: 16px; font-weight: 600; border-bottom: 1px solid #f9f9f9; padding-bottom: 12px; display: block; cursor: pointer; }
@@ -31,41 +44,28 @@
         .login-bar { display: block; padding: 15px; background: #222222; color: #ffffff; text-align: center; border-radius: 8px; font-weight: 600; cursor: pointer; }
 
         .main-content { padding: 40px 20px 100px 20px; text-align: center; max-width: 500px; margin: auto; min-height: 400px; }
-        .product-name { font-size: 28px; font-weight: 700; margin: 0 0 20px 0; }
+        .product-name { font-size: 26px; font-weight: 700; margin: 0 0 25px 0; }
         
-        .display-container { width: 100%; max-width: 320px; margin: 0 auto 20px auto; overflow: hidden; border-radius: 12px;}
-        .carousel-track { display: flex; width: 200%; animation: slideAnimation 8s infinite ease-in-out; }
-        .carousel-slide { width: 50%; display: block; }
-        .product-img { width: 100%; display: block; border-radius: 12px; }
-
-        @keyframes slideAnimation {
-            0%, 45% { transform: translateX(0); }
-            50%, 95% { transform: translateX(-50%); }
-            100% { transform: translateX(0); }
-        }
-
-        .price-container { margin-bottom: 25px; }
-        .old-price { font-size: 18px; color: #999; text-decoration: line-through; display: block; }
-        .new-price { font-size: 28px; font-weight: 700; color: #b30000; }
-
-        .btn-beli { display: block; width: 100%; background: #222222; color: #ffffff; padding: 15px 0; border-radius: 8px; font-weight: 600; border: none; cursor: pointer; font-family: 'Fredoka', sans-serif; font-size: 16px; margin-top: 20px; }
+        .btn-beli { display: block; width: 100%; background: #222222; color: #ffffff; padding: 12px 0; border-radius: 8px; font-weight: 600; border: none; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 14px; margin-top: 10px; }
         
+        /* Layout Grid 2 Kolom untuk Produk */
         .katalog-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; text-align: left; }
-        .katalog-card { border: 1px solid #eee; padding: 12px; border-radius: 12px; text-align: center; background: #fff; }
-        .katalog-card img { width: 100%; border-radius: 8px; margin-bottom: 10px; }
-        .katalog-card h3 { font-size: 13px; font-weight: 700; margin: 0 0 5px 0; color: #222; }
-        .katalog-card .harga { font-size: 14px; font-weight: 700; color: #b30000; margin-bottom: 10px; }
-        .btn-detail { background: #222; color: #fff; padding: 8px; width: 100%; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: 'Fredoka', sans-serif; }
+        .katalog-card { border: 1px solid #eee; padding: 12px; border-radius: 12px; text-align: center; background: #fff; display: flex; flex-direction: column; justify-content: space-between; }
+        .katalog-card img { width: 100%; border-radius: 8px; margin-bottom: 10px; display: block; }
+        .katalog-card h3 { font-size: 15px; font-weight: 700; margin: 0 0 5px 0; color: #222; text-align: left; }
+        .katalog-card .harga { font-size: 15px; font-weight: 700; color: #b30000; margin-bottom: 8px; text-align: left; }
+        .katalog-card .specs-text { font-size: 12px; color: #666; text-align: left; line-height: 1.5; margin-bottom: 10px; }
 
-        .specs-container { text-align: left; padding: 20px 0; margin: 20px 0; }
-        .specs-title { font-weight: 700; font-size: 16px; margin-bottom: 12px; display: block; }
-        .specs-list { margin: 0; padding: 0; list-style: none; font-size: 14px; color: #444; line-height: 1.8; }
-        .specs-list li { border-bottom: 1px solid #f0f0f0; padding: 10px 0; display: flex; align-items: center; gap: 10px; }
-        .spec-icon { display: inline-flex; align-items: center; justify-content: center; color: #666666; flex-shrink: 0; }
-        
-        .contact-box { padding: 40px; border: 2px dashed #eee; border-radius: 15px; margin-top: 20px; text-align: center; }
-        .btn-wa { display: inline-block; background: #25D366; color: white; padding: 15px 30px; border-radius: 30px; font-weight: 700; margin-top: 20px; }
+        /* Tampilan Mode Katalog HP (Toko) */
+        .phone-catalog { display: flex; flex-direction: column; gap: 15px; width: 100%; text-align: left; }
+        .phone-item { display: flex; align-items: center; border: 1px solid #e5e5e7; padding: 15px; border-radius: 14px; background: #fff; gap: 20px; box-sizing: border-box; }
+        .phone-img { width: 95px; height: 95px; object-fit: cover; border-radius: 10px; flex-shrink: 0; background: #f9f9f9; }
+        .phone-details { flex-grow: 1; display: flex; flex-direction: column; gap: 4px; }
+        .phone-details h3 { margin: 0; font-size: 16px; font-weight: 700; color: #222; }
+        .phone-details .harga { font-size: 15px; font-weight: 700; color: #b30000; margin-bottom: 5px; }
+        .phone-details .btn-beli-catalog { background: #222; color: #fff; border: none; padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; align-self: flex-start; font-family: 'Inter', sans-serif; }
 
+        /* Footer */
         .footer { padding: 60px 20px; background: #ffffff; text-align: left; font-size: 13px; color: #555555; border-top: 1px solid #eeeeee; }
         .footer-contact-info { margin-bottom: 25px; }
         .footer-contact-item { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
@@ -73,22 +73,35 @@
         .footer-profile-title { font-weight: 700; color: #111111; margin-bottom: 10px; font-size: 14px; }
         .footer-profile-text { line-height: 1.6; color: #666666; margin-bottom: 15px; }
         .footer-hq { margin-bottom: 25px; }
-        .footer-hq-logo { width: 100px; margin-bottom: 10px; display: block; }
+        .footer-hq-logo { width: 100px; margin-bottom: 10px; display: block; background: transparent; }
         .footer-office { font-weight: 400; color: #555555; margin-bottom: 5px; }
         .footer-brand { font-weight: 700; color: #111111; margin-bottom: 5px; }
-        .footer-address { line-height: 1.6; font-style: normal; }
-        .footer-gov { margin-bottom: 20px; padding: 10px; background: #f9f9f9; border-radius: 5px; font-size: 12px; line-height: 1.5; }
-        .copyright { font-size: 11px; color: #888888; border-top: 1px solid #eeeeee; padding-top: 15px; }
+        .footer-address { line-height: 1.6; font-style: normal; margin-bottom: 20px; }
+        
+        /* Didukung oleh Component Area */
+        .footer-supported { margin-top: 25px; padding-top: 20px; border-top: 1px dashed #e0e0e0; }
+        .supported-title { font-weight: 700; color: #111111; margin-bottom: 12px; font-size: 14px; }
+        .supported-images { display: flex; gap: 15px; align-items: center; margin-bottom: 12px; }
+        
+        /* MAGIC CSS Transparan JPG */
+        .supported-img { height: 35px; object-fit: contain; max-width: 120px; filter: invert(1); mix-blend-mode: multiply; }
+        
+        .supported-brand { font-weight: 700; color: #111111; margin-bottom: 5px; }
+        .supported-address { line-height: 1.6; color: #666666; }
 
-        /* --- TAMPILAN DESKTOP --- */
+        .footer-gov { margin-bottom: 20px; padding: 10px; background: #f9f9f9; border-radius: 5px; font-size: 12px; line-height: 1.5; }
+        .copyright { font-size: 11px; color: #888888; border-top: 1px solid #eeeeee; padding-top: 15px; text-align: left; }
+
+        /* --- TAMPILAN DESKTOP LAPTOP --- */
         @media (min-width: 768px) {
-            .main-content { max-width: 1000px; } 
-            .display-container { max-width: 500px; } 
-            .btn-beli { max-width: 300px; margin: 20px auto 0 auto; }
-            .katalog-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; } 
+            .main-content { max-width: 900px; } 
+            .katalog-grid { grid-template-columns: repeat(2, 1fr); gap: 25px; } 
+            .phone-catalog { max-width: 600px; margin: 0 auto; }
             .footer { display: flex; flex-wrap: wrap; justify-content: space-between; padding: 60px 10%; }
-            .footer-profile { flex: 2; min-width: 300px; margin-right: 40px; border-bottom: none; }
-            .footer-contact-info, .footer-hq { flex: 1; min-width: 250px; }
+            #footer-main-info { display: flex; flex-wrap: wrap; width: 100%; justify-content: space-between; gap: 20px; }
+            .footer-profile { flex: 2; min-width: 320px; margin-right: 40px; border-bottom: none; }
+            .footer-contact-info { flex: 1; min-width: 250px; }
+            .footer-hq { flex: 1; min-width: 280px; }
             .footer-gov, .copyright { width: 100%; text-align: center; margin-top: 30px; }
         }
     </style>
@@ -96,9 +109,22 @@
 <body>
 
     <div class="header">
-        <a onclick="window.location.href=window.location.pathname" style="cursor:pointer;"><img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Logo" class="logo"></a>
-        <div class="menu-btn" onclick="toggleMenu()">
-            <span></span><span></span><span></span>
+        <a onclick="window.location.href=window.location.pathname" style="cursor:pointer;">
+            <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Logo" class="logo">
+        </a>
+        
+        <div class="header-right">
+            <div class="cart-btn" onclick="renderKatalog()" title="Buka Toko">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+            </div>
+            
+            <div class="menu-btn" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </div>
         </div>
     </div>
 
@@ -118,164 +144,172 @@
     </div>
 
     <div class="main-content" id="app">
-        <div class="product-name">VoidPods Pro</div>
-        
-        <div class="display-container">
-            <div class="carousel-track">
-                <img src="https://i.ibb.co.com/gMs8J5pn/8504.png" class="carousel-slide" alt="Black">
-                <img src="https://i.ibb.co.com/S4RBg5cW/8618.png" class="carousel-slide" alt="White">
+        <div class="katalog-grid">
+            <div class="katalog-card">
+                <img src="https://i.ibb.co.com/gMs8J5pn/8504.png" alt="Jet Black" onclick="renderProdukDetail(0)" style="cursor:pointer;">
+                <h3 onclick="renderProdukDetail(0)" style="cursor:pointer;">VoidPods Pro - Jet Black</h3>
+                <div class="harga">IDR 189.000</div>
+                <div class="specs-text">
+                    <b>Warna:</b> Jet Black Matte<br>
+                    <b>Chip:</b> VoidCore T1<br>
+                    <b>Koneksi:</b> Bluetooth 5.3<br>
+                    <b>Baterai:</b> 3-4 Jam Premium
+                </div>
+            </div>
+            <div class="katalog-card">
+                <img src="https://i.ibb.co.com/S4RBg5cW/8618.png" alt="Pure White" onclick="renderProdukDetail(1)" style="cursor:pointer;">
+                <h3 onclick="renderProdukDetail(1)" style="cursor:pointer;">VoidPods Pro - Pure White</h3>
+                <div class="harga">IDR 189.000</div>
+                <div class="specs-text">
+                    <b>Warna:</b> Pure White Glossy<br>
+                    <b>Chip:</b> VoidCore T1<br>
+                    <b>Koneksi:</b> Bluetooth 5.3<br>
+                    <b>Baterai:</b> 3-4 Jam Premium
+                </div>
             </div>
         </div>
-        
-        <div class="price-container">
-            <span class="old-price">IDR 249.000</span>
-            <span class="new-price">IDR 189.000</span>
-        </div>
-
-        <button class="btn-beli" onclick="renderKatalog()">Lihat Semua Produk</button>
     </div>
 
     <div class="footer">
-        <div class="footer-profile">
-            <div class="footer-profile-title">Tentang Ousevoid Lintas Batas</div>
-            <p class="footer-profile-text">Ousevoid adalah pelopor teknologi audio nirkabel premium yang didedikasikan untuk menghadirkan pengalaman mendengarkan imersif bagi masyarakat Indonesia. Kami fokus pada inovasi desain, kualitas suara superior, dan daya tahan baterai luar biasa dengan harga yang kompetitif.</p>
-        </div>
+        <div id="footer-main-info">
+            <div class="footer-profile">
+                <div class="footer-profile-title">Tentang Ousevoid Lintas Batas</div>
+                <p class="footer-profile-text">Ousevoid adalah pelopor teknologi audio nirkabel premium yang didedikasikan untuk menghadirkan pengalaman mendengarkan imersif bagi masyarakat Indonesia. Kami fokus pada inovasi desain, kualitas suara superior, dan daya tahan baterai luar biasa dengan harga yang kompetitif.</p>
+            </div>
 
-        <div class="footer-contact-info">
-            Apabila kamu mengalami kendala produk silakan hubungi Contact Center kami di:<br>
-            <div class="footer-contact-item">📧 email: ousevoid@gmail.com</div>
-            <a href="https://wa.me/6285715000443" class="footer-contact-item" style="color: inherit;">💬 WhatsApp: 0857 15000 443</a>
-        </div>
+            <div class="footer-contact-info">
+                Apabila kamu mengalami kendala produk silakan hubungi Contact Center kami di:<br>
+                <div class="footer-contact-item">📧 email: ousevoid@gmail.com</div>
+                <a href="https://wa.me/6285715000443" class="footer-contact-item" style="color: inherit;">💬 WhatsApp: 0857 15000 443</a>
+            </div>
 
-        <div class="footer-hq">
-            <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Ousevoid Logo" class="footer-hq-logo">
-            <div class="footer-office">Kantor Pusat</div>
-            <div class="footer-brand">PT Ousevoid Lintas Batas</div>
-            <div class="footer-address">Jl. K.H Zainul Arifin 71 Duri Pulo Gambir, Jakarta Pusat</div>
-        </div>
+            <div class="footer-hq">
+                <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Ousevoid Logo" class="footer-hq-logo">
+                <div class="footer-office">Kantor Pusat</div>
+                <div class="footer-brand">PT Ousevoid Lintas Batas</div>
+                <div class="footer-address">Jl. K.H Zainul Arifin 71 Duri Pulo Gambir Jakarta pusat, Indonesia 10140</div>
+                
+                <div class="footer-supported">
+                    <div class="supported-title">Didukung oleh:</div>
+                    <div class="supported-images">
+                        <img src="https://i.ibb.co.com/M51qc4Pr/8826-2.jpg" alt="Payment Gateway" class="supported-img">
+                        <img src="https://i.ibb.co.com/DHZj9dpW/8827-2.jpg" alt="e-Package Service" class="supported-img">
+                    </div>
+                    <div class="supported-brand">PT Gamoon Desember Indonesia</div>
+                    <div class="supported-address">Jl KP Bakti Raya 22 Cideng Gambir Jakarta Pusat, Indonesia 10150</div>
+                </div>
+            </div>
 
-        <div class="footer-gov">
-            Direktorat Jenderal Perlindungan Konsumen dan Tertib Niaga<br>
-            Kementerian Perdagangan Republik Indonesia<br>
-            WhatsApp: 0853-1111-1010
+            <div class="footer-gov">
+                Direktorat Jenderal Perlindungan Konsumen dan Tertib Niaga<br>
+                Kementerian Perdagangan Republik Indonesia<br>
+                WhatsApp: 0853-1111-1010
+            </div>
         </div>
         <div class="copyright">&copy; 2026 PT Ousevoid Lintas Batas. Semua Hak Cipta dilindungi.</div>
     </div>
 
     <script>
         let dataProduk = [
-            { id: 1, nama: "VoidPods Pro - Jet Black", hargaBaru: "IDR 189.000", gambar: "https://i.ibb.co.com/gMs8J5pn/8504.png", specs: { warna: "Jet Black Matte", chip: "VoidCore T1", koneksi: "Bluetooth 5.3", baterai: "3-4 Jam" } },
-            { id: 2, nama: "VoidPods Pro - Pure White", hargaBaru: "IDR 189.000", gambar: "https://i.ibb.co.com/S4RBg5cW/8618.png", specs: { warna: "Pure White Glossy", chip: "VoidCore T1", koneksi: "Bluetooth 5.3", baterai: "3-4 Jam" } }
+            { id: 1, nama: "VoidPods Pro - Jet Black", hargaBaru: "IDR 189.000", gambar: "https://i.ibb.co.com/gMs8J5pn/8504.png", specs: { warna: "Jet Black Matte", chip: "VoidCore T1", koneksi: "Bluetooth 5.3", baterai: "3-4 Jam", tuning: "Signature Deep Bass & Crystal Clear Treble" } },
+            { id: 2, nama: "VoidPods Pro - Pure White", hargaBaru: "IDR 189.000", gambar: "https://i.ibb.co.com/S4RBg5cW/8618.png", specs: { warna: "Pure White Glossy", chip: "VoidCore T1", koneksi: "Bluetooth 5.3", baterai: "3-4 Jam", tuning: "Signature Deep Bass & Crystal Clear Treble" } }
         ];
 
-        // --- SISTEM DETEKSI STATUS MIDTRANS ---
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
             const status = urlParams.get('status');
-            if (status === 'sukses') {
-                renderStatusTransaksi('sukses');
-            } else if (status === 'gagal') {
-                renderStatusTransaksi('gagal');
-            }
+            if (status === 'sukses') { renderStatusTransaksi('sukses'); } 
+            else if (status === 'gagal') { renderStatusTransaksi('gagal'); }
         };
 
-        function renderStatusTransaksi(tipe) {
-            const app = document.getElementById('app');
-            if (tipe === 'sukses') {
-                app.innerHTML = `
-                <div style="border:1px solid #eee; padding:40px 20px; border-radius:12px; max-width:400px; margin:auto; text-align:center; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
-                    <div style="font-size:50px; margin-bottom:10px;">✅</div>
-                    <h2 style="margin:0 0 10px 0; color:#222;">Pembayaran Berhasil</h2>
-                    <p style="font-size:14px; color:#555; margin-bottom:20px;">Transaksi Anda telah kami terima.</p>
-                    
-                    <div style="border-top:1px dashed #ccc; border-bottom:1px dashed #ccc; padding:20px 0; text-align:left;">
-                        <p style="margin:0 0 5px 0; font-size:12px; color:#888;">NAMA PRODUK</p>
-                        <p style="margin:0 0 15px 0; font-weight:700; font-size:16px;">VoidPods Pro</p>
-                        <p style="margin:0 0 5px 0; font-size:12px; color:#888;">NOMINAL PEMBAYARAN</p>
-                        <p style="margin:0; font-weight:700; font-size:18px; color:#b30000;">IDR 189.000</p>
-                    </div>
-                    
-                    <p style="font-size:13px; line-height:1.6; color:#555; margin-top:20px;">Terima kasih atas kepercayaan Anda bertransaksi dengan PT Ousevoid Lintas Batas. Tim kami akan segera memproses dan mengirimkan pesanan ke alamat tujuan Anda.</p>
-                    <button class="btn-beli" onclick="window.location.href=window.location.pathname" style="margin-top:25px;">Selesai</button>
-                </div>`;
-            } else {
-                app.innerHTML = `
-                <div style="border:1px solid #eee; padding:40px 20px; border-radius:12px; max-width:400px; margin:auto; text-align:center; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
-                    <div style="font-size:50px; margin-bottom:10px;">❌</div>
-                    <h2 style="margin:0 0 10px 0; color:#222;">Pembayaran Gagal</h2>
-                    <p style="font-size:14px; color:#555; margin-bottom:20px;">Transaksi dibatalkan atau ditolak.</p>
-                    
-                    <div style="border-top:1px dashed #ccc; border-bottom:1px dashed #ccc; padding:20px 0; text-align:left;">
-                        <p style="margin:0 0 5px 0; font-size:12px; color:#888;">NAMA PRODUK</p>
-                        <p style="margin:0 0 15px 0; font-weight:700; font-size:16px;">VoidPods Pro</p>
-                        <p style="margin:0 0 5px 0; font-size:12px; color:#888;">NOMINAL TAGIHAN</p>
-                        <p style="margin:0; font-weight:700; font-size:18px; color:#b30000;">IDR 189.000</p>
-                    </div>
-                    
-                    <p style="font-size:13px; line-height:1.6; color:#555; margin-top:20px;">Mohon maaf, transaksi Anda tidak dapat diproses. Silakan periksa kembali metode pembayaran Anda atau hubungi layanan pelanggan kami apabila terdapat kendala.</p>
-                    <button class="btn-beli" onclick="window.location.href=window.location.pathname" style="margin-top:25px;">Kembali ke Beranda</button>
-                </div>`;
+        function toggleMenu() { 
+            document.getElementById('sidebar').classList.toggle('active'); 
+            document.getElementById('overlay').classList.toggle('active'); 
+        }
+        function autoClose() { 
+            if(document.getElementById('sidebar').classList.contains('active')) toggleMenu(); 
+        }
+
+        function toggleFooterUtama(tampilkan) {
+            const footerInfo = document.getElementById('footer-main-info');
+            if (footerInfo) {
+                footerInfo.style.display = tampilkan ? 'block' : 'none';
+                if (tampilkan && window.innerWidth >= 768) {
+                    footerInfo.style.display = 'flex';
+                }
             }
-            window.scrollTo(0,0);
         }
 
-        function toggleMenu() { document.getElementById('sidebar').classList.toggle('active'); document.getElementById('overlay').classList.toggle('active'); }
-        function autoClose() { if(document.getElementById('sidebar').classList.contains('active')) toggleMenu(); }
-
+        // Tampilan Toko
         function renderKatalog() {
+            toggleFooterUtama(false);
             const app = document.getElementById('app');
-            let htmlKatalog = `<div class="product-name">Katalog Produk</div><div class="katalog-grid">`;
+            let htmlKatalog = `<div class="phone-catalog">`;
+            
             dataProduk.forEach((p, index) => {
-                htmlKatalog += `<div class="katalog-card"><img src="${p.gambar}" alt="Produk"><h3>${p.nama}</h3><div class="harga">${p.hargaBaru}</div><button class="btn-detail" onclick="renderProdukDetail(${index})">Detail & Beli</button></div>`;
+                htmlKatalog += `
+                <div class="phone-item">
+                    <img src="${p.gambar}" class="phone-img" alt="Produk" onclick="renderProdukDetail(${index})" style="cursor:pointer;">
+                    <div class="phone-details">
+                        <h3 onclick="renderProdukDetail(${index})" style="cursor:pointer;">${p.nama}</h3>
+                        <div class="harga">${p.hargaBaru}</div>
+                        <button class="btn-beli-catalog" onclick="window.open('https://app.midtrans.com/payment-links/522c9d46-dbff-4f99-acfc-3c4c7c503f06-5fLX3AV4', '_blank')">Beli</button>
+                    </div>
+                </div>`;
             });
-            htmlKatalog += `</div><br><a onclick="window.location.href=window.location.pathname" style="color:#666; text-decoration:underline;">Kembali ke Beranda</a>`;
-            app.innerHTML = htmlKatalog; window.scrollTo(0,0); autoClose();
+            
+            htmlKatalog += `</div><br><a onclick="window.location.href=window.location.pathname" style="color:#666; text-decoration:underline; display:block; margin-top:20px;">Kembali ke Beranda</a>`;
+            app.innerHTML = htmlKatalog; window.scrollTo(0,0); 
+            autoClose();
         }
 
+        // Tampilan Detail
         function renderProdukDetail(index) {
+            toggleFooterUtama(false);
             const p = dataProduk[index];
             document.getElementById('app').innerHTML = `
                 <div class="product-name">${p.nama}</div>
-                <img src="${p.gambar}" style="width:100%; max-width:400px; border-radius:12px;">
-                <h3 style="color:#b30000">${p.hargaBaru}</h3>
-                <div style="text-align:left; font-size:14px; max-width:400px; margin: 0 auto;">
+                <img src="${p.gambar}" style="width:100%; max-width:400px; border-radius:12px; margin-bottom:15px;">
+                <h3 style="color:#b30000; font-size: 22px; margin: 10px 0;">${p.hargaBaru}</h3>
+                
+                <div style="text-align:left; font-size:14px; max-width:400px; margin: 0 auto 20px auto; background: #f9f9f9; padding: 20px; border-radius: 12px;">
                     <p><b>Warna:</b> ${p.specs.warna}</p>
                     <p><b>Chip:</b> ${p.specs.chip}</p>
                     <p><b>Koneksi:</b> ${p.specs.koneksi}</p>
+                    <p><b>Baterai:</b> ${p.specs.baterai}</p>
+                    <p><b>Karakter Suara:</b> ${p.specs.tuning}</p>
                 </div>
-                <button class="btn-beli" onclick="window.location.href='https://app.midtrans.com/payment-links/522c9d46-dbff-4f99-acfc-3c4c7c503f06-5fLX3AV4'">Beli Sekarang</button>
+                
+                <button class="btn-beli" style="max-width:400px; margin: 0 auto;" onclick="window.open('https://app.midtrans.com/payment-links/522c9d46-dbff-4f99-acfc-3c4c7c503f06-5fLX3AV4', '_blank')">Beli Sekarang</button>
                 <a onclick="renderKatalog()" style="display:block; margin-top:20px; color:#666; text-decoration:underline;">Kembali ke Katalog</a>`;
             window.scrollTo(0,0);
+            autoClose();
+        }
+
+        // FUNGSI PROMO (Dibalikin)
+        function renderPromo() { 
+            toggleFooterUtama(false);
+            document.getElementById('app').innerHTML = `<div class="product-name">Promo dan Diskon</div><p style="color:#555;">Maaf, saat ini tidak ada kampanye promo yang sedang berlangsung.</p><a onclick="window.location.href=window.location.pathname" style="display:block; margin-top:25px; color:#666; text-decoration:underline;">Kembali ke Beranda</a>`; 
+            autoClose(); 
         }
 
         function renderFAQ() {
+            toggleFooterUtama(false);
             document.getElementById('app').innerHTML = `
                 <div class="product-name">FAQ & Pedoman Penggunaan</div>
                 <div style="text-align:left; font-size:14px; line-height:1.7; color:#333;">
                     <p><b>1. Bagaimana tata cara penyambungan perangkat?</b><br>Keluarkan earbud dari wadah pengisi daya, aktifkan Bluetooth pada perangkat Anda, kemudian pilih "VoidPods Pro" pada daftar perangkat yang tersedia.</p>
                     <p><b>2. Bagaimana prosedur pengisian daya yang disarankan?</b><br>Gunakan kabel bawaan dan kepala pengisi daya dengan arus 5V/1A. Dilarang keras menggunakan kepala pengisi daya cepat (fast-charging) untuk menghindari kerusakan komponen baterai.</p>
                     <p><b>3. Apakah produk ini memiliki ketahanan terhadap air?</b><br>VoidPods Pro dirancang untuk tahan terhadap keringat dan cipratan air. Harap tidak merendam perangkat ke dalam air atau menggunakannya saat berenang.</p>
-                    <p><b>4. Bagaimana cara merawat sensor dan permukaan earbud?</b><br>Bersihkan permukaan earbud secara berkala menggunakan kain mikrofiber yang kering. Hindari penggunaan cairan pembersih kimia atau benda tajam pada bagian sensor.</p>
-                    <p><b>5. Tindakan apa yang diambil jika koneksi earbud terputus?</b><br>Simpan kembali earbud ke dalam wadah pengisi daya selama 10 detik. Hapus riwayat perangkat pada Bluetooth ponsel, kemudian lakukan proses penyambungan ulang.</p>
                 </div>
                 <a onclick="window.location.href=window.location.pathname" style="display:block; margin-top:25px; color:#666; text-decoration:underline;">Kembali ke Beranda</a>`;
             autoClose();
         }
 
-        function renderPromo() { document.getElementById('app').innerHTML = "<h3>Promo</h3><p>Maaf, saat ini tidak ada kampanye promo yang sedang berlangsung.</p><a onclick='window.location.href=window.location.pathname' style='color:blue;'>Kembali</a>"; autoClose(); }
-        function renderDukungan() { document.getElementById('app').innerHTML = "<h3>Dukungan</h3><p>Untuk bantuan lebih lanjut, silakan hubungi layanan pelanggan kami melalui WhatsApp di: 0857 15000 443</p><a onclick='window.location.href=window.location.pathname' style='color:blue;'>Kembali</a>"; autoClose(); }
-        
-        function renderTentang() {
-            document.getElementById('app').innerHTML = `
-                <div class="product-name">Tentang Ousevoid</div>
-                <div class="contact-box" style="text-align: left;">
-                    <h3 style="margin-top: 0;">Visi Kami</h3>
-                    <p>Ousevoid hadir untuk mengubah standar pengalaman audio nirkabel di Indonesia. Kami berdedikasi untuk menciptakan teknologi yang menggabungkan estetika desain minimalis dengan performa akustik superior yang dapat diakses oleh semua kalangan.</p>
-                    <h3 style="margin-top: 20px;">Filosofi Perusahaan</h3>
-                    <p>Kami percaya bahwa teknologi terbaik adalah teknologi yang menyatu dengan gaya hidup Anda. Oleh karena itu, Ousevoid terus berinovasi untuk menghadirkan perangkat yang tidak hanya cerdas, tetapi juga tahan lama dan elegan dalam setiap detailnya.</p>
-                </div>
-                <a onclick="window.location.href=window.location.pathname" style="display:block; margin-top:25px; font-size:14px; color:#666; text-decoration: underline;">Kembali ke Beranda</a>`;
-            autoClose();
+        function renderDukungan() { 
+            toggleFooterUtama(false);
+            document.getElementById('app').innerHTML = "<div class='product-name'>Dukungan Layanan</div><p>Untuk bantuan lebih lanjut, silakan hubungi layanan pelanggan kami melalui WhatsApp di: <b>0857 15000 443</b></p><a onclick='window.location.href=window.location.pathname' style='color:#666; text-decoration:underline;'>Kembali ke Beranda</a>"; 
+            autoClose(); 
         }
 
-        function
+        // FUNGSI TENTA
