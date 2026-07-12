@@ -79,6 +79,23 @@
         .footer-address { line-height: 1.6; font-style: normal; }
         .footer-gov { margin-bottom: 20px; padding: 10px; background: #f9f9f9; border-radius: 5px; font-size: 12px; line-height: 1.5; }
         .copyright { font-size: 11px; color: #888888; border-top: 1px solid #eeeeee; padding-top: 15px; }
+
+        /* --- TAMBAHAN UNTUK TAMPILAN FULL DI LAPTOP/DESKTOP --- */
+        @media (min-width: 768px) {
+            /* Melebarkan area utama */
+            .main-content { max-width: 1000px; } 
+            /* Memperbesar gambar produk utama */
+            .display-container { max-width: 500px; } 
+            /* Merubah tombol beli tidak full width */
+            .btn-beli { max-width: 300px; margin: 0 auto; }
+            /* Merubah Grid Katalog dari 2 kolom jadi 4 kolom */
+            .katalog-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; } 
+            /* Mengatur ulang posisi Footer agar menyamping (sejajar) */
+            .footer { display: flex; flex-wrap: wrap; justify-content: space-between; padding: 60px 10%; }
+            .footer-profile { flex: 2; min-width: 300px; margin-right: 40px; border-bottom: none; }
+            .footer-contact-info, .footer-hq { flex: 1; min-width: 250px; }
+            .footer-gov, .copyright { width: 100%; text-align: center; margin-top: 30px; }
+        }
     </style>
 </head>
 <body>
@@ -171,7 +188,7 @@
 
         function renderProdukDetail(index) {
             const p = dataProduk[index];
-            document.getElementById('app').innerHTML = `<div class="product-name">${p.nama}</div><img src="${p.gambar}" style="width:100%; border-radius:12px;"><h3 style="color:#b30000">${p.hargaBaru}</h3><div style="text-align:left; font-size:14px;"><p><b>Warna:</b> ${p.specs.warna}</p><p><b>Chip:</b> ${p.specs.chip}</p><p><b>Koneksi:</b> ${p.specs.koneksi}</p></div><button class="btn-beli" onclick="window.location.href='https://wa.me/6285715000443'">Beli via WhatsApp</button><a onclick="renderKatalog()" style="display:block; margin-top:20px; color:#666; text-decoration:underline;">Kembali ke Katalog</a>`;
+            document.getElementById('app').innerHTML = `<div class="product-name">${p.nama}</div><img src="${p.gambar}" style="width:100%; max-width:400px; border-radius:12px;"><h3 style="color:#b30000">${p.hargaBaru}</h3><div style="text-align:left; font-size:14px; max-width:400px; margin: 0 auto;"><p><b>Warna:</b> ${p.specs.warna}</p><p><b>Chip:</b> ${p.specs.chip}</p><p><b>Koneksi:</b> ${p.specs.koneksi}</p></div><button class="btn-beli" onclick="window.location.href='https://wa.me/6285715000443'">Beli via WhatsApp</button><a onclick="renderKatalog()" style="display:block; margin-top:20px; color:#666; text-decoration:underline;">Kembali ke Katalog</a>`;
             window.scrollTo(0,0);
         }
 
