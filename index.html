@@ -25,12 +25,10 @@
         .overlay.active { display: block; opacity: 1; }
         
         .menu-items { display: flex; flex-direction: column; gap: 15px; flex-grow: 1; }
-        .menu-link { font-size: 16px; font-weight: 600; border-bottom: 1px solid #f9f9f9; padding-bottom: 8px; display: block; }
-        .sub-menu { padding-left: 15px; display: flex; flex-direction: column; gap: 10px; margin-top: 5px; }
-        .sub-menu a { font-size: 14px; color: #666; font-weight: 400; }
+        .menu-link { font-size: 16px; font-weight: 600; border-bottom: 1px solid #f9f9f9; padding-bottom: 12px; display: block; cursor: pointer; }
 
         .sidebar-bottom { margin-top: 30px; margin-bottom: 20px; }
-        .login-bar { display: block; padding: 15px; background: #222222; color: #ffffff; text-align: center; border-radius: 8px; font-weight: 600; }
+        .login-bar { display: block; padding: 15px; background: #222222; color: #ffffff; text-align: center; border-radius: 8px; font-weight: 600; cursor: pointer; }
 
         .main-content { padding: 40px 20px 100px 20px; text-align: center; max-width: 500px; margin: auto; min-height: 400px; }
         .product-name { font-size: 28px; font-weight: 700; margin: 0 0 20px 0; }
@@ -38,39 +36,50 @@
         .display-container { width: 100%; max-width: 320px; margin: 0 auto 20px auto; overflow: hidden; }
         .product-img { width: 100%; display: block; border-radius: 12px; }
 
-        .carousel-track { display: flex; width: 200%; animation: slideAnimation 8s infinite ease-in-out; }
-        .carousel-slide { width: 50%; }
+        .price-container { margin-bottom: 25px; }
+        .old-price { font-size: 18px; color: #999; text-decoration: line-through; display: block; }
+        .new-price { font-size: 28px; font-weight: 700; color: #b30000; }
 
-        @keyframes slideAnimation {
-            0%, 40% { transform: translateX(0); }
-            50%, 90% { transform: translateX(-50%); }
-            100% { transform: translateX(0); }
-        }
+        .btn-beli { display: block; width: 100%; background: #222222; color: #ffffff; padding: 15px 0; border-radius: 8px; font-weight: 600; border: none; cursor: pointer; font-family: 'Fredoka', sans-serif; font-size: 16px; }
+        
+        /* Grid Katalog Dinamis */
+        .katalog-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; text-align: left; }
+        .katalog-card { border: 1px solid #eee; padding: 12px; border-radius: 12px; text-align: center; background: #fff; }
+        .katalog-card img { width: 100%; border-radius: 8px; margin-bottom: 10px; }
+        .katalog-card h3 { font-size: 13px; font-weight: 700; margin: 0 0 5px 0; color: #222; }
+        .katalog-card .harga { font-size: 14px; font-weight: 700; color: #b30000; margin-bottom: 10px; }
+        .btn-detail { background: #222; color: #fff; padding: 8px; width: 100%; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: 'Fredoka', sans-serif; }
 
-        /* Detail Spesifikasi dengan Ikon */
+        /* Spesifikasi */
         .specs-container { text-align: left; padding: 20px 0; margin: 20px 0; }
         .specs-title { font-weight: 700; font-size: 16px; margin-bottom: 12px; display: block; }
         .specs-list { margin: 0; padding: 0; list-style: none; font-size: 14px; color: #444; line-height: 1.8; }
-        
-        /* Menggunakan Flexbox agar ikon sejajar lurus di samping teks */
         .specs-list li { border-bottom: 1px solid #f0f0f0; padding: 10px 0; display: flex; align-items: center; gap: 10px; }
         .spec-icon { display: inline-flex; align-items: center; justify-content: center; color: #666666; flex-shrink: 0; }
+        
+        .contact-box { padding: 40px; border: 2px dashed #eee; border-radius: 15px; margin-top: 20px; text-align: center; }
+        .btn-wa { display: inline-block; background: #25D366; color: white; padding: 15px 30px; border-radius: 30px; font-weight: 700; margin-top: 20px; }
 
-        .price { font-size: 24px; font-weight: 700; color: #b30000; margin-bottom: 25px; }
-        .btn-beli { display: block; width: 100%; background: #222222; color: #ffffff; padding: 15px 0; border-radius: 8px; font-weight: 600; border: none; cursor: pointer; }
-
-        /* Tampilan Bawah Resmi (Professional Footer) */
-        .footer { padding: 60px 20px 40px 20px; background: #ffffff; text-align: center; font-size: 14px; color: #555555; border-top: 1px solid #eeeeee; }
-        .footer-brand { font-size: 16px; font-weight: 700; color: #111111; margin-bottom: 8px; letter-spacing: 0.3px; }
-        .footer-address { margin-bottom: 15px; color: #666666; line-height: 1.6; font-style: normal; }
-        .footer-contact { margin-bottom: 30px; font-size: 13px; }
-        .copyright { font-size: 12px; color: #888888; border-top: 1px solid #f9f9f9; padding-top: 20px; }
+        /* Footer Tetap Original */
+        .footer { padding: 60px 20px; background: #ffffff; text-align: left; font-size: 13px; color: #555555; border-top: 1px solid #eeeeee; }
+        .footer-profile { margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #f0f0f0; }
+        .footer-profile-title { font-weight: 700; color: #111111; margin-bottom: 10px; font-size: 14px; }
+        .footer-profile-text { line-height: 1.6; color: #666666; margin-bottom: 15px; }
+        .footer-contact-info { margin-bottom: 25px; }
+        .footer-contact-item { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+        .footer-hq { margin-bottom: 25px; }
+        .footer-hq-logo { width: 100px; margin-bottom: 10px; display: block; }
+        .footer-office { font-weight: 400; color: #555555; margin-bottom: 5px; }
+        .footer-brand { font-weight: 700; color: #111111; margin-bottom: 5px; }
+        .footer-address { line-height: 1.6; font-style: normal; }
+        .footer-gov { margin-bottom: 20px; padding: 10px; background: #f9f9f9; border-radius: 5px; font-size: 12px; }
+        .copyright { font-size: 11px; color: #888888; border-top: 1px solid #eeeeee; padding-top: 15px; }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <a href="index.html"><img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Logo" class="logo"></a>
+        <a onclick="location.reload()" style="cursor:pointer;"><img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Logo" class="logo"></a>
         <div class="menu-btn" onclick="toggleMenu()">
             <span></span><span></span><span></span>
         </div>
@@ -80,112 +89,171 @@
     
     <div class="sidebar" id="sidebar">
         <div class="menu-items">
-            <span class="menu-link">Produk Ousevoid</span>
-            <div class="sub-menu">
-                <a onclick="renderProduk('black')">• VoidPods Pro Black</a>
-                <a onclick="renderProduk('white')">• VoidPods Pro White</a>
-            </div>
+            <a class="menu-link" onclick="renderKatalog()">Produk Ousevoid</a>
             <a class="menu-link" onclick="toggleMenu()">Promo dan Diskon</a>
             <a class="menu-link" onclick="toggleMenu()">FAQ</a>
-            <a class="menu-link" onclick="toggleMenu()">Dukungan</a>
+            <a class="menu-link" onclick="renderDukungan()">Dukungan</a>
             <a class="menu-link" onclick="toggleMenu()">Tentang Kami</a>
         </div>
-        
         <div class="sidebar-bottom">
-            <a href="#login" class="login-bar">Login Admin</a>
+            <a class="login-bar" onclick="loginAdmin()">Login Admin</a>
         </div>
     </div>
 
     <div class="main-content" id="app">
         <div class="product-name">VoidPods Pro</div>
         <div class="display-container">
-            <div class="carousel-track">
-                <img src="https://i.ibb.co.com/gMs8J5pn/8504.png" class="carousel-slide" alt="Black">
-                <img src="https://i.ibb.co.com/S4RBg5cW/8618.png" class="carousel-slide" alt="White">
-            </div>
+            <img src="https://i.ibb.co.com/gMs8J5pn/8504.png" class="product-img" alt="Product">
         </div>
-        <div class="price">IDR 249.000</div>
-        <p style="font-size: 14px; color: #666;">Pilih varian di menu untuk detail lengkap.</p>
-        <button class="btn-beli" onclick="toggleMenu()">Lihat Pilihan Produk</button>
+        
+        <div class="price-container">
+            <span class="old-price">IDR 249.000</span>
+            <span class="new-price">IDR 189.000</span>
+        </div>
+
+        <button class="btn-beli" onclick="renderKatalog()">Lihat Semua Produk</button>
     </div>
 
     <div class="footer">
-        <div class="footer-brand">PT Ousevoid Lintas Batas</div>
-        <address class="footer-address">
-            Jl. K.H Zainul Arifin 71, Duri Pulo, Gambir<br>
-            Jakarta Pusat, Indonesia 10140
-        </address>
-        <div class="footer-contact">
-            Hubungi Kami: <a href="https://wa.me/6285715000443" style="color: #25D366; font-weight: 700;">+62 857 15000 443</a>
+        <div class="footer-profile">
+            <div class="footer-profile-title">Tentang Ousevoid Lintas Batas</div>
+            <p class="footer-profile-text">Ousevoid adalah pelopor teknologi audio nirkabel premium yang didedikasikan untuk menghadirkan pengalaman mendengarkan imersif bagi masyarakat Indonesia. Kami fokus pada inovasi desain, kualitas suara superior, dan daya tahan baterai luar biasa dengan harga yang kompetitif.</p>
+            <p class="footer-profile-text">Didirikan di Jakarta, Ousevoid berkomitmen untuk memberikan layanan pelanggan terbaik dan produk bergaransi resmi untuk kepuasan Anda.</p>
+        </div>
+
+        <div class="footer-contact-info">
+            Apabila kamu mengalami kendala produk silakan hubungi Contact Center kami di:<br>
+            <div class="footer-contact-item">📧 email: ousevoid@gmail.com</div>
+            <a href="https://wa.me/6285715000443" class="footer-contact-item">💬 WhatsApp: 0857 15000 443</a>
+        </div>
+
+        <div class="footer-hq">
+            <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Ousevoid Logo" class="footer-hq-logo">
+            <div class="footer-office">Kantor Pusat</div>
+            <div class="footer-brand">PT Ousevoid Lintas Batas</div>
+            <address class="footer-address">
+                Jl. K.H Zainul Arifin 71 Duri Pulo Gambir<br>
+                Jakarta Pusat, Indonesia 10140
+            </address>
+        </div>
+
+        <div class="footer-gov">
+            Direktorat Jenderal Perlindungan Konsumen dan Tertib Niaga<br>
+            Kementerian Perdagangan Republik Indonesia<br>
+            WhatsApp: 0853-1111-1010
         </div>
         <div class="copyright">
-            &copy; 2026 PT Ousevoid Lintas Batas. Hak Cipta Dilindungi Undang-Undang.
+            &copy; 2026 PT Ousevoid Lintas Batas. Semua Hak Cipta dilindungi Undang-Undang.
         </div>
     </div>
 
     <script>
-        // Data SVG Icon Minimalis
         const iconWarna = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>`;
         const iconChip = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="15" x2="23" y2="15"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="15" x2="4" y2="15"></line></svg>`;
         const iconBluetooth = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6.5 6.5 17.5 17.5 12 23 12 1 17.5 6.5 6.5 17.5"></polygon></svg>`;
         const iconBaterai = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="18" height="12" rx="2" ry="2"></rect><line x1="23" y1="11" x2="23" y2="13"></line></svg>`;
 
-        // Database Produk Terstruktur
-        const dataProduk = {
-            'black': {
-                nama: "VoidPods Pro - Jet Black",
-                harga: "IDR 249.000",
-                gambar: "https://i.ibb.co.com/gMs8J5pn/8504.png",
-                specs: {
-                    warna: "Jet Black Matte",
-                    chip: "VoidCore T1 (JL AC6973 HD)",
-                    koneksi: "Bluetooth 5.3 (Ultra Stable)",
-                    baterai: "300mAh (Play time 3-4 Jam)"
-                }
-            },
-            'white': {
-                nama: "VoidPods Pro - Pure White",
-                harga: "IDR 249.000",
-                gambar: "https://i.ibb.co.com/S4RBg5cW/8618.png",
-                specs: {
-                    warna: "Pure White Glossy",
-                    chip: "VoidCore T1 (JL AC6973 HD)",
-                    koneksi: "Bluetooth 5.3 (Ultra Stable)",
-                    baterai: "300mAh (Play time 3-4 Jam)"
-                }
-            }
-        };
+        // Database Katalog
+        let dataProduk = [
+            { id: 1, nama: "VoidPods Pro - Jet Black", hargaBaru: "IDR 189.000", gambar: "https://i.ibb.co.com/gMs8J5pn/8504.png", specs: { warna: "Jet Black Matte", chip: "VoidCore T1 (JL AC6973 HD)", koneksi: "Bluetooth 5.3", baterai: "300mAh (Play time 3-4 Jam)" } },
+            { id: 2, nama: "VoidPods Pro - Pure White", hargaBaru: "IDR 189.000", gambar: "https://i.ibb.co.com/S4RBg5cW/8618.png", specs: { warna: "Pure White Glossy", chip: "VoidCore T1 (JL AC6973 HD)", koneksi: "Bluetooth 5.3", baterai: "300mAh (Play time 3-4 Jam)" } }
+        ];
 
-        function toggleMenu() {
-            document.getElementById('sidebar').classList.toggle('active');
-            document.getElementById('overlay').classList.toggle('active');
+        function toggleMenu() { 
+            document.getElementById('sidebar').classList.toggle('active'); 
+            document.getElementById('overlay').classList.toggle('active'); 
         }
 
-        function renderProduk(key) {
-            const p = dataProduk[key];
+        function renderKatalog() {
             const app = document.getElementById('app');
+            let htmlKatalog = `<div class="product-name">Katalog Produk</div><div class="katalog-grid">`;
             
-            // Susunan HTML Spesifikasi dengan Penambahan Ikon SVG
+            dataProduk.forEach((p, index) => {
+                htmlKatalog += `
+                    <div class="katalog-card">
+                        <img src="${p.gambar}" alt="Produk">
+                        <h3>${p.nama}</h3>
+                        <div class="harga">${p.hargaBaru}</div>
+                        <button class="btn-detail" onclick="renderProdukDetail(${index})">Detail & Beli</button>
+                    </div>
+                `;
+            });
+
+            htmlKatalog += `</div><a onclick="location.reload()" style="display:block; margin-top:25px; font-size:14px; color:#666; text-decoration: underline;">Kembali ke Beranda</a>`;
+            app.innerHTML = htmlKatalog;
+            window.scrollTo(0,0);
+            if(document.getElementById('sidebar').classList.contains('active')) {
+                toggleMenu(); // Tutup sidebar otomatis
+            }
+        }
+
+        function renderProdukDetail(index) {
+            const p = dataProduk[index];
+            const app = document.getElementById('app');
             let specsHtml = `
                 <li><span class="spec-icon">${iconWarna}</span> <span><strong>Warna:</strong> ${p.specs.warna}</span></li>
                 <li><span class="spec-icon">${iconChip}</span> <span><strong>Chip:</strong> ${p.specs.chip}</span></li>
                 <li><span class="spec-icon">${iconBluetooth}</span> <span><strong>Koneksi:</strong> ${p.specs.koneksi}</span></li>
                 <li><span class="spec-icon">${iconBaterai}</span> <span><strong>Baterai:</strong> ${p.specs.baterai}</span></li>
             `;
-            
             app.innerHTML = `
                 <div class="product-name">${p.nama}</div>
                 <div class="display-container"><img src="${p.gambar}" class="product-img"></div>
-                <div class="price">${p.harga}</div>
+                <div class="price-container">
+                    <span class="new-price">${p.hargaBaru}</span>
+                </div>
                 <div class="specs-container">
-                    <span class="specs-title">Spesifikasi:</span>
+                    <span class="specs-title">Spesifikasi Lengkap:</span>
                     <ul class="specs-list">${specsHtml}</ul>
                 </div>
-                <button class="btn-beli">Beli Sekarang</button>
+                <button class="btn-beli" style="background:#25D366" onclick="window.location.href='https://wa.me/6285715000443'">Beli Sekarang (WhatsApp)</button>
+                <a onclick="renderKatalog()" style="display:block; margin-top:25px; font-size:14px; color:#666; text-decoration: underline;">Kembali ke Katalog</a>
+            `;
+            window.scrollTo(0,0);
+        }
+
+        function renderDukungan() {
+            const app = document.getElementById('app');
+            app.innerHTML = `
+                <div class="product-name">Dukungan</div>
+                <div class="contact-box">
+                    <p>Ada kendala atau pertanyaan seputar produk kami? Tim Ousevoid siap membantu Anda.</p>
+                    <a href="https://wa.me/6285715000443" class="btn-wa">Chat WhatsApp Kami</a>
+                </div>
                 <a onclick="location.reload()" style="display:block; margin-top:25px; font-size:14px; color:#666; text-decoration: underline;">Kembali ke Beranda</a>
             `;
             window.scrollTo(0,0);
             toggleMenu();
+        }
+
+        function loginAdmin() {
+            let user = prompt("Masukkan Username Admin:");
+            let pass = prompt("Masukkan Password:");
+            
+            if (user === "ousevoidid" && pass === "Aa272900*") {
+                let nama = prompt("Nama Produk Baru:");
+                let hargaBaru = prompt("Harga Promo (Contoh: IDR 100.000):");
+                let gambar = prompt("Link URL Gambar (Contoh: https://i.ibb.co...):");
+                
+                if(nama && hargaBaru && gambar) {
+                    dataProduk.push({
+                        id: Date.now(),
+                        nama: nama,
+                        hargaBaru: hargaBaru,
+                        gambar: gambar,
+                        specs: {
+                            warna: "Varian Custom",
+                            chip: "Standar Ousevoid",
+                            koneksi: "Bluetooth 5.3",
+                            baterai: "Standar"
+                        }
+                    });
+                    alert("Produk berhasil ditambahkan!");
+                    renderKatalog(); 
+                }
+            } else {
+                alert("Akses Ditolak! Username atau Password salah.");
+            }
         }
     </script>
 </body>
