@@ -14,31 +14,27 @@
         a { text-decoration: none; color: inherit; cursor: pointer; }
         
         /* Header & Logo */
-        .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid #eeeeee; position: sticky; top: 0; background: #ffffff; z-index: 999999; }
-        .logo { width: 130px; background: transparent; cursor: pointer; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid #eeeeee; position: sticky; top: 0; background: #ffffff; z-index: 1000; }
+        .logo { width: 130px; background: transparent; }
         
         /* Area Kanan Header (Keranjang + Menu) */
-        .header-right { display: flex; align-items: center; gap: 10px; }
+        .header-right { display: flex; align-items: center; gap: 15px; position: relative; z-index: 9999; }
         
-        /* Tombol Header (Pakai Button Asli Biar HP Ngerespon) */
-        .action-btn {
-            background: transparent; border: none; padding: 12px; cursor: pointer;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            gap: 5px; position: relative; z-index: 999999;
-        }
+        /* Icon Keranjang */
+        .cart-btn { cursor: pointer; display: flex; align-items: center; justify-content: center; color: #222222; padding: 5px; transition: 0.2s; position: relative; z-index: 9999; }
+        .cart-btn:active { color: #b30000; }
+        .cart-btn svg { width: 24px; height: 24px; pointer-events: none; }
+
+        /* Tombol Menu Sidebar */
+        .menu-btn { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; position: relative; z-index: 9999; }
+        .menu-btn span { width: 24px; height: 3px; background: #222222; border-radius: 2px; display: block; }
         
-        /* Matikan klik di icon agar tombol utama yang merespon */
-        .action-btn svg, .action-btn .hamburger-line { pointer-events: none; }
-        
-        .action-btn svg { width: 26px; height: 26px; color: #222222; }
-        .hamburger-line { width: 24px; height: 3px; background: #222222; border-radius: 2px; display: block; }
-        
-        /* Sidebar */
-        .sidebar { position: fixed; top: 0; right: -300px; width: 260px; height: 100%; background: #ffffff; box-shadow: -2px 0 5px rgba(0,0,0,0.1); z-index: 999998; transition: right 0.3s ease; padding: 80px 20px 20px 20px; box-sizing: border-box; display: flex; flex-direction: column; overflow-y: auto; }
+        /* Sidebar & Overlay */
+        .sidebar { position: fixed; top: 0; right: -300px; width: 260px; height: 100%; background: #ffffff; box-shadow: -2px 0 5px rgba(0,0,0,0.1); z-index: 1002; transition: right 0.3s ease; padding: 80px 20px 20px 20px; box-sizing: border-box; display: flex; flex-direction: column; overflow-y: auto; }
         .sidebar.active { right: 0; }
         
-        /* Overlay */
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999997; display: none; }
+        /* HARD FIX OVERLAY: Pakai display none biar aplikasinya gak nge-bug */
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1001; display: none; }
         .overlay.active { display: block; }
         
         .menu-items { display: flex; flex-direction: column; gap: 15px; flex-grow: 1; }
@@ -52,7 +48,7 @@
         
         .btn-beli { display: block; width: 100%; background: #222222; color: #ffffff; padding: 12px 0; border-radius: 8px; font-weight: 600; border: none; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 14px; margin-top: 10px; }
         
-        /* Grid Produk */
+        /* Layout Grid 2 Kolom untuk Produk */
         .katalog-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; text-align: left; }
         .katalog-card { border: 1px solid #eee; padding: 12px; border-radius: 12px; text-align: center; background: #fff; display: flex; flex-direction: column; justify-content: space-between; }
         .katalog-card img { width: 100%; border-radius: 8px; margin-bottom: 10px; display: block; }
@@ -60,7 +56,7 @@
         .katalog-card .harga { font-size: 15px; font-weight: 700; color: #b30000; margin-bottom: 8px; text-align: left; }
         .katalog-card .specs-text { font-size: 12px; color: #666; text-align: left; line-height: 1.5; margin-bottom: 10px; }
 
-        /* Tampilan Katalog Mode HP */
+        /* Tampilan Mode Katalog HP (Toko) */
         .phone-catalog { display: flex; flex-direction: column; gap: 15px; width: 100%; text-align: left; }
         .phone-item { display: flex; align-items: center; border: 1px solid #e5e5e7; padding: 15px; border-radius: 14px; background: #fff; gap: 20px; box-sizing: border-box; }
         .phone-img { width: 95px; height: 95px; object-fit: cover; border-radius: 10px; flex-shrink: 0; background: #f9f9f9; }
@@ -82,16 +78,21 @@
         .footer-brand { font-weight: 700; color: #111111; margin-bottom: 5px; }
         .footer-address { line-height: 1.6; font-style: normal; margin-bottom: 20px; }
         
+        /* Didukung oleh Component Area */
         .footer-supported { margin-top: 25px; padding-top: 20px; border-top: 1px dashed #e0e0e0; }
         .supported-title { font-weight: 700; color: #111111; margin-bottom: 12px; font-size: 14px; }
         .supported-images { display: flex; gap: 15px; align-items: center; margin-bottom: 12px; }
+        
+        /* MAGIC CSS Transparan JPG */
         .supported-img { height: 35px; object-fit: contain; max-width: 120px; filter: invert(1); mix-blend-mode: multiply; }
+        
         .supported-brand { font-weight: 700; color: #111111; margin-bottom: 5px; }
         .supported-address { line-height: 1.6; color: #666666; }
 
         .footer-gov { margin-bottom: 20px; padding: 10px; background: #f9f9f9; border-radius: 5px; font-size: 12px; line-height: 1.5; }
         .copyright { font-size: 11px; color: #888888; border-top: 1px solid #eeeeee; padding-top: 15px; text-align: left; }
 
+        /* --- TAMPILAN DESKTOP LAPTOP --- */
         @media (min-width: 768px) {
             .main-content { max-width: 900px; } 
             .katalog-grid { grid-template-columns: repeat(2, 1fr); gap: 25px; } 
@@ -108,22 +109,22 @@
 <body>
 
     <div class="header">
-        <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Logo" class="logo" onclick="renderHome()">
+        <a onclick="window.location.href=window.location.pathname" style="cursor:pointer;">
+            <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Logo" class="logo">
+        </a>
         
         <div class="header-right">
-            <button class="action-btn" onclick="renderKatalog()">
+            <div class="cart-btn" onclick="renderKatalog()" title="Buka Toko">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="9" cy="21" r="1"></circle>
                     <circle cx="20" cy="21" r="1"></circle>
                     <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                 </svg>
-            </button>
+            </div>
             
-            <button class="action-btn" onclick="toggleMenu()">
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-            </button>
+            <div class="menu-btn" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </div>
         </div>
     </div>
 
@@ -131,7 +132,7 @@
     
     <div class="sidebar" id="sidebar">
         <div class="menu-items">
-            <a class="menu-link" onclick="renderHome()">Produk Ousevoid</a>
+            <a class="menu-link" onclick="renderKatalog()">Produk Ousevoid</a>
             <a class="menu-link" onclick="renderPromo()">Promo dan Diskon</a>
             <a class="menu-link" onclick="renderFAQ()">FAQ</a>
             <a class="menu-link" onclick="renderDukungan()">Dukungan</a>
@@ -214,7 +215,6 @@
             { id: 2, nama: "VoidPods Pro - Pure White", hargaBaru: "IDR 189.000", gambar: "https://i.ibb.co.com/S4RBg5cW/8618.png", specs: { warna: "Pure White Glossy", chip: "VoidCore T1", koneksi: "Bluetooth 5.3", baterai: "3-4 Jam", tuning: "Signature Deep Bass & Crystal Clear Treble" } }
         ];
 
-        // Status Transaksi Midtrans
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
             const status = urlParams.get('status');
@@ -240,39 +240,6 @@
             }
         }
 
-        // FUNGSI RENDER HOME
-        function renderHome() {
-            toggleFooterUtama(true);
-            const app = document.getElementById('app');
-            app.innerHTML = `
-                <div class="katalog-grid">
-                    <div class="katalog-card">
-                        <img src="https://i.ibb.co.com/gMs8J5pn/8504.png" alt="Jet Black" onclick="renderProdukDetail(0)" style="cursor:pointer;">
-                        <h3 onclick="renderProdukDetail(0)" style="cursor:pointer;">VoidPods Pro - Jet Black</h3>
-                        <div class="harga">IDR 189.000</div>
-                        <div class="specs-text">
-                            <b>Warna:</b> Jet Black Matte<br>
-                            <b>Chip:</b> VoidCore T1<br>
-                            <b>Koneksi:</b> Bluetooth 5.3<br>
-                            <b>Baterai:</b> 3-4 Jam Premium
-                        </div>
-                    </div>
-                    <div class="katalog-card">
-                        <img src="https://i.ibb.co.com/S4RBg5cW/8618.png" alt="Pure White" onclick="renderProdukDetail(1)" style="cursor:pointer;">
-                        <h3 onclick="renderProdukDetail(1)" style="cursor:pointer;">VoidPods Pro - Pure White</h3>
-                        <div class="harga">IDR 189.000</div>
-                        <div class="specs-text">
-                            <b>Warna:</b> Pure White Glossy<br>
-                            <b>Chip:</b> VoidCore T1<br>
-                            <b>Koneksi:</b> Bluetooth 5.3<br>
-                            <b>Baterai:</b> 3-4 Jam Premium
-                        </div>
-                    </div>
-                </div>`;
-            window.scrollTo(0,0);
-            autoClose();
-        }
-
         // Tampilan Toko
         function renderKatalog() {
             toggleFooterUtama(false);
@@ -291,9 +258,9 @@
                 </div>`;
             });
             
-            htmlKatalog += `</div><br><a onclick="renderHome()" style="color:#666; text-decoration:underline; display:block; margin-top:20px;">Kembali ke Beranda</a>`;
+            htmlKatalog += `</div><br><a onclick="window.location.href=window.location.pathname" style="color:#666; text-decoration:underline; display:block; margin-top:20px;">Kembali ke Beranda</a>`;
             app.innerHTML = htmlKatalog; window.scrollTo(0,0); 
-            autoClose(); 
+            autoClose();
         }
 
         // Tampilan Detail
@@ -319,15 +286,30 @@
             autoClose();
         }
 
-        // Fungsi Promo
+        // FUNGSI PROMO (Dibalikin)
         function renderPromo() { 
             toggleFooterUtama(false);
-            document.getElementById('app').innerHTML = `<div class="product-name">Promo dan Diskon</div><p style="color:#555;">Maaf, saat ini tidak ada kampanye promo yang sedang berlangsung.</p><a onclick="renderHome()" style="display:block; margin-top:25px; color:#666; text-decoration:underline;">Kembali ke Beranda</a>`; 
+            document.getElementById('app').innerHTML = `<div class="product-name">Promo dan Diskon</div><p style="color:#555;">Maaf, saat ini tidak ada kampanye promo yang sedang berlangsung.</p><a onclick="window.location.href=window.location.pathname" style="display:block; margin-top:25px; color:#666; text-decoration:underline;">Kembali ke Beranda</a>`; 
             autoClose(); 
         }
 
-        // Fungsi FAQ
         function renderFAQ() {
             toggleFooterUtama(false);
             document.getElementById('app').innerHTML = `
-                <div class="product-name">FAQ & Pedoman Pengguna
+                <div class="product-name">FAQ & Pedoman Penggunaan</div>
+                <div style="text-align:left; font-size:14px; line-height:1.7; color:#333;">
+                    <p><b>1. Bagaimana tata cara penyambungan perangkat?</b><br>Keluarkan earbud dari wadah pengisi daya, aktifkan Bluetooth pada perangkat Anda, kemudian pilih "VoidPods Pro" pada daftar perangkat yang tersedia.</p>
+                    <p><b>2. Bagaimana prosedur pengisian daya yang disarankan?</b><br>Gunakan kabel bawaan dan kepala pengisi daya dengan arus 5V/1A. Dilarang keras menggunakan kepala pengisi daya cepat (fast-charging) untuk menghindari kerusakan komponen baterai.</p>
+                    <p><b>3. Apakah produk ini memiliki ketahanan terhadap air?</b><br>VoidPods Pro dirancang untuk tahan terhadap keringat dan cipratan air. Harap tidak merendam perangkat ke dalam air atau menggunakannya saat berenang.</p>
+                </div>
+                <a onclick="window.location.href=window.location.pathname" style="display:block; margin-top:25px; color:#666; text-decoration:underline;">Kembali ke Beranda</a>`;
+            autoClose();
+        }
+
+        function renderDukungan() { 
+            toggleFooterUtama(false);
+            document.getElementById('app').innerHTML = "<div class='product-name'>Dukungan Layanan</div><p>Untuk bantuan lebih lanjut, silakan hubungi layanan pelanggan kami melalui WhatsApp di: <b>0857 15000 443</b></p><a onclick='window.location.href=window.location.pathname' style='color:#666; text-decoration:underline;'>Kembali ke Beranda</a>"; 
+            autoClose(); 
+        }
+
+        // FUNGSI TENTA
