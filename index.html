@@ -3,62 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OUSEVOID | Official</title>
+    <title>OUSEVOID | Official Store</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     
     <style>
         body { margin: 0; font-family: 'Inter', sans-serif; color: #222222; background: #ffffff; scroll-behavior: smooth; }
         a { text-decoration: none; color: inherit; cursor: pointer; }
         
+        /* Header */
         .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid #eeeeee; position: sticky; top: 0; background: #ffffff; z-index: 1000; }
-        .logo { width: 130px; background: transparent; cursor: pointer; }
+        .logo { width: 130px; }
         
-        .header-right { display: flex; align-items: center; gap: 15px; position: relative; z-index: 1001; }
-        
-        .cart-icon { cursor: pointer; padding: 5px; display: flex; align-items: center; }
-        .cart-icon svg { pointer-events: none; width: 24px; height: 24px; color: #222222; }
-        
-        .menu-btn { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; }
-        .menu-btn span { width: 24px; height: 3px; background: #222222; transition: 0.3s; border-radius: 2px; display: block; pointer-events: none; }
-        
-        .sidebar { position: fixed; top: 0; right: -300px; width: 260px; height: 100%; background: #ffffff; box-shadow: -2px 0 5px rgba(0,0,0,0.1); z-index: 1003; transition: right 0.3s ease; padding: 80px 20px 20px 20px; box-sizing: border-box; display: flex; flex-direction: column; overflow-y: auto; }
+        .header-right { display: flex; align-items: center; gap: 15px; }
+        .cart-icon svg { width: 24px; height: 24px; color: #222222; }
+        .menu-btn { display: flex; flex-direction: column; gap: 5px; cursor: pointer; }
+        .menu-btn span { width: 24px; height: 3px; background: #222222; border-radius: 2px; }
+
+        /* Sidebar Terang Premium */
+        .sidebar { position: fixed; top: 0; right: -300px; width: 280px; height: 100%; background: #ffffff; box-shadow: -2px 0 10px rgba(0,0,0,0.05); z-index: 1003; transition: 0.3s; padding: 20px 15px; box-sizing: border-box; overflow-y: auto; }
         .sidebar.active { right: 0; }
         
+        .sidebar-header { padding: 10px 5px 30px 5px; border-bottom: 1px solid #eeeeee; margin-bottom: 20px; }
+        .sidebar-logo { width: 140px; }
+
+        .nav-group { margin-bottom: 25px; }
+        .nav-label { font-size: 12px; color: #888; font-weight: 700; letter-spacing: 1px; margin-bottom: 15px; padding-left: 10px; text-transform: uppercase; }
+
+        .nav-item { display: flex; align-items: center; padding: 12px 15px; border-radius: 8px; margin-bottom: 5px; color: #555; font-size: 14px; font-weight: 500; transition: 0.2s; cursor: pointer; }
+        .nav-item i { width: 25px; font-size: 18px; margin-right: 12px; color: #888; }
+        .nav-item:hover { background: #f9f9f9; color: #222; }
+        
+        /* WARNA AKTIF DIUBAH KE HITAM */
+        .nav-item.active { background: #111111; color: #fff; }
+        .nav-item.active i { color: #fff; }
+
         .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1002; display: none; }
         .overlay.active { display: block; }
+
+        /* Main Content */
+        .main-content { padding: 30px 20px 100px 20px; max-width: 600px; margin: auto; min-height: 500px; text-align: center; }
+        .page-title { font-size: 24px; font-weight: 700; margin-bottom: 25px; color: #111; text-align: left; }
         
-        .menu-items { display: flex; flex-direction: column; gap: 15px; flex-grow: 1; }
-        .menu-link { font-size: 16px; font-weight: 600; border-bottom: 1px solid #f9f9f9; padding-bottom: 12px; display: block; cursor: pointer; }
+        /* --- HERO BANNER & HOTSPOT --- */
+        .hero-banner { position: relative; width: 100%; border-radius: 16px; overflow: hidden; margin-bottom: 35px; }
+        .hero-banner img { width: 100%; display: block; }
+        .hotspot-btn {
+            position: absolute;
+            bottom: 10.5%; /* Koordinat Y tombol spesifikasi */
+            left: 7.5%;    /* Koordinat X tombol spesifikasi */
+            width: 25%;    /* Lebar area klik */
+            height: 13.5%; /* Tinggi area klik */
+            background: rgba(255, 255, 255, 0); 
+            border: 1px solid transparent;
+            border-radius: 40px; 
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .hotspot-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+        }
 
-        .sidebar-bottom { margin-top: 30px; margin-bottom: 20px; }
-        .login-bar { display: block; padding: 15px; background: #222222; color: #ffffff; text-align: center; border-radius: 8px; font-weight: 600; cursor: pointer; }
+        /* Grid Produk */
+        .katalog-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        .katalog-card { background: #fff; border: 1px solid #eee; padding: 12px; border-radius: 12px; transition: 0.3s; }
+        .katalog-card:hover { border-color: #ccc; }
+        .katalog-card img { width: 100%; border-radius: 8px; margin-bottom: 10px; cursor: pointer; }
+        .katalog-card h3 { font-size: 14px; margin: 0 0 5px 0; color: #111; text-align: left; cursor: pointer; }
+        /* WARNA HARGA DIUBAH KE HITAM */
+        .katalog-card .harga { font-size: 15px; font-weight: 700; color: #111111; margin-bottom: 10px; text-align: left; }
+        .btn-beli { background: #222; color: #fff; padding: 10px; border-radius: 6px; font-weight: 700; border: none; cursor: pointer; width: 100%; font-size: 12px; }
 
-        .main-content { padding: 40px 20px 100px 20px; text-align: center; max-width: 500px; margin: auto; min-height: 400px; }
-        .product-name { font-size: 26px; font-weight: 700; margin: 0 0 25px 0; }
-        
-        .btn-beli { display: block; width: 100%; background: #222222; color: #ffffff; padding: 12px 0; border-radius: 8px; font-weight: 600; border: none; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 14px; margin-top: 10px; }
-        
-        .katalog-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; text-align: left; }
-        .katalog-card { border: 1px solid #eee; padding: 12px; border-radius: 12px; text-align: center; background: #fff; display: flex; flex-direction: column; justify-content: space-between; }
-        .katalog-card img { width: 100%; border-radius: 8px; margin-bottom: 10px; display: block; }
-        .katalog-card h3 { font-size: 15px; font-weight: 700; margin: 0 0 5px 0; color: #222; text-align: left; }
-        .katalog-card .harga { font-size: 15px; font-weight: 700; color: #b30000; margin-bottom: 8px; text-align: left; }
-        .katalog-card .specs-text { font-size: 12px; color: #666; text-align: left; line-height: 1.5; margin-bottom: 10px; }
+        /* Trust Badges */
+        .trust-badges { display: flex; flex-direction: column; gap: 15px; background: #fdfdfd; border: 1px solid #eee; border-radius: 12px; padding: 20px; margin-top: 40px; text-align: left; }
+        .badge-item { display: flex; align-items: center; gap: 15px; }
+        /* WARNA ICON TRUST BADGE DIUBAH KE HITAM */
+        .badge-icon { font-size: 24px; color: #111111; width: 30px; text-align: center; }
+        .badge-text h4 { margin: 0 0 3px 0; font-size: 14px; color: #111; }
+        .badge-text p { margin: 0; font-size: 12px; color: #666; }
 
-        .phone-catalog { display: flex; flex-direction: column; gap: 15px; width: 100%; text-align: left; }
-        .phone-item { display: flex; align-items: center; border: 1px solid #e5e5e7; padding: 15px; border-radius: 14px; background: #fff; gap: 20px; box-sizing: border-box; }
-        .phone-img { width: 95px; height: 95px; object-fit: cover; border-radius: 10px; flex-shrink: 0; background: #f9f9f9; }
-        .phone-details { flex-grow: 1; display: flex; flex-direction: column; gap: 4px; }
-        .phone-details h3 { margin: 0; font-size: 16px; font-weight: 700; color: #222; }
-        .phone-details .harga { font-size: 15px; font-weight: 700; color: #b30000; margin-bottom: 5px; }
-        .phone-details .btn-beli-catalog { background: #222; color: #fff; border: none; padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; align-self: flex-start; font-family: 'Inter', sans-serif; }
+        /* Coming Soon & Info Styles */
+        .info-box { text-align: left; line-height: 1.8; color: #444; background: #f9f9f9; padding: 20px; border-radius: 12px; border: 1px solid #eee; }
+        .info-box h2 { color: #111; margin-top: 0; font-size: 20px; margin-bottom: 15px; }
+        .coming-soon-container { padding: 80px 20px; }
+        /* WARNA ICON COMING SOON DIUBAH KE HITAM */
+        .cs-icon { font-size: 50px; color: #111111; margin-bottom: 20px; }
 
+        /* --- MODAL POP-UP STYLES --- */
+        .modal-spec-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(5px); z-index: 2000; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease; }
+        .modal-spec-content { background: #ffffff; padding: 30px; border-radius: 20px; width: 90%; max-width: 450px; position: relative; color: #222; box-shadow: 0 25px 50px rgba(0,0,0,0.5); transform: translateY(20px); transition: transform 0.3s ease; text-align: left; }
+        .modal-close-btn { position: absolute; top: 15px; right: 20px; font-size: 28px; cursor: pointer; font-weight: bold; color: #999; transition: color 0.2s; }
+        .modal-close-btn:hover { color: #111; }
+        .profile-title { font-size: 20px; font-weight: 800; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; color: #111; }
+        .bar-container { margin-bottom: 18px; }
+        .bar-label { display: flex; justify-content: space-between; margin-bottom: 6px; font-weight: 600; font-size: 13px; color: #444; }
+        .bar-bg { width: 100%; height: 8px; background: #e6e6e6; border-radius: 10px; overflow: hidden; }
+        .bar-fill { height: 100%; background: #111111; border-radius: 10px; width: 0; transition: width 1.2s cubic-bezier(0.1, 0.7, 0.1, 1); }
+        .spec-list { margin-top: 25px; padding-top: 20px; border-top: 1px solid #eee; font-size: 13px; line-height: 1.8; list-style: none; padding-left: 0; color: #555; }
+        .spec-list li strong { color: #111; display: inline-block; width: 95px; }
+
+        /* Footer Terang Premium */
         .footer { padding: 60px 20px; background: #ffffff; text-align: left; font-size: 13px; color: #555555; border-top: 1px solid #eeeeee; }
-        .footer-contact-info { margin-bottom: 25px; }
-        .footer-contact-item { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+        .footer-contact-info { margin-bottom: 25px; line-height: 1.6; }
+        .footer-contact-item { display: flex; align-items: center; gap: 8px; margin-top: 5px; }
         .footer-profile { margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #f0f0f0; }
         .footer-profile-title { font-weight: 700; color: #111111; margin-bottom: 10px; font-size: 14px; }
         .footer-profile-text { line-height: 1.6; color: #666666; margin-bottom: 15px; }
@@ -66,7 +117,7 @@
         .footer-hq-logo { width: 100px; margin-bottom: 10px; display: block; background: transparent; }
         .footer-office { font-weight: 400; color: #555555; margin-bottom: 5px; }
         .footer-brand { font-weight: 700; color: #111111; margin-bottom: 5px; }
-        .footer-address { line-height: 1.6; font-style: normal; margin-bottom: 20px; }
+        .footer-address { line-height: 1.6; font-style: normal; margin-bottom: 20px; color: #666666; }
         
         .footer-supported { margin-top: 25px; padding-top: 20px; border-top: 1px dashed #e0e0e0; }
         .supported-title { font-weight: 700; color: #111111; margin-bottom: 12px; font-size: 14px; }
@@ -75,15 +126,16 @@
         .supported-brand { font-weight: 700; color: #111111; margin-bottom: 5px; }
         .supported-address { line-height: 1.6; color: #666666; }
 
-        .footer-gov { margin-bottom: 20px; padding: 10px; background: #f9f9f9; border-radius: 5px; font-size: 12px; line-height: 1.5; }
+        .footer-gov { margin-bottom: 20px; padding: 12px; background: #f9f9f9; border: 1px solid #eeeeee; border-radius: 6px; font-size: 12px; line-height: 1.5; color: #555555; }
         .copyright { font-size: 11px; color: #888888; border-top: 1px solid #eeeeee; padding-top: 15px; text-align: left; }
-
+        
         #footer-main-info.hidden { display: none !important; }
 
         @media (min-width: 768px) {
-            .main-content { max-width: 900px; } 
-            .katalog-grid { grid-template-columns: repeat(2, 1fr); gap: 25px; } 
-            .phone-catalog { max-width: 600px; margin: 0 auto; }
+            .main-content { max-width: 900px; }
+            .katalog-grid { grid-template-columns: repeat(3, 1fr); }
+            .trust-badges { flex-direction: row; flex-wrap: wrap; justify-content: space-between; }
+            .badge-item { flex: 1; min-width: 200px; }
             .footer { display: flex; flex-wrap: wrap; justify-content: space-between; padding: 60px 10%; }
             #footer-main-info { display: flex; flex-wrap: wrap; width: 100%; justify-content: space-between; gap: 20px; }
             .footer-profile { flex: 2; min-width: 320px; margin-right: 40px; border-bottom: none; }
@@ -96,64 +148,66 @@
 <body>
 
     <div class="header">
-        <a onclick="renderHome()" style="cursor:pointer;">
-            <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Logo" class="logo">
-        </a>
-        
+        <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Ousevoid Logo" class="logo" onclick="renderHome()" style="cursor:pointer;">
         <div class="header-right">
-            <div class="cart-icon" onclick="renderKatalog()">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="9" cy="21" r="1"></circle>
-                    <circle cx="20" cy="21" r="1"></circle>
-                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                </svg>
-            </div>
-            
-            <div class="menu-btn" onclick="toggleMenu()">
-                <span></span><span></span><span></span>
-            </div>
+            <div class="cart-icon" onclick="renderHome()" style="cursor:pointer;"><i class="fa-solid fa-cart-shopping"></i></div>
+            <div class="menu-btn" onclick="toggleMenu()"><span></span><span></span><span></span></div>
         </div>
     </div>
 
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
     
     <div class="sidebar" id="sidebar">
-        <div class="menu-items">
-            <a class="menu-link" onclick="renderHome()">Produk Ousevoid</a>
-            <a class="menu-link" onclick="renderPromo()">Promo dan Diskon</a>
-            <a class="menu-link" onclick="renderFAQ()">FAQ</a>
-            <a class="menu-link" onclick="renderDukungan()">Dukungan</a>
-            <a class="menu-link" onclick="renderTentang()">Tentang Kami</a>
+        <div class="sidebar-header">
+            <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" class="sidebar-logo">
         </div>
-        <div class="sidebar-bottom">
-            <a class="login-bar" onclick="loginAdmin()">Login Admin</a>
+
+        <div class="nav-item active" id="btn-beranda" onclick="renderHome()"><i class="fa-solid fa-house"></i> Beranda</div>
+
+        <div class="nav-group">
+            <div class="nav-label">Kategori</div>
+            <div class="nav-item" id="btn-earbuds" onclick="renderHome()"><i class="fa-solid fa-ear-listen"></i> Earbuds</div>
+            <div class="nav-item" id="btn-headphones" onclick="renderCS('Headphones')"><i class="fa-solid fa-headphones"></i> Headphones</div>
+            <div class="nav-item" id="btn-speaker" onclick="renderCS('Speaker')"><i class="fa-solid fa-volume-high"></i> Speaker</div>
+            <div class="nav-item" id="btn-accessories" onclick="renderCS('Accessories')"><i class="fa-solid fa-link"></i> Accessories</div>
+        </div>
+
+        <div class="nav-group">
+            <div class="nav-label">Informasi</div>
+            <div class="nav-item" id="btn-garansi" onclick="renderGaransi()"><i class="fa-solid fa-shield-halved"></i> Garansi Resmi</div>
+            <div class="nav-item" id="btn-pengiriman" onclick="renderPengiriman()"><i class="fa-solid fa-truck-fast"></i> Pengiriman</div>
+            <div class="nav-item" id="btn-pembayaran" onclick="renderPembayaran()"><i class="fa-solid fa-credit-card"></i> Pembayaran</div>
+            <div class="nav-item" id="btn-privasi" onclick="renderPrivasi()"><i class="fa-solid fa-lock"></i> Kebijakan Privasi</div>
+            <div class="nav-item" id="btn-syarat" onclick="renderSyarat()"><i class="fa-solid fa-file-lines"></i> Syarat & Ketentuan</div>
         </div>
     </div>
 
-    <div class="main-content" id="app">
-        <div class="katalog-grid">
-            <div class="katalog-card">
-                <img src="https://i.ibb.co.com/gMs8J5pn/8504.png" alt="Jet Black" onclick="renderProdukDetail(0)" style="cursor:pointer;">
-                <h3 onclick="renderProdukDetail(0)" style="cursor:pointer;">VoidPods Pro - Jet Black</h3>
-                <div class="harga">IDR 189.000</div>
-                <div class="specs-text">
-                    <b>Warna:</b> Jet Black Matte<br>
-                    <b>Chip:</b> VoidCore T1<br>
-                    <b>Koneksi:</b> Bluetooth 5.3<br>
-                    <b>Baterai:</b> 3-4 Jam Premium
-                </div>
+    <div class="main-content" id="app"></div>
+
+    <div id="specModalGlobal" class="modal-spec-overlay">
+        <div class="modal-spec-content" id="modalBoxGlobal">
+            <span class="modal-close-btn" onclick="closeSpecModal()">&times;</span>
+            <div class="profile-title">Ousevoid Sound Profile</div>
+            
+            <div class="bar-container">
+                <div class="bar-label"><span>Bass Intensity</span><span>8.5/10</span></div>
+                <div class="bar-bg"><div class="bar-fill" id="bar-bass"></div></div>
             </div>
-            <div class="katalog-card">
-                <img src="https://i.ibb.co.com/S4RBg5cW/8618.png" alt="Pure White" onclick="renderProdukDetail(1)" style="cursor:pointer;">
-                <h3 onclick="renderProdukDetail(1)" style="cursor:pointer;">VoidPods Pro - Pure White</h3>
-                <div class="harga">IDR 189.000</div>
-                <div class="specs-text">
-                    <b>Warna:</b> Pure White Glossy<br>
-                    <b>Chip:</b> VoidCore T1<br>
-                    <b>Koneksi:</b> Bluetooth 5.3<br>
-                    <b>Baterai:</b> 3-4 Jam Premium
-                </div>
+            <div class="bar-container">
+                <div class="bar-label"><span>Crystal Clear Treble</span><span>9.0/10</span></div>
+                <div class="bar-bg"><div class="bar-fill" id="bar-treble"></div></div>
             </div>
+            <div class="bar-container">
+                <div class="bar-label"><span>Vocal Clarity</span><span>8.8/10</span></div>
+                <div class="bar-bg"><div class="bar-fill" id="bar-vocal"></div></div>
+            </div>
+
+            <ul class="spec-list">
+                <li><strong>Engine:</strong> 11mm Custom Dynamic Driver</li>
+                <li><strong>Isolation:</strong> Passive Noise Cancellation Pro-Fit</li>
+                <li><strong>Connection:</strong> Bluetooth 5.3 (Ultra-Low Latency)</li>
+                <li><strong>Battery:</strong> Up to 12 Hours Continuous Playback</li>
+            </ul>
         </div>
     </div>
 
@@ -197,12 +251,11 @@
     </div>
 
     <script>
-        var dataProduk = [
-            { id: 1, nama: "VoidPods Pro - Jet Black", hargaBaru: "IDR 189.000", gambar: "https://i.ibb.co.com/gMs8J5pn/8504.png", specs: { warna: "Jet Black Matte", chip: "VoidCore T1", koneksi: "Bluetooth 5.3", baterai: "3-4 Jam", tuning: "Signature Deep Bass & Crystal Clear Treble" } },
-            { id: 2, nama: "VoidPods Pro - Pure White", hargaBaru: "IDR 189.000", gambar: "https://i.ibb.co.com/S4RBg5cW/8618.png", specs: { warna: "Pure White Glossy", chip: "VoidCore T1", koneksi: "Bluetooth 5.3", baterai: "3-4 Jam", tuning: "Signature Deep Bass & Crystal Clear Treble" } }
+        var products = [
+            { id: 1, name: "VoidPods Pro - Jet Black", price: "IDR 189.000", img: "https://i.ibb.co.com/gMs8J5pn/8504.png", specs: { warna: "Jet Black Matte", chip: "VoidCore T1", koneksi: "Bluetooth 5.3", baterai: "3-4 Jam Premium" } },
+            { id: 2, name: "VoidPods Pro - Pure White", price: "IDR 189.000", img: "https://i.ibb.co.com/S4RBg5cW/8618.png", specs: { warna: "Pure White Glossy", chip: "VoidCore T1", koneksi: "Bluetooth 5.3", baterai: "3-4 Jam Premium" } }
         ];
 
-        // Sistem deteksi Midtrans yang aman tanpa bikin crash
         window.onload = function() {
             try {
                 var url = window.location.href;
@@ -210,26 +263,30 @@
                     renderStatusTransaksi('sukses');
                 } else if (url.indexOf('status=gagal') > -1) {
                     renderStatusTransaksi('gagal');
+                } else {
+                    renderHome();
                 }
-            } catch(e) {}
+            } catch(e) {
+                renderHome();
+            }
         };
 
-        function toggleMenu() { 
-            var sidebar = document.getElementById('sidebar');
-            var overlay = document.getElementById('overlay');
-            if (sidebar.className === 'sidebar') {
-                sidebar.className = 'sidebar active';
-                overlay.className = 'overlay active';
-            } else {
-                sidebar.className = 'sidebar';
-                overlay.className = 'overlay';
-            }
+        function toggleMenu() {
+            var s = document.getElementById('sidebar');
+            var o = document.getElementById('overlay');
+            s.classList.toggle('active');
+            o.classList.toggle('active');
         }
 
-        function autoClose() { 
-            var sidebar = document.getElementById('sidebar');
-            if (sidebar.className === 'sidebar active') {
-                toggleMenu(); 
+        function autoClose() {
+            var s = document.getElementById('sidebar');
+            if (s.classList.contains('active')) toggleMenu();
+        }
+
+        function clearActiveMenu() {
+            var items = document.getElementsByClassName('nav-item');
+            for(var i=0; i<items.length; i++) {
+                items[i].classList.remove('active');
             }
         }
 
@@ -237,129 +294,47 @@
             var footerInfo = document.getElementById('footer-main-info');
             if (footerInfo) {
                 if (tampilkan) {
-                    footerInfo.className = '';
+                    footerInfo.classList.remove('hidden');
                 } else {
-                    footerInfo.className = 'hidden';
+                    footerInfo.classList.add('hidden');
                 }
             }
         }
 
-        function renderHome() {
-            toggleFooterUtama(true);
-            var html = '<div class="katalog-grid">' +
-                '<div class="katalog-card">' +
-                    '<img src="https://i.ibb.co.com/gMs8J5pn/8504.png" alt="Jet Black" onclick="renderProdukDetail(0)" style="cursor:pointer;">' +
-                    '<h3 onclick="renderProdukDetail(0)" style="cursor:pointer;">VoidPods Pro - Jet Black</h3>' +
-                    '<div class="harga">IDR 189.000</div>' +
-                    '<div class="specs-text"><b>Warna:</b> Jet Black Matte<br><b>Chip:</b> VoidCore T1<br><b>Koneksi:</b> Bluetooth 5.3<br><b>Baterai:</b> 3-4 Jam Premium</div>' +
-                '</div>' +
-                '<div class="katalog-card">' +
-                    '<img src="https://i.ibb.co.com/S4RBg5cW/8618.png" alt="Pure White" onclick="renderProdukDetail(1)" style="cursor:pointer;">' +
-                    '<h3 onclick="renderProdukDetail(1)" style="cursor:pointer;">VoidPods Pro - Pure White</h3>' +
-                    '<div class="harga">IDR 189.000</div>' +
-                    '<div class="specs-text"><b>Warna:</b> Pure White Glossy<br><b>Chip:</b> VoidCore T1<br><b>Koneksi:</b> Bluetooth 5.3<br><b>Baterai:</b> 3-4 Jam Premium</div>' +
-                '</div>' +
-            '</div>';
-            document.getElementById('app').innerHTML = html;
-            window.scrollTo(0,0);
-            autoClose();
+        /* --- FUNGSI MODAL --- */
+        function openSpecModal() {
+            var modal = document.getElementById('specModalGlobal');
+            var modalBox = document.getElementById('modalBoxGlobal');
+            modal.style.display = 'flex';
+            
+            setTimeout(function() {
+                modal.style.opacity = '1';
+                modalBox.style.transform = 'translateY(0)';
+            }, 10);
+
+            setTimeout(function() {
+                document.getElementById('bar-bass').style.width = '85%';
+                document.getElementById('bar-treble').style.width = '90%';
+                document.getElementById('bar-vocal').style.width = '88%';
+            }, 300); 
         }
 
-        function renderKatalog() {
-            toggleFooterUtama(false);
-            var html = '<div class="phone-catalog">';
-            for(var i=0; i<dataProduk.length; i++) {
-                var p = dataProduk[i];
-                html += '<div class="phone-item">' +
-                    '<img src="' + p.gambar + '" class="phone-img" alt="Produk" onclick="renderProdukDetail(' + i + ')" style="cursor:pointer;">' +
-                    '<div class="phone-details">' +
-                        '<h3 onclick="renderProdukDetail(' + i + ')" style="cursor:pointer;">' + p.nama + '</h3>' +
-                        '<div class="harga">' + p.hargaBaru + '</div>' +
-                        '<button class="btn-beli-catalog" onclick="window.open(\'https://app.midtrans.com/payment-links/522c9d46-dbff-4f99-acfc-3c4c7c503f06-5fLX3AV4\', \'_blank\')">Beli</button>' +
-                    '</div>' +
-                '</div>';
-            }
-            html += '</div><br><a onclick="renderHome()" style="color:#666; text-decoration:underline; display:block; margin-top:20px; cursor:pointer;">Kembali ke Beranda</a>';
-            document.getElementById('app').innerHTML = html;
-            window.scrollTo(0,0);
-            autoClose();
+        function closeSpecModal() {
+            var modal = document.getElementById('specModalGlobal');
+            var modalBox = document.getElementById('modalBoxGlobal');
+            modal.style.opacity = '0';
+            modalBox.style.transform = 'translateY(20px)';
+            
+            setTimeout(function() {
+                modal.style.display = 'none';
+                document.getElementById('bar-bass').style.width = '0';
+                document.getElementById('bar-treble').style.width = '0';
+                document.getElementById('bar-vocal').style.width = '0';
+            }, 300);
         }
 
-        function renderProdukDetail(index) {
-            toggleFooterUtama(false);
-            var p = dataProduk[index];
-            var html = '<div class="product-name">' + p.nama + '</div>' +
-                '<img src="' + p.gambar + '" style="width:100%; max-width:400px; border-radius:12px; margin-bottom:15px;">' +
-                '<h3 style="color:#b30000; font-size: 22px; margin: 10px 0;">' + p.hargaBaru + '</h3>' +
-                '<div style="text-align:left; font-size:14px; max-width:400px; margin: 0 auto 20px auto; background: #f9f9f9; padding: 20px; border-radius: 12px;">' +
-                    '<p><b>Warna:</b> ' + p.specs.warna + '</p>' +
-                    '<p><b>Chip:</b> ' + p.specs.chip + '</p>' +
-                    '<p><b>Koneksi:</b> ' + p.specs.koneksi + '</p>' +
-                    '<p><b>Baterai:</b> ' + p.specs.baterai + '</p>' +
-                    '<p><b>Karakter Suara:</b> ' + p.specs.tuning + '</p>' +
-                '</div>' +
-                '<button class="btn-beli" style="max-width:400px; margin: 0 auto;" onclick="window.open(\'https://app.midtrans.com/payment-links/522c9d46-dbff-4f99-acfc-3c4c7c503f06-5fLX3AV4\', \'_blank\')">Beli Sekarang</button>' +
-                '<a onclick="renderKatalog()" style="display:block; margin-top:20px; color:#666; text-decoration:underline; cursor:pointer;">Kembali ke Katalog</a>';
-            document.getElementById('app').innerHTML = html;
-            window.scrollTo(0,0);
-            autoClose();
-        }
-
-        function renderPromo() { 
-            toggleFooterUtama(false);
-            var html = '<div class="product-name">Promo dan Diskon</div><p style="color:#555;">Maaf, saat ini tidak ada kampanye promo yang sedang berlangsung.</p><a onclick="renderHome()" style="display:block; margin-top:25px; color:#666; text-decoration:underline; cursor:pointer;">Kembali ke Beranda</a>';
-            document.getElementById('app').innerHTML = html;
-            autoClose(); 
-        }
-
-        function renderFAQ() {
-            toggleFooterUtama(false);
-            var html = '<div class="product-name">FAQ & Pedoman Penggunaan</div><div style="text-align:left; font-size:14px; line-height:1.7; color:#333;"><p><b>1. Bagaimana tata cara penyambungan perangkat?</b><br>Keluarkan earbud dari wadah pengisi daya, aktifkan Bluetooth pada perangkat Anda, kemudian pilih "VoidPods Pro" pada daftar perangkat yang tersedia.</p><p><b>2. Bagaimana prosedur pengisian daya yang disarankan?</b><br>Gunakan kabel bawaan dan kepala pengisi daya dengan arus 5V/1A. Dilarang keras menggunakan kepala pengisi daya cepat (fast-charging) untuk menghindari kerusakan komponen baterai.</p><p><b>3. Apakah produk ini memiliki ketahanan terhadap air?</b><br>VoidPods Pro dirancang untuk tahan terhadap keringat dan cipratan air. Harap tidak merendam perangkat ke dalam air atau menggunakannya saat berenang.</p></div><a onclick="renderHome()" style="display:block; margin-top:25px; color:#666; text-decoration:underline; cursor:pointer;">Kembali ke Beranda</a>';
-            document.getElementById('app').innerHTML = html;
-            autoClose();
-        }
-
-        function renderDukungan() { 
-            toggleFooterUtama(false);
-            var html = '<div class="product-name">Dukungan Layanan</div><p>Untuk bantuan lebih lanjut, silakan hubungi layanan pelanggan kami melalui WhatsApp di: <b>0857 15000 443</b></p><a onclick="renderHome()" style="color:#666; text-decoration:underline; cursor:pointer; display:block; margin-top:25px;">Kembali ke Beranda</a>';
-            document.getElementById('app').innerHTML = html;
-            autoClose(); 
-        }
-
-        function renderTentang() {
-            toggleFooterUtama(false);
-            var html = '<div class="product-name">Tentang Ousevoid</div><div style="text-align: left; background: #f9f9f9; padding: 20px; border-radius: 12px; margin-bottom: 20px; font-size:14px; color:#333; line-height:1.6;"><h3 style="margin-top: 0; color:#111;">Visi Kami</h3><p>Ousevoid hadir untuk mengubah standar pengalaman audio nirkabel di Indonesia. Kami berdedikasi untuk menciptakan teknologi yang menggabungkan estetika desain minimalis dengan performa akustik superior yang dapat diakses oleh semua kalangan.</p><h3 style="margin-top: 20px; color:#111;">Filosofi Perusahaan</h3><p>Kami percaya bahwa teknologi terbaik adalah teknologi yang menyatu dengan gaya hidup Anda. Oleh karena itu, Ousevoid terus berinovasi untuk menghadirkan perangkat yang tidak hanya cerdas, tetapi juga tahan lama dan elegan dalam setiap detailnya.</p></div><a onclick="renderHome()" style="display:block; margin-top:25px; color:#666; text-decoration: underline; cursor:pointer;">Kembali ke Beranda</a>';
-            document.getElementById('app').innerHTML = html;
-            autoClose();
-        }
-
-        function renderStatusTransaksi(tipe) {
-            toggleFooterUtama(false);
-            var html = '';
-            if (tipe === 'sukses') {
-                html = '<div style="border:1px solid #eee; padding:40px 20px; border-radius:12px; max-width:400px; margin:auto; text-align:center;"><div style="font-size:50px; margin-bottom:10px;">✅</div><h2 style="margin:0 0 10px 0;">Pembayaran Berhasil</h2><div style="border-top:1px dashed #ccc; border-bottom:1px dashed #ccc; padding:20px 0; text-align:left;"><p style="margin:0; font-size:12px; color:#888;">NAMA PRODUK</p><p style="margin:0 0 15px 0; font-weight:700;">VoidPods Pro</p><p style="margin:0; font-size:12px; color:#888;">NOMINAL</p><p style="margin:0; font-weight:700; color:#b30000;">IDR 189.000</p></div><p style="font-size:13px; color:#555; margin-top:20px;">Terima kasih atas kepercayaan Anda bertransaksi dengan PT Ousevoid Lintas Batas. Pesanan Anda segera diproses oleh tim logistik kami.</p><button class="btn-beli" onclick="renderHome()">Selesai</button></div>';
-            } else {
-                html = '<div style="border:1px solid #eee; padding:40px 20px; border-radius:12px; max-width:400px; margin:auto; text-align:center;"><div style="font-size:50px; margin-bottom:10px;">❌</div><h2 style="margin:0 0 10px 0;">Pembayaran Gagal</h2><div style="border-top:1px dashed #ccc; border-bottom:1px dashed #ccc; padding:20px 0; text-align:left;"><p style="margin:0; font-size:12px; color:#888;">NAMA PRODUK</p><p style="margin:0 0 15px 0; font-weight:700;">VoidPods Pro</p><p style="margin:0; font-size:12px; color:#888;">NOMINAL</p><p style="margin:0; font-weight:700; color:#b30000;">IDR 189.000</p></div><p style="font-size:13px; color:#555; margin-top:20px;">Transaksi dibatalkan. Hubungi Customer Service kami apabila terjadi kendala saldo atau kegagalan sistem pembayaran.</p><button class="btn-beli" onclick="renderHome()">Kembali</button></div>';
-            }
-            document.getElementById('app').innerHTML = html;
-            window.scrollTo(0,0);
-        }
-
-        function loginAdmin() {
-            var u = prompt("User:"); var p = prompt("Pass:"); 
-            if(u === "ousevoidid" && p === "Aa272900*") alert("Login Berhasil"); 
-            else alert("Akses Ditolak");
-        }
-
-        window.toggleMenu = toggleMenu;
-        window.renderHome = renderHome;
-        window.renderKatalog = renderKatalog;
-        window.renderProdukDetail = renderProdukDetail;
-        window.renderPromo = renderPromo;
-        window.renderFAQ = renderFAQ;
-        window.renderDukungan = renderDukungan;
-        window.renderTentang = renderTentang;
-        window.loginAdmin = loginAdmin;
-    </script>
-</body>
-</html>
+        // Event Klik diluar modal buat nutup
+        window.onclick = function(event) {
+            var modal = document.getElementById('specModalGlobal');
+            if (event.target == modal) {
+                closeS
