@@ -1,4 +1,4 @@
-        <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -80,10 +80,7 @@
         .footer-supported { margin-top: 25px; padding-top: 20px; border-top: 1px dashed #e0e0e0; }
         .supported-title { font-weight: 700; color: #111111; margin-bottom: 12px; font-size: 14px; }
         .supported-images { display: flex; gap: 15px; align-items: center; margin-bottom: 12px; }
-        
-        /* MAGIC CSS Transparan JPG */
         .supported-img { height: 35px; object-fit: contain; max-width: 120px; filter: invert(1); mix-blend-mode: multiply; }
-        
         .supported-brand { font-weight: 700; color: #111111; margin-bottom: 5px; }
         .supported-address { line-height: 1.6; color: #666666; }
 
@@ -234,7 +231,7 @@
             if(document.getElementById('sidebar').classList.contains('active')) toggleMenu(); 
         }
 
-        // Kontrol tampilan footer yang aman secara CSS Class
+        // Kontrol tampilan footer
         function toggleFooterUtama(tampilkan) {
             const footerInfo = document.getElementById('footer-main-info');
             if (footerInfo) {
@@ -323,4 +320,9 @@
         // Halaman Informasi Pelengkap
         function renderPromo() { 
             toggleFooterUtama(false);
-            document.getElementById('app').innerHTML = `<div class="product-name">Promo dan Diskon</div><p style="color:#555;">Maaf, saat ini tidak ada kampanye promo yang sedang berlangsung.</p><a onclick="renderHome()" style="display:block; margin-top:25px; color:#666; text-decoration:underline; cursor:pointer;">Kembali ke Beranda<
+            document.getElementById('app').innerHTML = `
+                <div class="product-name">Promo dan Diskon</div>
+                <p style="color:#555;">Maaf, saat ini tidak ada kampanye promo yang sedang berlangsung.</p>
+                <a onclick="renderHome()" style="display:block; margin-top:25px; color:#666; text-decoration:underline; cursor:pointer;">Kembali ke Beranda</a>
+            `; 
+            a
