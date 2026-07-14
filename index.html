@@ -17,17 +17,16 @@
         .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid #eeeeee; position: sticky; top: 0; background: #ffffff; z-index: 1000; }
         .logo { width: 130px; background: transparent; cursor: pointer; }
         
-        /* Area Kanan Header (Tombol Fix) */
+        /* Area Kanan Header */
         .header-right { display: flex; align-items: center; gap: 15px; }
         
         .tombol-nav { cursor: pointer; padding: 5px; display: flex; align-items: center; justify-content: center; }
-        .tombol-nav svg { pointer-events: none; } /* Mencegah bug klik di HP */
+        .tombol-nav svg { pointer-events: none; } 
         
         /* Sidebar & Overlay */
         .sidebar { position: fixed; top: 0; right: -300px; width: 260px; height: 100%; background: #ffffff; box-shadow: -2px 0 5px rgba(0,0,0,0.1); z-index: 9999; transition: right 0.3s ease; padding: 80px 20px 20px 20px; box-sizing: border-box; display: flex; flex-direction: column; overflow-y: auto; }
         .sidebar.active { right: 0; }
         
-        /* Overlay Fix Total */
         .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9998; display: none; }
         .overlay.active { display: block; }
         
@@ -98,18 +97,20 @@
 <body>
 
     <div class="header">
-        <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Logo" class="logo" onclick="renderHome()">
+        <a onclick="renderHome()" style="cursor:pointer;">
+            <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Logo" class="logo">
+        </a>
         
         <div class="header-right">
-            <div class="tombol-nav" onclick="renderKatalog()">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <div class="tombol-nav" onclick="renderKatalog()" style="padding: 12px; cursor: pointer; display: flex; align-items: center; -webkit-tap-highlight-color: transparent;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 26px; height: 26px; color: #222222; pointer-events: none;">
                     <circle cx="9" cy="21" r="1"></circle>
                     <circle cx="20" cy="21" r="1"></circle>
                     <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                 </svg>
             </div>
             
-            <div class="tombol-nav" onclick="toggleMenu()" style="flex-direction: column; gap: 5px;">
+            <div class="tombol-nav" onclick="toggleMenu()" style="padding: 12px; cursor: pointer; display: flex; flex-direction: column; gap: 5px; -webkit-tap-highlight-color: transparent;">
                 <span style="width: 24px; height: 3px; background: #222222; border-radius: 2px; pointer-events: none;"></span>
                 <span style="width: 24px; height: 3px; background: #222222; border-radius: 2px; pointer-events: none;"></span>
                 <span style="width: 24px; height: 3px; background: #222222; border-radius: 2px; pointer-events: none;"></span>
@@ -204,7 +205,6 @@
             { id: 2, nama: "VoidPods Pro - Pure White", hargaBaru: "IDR 189.000", gambar: "https://i.ibb.co.com/S4RBg5cW/8618.png", specs: { warna: "Pure White Glossy", chip: "VoidCore T1", koneksi: "Bluetooth 5.3", baterai: "3-4 Jam", tuning: "Signature Deep Bass & Crystal Clear Treble" } }
         ];
 
-        // Murni sistem deteksi URL buat Midtrans
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
             const status = urlParams.get('status');
@@ -320,6 +320,4 @@
         function renderFAQ() {
             toggleFooterUtama(false);
             document.getElementById('app').innerHTML = `
-                <div class="product-name">FAQ & Pedoman Penggunaan</div>
-                <div style="text-align:left; font-size:14px; line-height:1.7; color:#333;">
-                    <p><b>1. Bagaimana tata cara penyambungan perangkat?</b><br>Keluarkan earbud dari w
+                <div class="product-name">
