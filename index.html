@@ -212,13 +212,16 @@
             document.getElementById('sidebar').classList.toggle('active');
             document.getElementById('overlay').classList.toggle('active');
         }
+        
         function autoClose() {
             if (document.getElementById('sidebar').classList.contains('active')) toggleMenu();
         }
+        
         function clearActiveMenu() {
             var items = document.getElementsByClassName('nav-item');
             for(var i=0; i<items.length; i++) { items[i].classList.remove('active'); }
         }
+        
         function toggleFooterUtama(tampilkan) {
             var f = document.getElementById('footer-main-info');
             if(f) { tampilkan ? f.classList.remove('hidden') : f.classList.add('hidden'); }
@@ -234,6 +237,7 @@
                 document.getElementById('bar-vocal').style.width = '88%';
             }, 300); 
         }
+        
         function closeSpecModal() {
             var modal = document.getElementById('specModalGlobal');
             modal.classList.remove('show');
@@ -243,200 +247,128 @@
                 document.getElementById('bar-vocal').style.width = '0';
             }, 300);
         }
+        
         document.addEventListener('click', function(event) {
             var modal = document.getElementById('specModalGlobal');
             if (event.target === modal) { closeSpecModal(); }
         });
 
-        /* HALAMAN UTAMA */
+        /* HALAMAN UTAMA & LOOP PRODUK */
         function renderHome() {
             toggleFooterUtama(true);
             var app = document.getElementById('app');
             var html = '<div class="hero-banner"><img src="https://i.ibb.co.com/pjhVC7S6/SOUND-Without-20260714-173950-0000.png" alt="Banner"><button type="button" class="hotspot-btn" onclick="openSpecModal()"></button></div>';
             
             html += '<div class="page-title">Earbuds Terlaris</div><div class="katalog-grid">';
+            
+            // Loop buat nampilin produk yang kepotong tadi
             for(var i=0; i<products.length; i++) {
                 html += '<div class="katalog-card">' +
                     '<img src="' + products[i].img + '" onclick="renderProdukDetail(' + i + ')">' +
                     '<h3 onclick="renderProdukDetail(' + i + ')">' + products[i].name + '</h3>' +
                     '<div class="harga">' + products[i].price + '</div>' +
-                    '<button type="button" class="btn-beli" onclick="renderCheckout(' + i + ')">BELI SEKARANG</button>' +
-                '</div>';
+                    '<button class="btn-beli" onclick="renderProdukDetail(' + i + ')">Beli Sekarang</button>' +
+                    '</div>';
             }
+            
             html += '</div>';
-
-            html += '<div class="trust-badges"><div class="badge-item"><i class="fa-solid fa-shield-halved badge-icon"></i><div class="badge-text"><h4>Garansi Resmi</h4><p>Garansi 2 bulan</p></div></div><div class="badge-item"><i class="fa-solid fa-truck-fast badge-icon"></i><div class="badge-text"><h4>Gratis Ongkir</h4><p>Min. belanja tertentu</p></div></div><div class="badge-item"><i class="fa-solid fa-lock badge-icon"></i><div class="badge-text"><h4>Pembayaran Aman</h4><p>100% secure payment</p></div></div><div class="badge-item"><i class="fa-solid fa-headset badge-icon"></i><div class="badge-text"><h4>Customer Support</h4><p>24/7 Siap membantu</p></div></div></div>';
-
             app.innerHTML = html;
             clearActiveMenu();
-            if(document.getElementById('btn-beranda')) document.getElementById('btn-beranda').classList.add('active');
-            autoClose(); window.scrollTo(0,0);
+            document.getElementById('btn-beranda').classList.add('active');
+            autoClose();
         }
 
-        /* DETAIL PRODUK */
+        /* FUNGSI HALAMAN DETAIL & CHECKOUT */
         function renderProdukDetail(index) {
             toggleFooterUtama(false);
             var p = products[index];
-            var html = '<div style="font-size:22px; font-weight:700; text-align:left; color:#111; margin-bottom:15px;">' + p.name + '</div>' +
-                '<img src="' + p.img + '" style="width:100%; max-width:400px; border-radius:12px; margin-bottom:20px;">' +
-                '<div style="text-align:left; font-size:14px; max-width:400px; margin: 0 auto 20px auto; background: #f9f9f9; padding: 20px; border-radius: 12px; border: 1px solid #eee;">' +
-                    '<p style="margin-top:0;"><b>Spesifikasi Produk:</b></p>' +
-                    '<p><b>Warna:</b> ' + p.specs.warna + '</p>' +
-                    '<p><b>Chip:</b> ' + p.specs.chip + '</p>' +
-                    '<p><b>Koneksi:</b> ' + p.specs.koneksi + '</p>' +
-                    '<p style="margin-bottom:0;"><b>Baterai:</b> ' + p.specs.baterai + '</p>' +
+            var app = document.getElementById('app');
+            var html = '<div class="page-title">Checkout Pesanan</div>' +
+                '<div class="co-summary-box">' +
+                    '<img src="' + p.img + '">' +
+                    '<div><h4 style="margin:0 0 5px 0;">' + p.name + '</h4><div style="font-weight:700;color:#111;">' + p.price + '</div></div>' +
                 '</div>' +
-                '<button type="button" class="btn-beli" style="max-width:400px; margin: 0 auto; padding:15px; font-size:14px;" onclick="renderCheckout(' + index + ')">Beli Sekarang</button>' +
-                '<a onclick="renderHome()" style="display:block; margin-top:20px; color:#666; font-size:13px; text-decoration:underline; cursor:pointer;">Kembali ke Beranda</a>';
+                '<div class="co-input-group"><label class="co-label">Nama Lengkap</label><input type="text" id="co-nama" class="co-input" placeholder="Masukkan nama Anda"></div>' +
+                '<div class="co-input-group"><label class="co-label">Nomor WhatsApp</label><input type="number" id="co-wa" class="co-input" placeholder="08xxxxxxxxx"></div>' +
+                '<div class="co-input-group"><label class="co-label">Alamat Email</label><input type="email" id="co-email" class="co-input" placeholder="email@anda.com"></div>' +
+                '<div class="co-input-group"><label class="co-label">Alamat Lengkap Pengiriman</label><input type="text" id="co-alamat" class="co-input" placeholder="Jalan, RT/RW, Kota, Kode Pos"></div>' +
+                '<button class="btn-beli" onclick="eksekusiBayarMidtrans(' + index + ')" style="margin-top:20px; font-size:16px; padding:15px;">Proses Pembayaran</button>';
             
-            document.getElementById('app').innerHTML = html;
-            autoClose(); window.scrollTo(0,0);
+            app.innerHTML = html;
+            autoClose();
         }
 
-        /* HALAMAN CHECKOUT KUSTOM */
-        function renderCheckout(index) {
-            toggleFooterUtama(false);
-            var p = products[index];
-            
-            var html = '<div style="max-width:450px; margin:auto;">' +
-                '<h2 style="text-align:left; font-size:20px; color:#111; margin-top:0;">Informasi Pengiriman</h2>' +
-                '<div class="co-summary-box"><img src="' + p.img + '"><div><div style="font-weight:600; font-size:14px; color:#111; margin-bottom:5px;">' + p.name + '</div><div style="font-weight:700; font-size:15px; color:#111;">' + p.price + '</div></div></div>' +
-                '<div class="co-input-group"><label class="co-label">Nama Lengkap</label><input type="text" id="co-nama" class="co-input" placeholder="Masukkan nama penerima" required></div>' +
-                '<div class="co-input-group"><label class="co-label">Nomor WhatsApp</label><input type="number" id="co-wa" class="co-input" placeholder="Contoh: 08123456789" required></div>' +
-                '<div class="co-input-group"><label class="co-label">Alamat Lengkap</label><textarea id="co-alamat" class="co-input" rows="2" style="resize:vertical;" placeholder="Nama jalan, RT/RW, kota" required></textarea></div>' +
-                '<div class="co-input-group" style="margin-bottom:30px;"><label class="co-label">Email Invoice</label><input type="email" id="co-email" class="co-input" placeholder="contoh@email.com" required><small style="color:#666; font-size:11px; margin-top:5px; display:block; text-align:left;">Tulis untuk kirim invoice jika transaksi berhasil</small></div>' +
-                '<button type="button" class="btn-beli" style="padding:15px; font-size:14px;" onclick="bukaHalamanPembayaran(' + index + ')">Lanjut ke Pembayaran</button>' +
-                '<a onclick="renderProdukDetail(' + index + ')" style="display:block; margin-top:20px; color:#666; font-size:13px; text-decoration:underline; cursor:pointer;">Batal & Kembali</a>' +
-            '</div>';
-
-            document.getElementById('app').innerHTML = html;
-            clearActiveMenu(); window.scrollTo(0,0);
-        }
-
-        /* TRANSISI KE HALAMAN PEMBAYARAN KUSTOM */
-        function bukaHalamanPembayaran(index) {
+        /* FUNGSI UTAMA MIDTRANS + CLOUDFLARE BACKEND */
+        async function eksekusiBayarMidtrans(index) {
             var nama = document.getElementById('co-nama').value;
             var wa = document.getElementById('co-wa').value;
-            var alamat = document.getElementById('co-alamat').value;
             var email = document.getElementById('co-email').value;
+            var alamat = document.getElementById('co-alamat').value;
 
-            if(!nama || !wa || !alamat || !email) {
-                alert("Mohon lengkapi seluruh Formulir Data Pengiriman sebelum melanjutkan.");
+            if (!nama || !wa || !email || !alamat) {
+                alert("Mohon lengkapi semua formulir pengiriman terlebih dahulu!");
                 return;
             }
-            var dataPembeli = { nama: nama, wa: wa, alamat: alamat, email: email };
-            renderHalamanPembayaran(index, dataPembeli);
+
+            // Ganti tombol jadi loading biar pembeli ga pencet berkali-kali
+            document.querySelector('.btn-beli').innerHTML = 'Memproses...';
+            document.querySelector('.btn-beli').disabled = true;
+
+            try {
+                // Nembak ke file functions/backend.js yang lu bikin tadi
+                const response = await fetch("/backend", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        nama: nama,
+                        wa: wa,
+                        email: email,
+                        total: 189000 // Fix harga sesuai produk
+                    })
+                });
+
+                const hasil = await response.json();
+
+                if (hasil.redirect_url) {
+                    window.location.href = hasil.redirect_url;
+                } else {
+                    alert("Gagal memproses transaksi: " + (hasil.error || "Coba lagi nanti."));
+                    document.querySelector('.btn-beli').innerHTML = 'Proses Pembayaran';
+                    document.querySelector('.btn-beli').disabled = false;
+                }
+            } catch (err) {
+                alert("Koneksi ke server terputus. Pastikan internet stabil.");
+                document.querySelector('.btn-beli').innerHTML = 'Proses Pembayaran';
+                document.querySelector('.btn-beli').disabled = false;
+            }
         }
 
-        /* HALAMAN PEMBAYARAN TRANSAKSI (REVIEW) */
-        function renderHalamanPembayaran(index, user) {
+        /* FUNGSI MENU KATEGORI COMING SOON */
+        function renderCS(title) {
             toggleFooterUtama(false);
-            var p = products[index];
-
-            var tgl = new Date();
-            var yyyy = tgl.getFullYear();
-            var mm = String(tgl.getMonth() + 1).padStart(2, '0');
-            var dd = String(tgl.getDate()).padStart(2, '0');
-            var urutAcak = String(Math.floor(Math.random() * 900000) + 100000);
-            var idTransaksi = yyyy + "/OUSE/" + mm + "/" + dd + "/REG" + urutAcak;
-
-            var html = '<div style="max-width:480px; margin:auto; text-align:center; background:#ffffff; border:1px solid #eee; padding:30px 20px; border-radius:16px; box-shadow:0 4px 20px rgba(0,0,0,0.02);">' +
-                '<img src="https://i.ibb.co.com/x8MrtzXr/8588.png" style="width:110px; margin-bottom:20px;">' +
-                '<h2 style="font-size:20px; font-weight:700; color:#111; margin:0 0 5px 0;">Pembayaran Transaksi</h2>' +
-                '<div style="font-size:12px; color:#666; word-break:break-all; font-weight:500; margin-bottom:20px;">ID Transaksi: <span style="font-weight:700; color:#111;">' + idTransaksi + '</span></div>' +
-                '<div style="background:#f9f9f9; border:1px solid #eee; padding:15px; border-radius:12px; margin-bottom:25px;">' +
-                    '<div style="font-size:12px; color:#888; text-transform:uppercase; font-weight:600; margin-bottom:4px;">Total Tagihan</div>' +
-                    '<div style="font-size:24px; font-weight:800; color:#111;">' + p.price + '</div>' +
-                    '<div style="display:inline-block; font-size:11px; font-weight:700; background:#fff2e6; color:#b35c00; padding:4px 10px; border-radius:20px; margin-top:8px; border:1px solid #ffe6cc; text-transform:uppercase; letter-spacing:0.5px;"><i class="fa-solid fa-clock" style="margin-right:4px;"></i> Menunggu Pembayaran</div>' +
-                '</div>' +
-                '<div style="text-align:left; font-size:13px; border-bottom:1px solid #eee; padding-bottom:15px; margin-bottom:20px; line-height:1.6; color:#444;">' +
-                    '<div style="font-weight:700; color:#111; margin-bottom:8px; font-size:14px; text-transform:uppercase; letter-spacing:0.5px;">Data Penerima & Invoice</div>' +
-                    '<div><b>Nama:</b> ' + user.nama + '</div>' +
-                    '<div><b>No Telpon:</b> ' + user.wa + '</div>' +
-                    '<div><b>Alamat:</b> ' + user.alamat + '</div>' +
-                    '<div style="margin-top:4px; padding-top:4px; border-top:1px dashed #eee; color:#111;"><b>Email Invoice:</b> ' + user.email + '</div>' +
-                '</div>' +
-                '<div style="text-align:left; font-weight:700; font-size:14px; color:#111; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px;">Pilih Metode Pembayaran</div>' +
-                '<div class="payment-method-grid">' +
-                    '<div class="payment-item selected" onclick="pilihPayment(this)"><img src="https://i.ibb.co.com/MDFzRSrD/Gopay-logo-svg.png" alt="GoPay"></div>' +
-                    '<div class="payment-item" onclick="pilihPayment(this)"><img src="https://i.ibb.co.com/HLqqw8qc/shopeepay.png" alt="ShopeePay"></div>' +
-                    '<div class="payment-item" onclick="pilihPayment(this)"><img src="https://i.ibb.co.com/xqg0PbT4/Logo-dana-blue-svg.png" alt="DANA"></div>' +
-                    '<div class="payment-item" onclick="pilihPayment(this)"><img src="https://i.ibb.co.com/nq11tGCJ/Logo-QRIS-svg.png" alt="QRIS"></div>' +
-                    '<div class="payment-item" onclick="pilihPayment(this)"><img src="https://i.ibb.co.com/HfWbZzbG/BRI-2025-with-full-name-svg.png" alt="BRI"></div>' +
-                    '<div class="payment-item" onclick="pilihPayment(this)"><img src="https://i.ibb.co.com/BVztVS7s/Bank-Negara-Indonesia-logo-2004-svg.png" alt="BNI"></div>' +
-                    '<div class="payment-item" onclick="pilihPayment(this)"><img src="https://i.ibb.co.com/0pzHG5xN/Bank-Mandiri-logo-2016-svg.png" alt="Mandiri"></div>' +
-                    '<div class="payment-item" onclick="pilihPayment(this)"><img src="https://i.ibb.co.com/BKgDdxxY/BTN-2024-svg.png" alt="BTN"></div>' +
-                    '<div class="payment-item" onclick="pilihPayment(this)"><img src="https://i.ibb.co.com/qLT2FX8W/500px-Bank-Central-Asia-svg.png" alt="BCA"></div>' +
-                '</div>' +
-                '<button type="button" class="btn-beli" style="padding:15px; font-size:14px; margin-top:15px;" onclick="window.open(\'https://app.midtrans.com/payment-links/522c9d46-dbff-4f99-acfc-3c4c7c503f06-5fLX3AV4\', \'_blank\')">BAYAR SEKARANG</button>' +
-                '<a onclick="renderCheckout(' + index + ')" style="display:block; margin-top:18px; color:#666; font-size:13px; text-decoration:underline; cursor:pointer;">Kembali ke Halaman Produk</a>' +
-                '<div style="margin-top:30px; padding-top:20px; border-top:1px dashed #eee; display:flex; flex-direction:column; align-items:center; gap:6px;">' +
-                    '<div style="font-size:11px; color:#888; font-weight:600; text-transform:uppercase; letter-spacing:0.5px;">Powered by:</div>' +
-                    '<img src="https://i.ibb.co.com/k2D0fVSy/Midtrans.png" style="height:20px; filter:grayscale(100%); mix-blend-mode:multiply;">' +
-                    '<p style="margin:4px 0 0 0; font-size:11px; color:#777; line-height:1.4; max-width:340px;">Transaksi Anda dilindungi secara profesional oleh sistem keamanan & enkripsi data berlapis Midtrans.</p>' +
-                '</div>' +
-            '</div>';
-
-            document.getElementById('app').innerHTML = html; window.scrollTo(0,0);
-        }
-
-        /* Fungsi Klik Metode Pembayaran Visual */
-        function pilihPayment(element) {
-            var items = document.getElementsByClassName('payment-item');
-            for(var i=0; i<items.length; i++) { items[i].classList.remove('selected'); }
-            element.classList.add('selected');
-        }
-
-        /* HALAMAN INFO & COMING SOON */
-        function renderInfo(title, icon, content, btnId) {
-            toggleFooterUtama(false);
-            document.getElementById('app').innerHTML = '<div class="info-box"><h2><i class="fa-solid ' + icon + '"></i> ' + title + '</h2>' + content + '</div>';
-            clearActiveMenu(); if(document.getElementById(btnId)) document.getElementById(btnId).classList.add('active');
-            autoClose(); window.scrollTo(0,0);
-        }
-        function renderCS(name) {
-            toggleFooterUtama(false);
-            document.getElementById('app').innerHTML = '<div class="coming-soon-container"><div class="cs-icon"><i class="fa-solid fa-rocket"></i></div><h1>' + name + '</h1><p style="color:#666;">Coming Soon! Nantikan koleksi ' + name + ' premium kami.</p><button type="button" class="btn-beli" style="max-width:200px; margin-top:20px; margin-left:auto; margin-right:auto;" onclick="renderHome()">Kembali</button></div>';
+            document.getElementById('app').innerHTML = '<div class="coming-soon-container"><i class="fa-solid fa-boxes-packing cs-icon"></i><h2>' + title + '</h2><p>Kategori ini sedang dalam persiapan. Nantikan koleksi terbaik dari Ousevoid segera!</p></div>';
             clearActiveMenu();
-            if(name==='Headphones') document.getElementById('btn-headphones').classList.add('active');
-            if(name==='Speaker') document.getElementById('btn-speaker').classList.add('active');
-            if(name==='Accessories') document.getElementById('btn-accessories').classList.add('active');
-            autoClose(); window.scrollTo(0,0);
+            autoClose();
         }
 
-        function renderGaransi() { renderInfo('Garansi Resmi', 'fa-shield-halved', '<p>Garansi Resmi 2 Bulan sejak tanggal pembelian. Bebas cacat pabrik.</p>', 'btn-garansi'); }
-        function renderPengiriman() { renderInfo('Informasi Pengiriman', 'fa-truck-fast', '<p>Pengiriman cepat dan aman. Pesanan diproses di hari yang sama.</p>', 'btn-pengiriman'); }
-        function renderPembayaran() { renderInfo('Metode Pembayaran', 'fa-credit-card', '<p>Pembayaran diproses secara aman melalui Midtrans Payment Gateway.</p>', 'btn-pembayaran'); }
-        function renderPrivasi() { renderInfo('Kebijakan Privasi', 'fa-lock', '<p>Data pribadi dan alamat Anda kami lindungi sepenuhnya dan tidak disebar ke pihak ketiga.</p>', 'btn-privasi'); }
-        function renderSyarat() { renderInfo('Syarat & Ketentuan', 'fa-file-lines', '<p>Seluruh transaksi diselesaikan melalui sistem tagihan resmi web kami.</p>', 'btn-syarat'); }
-
-        /* STATUS TRANSAKSI */
-        function renderStatusTransaksi(tipe) {
+        /* FUNGSI MENU INFORMASI SIDEBAR */
+        function renderInfo(title, content) {
             toggleFooterUtama(false);
-            var html = '';
-            var nom = "OSV-" + Math.floor(Math.random() * 999999);
-            var resi = "JNT-88299310" + Math.floor(Math.random() * 100);
-
-            if (tipe === 'sukses') {
-                html = '<div style="border:1px solid #eee; background:#fff; padding:40px 20px; border-radius:12px; max-width:400px; margin:auto; text-align:center;"><div style="font-size:50px; margin-bottom:10px;">✅</div><h2 style="margin:0 0 10px 0; color:#111;">Pembayaran Berhasil</h2><div style="border-top:1px dashed #ccc; border-bottom:1px dashed #ccc; padding:20px 0; text-align:left;"><p style="margin:0; font-size:11px; color:#888;">NOMOR TRANSAKSI</p><p style="margin:0 0 15px 0; font-weight:700; color:#111;">' + nom + '</p><p style="margin:0; font-size:11px; color:#888;">RESI PENGIRIMAN</p><p style="margin:0 0 15px 0; font-weight:700; color:#111;">' + resi + '</p><p style="margin:0; font-size:11px; color:#888;">TIPE PRODUK</p><p style="margin:0; font-weight:700; color:#111;">VoidPods Pro</p></div><p style="font-size:13px; color:#555; margin-top:20px;">Detail pesanan sudah dikirim ke WhatsApp. Data alamat Anda disembunyikan demi privasi.</p><button type="button" class="btn-beli" style="margin-top:15px;" onclick="renderHome()">Selesai</button></div>';
-            } else {
-                html = '<div style="border:1px solid #eee; background:#fff; padding:40px 20px; border-radius:12px; max-width:400px; margin:auto; text-align:center;"><div style="font-size:50px; margin-bottom:10px;">❌</div><h2 style="margin:0 0 10px 0; color:#111;">Pembayaran Gagal</h2><div style="border-top:1px dashed #ccc; border-bottom:1px dashed #ccc; padding:20px 0; text-align:left;"><p style="margin:0; font-size:11px; color:#888;">NOMOR TRANSAKSI</p><p style="margin:0 0 15px 0; font-weight:700; color:#111;">' + nom + '</p></div><p style="font-size:13px; color:#555; margin-top:20px;">Transaksi dibatalkan. Hubungi Customer Service jika ada kendala.</p><button type="button" class="btn-beli" style="margin-top:15px;" onclick="renderHome()">Kembali</button></div>';
-            }
-            document.getElementById('app').innerHTML = html;
-            clearActiveMenu(); window.scrollTo(0,0);
+            document.getElementById('app').innerHTML = '<div class="info-box"><h2>' + title + '</h2><p>' + content + '</p></div>';
+            clearActiveMenu();
+            autoClose();
         }
+        
+        function renderGaransi() { renderInfo('Garansi Resmi', 'Semua produk Ousevoid dilindungi garansi resmi selama 1 tahun penuh. Berlaku untuk kerusakan cacat pabrik (bukan karena kelalaian pengguna). Proses klaim sangat mudah melalui WhatsApp resmi kami.'); }
+        function renderPengiriman() { renderInfo('Pengiriman', 'Pesanan yang terkonfirmasi pembayarannya sebelum jam 15.00 WIB akan dikirim pada hari yang sama. Kami menggunakan layanan logistik terpercaya PT Gamoon Desember Indonesia.'); }
+        function renderPembayaran() { renderInfo('Pembayaran', 'Sistem pembayaran kami dijamin aman dan terenkripsi. Kami menerima berbagai metode pembayaran: QRIS (Gopay, OVO, Dana, ShopeePay), Transfer Bank (Virtual Account BCA, Mandiri, BNI, BRI), serta Kartu Kredit.'); }
+        function renderPrivasi() { renderInfo('Kebijakan Privasi', 'Keamanan data Anda adalah prioritas kami. Data pribadi seperti Nama, Nomor WhatsApp, dan Email hanya digunakan untuk keperluan pengiriman pesanan dan tidak akan pernah dibagikan kepada pihak ketiga.'); }
+        function renderSyarat() { renderInfo('Syarat & Ketentuan', 'Dengan melakukan pembelian di website resmi Ousevoid, Anda menyetujui seluruh kebijakan pengiriman, pengembalian dana, dan klaim garansi yang berlaku di perusahaan kami.'); }
 
-        /* --- SCRIPT EKSEKUSI OTOMATIS ANTI-BLANK (HTML CODE RUNNER SAFE) --- */
-        setTimeout(function() {
-            var urlCheck = window.location.href || "";
-            if (urlCheck.indexOf('status=sukses') > -1) { 
-                renderStatusTransaksi('sukses'); 
-            } else if (urlCheck.indexOf('status=gagal') > -1) { 
-                renderStatusTransaksi('gagal'); 
-            } else { 
-                renderHome(); 
-            }
-        }, 100);
+        // Buka halaman home saat web pertama kali dibuka
+        window.onload = function() {
+            renderHome();
+        };
     </script>
 </body>
 </html>
