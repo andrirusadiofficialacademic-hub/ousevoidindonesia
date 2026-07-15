@@ -11,144 +11,84 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     
     <style>
-        body { margin: 0; font-family: 'Inter', sans-serif; color: #222222; background: #ffffff; scroll-behavior: smooth; }
+        /* CSS COMPRESSED UNTUK MENCEGAH KODE KEPOTONG */
+        body { margin: 0; font-family: 'Inter', sans-serif; color: #222; background: #fff; scroll-behavior: smooth; }
         a { text-decoration: none; color: inherit; cursor: pointer; }
-        
-        /* HEADER (Posisi Menu di Kiri, Cart di Kanan) */
-        .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid #eeeeee; position: sticky; top: 0; background: #ffffff; z-index: 1000; }
-        .logo { width: 130px; cursor: pointer; }
-        
-        .header-left { display: flex; align-items: center; gap: 15px; }
-        .header-right { display: flex; align-items: center; }
-        .cart-icon { font-size: 20px; color: #222222; cursor: pointer; padding: 5px; }
-        
-        .menu-btn { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; }
-        .menu-btn span { width: 22px; height: 3px; background: #222222; border-radius: 2px; transition: 0.3s; }
-
-        /* SIDEBAR PINDAH KE KIRI PREMIUM */
-        .sidebar { 
-            position: fixed; 
-            top: 0; 
-            left: -300px; /* Mulai tersembunyi di sebelah kiri */
-            width: 280px; 
-            height: 100%; 
-            background: #ffffff; 
-            box-shadow: 2px 0 10px rgba(0,0,0,0.05); 
-            z-index: 1003; 
-            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-            padding: 20px 15px; 
-            box-sizing: border-box; 
-            overflow-y: auto; 
-        }
-        .sidebar.active { left: 0; } /* Geser masuk dari kiri */
-        
-        .sidebar-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 5px 30px 5px; border-bottom: 1px solid #eeeeee; margin-bottom: 20px; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid #eee; position: sticky; top: 0; background: #fff; z-index: 1000; }
+        .menu-btn { position: relative; display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 10px 10px 10px 0; z-index: 1001; }
+        .menu-btn span { width: 24px; height: 3px; background: #222; border-radius: 2px; }
+        .logo { width: 120px; cursor: pointer; position: absolute; left: 50%; transform: translateX(-50%); z-index: 1001; }
+        .cart-icon { position: relative; font-size: 20px; color: #222; cursor: pointer; padding: 10px 0 10px 10px; z-index: 1001; }
+        .sidebar { position: fixed; top: 0; left: -320px; width: 280px; height: 100%; background: #fff; box-shadow: 2px 0 15px rgba(0,0,0,0.1); z-index: 1003; transition: 0.3s cubic-bezier(0.4,0,0.2,1); padding: 20px 15px; box-sizing: border-box; overflow-y: auto; }
+        .sidebar.active { left: 0; }
+        .sidebar-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 5px 30px 5px; border-bottom: 1px solid #eee; margin-bottom: 20px; }
         .sidebar-logo { width: 130px; }
-        .close-sidebar-btn { font-size: 22px; color: #888; cursor: pointer; }
-
+        .close-sidebar-btn { font-size: 22px; color: #888; cursor: pointer; padding: 5px; }
         .nav-group { margin-bottom: 25px; }
         .nav-label { font-size: 12px; color: #888; font-weight: 700; letter-spacing: 1px; margin-bottom: 15px; padding-left: 10px; text-transform: uppercase; }
-
         .nav-item { display: flex; align-items: center; padding: 12px 15px; border-radius: 8px; margin-bottom: 5px; color: #555; font-size: 14px; font-weight: 500; transition: 0.2s; cursor: pointer; }
         .nav-item i { width: 25px; font-size: 18px; margin-right: 12px; color: #888; }
         .nav-item:hover { background: #f9f9f9; color: #222; }
-        
-        /* Tema Hitam Elegan Aktif */
-        .nav-item.active { background: #111111; color: #fff; }
+        .nav-item.active { background: #111; color: #fff; }
         .nav-item.active i { color: #fff; }
-
-        /* Backdrop Overlay */
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1002; opacity: 0; visibility: hidden; transition: 0.3s; }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1002; opacity: 0; visibility: hidden; transition: 0.3s; }
         .overlay.active { opacity: 1; visibility: visible; }
-
-        /* Main Content */
         .main-content { padding: 30px 20px 100px 20px; max-width: 600px; margin: auto; min-height: 500px; text-align: center; }
         .page-title { font-size: 24px; font-weight: 700; margin-bottom: 25px; color: #111; text-align: left; }
-        
-        /* --- HERO BANNER & HOTSPOT --- */
         .hero-banner { position: relative; width: 100%; border-radius: 16px; overflow: hidden; margin-bottom: 35px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
         .hero-banner img { width: 100%; display: block; }
-        .hotspot-btn {
-            position: absolute;
-            bottom: 10%; 
-            left: 7%;    
-            width: 25%;    
-            height: 14%; 
-            background: rgba(255, 255, 255, 0); 
-            border: none;
-            border-radius: 8px; 
-            cursor: pointer;
-            transition: background 0.3s ease;
-            z-index: 10;
-        }
-        .hotspot-btn:hover { background: rgba(255, 255, 255, 0.15); }
-
-        /* Grid Produk */
+        .hotspot-btn { position: absolute; bottom: 10%; left: 7%; width: 25%; height: 14%; background: rgba(255,255,255,0); border: none; border-radius: 8px; cursor: pointer; transition: 0.3s; z-index: 10; }
+        .hotspot-btn:hover { background: rgba(255,255,255,0.15); box-shadow: 0 0 15px rgba(255,255,255,0.3); }
         .katalog-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
         .katalog-card { background: #fff; border: 1px solid #eee; padding: 12px; border-radius: 12px; transition: 0.3s; }
         .katalog-card:hover { border-color: #ccc; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
         .katalog-card img { width: 100%; border-radius: 8px; margin-bottom: 10px; cursor: pointer; }
         .katalog-card h3 { font-size: 14px; margin: 0 0 5px 0; color: #111; text-align: left; cursor: pointer; }
-        .katalog-card .harga { font-size: 15px; font-weight: 700; color: #111111; margin-bottom: 10px; text-align: left; }
+        .katalog-card .harga { font-size: 15px; font-weight: 700; color: #111; margin-bottom: 10px; text-align: left; }
         .btn-beli { background: #111; color: #fff; padding: 12px; border-radius: 8px; font-weight: 700; border: none; cursor: pointer; width: 100%; font-size: 13px; transition: 0.2s; }
         .btn-beli:hover { background: #333; }
-
-        /* Trust Badges */
+        .co-input-group { margin-bottom: 18px; text-align: left; }
+        .co-label { display: block; font-size: 13px; font-weight: 600; color: #333; margin-bottom: 6px; }
+        .co-input { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 14px; box-sizing: border-box; transition: 0.3s; }
+        .co-input:focus { border-color: #111; outline: none; }
+        .co-summary-box { display: flex; align-items: center; gap: 15px; background: #f9f9f9; padding: 15px; border-radius: 12px; border: 1px solid #eee; margin-bottom: 25px; text-align: left; }
+        .co-summary-box img { width: 70px; height: 70px; object-fit: cover; border-radius: 8px; }
+        .payment-method-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0; }
+        .payment-item { border: 1px solid #eee; border-radius: 8px; padding: 10px; display: flex; align-items: center; justify-content: center; background: #fff; cursor: pointer; transition: 0.2s; height: 50px; box-sizing: border-box; }
+        .payment-item:hover, .payment-item.selected { border-color: #111; background: #fafafa; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .payment-item img { max-height: 25px; max-width: 100%; object-fit: contain; }
         .trust-badges { display: flex; flex-direction: column; gap: 15px; background: #fdfdfd; border: 1px solid #eee; border-radius: 12px; padding: 20px; margin-top: 40px; text-align: left; }
         .badge-item { display: flex; align-items: center; gap: 15px; }
-        .badge-icon { font-size: 24px; color: #111111; width: 30px; text-align: center; }
+        .badge-icon { font-size: 24px; color: #111; width: 30px; text-align: center; }
         .badge-text h4 { margin: 0 0 3px 0; font-size: 14px; color: #111; }
         .badge-text p { margin: 0; font-size: 12px; color: #666; }
-
-        /* Info Styles */
         .info-box { text-align: left; line-height: 1.8; color: #444; background: #f9f9f9; padding: 25px; border-radius: 12px; border: 1px solid #eee; }
         .info-box h2 { color: #111; margin-top: 0; font-size: 20px; margin-bottom: 15px; }
         .coming-soon-container { padding: 80px 20px; }
-        .cs-icon { font-size: 50px; color: #111111; margin-bottom: 20px; }
-
-        /* --- MODAL POP-UP STYLES --- */
-        .modal-spec-overlay { 
-            visibility: hidden; opacity: 0; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(4px); z-index: 2000; 
-            display: flex; justify-content: center; align-items: center; transition: 0.3s ease; 
-        }
+        .cs-icon { font-size: 50px; color: #111; margin-bottom: 20px; }
+        .modal-spec-overlay { visibility: hidden; opacity: 0; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); z-index: 2000; display: flex; justify-content: center; align-items: center; transition: 0.3s ease; }
         .modal-spec-overlay.show { visibility: visible; opacity: 1; }
-        
-        .modal-spec-content { 
-            background: #ffffff; padding: 30px; border-radius: 16px; width: 90%; max-width: 400px; 
-            position: relative; color: #222; box-shadow: 0 25px 50px rgba(0,0,0,0.3); 
-            transform: translateY(30px) scale(0.95); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-align: left; 
-        }
+        .modal-spec-content { background: #fff; padding: 30px; border-radius: 16px; width: 90%; max-width: 400px; position: relative; color: #222; box-shadow: 0 25px 50px rgba(0,0,0,0.3); transform: translateY(30px) scale(0.95); transition: 0.4s; text-align: left; }
         .modal-spec-overlay.show .modal-spec-content { transform: translateY(0) scale(1); }
-
-        .modal-close-btn { position: absolute; top: 15px; right: 20px; font-size: 26px; cursor: pointer; font-weight: bold; color: #999; transition: color 0.2s; line-height: 1; }
+        .modal-close-btn { position: absolute; top: 15px; right: 20px; font-size: 26px; cursor: pointer; font-weight: bold; color: #999; }
         .modal-close-btn:hover { color: #111; }
         .profile-title { font-size: 18px; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; color: #111; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        
         .bar-container { margin-bottom: 15px; }
         .bar-label { display: flex; justify-content: space-between; margin-bottom: 6px; font-weight: 600; font-size: 13px; color: #333; }
         .bar-bg { width: 100%; height: 6px; background: #eee; border-radius: 10px; overflow: hidden; }
-        .bar-fill { height: 100%; background: #111111; border-radius: 10px; width: 0; transition: width 1s cubic-bezier(0.2, 0.8, 0.2, 1); }
-        
+        .bar-fill { height: 100%; background: #111; border-radius: 10px; width: 0; transition: width 1s; }
         .spec-list { margin-top: 20px; padding-top: 15px; font-size: 13px; line-height: 1.6; list-style: none; padding-left: 0; color: #555; }
         .spec-list li { margin-bottom: 8px; }
         .spec-list li strong { color: #111; display: inline-block; width: 90px; }
-
-        /* Footer */
-        .footer { padding: 60px 20px; background: #ffffff; text-align: left; font-size: 13px; color: #555555; border-top: 1px solid #eeeeee; }
-        .footer-contact-info { margin-bottom: 25px; line-height: 1.6; }
-        .footer-contact-item { display: flex; align-items: center; gap: 8px; margin-top: 5px; }
-        .footer-profile { margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #f0f0f0; }
-        .footer-profile-title { font-weight: 700; color: #111111; margin-bottom: 10px; font-size: 14px; }
-        .footer-profile-text { line-height: 1.6; color: #666666; margin-bottom: 15px; }
-        .footer-hq { margin-bottom: 25px; }
-        .footer-hq-logo { width: 100px; margin-bottom: 10px; display: block; background: transparent; }
-        .footer-office { font-weight: 400; color: #555555; margin-bottom: 5px; }
-        .footer-brand { font-weight: 700; color: #111111; margin-bottom: 5px; }
-        .footer-address { line-height: 1.6; font-style: normal; margin-bottom: 20px; color: #666666; }
-        .footer-gov { margin-bottom: 20px; padding: 12px; background: #f9f9f9; border: 1px solid #eeeeee; border-radius: 6px; font-size: 12px; line-height: 1.5; color: #555555; }
-        .copyright { font-size: 11px; color: #888888; border-top: 1px solid #eeeeee; padding-top: 15px; text-align: left; }
         
+        .footer { padding: 60px 20px; background: #fff; text-align: left; font-size: 13px; color: #555; border-top: 1px solid #eee; }
+        .footer-profile-title { font-weight: 700; color: #111; margin-bottom: 10px; font-size: 14px; }
+        .footer-profile-text { line-height: 1.6; color: #666; margin-bottom: 15px; }
+        .footer-hq-logo { width: 100px; margin-bottom: 10px; display: block; }
+        .supported-title { font-weight: 700; color: #111; margin-bottom: 12px; font-size: 14px; }
+        .supported-img { height: 35px; object-fit: contain; max-width: 120px; filter: invert(1); mix-blend-mode: multiply; }
+        .footer-gov { margin-bottom: 20px; padding: 12px; background: #f9f9f9; border: 1px solid #eee; border-radius: 6px; font-size: 12px; line-height: 1.5; color: #555; }
+        .copyright { font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 15px; text-align: left; }
         #footer-main-info.hidden { display: none !important; }
 
         @media (min-width: 768px) {
@@ -159,8 +99,7 @@
             .footer { display: flex; flex-wrap: wrap; justify-content: space-between; padding: 60px 10%; }
             #footer-main-info { display: flex; flex-wrap: wrap; width: 100%; justify-content: space-between; gap: 20px; }
             .footer-profile { flex: 2; min-width: 320px; margin-right: 40px; border-bottom: none; }
-            .footer-contact-info { flex: 1; min-width: 250px; }
-            .footer-hq { flex: 1; min-width: 280px; }
+            .footer-contact-info, .footer-hq { flex: 1; min-width: 250px; }
             .footer-gov, .copyright { width: 100%; text-align: center; margin-top: 30px; }
         }
     </style>
@@ -168,12 +107,12 @@
 <body>
 
     <div class="header">
-        <div class="header-left">
-            <div class="menu-btn" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+        <div class="menu-btn" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
         </div>
         <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Ousevoid Logo" class="logo" onclick="renderHome()">
-        <div class="header-right">
-            <div class="cart-icon" onclick="renderHome()"><i class="fa-solid fa-cart-shopping"></i></div>
+        <div class="cart-icon" onclick="renderHome()">
+            <i class="fa-solid fa-bag-shopping"></i>
         </div>
     </div>
 
@@ -184,9 +123,7 @@
             <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" class="sidebar-logo">
             <div class="close-sidebar-btn" onclick="toggleMenu()"><i class="fa-solid fa-xmark"></i></div>
         </div>
-
         <div class="nav-item active" id="btn-beranda" onclick="renderHome()"><i class="fa-solid fa-house"></i> Beranda</div>
-
         <div class="nav-group">
             <div class="nav-label">Kategori</div>
             <div class="nav-item" id="btn-earbuds" onclick="renderHome()"><i class="fa-solid fa-ear-listen"></i> Earbuds</div>
@@ -194,7 +131,6 @@
             <div class="nav-item" id="btn-speaker" onclick="renderCS('Speaker')"><i class="fa-solid fa-volume-high"></i> Speaker</div>
             <div class="nav-item" id="btn-accessories" onclick="renderCS('Accessories')"><i class="fa-solid fa-link"></i> Accessories</div>
         </div>
-
         <div class="nav-group">
             <div class="nav-label">Informasi</div>
             <div class="nav-item" id="btn-garansi" onclick="renderGaransi()"><i class="fa-solid fa-shield-halved"></i> Garansi Resmi</div>
@@ -211,7 +147,6 @@
         <div class="modal-spec-content">
             <span class="modal-close-btn" onclick="closeSpecModal()">&times;</span>
             <div class="profile-title">Ousevoid Sound Profile</div>
-            
             <div class="bar-container">
                 <div class="bar-label"><span>Bass Intensity</span><span>8.5/10</span></div>
                 <div class="bar-bg"><div class="bar-fill" id="bar-bass"></div></div>
@@ -224,7 +159,6 @@
                 <div class="bar-label"><span>Vocal Clarity</span><span>8.8/10</span></div>
                 <div class="bar-bg"><div class="bar-fill" id="bar-vocal"></div></div>
             </div>
-
             <ul class="spec-list">
                 <li><strong>Engine:</strong> 11mm Custom Dynamic Driver</li>
                 <li><strong>Isolation:</strong> Passive Noise Cancellation Pro-Fit</li>
@@ -240,20 +174,25 @@
                 <div class="footer-profile-title">Tentang Ousevoid Lintas Batas</div>
                 <p class="footer-profile-text">Ousevoid adalah pelopor teknologi audio nirkabel premium yang didedikasikan untuk menghadirkan pengalaman mendengarkan imersif bagi masyarakat Indonesia. Kami fokus pada inovasi desain, kualitas suara superior, dan daya tahan baterai luar biasa dengan harga yang kompetitif.</p>
             </div>
-
             <div class="footer-contact-info">
                 Apabila kamu mengalami kendala produk silakan hubungi Contact Center kami di:<br>
-                <div class="footer-contact-item">📧 email: ousevoid@gmail.com</div>
-                <a href="https://wa.me/6285715000443" class="footer-contact-item" style="color: inherit;">💬 WhatsApp: 0857 15000 443</a>
+                <div style="display:flex; align-items:center; gap:8px; margin-top:5px;">📧 email: ousevoid@gmail.com</div>
+                <a href="https://wa.me/6285715000443" style="display:flex; align-items:center; gap:8px; margin-top:5px; color:inherit;">💬 WhatsApp: 0857 15000 443</a>
             </div>
-
             <div class="footer-hq">
                 <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Ousevoid Logo" class="footer-hq-logo">
-                <div class="footer-office">Kantor Pusat</div>
-                <div class="footer-brand">PT Ousevoid Lintas Batas</div>
-                <div class="footer-address">Jl. K.H Zainul Arifin 71 Duri Pulo Gambir Jakarta pusat, Indonesia 10140</div>
+                <div style="font-weight:400; color:#555; margin-bottom:5px;">Kantor Pusat</div>
+                <div style="font-weight:700; color:#111; margin-bottom:5px;">PT Ousevoid Lintas Batas</div>
+                <div style="line-height:1.6; margin-bottom:20px; color:#666;">Jl. K.H Zainul Arifin 71 Duri Pulo Gambir Jakarta pusat, Indonesia 10140</div>
+                <div style="margin-top:25px; padding-top:20px; border-top:1px dashed #e0e0e0;">
+                    <div class="supported-title">Powered by:</div>
+                    <div style="display:flex; gap:15px; margin-bottom:12px;">
+                        <img src="https://i.ibb.co.com/DHZj9dpW/8827-2.jpg" alt="e-Package Service" class="supported-img">
+                    </div>
+                    <div style="font-weight:700; color:#111; margin-bottom:5px;">PT Gamoon Desember Indonesia</div>
+                    <div style="line-height:1.6; color:#666;">Jl KP Bakti Raya 22 Cideng Gambir Jakarta Pusat, Indonesia 10150</div>
+                </div>
             </div>
-
             <div class="footer-gov">
                 Direktorat Jenderal Perlindungan Konsumen dan Tertib Niaga<br>
                 Kementerian Perdagangan Republik Indonesia<br>
@@ -265,94 +204,239 @@
 
     <script>
         var products = [
-            { id: 1, name: "VoidPods Pro - Jet Black", price: "IDR 189.000", img: "https://i.ibb.co.com/gMs8J5pn/8504.png", specs: { warna: "Jet Black Matte", chip: "VoidCore T1", koneksi: "Bluetooth 5.3", baterai: "3-4 Jam Premium" } },
-            { id: 2, name: "VoidPods Pro - Pure White", price: "IDR 189.000", img: "https://i.ibb.co.com/S4RBg5cW/8618.png", specs: { warna: "Pure White Glossy", chip: "VoidCore T1", koneksi: "Bluetooth 5.3", baterai: "3-4 Jam Premium" } }
+            { id: 1, name: "VoidPods Pro - Jet Black", price: "IDR 189.000,00", img: "https://i.ibb.co.com/gMs8J5pn/8504.png", specs: { warna: "Jet Black Matte", chip: "VoidCore T1", koneksi: "Bluetooth 5.3", baterai: "3-4 Jam Premium" } },
+            { id: 2, name: "VoidPods Pro - Pure White", price: "IDR 189.000,00", img: "https://i.ibb.co.com/S4RBg5cW/8618.png", specs: { warna: "Pure White Glossy", chip: "VoidCore T1", koneksi: "Bluetooth 5.3", baterai: "3-4 Jam Premium" } }
         ];
 
-        window.onload = function() {
-            var url = window.location.href;
-            if (url.indexOf('status=sukses') > -1) {
-                renderStatusTransaksi('sukses');
-            } else if (url.indexOf('status=gagal') > -1) {
-                renderStatusTransaksi('gagal');
-            } else {
-                renderHome();
-            }
-        };
-
         function toggleMenu() {
-            var s = document.getElementById('sidebar');
-            var o = document.getElementById('overlay');
-            s.classList.toggle('active');
-            o.classList.toggle('active');
+            document.getElementById('sidebar').classList.toggle('active');
+            document.getElementById('overlay').classList.toggle('active');
         }
-
         function autoClose() {
-            var s = document.getElementById('sidebar');
-            if (s.classList.contains('active')) toggleMenu();
+            if (document.getElementById('sidebar').classList.contains('active')) toggleMenu();
         }
-
         function clearActiveMenu() {
             var items = document.getElementsByClassName('nav-item');
-            for(var i=0; i<items.length; i++) {
-                items[i].classList.remove('active');
-            }
+            for(var i=0; i<items.length; i++) { items[i].classList.remove('active'); }
         }
-
         function toggleFooterUtama(tampilkan) {
-            var footerInfo = document.getElementById('footer-main-info');
-            if (footerInfo) {
-                if (tampilkan) {
-                    footerInfo.classList.remove('hidden');
-                } else {
-                    footerInfo.classList.add('hidden');
-                }
-            }
+            var f = document.getElementById('footer-main-info');
+            if(f) { tampilkan ? f.classList.remove('hidden') : f.classList.add('hidden'); }
         }
 
-        /* --- FUNGSI MODAL --- */
+        /* FUNGSI MODAL SPESIFIKASI */
         function openSpecModal() {
             var modal = document.getElementById('specModalGlobal');
             modal.classList.add('show');
-            
             setTimeout(function() {
                 document.getElementById('bar-bass').style.width = '85%';
                 document.getElementById('bar-treble').style.width = '90%';
                 document.getElementById('bar-vocal').style.width = '88%';
             }, 300); 
         }
-
         function closeSpecModal() {
             var modal = document.getElementById('specModalGlobal');
             modal.classList.remove('show');
-            
             setTimeout(function() {
                 document.getElementById('bar-bass').style.width = '0';
                 document.getElementById('bar-treble').style.width = '0';
                 document.getElementById('bar-vocal').style.width = '0';
             }, 300);
         }
-
-        // Penutup Modal Klik Luar Kotak Aman
         document.addEventListener('click', function(event) {
             var modal = document.getElementById('specModalGlobal');
-            if (event.target === modal) {
-                closeSpecModal();
-            }
+            if (event.target === modal) { closeSpecModal(); }
         });
 
-        /* --- RENDERING HALAMAN --- */
+        /* HALAMAN UTAMA */
         function renderHome() {
             toggleFooterUtama(true);
             var app = document.getElementById('app');
+            var html = '<div class="hero-banner"><img src="https://i.ibb.co.com/pjhVC7S6/SOUND-Without-20260714-173950-0000.png" alt="Banner"><button type="button" class="hotspot-btn" onclick="openSpecModal()"></button></div>';
             
-            var html = '<div class="hero-banner">' +
-                '<img src="https://i.ibb.co.com/pjhVC7S6/SOUND-Without-20260714-173950-0000.png" alt="Ousevoid VoidPods Pro Banner">' +
-                '<button type="button" class="hotspot-btn" onclick="openSpecModal()" title="Cek Spesifikasi"></button>' +
-            '</div>';
-
             html += '<div class="page-title">Earbuds Terlaris</div><div class="katalog-grid">';
-            
             for(var i=0; i<products.length; i++) {
                 html += '<div class="katalog-card">' +
-                    '
+                    '<img src="' + products[i].img + '" onclick="renderProdukDetail(' + i + ')">' +
+                    '<h3 onclick="renderProdukDetail(' + i + ')">' + products[i].name + '</h3>' +
+                    '<div class="harga">' + products[i].price + '</div>' +
+                    '<button type="button" class="btn-beli" onclick="renderCheckout(' + i + ')">BELI SEKARANG</button>' +
+                '</div>';
+            }
+            html += '</div>';
+
+            html += '<div class="trust-badges"><div class="badge-item"><i class="fa-solid fa-shield-halved badge-icon"></i><div class="badge-text"><h4>Garansi Resmi</h4><p>Garansi 2 bulan</p></div></div><div class="badge-item"><i class="fa-solid fa-truck-fast badge-icon"></i><div class="badge-text"><h4>Gratis Ongkir</h4><p>Min. belanja tertentu</p></div></div><div class="badge-item"><i class="fa-solid fa-lock badge-icon"></i><div class="badge-text"><h4>Pembayaran Aman</h4><p>100% secure payment</p></div></div><div class="badge-item"><i class="fa-solid fa-headset badge-icon"></i><div class="badge-text"><h4>Customer Support</h4><p>24/7 Siap membantu</p></div></div></div>';
+
+            app.innerHTML = html;
+            clearActiveMenu();
+            if(document.getElementById('btn-beranda')) document.getElementById('btn-beranda').classList.add('active');
+            autoClose(); window.scrollTo(0,0);
+        }
+
+        /* DETAIL PRODUK */
+        function renderProdukDetail(index) {
+            toggleFooterUtama(false);
+            var p = products[index];
+            var html = '<div style="font-size:22px; font-weight:700; text-align:left; color:#111; margin-bottom:15px;">' + p.name + '</div>' +
+                '<img src="' + p.img + '" style="width:100%; max-width:400px; border-radius:12px; margin-bottom:20px;">' +
+                '<div style="text-align:left; font-size:14px; max-width:400px; margin: 0 auto 20px auto; background: #f9f9f9; padding: 20px; border-radius: 12px; border: 1px solid #eee;">' +
+                    '<p style="margin-top:0;"><b>Spesifikasi Produk:</b></p>' +
+                    '<p><b>Warna:</b> ' + p.specs.warna + '</p>' +
+                    '<p><b>Chip:</b> ' + p.specs.chip + '</p>' +
+                    '<p><b>Koneksi:</b> ' + p.specs.koneksi + '</p>' +
+                    '<p style="margin-bottom:0;"><b>Baterai:</b> ' + p.specs.baterai + '</p>' +
+                '</div>' +
+                '<button type="button" class="btn-beli" style="max-width:400px; margin: 0 auto; padding:15px; font-size:14px;" onclick="renderCheckout(' + index + ')">Beli Sekarang</button>' +
+                '<a onclick="renderHome()" style="display:block; margin-top:20px; color:#666; font-size:13px; text-decoration:underline; cursor:pointer;">Kembali ke Beranda</a>';
+            
+            document.getElementById('app').innerHTML = html;
+            autoClose(); window.scrollTo(0,0);
+        }
+
+        /* HALAMAN CHECKOUT KUSTOM */
+        function renderCheckout(index) {
+            toggleFooterUtama(false);
+            var p = products[index];
+            
+            var html = '<div style="max-width:450px; margin:auto;">' +
+                '<h2 style="text-align:left; font-size:20px; color:#111; margin-top:0;">Informasi Pengiriman</h2>' +
+                '<div class="co-summary-box"><img src="' + p.img + '"><div><div style="font-weight:600; font-size:14px; color:#111; margin-bottom:5px;">' + p.name + '</div><div style="font-weight:700; font-size:15px; color:#111;">' + p.price + '</div></div></div>' +
+                '<div class="co-input-group"><label class="co-label">Nama Lengkap</label><input type="text" id="co-nama" class="co-input" placeholder="Masukkan nama penerima" required></div>' +
+                '<div class="co-input-group"><label class="co-label">Nomor WhatsApp</label><input type="number" id="co-wa" class="co-input" placeholder="Contoh: 08123456789" required></div>' +
+                '<div class="co-input-group"><label class="co-label">Alamat Lengkap</label><textarea id="co-alamat" class="co-input" rows="2" style="resize:vertical;" placeholder="Nama jalan, RT/RW, kota" required></textarea></div>' +
+                '<div class="co-input-group" style="margin-bottom:30px;"><label class="co-label">Email Invoice</label><input type="email" id="co-email" class="co-input" placeholder="contoh@email.com" required><small style="color:#666; font-size:11px; margin-top:5px; display:block; text-align:left;">Tulis untuk kirim invoice jika transaksi berhasil</small></div>' +
+                '<button type="button" class="btn-beli" style="padding:15px; font-size:14px;" onclick="bukaHalamanPembayaran(' + index + ')">Lanjut ke Pembayaran</button>' +
+                '<a onclick="renderProdukDetail(' + index + ')" style="display:block; margin-top:20px; color:#666; font-size:13px; text-decoration:underline; cursor:pointer;">Batal & Kembali</a>' +
+            '</div>';
+
+            document.getElementById('app').innerHTML = html;
+            clearActiveMenu(); window.scrollTo(0,0);
+        }
+
+        /* TRANSISI KE HALAMAN PEMBAYARAN KUSTOM */
+        function bukaHalamanPembayaran(index) {
+            var nama = document.getElementById('co-nama').value;
+            var wa = document.getElementById('co-wa').value;
+            var alamat = document.getElementById('co-alamat').value;
+            var email = document.getElementById('co-email').value;
+
+            if(!nama || !wa || !alamat || !email) {
+                alert("Mohon lengkapi seluruh Formulir Data Pengiriman sebelum melanjutkan.");
+                return;
+            }
+            var dataPembeli = { nama: nama, wa: wa, alamat: alamat, email: email };
+            renderHalamanPembayaran(index, dataPembeli);
+        }
+
+        /* HALAMAN PEMBAYARAN TRANSAKSI (REVIEW) */
+        function renderHalamanPembayaran(index, user) {
+            toggleFooterUtama(false);
+            var p = products[index];
+
+            var tgl = new Date();
+            var yyyy = tgl.getFullYear();
+            var mm = String(tgl.getMonth() + 1).padStart(2, '0');
+            var dd = String(tgl.getDate()).padStart(2, '0');
+            var urutAcak = String(Math.floor(Math.random() * 900000) + 100000);
+            var idTransaksi = yyyy + "/OUSE/" + mm + "/" + dd + "/REG" + urutAcak;
+
+            var html = '<div style="max-width:480px; margin:auto; text-align:center; background:#ffffff; border:1px solid #eee; padding:30px 20px; border-radius:16px; box-shadow:0 4px 20px rgba(0,0,0,0.02);">' +
+                '<img src="https://i.ibb.co.com/x8MrtzXr/8588.png" style="width:110px; margin-bottom:20px;">' +
+                '<h2 style="font-size:20px; font-weight:700; color:#111; margin:0 0 5px 0;">Pembayaran Transaksi</h2>' +
+                '<div style="font-size:12px; color:#666; word-break:break-all; font-weight:500; margin-bottom:20px;">ID Transaksi: <span style="font-weight:700; color:#111;">' + idTransaksi + '</span></div>' +
+                '<div style="background:#f9f9f9; border:1px solid #eee; padding:15px; border-radius:12px; margin-bottom:25px;">' +
+                    '<div style="font-size:12px; color:#888; text-transform:uppercase; font-weight:600; margin-bottom:4px;">Total Tagihan</div>' +
+                    '<div style="font-size:24px; font-weight:800; color:#111;">' + p.price + '</div>' +
+                    '<div style="display:inline-block; font-size:11px; font-weight:700; background:#fff2e6; color:#b35c00; padding:4px 10px; border-radius:20px; margin-top:8px; border:1px solid #ffe6cc; text-transform:uppercase; letter-spacing:0.5px;"><i class="fa-solid fa-clock" style="margin-right:4px;"></i> Menunggu Pembayaran</div>' +
+                '</div>' +
+                '<div style="text-align:left; font-size:13px; border-bottom:1px solid #eee; padding-bottom:15px; margin-bottom:20px; line-height:1.6; color:#444;">' +
+                    '<div style="font-weight:700; color:#111; margin-bottom:8px; font-size:14px; text-transform:uppercase; letter-spacing:0.5px;">Data Penerima & Invoice</div>' +
+                    '<div><b>Nama:</b> ' + user.nama + '</div>' +
+                    '<div><b>No Telpon:</b> ' + user.wa + '</div>' +
+                    '<div><b>Alamat:</b> ' + user.alamat + '</div>' +
+                    '<div style="margin-top:4px; padding-top:4px; border-top:1px dashed #eee; color:#111;"><b>Email Invoice:</b> ' + user.email + '</div>' +
+                '</div>' +
+                '<div style="text-align:left; font-weight:700; font-size:14px; color:#111; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px;">Pilih Metode Pembayaran</div>' +
+                '<div class="payment-method-grid">' +
+                    '<div class="payment-item selected" onclick="pilihPayment(this)"><img src="https://i.ibb.co.com/MDFzRSrD/Gopay-logo-svg.png" alt="GoPay"></div>' +
+                    '<div class="payment-item" onclick="pilihPayment(this)"><img src="https://i.ibb.co.com/HLqqw8qc/shopeepay.png" alt="ShopeePay"></div>' +
+                    '<div class="payment-item" onclick="pilihPayment(this)"><img src="https://i.ibb.co.com/xqg0PbT4/Logo-dana-blue-svg.png" alt="DANA"></div>' +
+                    '<div class="payment-item" onclick="pilihPayment(this)"><img src="https://i.ibb.co.com/nq11tGCJ/Logo-QRIS-svg.png" alt="QRIS"></div>' +
+                    '<div class="payment-item" onclick="pilihPayment(this)"><img src="https://i.ibb.co.com/HfWbZzbG/BRI-2025-with-full-name-svg.png" alt="BRI"></div>' +
+                    '<div class="payment-item" onclick="pilihPayment(this)"><img src="https://i.ibb.co.com/BVztVS7s/Bank-Negara-Indonesia-logo-2004-svg.png" alt="BNI"></div>' +
+                    '<div class="payment-item" onclick="pilihPayment(this)"><img src="https://i.ibb.co.com/0pzHG5xN/Bank-Mandiri-logo-2016-svg.png" alt="Mandiri"></div>' +
+                    '<div class="payment-item" onclick="pilihPayment(this)"><img src="https://i.ibb.co.com/BKgDdxxY/BTN-2024-svg.png" alt="BTN"></div>' +
+                    '<div class="payment-item" onclick="pilihPayment(this)"><img src="https://i.ibb.co.com/qLT2FX8W/500px-Bank-Central-Asia-svg.png" alt="BCA"></div>' +
+                '</div>' +
+                '<button type="button" class="btn-beli" style="padding:15px; font-size:14px; margin-top:15px;" onclick="window.open(\'https://app.midtrans.com/payment-links/522c9d46-dbff-4f99-acfc-3c4c7c503f06-5fLX3AV4\', \'_blank\')">BAYAR SEKARANG</button>' +
+                '<a onclick="renderCheckout(' + index + ')" style="display:block; margin-top:18px; color:#666; font-size:13px; text-decoration:underline; cursor:pointer;">Kembali ke Halaman Produk</a>' +
+                '<div style="margin-top:30px; padding-top:20px; border-top:1px dashed #eee; display:flex; flex-direction:column; align-items:center; gap:6px;">' +
+                    '<div style="font-size:11px; color:#888; font-weight:600; text-transform:uppercase; letter-spacing:0.5px;">Powered by:</div>' +
+                    '<img src="https://i.ibb.co.com/k2D0fVSy/Midtrans.png" style="height:20px; filter:grayscale(100%); mix-blend-mode:multiply;">' +
+                    '<p style="margin:4px 0 0 0; font-size:11px; color:#777; line-height:1.4; max-width:340px;">Transaksi Anda dilindungi secara profesional oleh sistem keamanan & enkripsi data berlapis Midtrans.</p>' +
+                '</div>' +
+            '</div>';
+
+            document.getElementById('app').innerHTML = html; window.scrollTo(0,0);
+        }
+
+        /* Fungsi Klik Metode Pembayaran Visual */
+        function pilihPayment(element) {
+            var items = document.getElementsByClassName('payment-item');
+            for(var i=0; i<items.length; i++) { items[i].classList.remove('selected'); }
+            element.classList.add('selected');
+        }
+
+        /* HALAMAN INFO & COMING SOON */
+        function renderInfo(title, icon, content, btnId) {
+            toggleFooterUtama(false);
+            document.getElementById('app').innerHTML = '<div class="info-box"><h2><i class="fa-solid ' + icon + '"></i> ' + title + '</h2>' + content + '</div>';
+            clearActiveMenu(); if(document.getElementById(btnId)) document.getElementById(btnId).classList.add('active');
+            autoClose(); window.scrollTo(0,0);
+        }
+        function renderCS(name) {
+            toggleFooterUtama(false);
+            document.getElementById('app').innerHTML = '<div class="coming-soon-container"><div class="cs-icon"><i class="fa-solid fa-rocket"></i></div><h1>' + name + '</h1><p style="color:#666;">Coming Soon! Nantikan koleksi ' + name + ' premium kami.</p><button type="button" class="btn-beli" style="max-width:200px; margin-top:20px; margin-left:auto; margin-right:auto;" onclick="renderHome()">Kembali</button></div>';
+            clearActiveMenu();
+            if(name==='Headphones') document.getElementById('btn-headphones').classList.add('active');
+            if(name==='Speaker') document.getElementById('btn-speaker').classList.add('active');
+            if(name==='Accessories') document.getElementById('btn-accessories').classList.add('active');
+            autoClose(); window.scrollTo(0,0);
+        }
+
+        function renderGaransi() { renderInfo('Garansi Resmi', 'fa-shield-halved', '<p>Garansi Resmi 2 Bulan sejak tanggal pembelian. Bebas cacat pabrik.</p>', 'btn-garansi'); }
+        function renderPengiriman() { renderInfo('Informasi Pengiriman', 'fa-truck-fast', '<p>Pengiriman cepat dan aman. Pesanan diproses di hari yang sama.</p>', 'btn-pengiriman'); }
+        function renderPembayaran() { renderInfo('Metode Pembayaran', 'fa-credit-card', '<p>Pembayaran diproses secara aman melalui Midtrans Payment Gateway.</p>', 'btn-pembayaran'); }
+        function renderPrivasi() { renderInfo('Kebijakan Privasi', 'fa-lock', '<p>Data pribadi dan alamat Anda kami lindungi sepenuhnya dan tidak disebar ke pihak ketiga.</p>', 'btn-privasi'); }
+        function renderSyarat() { renderInfo('Syarat & Ketentuan', 'fa-file-lines', '<p>Seluruh transaksi diselesaikan melalui sistem tagihan resmi web kami.</p>', 'btn-syarat'); }
+
+        /* STATUS TRANSAKSI */
+        function renderStatusTransaksi(tipe) {
+            toggleFooterUtama(false);
+            var html = '';
+            var nom = "OSV-" + Math.floor(Math.random() * 999999);
+            var resi = "JNT-88299310" + Math.floor(Math.random() * 100);
+
+            if (tipe === 'sukses') {
+                html = '<div style="border:1px solid #eee; background:#fff; padding:40px 20px; border-radius:12px; max-width:400px; margin:auto; text-align:center;"><div style="font-size:50px; margin-bottom:10px;">✅</div><h2 style="margin:0 0 10px 0; color:#111;">Pembayaran Berhasil</h2><div style="border-top:1px dashed #ccc; border-bottom:1px dashed #ccc; padding:20px 0; text-align:left;"><p style="margin:0; font-size:11px; color:#888;">NOMOR TRANSAKSI</p><p style="margin:0 0 15px 0; font-weight:700; color:#111;">' + nom + '</p><p style="margin:0; font-size:11px; color:#888;">RESI PENGIRIMAN</p><p style="margin:0 0 15px 0; font-weight:700; color:#111;">' + resi + '</p><p style="margin:0; font-size:11px; color:#888;">TIPE PRODUK</p><p style="margin:0; font-weight:700; color:#111;">VoidPods Pro</p></div><p style="font-size:13px; color:#555; margin-top:20px;">Detail pesanan sudah dikirim ke WhatsApp. Data alamat Anda disembunyikan demi privasi.</p><button type="button" class="btn-beli" style="margin-top:15px;" onclick="renderHome()">Selesai</button></div>';
+            } else {
+                html = '<div style="border:1px solid #eee; background:#fff; padding:40px 20px; border-radius:12px; max-width:400px; margin:auto; text-align:center;"><div style="font-size:50px; margin-bottom:10px;">❌</div><h2 style="margin:0 0 10px 0; color:#111;">Pembayaran Gagal</h2><div style="border-top:1px dashed #ccc; border-bottom:1px dashed #ccc; padding:20px 0; text-align:left;"><p style="margin:0; font-size:11px; color:#888;">NOMOR TRANSAKSI</p><p style="margin:0 0 15px 0; font-weight:700; color:#111;">' + nom + '</p></div><p style="font-size:13px; color:#555; margin-top:20px;">Transaksi dibatalkan. Hubungi Customer Service jika ada kendala.</p><button type="button" class="btn-beli" style="margin-top:15px;" onclick="renderHome()">Kembali</button></div>';
+            }
+            document.getElementById('app').innerHTML = html;
+            clearActiveMenu(); window.scrollTo(0,0);
+        }
+
+        /* --- SCRIPT EKSEKUSI OTOMATIS ANTI-BLANK (HTML CODE RUNNER SAFE) --- */
+        setTimeout(function() {
+            var urlCheck = window.location.href || "";
+            if (urlCheck.indexOf('status=sukses') > -1) { 
+                renderStatusTransaksi('sukses'); 
+            } else if (urlCheck.indexOf('status=gagal') > -1) { 
+                renderStatusTransaksi('gagal'); 
+            } else { 
+                renderHome(); 
+            }
+        }, 100);
+    </script>
+</body>
+</html>
