@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ousevoid - Admin Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #f4f4f5; margin: 0; padding: 20px; color: #111; }
+        .admin-container { max-width: 500px; margin: 0 auto; background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        h2 { margin-top: 0; font-size: 20px; border-bottom: 2px solid #eee; padding-bottom: 15px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px; color: #555; }
+        input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; box-sizing: border-box; font-family: inherit; }
+        input:focus, select:focus { border-color: #111; outline: none; }
+        button { width: 100%; padding: 14px; background: #111; color: #fff; border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 10px; transition: 0.3s; }
+        button:hover { background: #333; }
+        button:disabled { background: #999; cursor: not-allowed; }
+        .status { margin-top: 15px; padding: 10px; border-radius: 8px; text-align: center; font-size: 13px; font-weight: 600; display: none; }
+        .success { background: #dcfce7; color: #166534; }
+        .error { background: #fee2e2; color: #991b1b; }
+    </style>
+</head>
+<body>
+
+    <div class="admin-container">
+        <h2>🛠️ Tambah Produk Baru</h2>
+        
+        <div class="form-group">
+            <label>Nama Produk (Contoh: Baterai iPhone 11 - Surya ACC)</label>
+            <input type="text" id="input-nama" placeholder="Masukkan nama produk..." required>
+        </div>
+        
+        <div class="form-group">
+            <label>Harga (Angka saja, tanpa titik/Rp)</label>
+            <input type="number" id="input-harga" placeholder="Contoh: 250000" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Jumlah Stok</label>
+            <input type="number" id="input-stok" placeholder="Contoh: 10" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Link Gambar (Dari ImgBB)</label>
+            <input type="url" id="input-gambar" placeholder="https://i.ibb.co.com/..." required>
+        </div>
+        
+        <div class="form-group">
+            <label>Kategori</label>
+            <select id="input-kategori">
+                <option value="Sparepart">Sparepart</option>
+                <option value="Earbuds">Earbuds</option>
+                <option value="Headphones">Headphones</option>
+                <option value="Speaker">Speaker</option>
+            </select>
+        </div>
+
+        <button id="btn-submit" onclick="tambahProduk()">Simpan ke Database</button>
+        <div id="status-pesan" class="status"></div>
+    </div>
+
+    <script>
+        // INI ADALAH KUNCI MASTER LU
+        const API_URL = "https://script.google.com/macros/s/AKfycbykhpcX5ELq6_HgIGb8oDPf1XP7t5W8mZinCLbQMy_3j4ASLb3WoQ7NxYO1dyynfRF4/exec";
+
+        async function tambahProduk() {
+            const nama = document.getElementById('input-nama').value;
+            const harga = document.getElementById('input-harga').value;
+            const stok = document.getElementById('input-stok').value;
+            const gambar = document.getElementById('input-gambar').value;
+            const kategori = document.getElementById('input-kategori').value;
+            
+            const btn = document.getElementById('btn-submit');
+            const status = document.getElementById('status-pesan');
+
+            if (!nama || !harga || !stok || !gambar) {
+                tampilkanPesan("error", "Harap isi semua kolom!");
+                return;
+            }
+
+            btn.innerHTML = "Menyimpan data... ⏳";
+            btn.disabled = true;
+
+            const payload = {
+                action: "add",
+                nama: nama,
+                harga: harga,
+                stok: stok,
+                gambar: gambar,
+                kategori: kategori
+            };
+
+            try {
+                // Proses mengirim data ke Google Sheets
+                const response = await fetch(API_URL, {
+                    method: "POST",
+                    body: JSON.stringify(payload) // Kirim sebagai text biasa biar tembus keamanan browser
+                });
+
+                const result = await response.json();
+
+                if (result.status === "success") {
+                    tampilkanPesan("success", "✅ Mantap! Produk berhasil ditambahkan.");
+                    // Kosongin form lagi biar siap nambah barang berikutnya
+                    document.getElementById('input-nama').value = '';
+                    document.getElementById('input-harga').value = '';
+                    document.getElementById('input-stok').value = '';
+                    document.getElementById('input-gambar').value = '';
+                } else {
+                    tampilkanPesan("error", "❌ Gagal: " + result.message);
+                }
+            } catch (error) {
+                tampilkanPesan("error", "❌ Terjadi kesalahan jaringan. Coba lagi!");
+            }
+
+            btn.innerHTML = "Simpan ke Database";
+            btn.disabled = false;
+        }
+
+        function tampilkanPesan(tipe, teks) {
+            const status = document.getElementById('status-pesan');
+            status.className = "status " + tipe;
+            status.innerHTML = teks;
+            status.style.display = "block";
+            setTimeout(() => { status.style.display = "none"; }, 5000); // Hilang otomatis dalam 5 detik
+        }
+    </script>
+</body>
+</html>
