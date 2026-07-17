@@ -47,16 +47,40 @@
         .katalog-card .harga { font-size: 15px; font-weight: 700; color: #111; margin-bottom: 10px; text-align: left; }
         .btn-beli { background: #111; color: #fff; padding: 12px; border-radius: 8px; font-weight: 700; border: none; cursor: pointer; width: 100%; font-size: 13px; transition: 0.2s; }
         .btn-beli:hover { background: #333; }
-        .co-input-group { margin-bottom: 18px; text-align: left; }
-        .co-label { display: block; font-size: 13px; font-weight: 600; color: #333; margin-bottom: 6px; }
-        .co-input { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 14px; box-sizing: border-box; transition: 0.3s; }
-        .co-input:focus { border-color: #111; outline: none; }
-        .co-summary-box { display: flex; align-items: center; gap: 15px; background: #f9f9f9; padding: 15px; border-radius: 12px; border: 1px solid #eee; margin-bottom: 25px; text-align: left; }
-        .co-summary-box img { width: 70px; height: 70px; object-fit: cover; border-radius: 8px; }
-        .payment-method-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0; }
-        .payment-item { border: 1px solid #eee; border-radius: 8px; padding: 10px; display: flex; align-items: center; justify-content: center; background: #fff; cursor: pointer; transition: 0.2s; height: 50px; box-sizing: border-box; }
-        .payment-item:hover, .payment-item.selected { border-color: #111; background: #fafafa; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-        .payment-item img { max-height: 25px; max-width: 100%; object-fit: contain; }
+        
+        /* CSS CHECKOUT BARU */
+        .co-wrapper { text-align: left; background: #f7f7f7; padding: 15px; border-radius: 12px; margin-bottom: 80px; }
+        .co-card { background: #fff; border-radius: 10px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+        .co-card-header { font-size: 14px; font-weight: 700; color: #111; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+        .co-card-header i { color: #555; }
+        .co-input-modern { width: 100%; padding: 12px 15px; border: 1px solid #eee; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 13px; box-sizing: border-box; margin-bottom: 10px; background: #fafafa; transition: 0.3s; }
+        .co-input-modern:focus { border-color: #111; background: #fff; outline: none; }
+        .co-product-item { display: flex; gap: 15px; align-items: center; padding-bottom: 15px; border-bottom: 1px dashed #eee; margin-bottom: 15px; }
+        .co-product-item img { width: 70px; height: 70px; object-fit: cover; border-radius: 8px; border: 1px solid #eee; }
+        .co-product-info { flex: 1; }
+        .co-product-name { font-size: 14px; font-weight: 600; color: #111; margin-bottom: 5px; }
+        .co-product-price { font-size: 14px; font-weight: 700; color: #e74c3c; }
+        .co-product-qty { font-size: 13px; color: #888; font-weight: 600; }
+        .co-summary-line { display: flex; justify-content: space-between; font-size: 13px; color: #555; margin-bottom: 8px; }
+        .co-summary-line.total-line { border-top: 1px solid #eee; padding-top: 10px; margin-top: 5px; font-weight: 700; color: #111; font-size: 15px; }
+        
+        .co-bottom-bar { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 15px 20px; box-sizing: border-box; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 -5px 15px rgba(0,0,0,0.05); z-index: 1000; border-top: 1px solid #eee; }
+        .co-bottom-total-wrapper { display: flex; flex-direction: column; text-align: left; }
+        .co-bottom-label { font-size: 11px; color: #888; font-weight: 600; }
+        .co-bottom-price { font-size: 18px; font-weight: 700; color: #111; }
+        .co-btn-pay { background: #111; color: #fff; padding: 12px 25px; border-radius: 8px; font-weight: 700; border: none; cursor: pointer; font-size: 14px; transition: 0.2s; }
+        .co-btn-pay:hover { background: #333; }
+
+        /* CSS TAMBAHAN METODE PEMBAYARAN & KURIR */
+        .co-section-title { font-size: 13px; font-weight: 700; color: #555; margin: 20px 0 10px 0; text-transform: uppercase; }
+        .kurir-select { width: 100%; padding: 12px; border: 1px solid #eee; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 13px; background: #fafafa; margin-bottom: 10px; color: #333; outline: none; }
+        .kurir-select:focus { border-color: #111; }
+        .payment-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 15px; }
+        .payment-box { border: 1px solid #eee; border-radius: 8px; padding: 10px; display: flex; align-items: center; justify-content: center; background: #fff; cursor: pointer; transition: 0.2s; height: 45px; box-sizing: border-box; }
+        .payment-box:hover { border-color: #aaa; background: #fafafa; }
+        .payment-box.selected { border-color: #111; background: #fafafa; box-shadow: 0 0 0 1px #111; }
+        .payment-box img { max-height: 20px; max-width: 100%; object-fit: contain; }
+
         .trust-badges { display: flex; flex-direction: column; gap: 15px; background: #fdfdfd; border: 1px solid #eee; border-radius: 12px; padding: 20px; margin-top: 40px; text-align: left; }
         .badge-item { display: flex; align-items: center; gap: 15px; }
         .badge-icon { font-size: 24px; color: #111; width: 30px; text-align: center; }
@@ -101,6 +125,7 @@
             .footer-profile { flex: 2; min-width: 320px; margin-right: 40px; border-bottom: none; }
             .footer-contact-info, .footer-hq { flex: 1; min-width: 250px; }
             .footer-gov, .copyright { width: 100%; text-align: center; margin-top: 30px; }
+            .co-bottom-bar { justify-content: center; gap: 20px; } 
         }
     </style>
 </head>
@@ -168,7 +193,7 @@
         </div>
     </div>
 
-    <div class="footer">
+    <div class="footer" id="main-footer">
         <div id="footer-main-info">
             <div class="footer-profile">
                 <div class="footer-profile-title">Tentang Ousevoid Lintas Batas</div>
@@ -204,9 +229,13 @@
 
     <script>
         var products = [
-            { id: 1, name: "VoidPods Pro - Jet Black", price: "IDR 189.000,00", img: "https://i.ibb.co.com/gMs8J5pn/8504.png", specs: { warna: "Jet Black Matte", chip: "VoidCore T1", koneksi: "Bluetooth 5.3", baterai: "3-4 Jam Premium" } },
-            { id: 2, name: "VoidPods Pro - Pure White", price: "IDR 189.000,00", img: "https://i.ibb.co.com/S4RBg5cW/8618.png", specs: { warna: "Pure White Glossy", chip: "VoidCore T1", koneksi: "Bluetooth 5.3", baterai: "3-4 Jam Premium" } }
+            { id: 1, name: "VoidPods Pro - Jet Black", price: "IDR 189.000", priceValue: 189000, img: "https://i.ibb.co.com/gMs8J5pn/8504.png", specs: { warna: "Jet Black Matte", chip: "VoidCore T1", koneksi: "Bluetooth 5.3", baterai: "3-4 Jam Premium" } },
+            { id: 2, name: "VoidPods Pro - Pure White", price: "IDR 189.000", priceValue: 189000, img: "https://i.ibb.co.com/S4RBg5cW/8618.png", specs: { warna: "Pure White Glossy", chip: "VoidCore T1", koneksi: "Bluetooth 5.3", baterai: "3-4 Jam Premium" } }
         ];
+
+        // Variabel untuk nyimpen pilihan pembeli di memori lokal sementara
+        window.selectedPaymentMethod = "";
+        window.currentBasePrice = 0;
 
         function toggleMenu() {
             document.getElementById('sidebar').classList.toggle('active');
@@ -224,7 +253,9 @@
         
         function toggleFooterUtama(tampilkan) {
             var f = document.getElementById('footer-main-info');
+            var footerUtuh = document.getElementById('main-footer');
             if(f) { tampilkan ? f.classList.remove('hidden') : f.classList.add('hidden'); }
+            if(footerUtuh) { tampilkan ? footerUtuh.style.display = 'block' : footerUtuh.style.display = 'none'; }
         }
 
         /* FUNGSI MODAL SPESIFIKASI */
@@ -253,7 +284,7 @@
             if (event.target === modal) { closeSpecModal(); }
         });
 
-        /* HALAMAN UTAMA & LOOP PRODUK */
+        /* HALAMAN UTAMA */
         function renderHome() {
             toggleFooterUtama(true);
             var app = document.getElementById('app');
@@ -261,7 +292,6 @@
             
             html += '<div class="page-title">Earbuds Terlaris</div><div class="katalog-grid">';
             
-            // Loop buat nampilin produk yang kepotong tadi
             for(var i=0; i<products.length; i++) {
                 html += '<div class="katalog-card">' +
                     '<img src="' + products[i].img + '" onclick="renderProdukDetail(' + i + ')">' +
@@ -278,21 +308,111 @@
             autoClose();
         }
 
-        /* FUNGSI HALAMAN DETAIL & CHECKOUT */
+        /* FUNGSI PILIH METODE PEMBAYARAN UI */
+        function pilihPayment(el, method) {
+            var boxes = document.getElementsByClassName('payment-box');
+            for(var i=0; i<boxes.length; i++){
+                boxes[i].classList.remove('selected');
+            }
+            el.classList.add('selected');
+            window.selectedPaymentMethod = method; // Simpan apa yang dipilih user
+        }
+
+        /* FUNGSI HITUNG ONGKIR DINAMIS */
+        function updateOngkir() {
+            var kurirVal = parseInt(document.getElementById('co-kurir').value) || 0;
+            var totalFinal = window.currentBasePrice + kurirVal;
+            
+            // Update Teks di Layar
+            document.getElementById('lbl-ongkir').innerText = kurirVal === 0 ? 'Menyesuaikan' : 'Rp ' + kurirVal.toLocaleString('id-ID');
+            document.getElementById('lbl-total-atas').innerText = 'Rp ' + totalFinal.toLocaleString('id-ID');
+            document.getElementById('lbl-total-bawah').innerText = 'Rp ' + totalFinal.toLocaleString('id-ID');
+        }
+
+        /* HALAMAN CHECKOUT BARU */
         function renderProdukDetail(index) {
-            toggleFooterUtama(false);
+            toggleFooterUtama(false); 
             var p = products[index];
+            window.currentBasePrice = p.priceValue; // Simpan harga dasar
+            window.selectedPaymentMethod = ""; // Reset pembayaran
+            
             var app = document.getElementById('app');
-            var html = '<div class="page-title">Checkout Pesanan</div>' +
-                '<div class="co-summary-box">' +
-                    '<img src="' + p.img + '">' +
-                    '<div><h4 style="margin:0 0 5px 0;">' + p.name + '</h4><div style="font-weight:700;color:#111;">' + p.price + '</div></div>' +
-                '</div>' +
-                '<div class="co-input-group"><label class="co-label">Nama Lengkap</label><input type="text" id="co-nama" class="co-input" placeholder="Masukkan nama Anda"></div>' +
-                '<div class="co-input-group"><label class="co-label">Nomor WhatsApp</label><input type="number" id="co-wa" class="co-input" placeholder="08xxxxxxxxx"></div>' +
-                '<div class="co-input-group"><label class="co-label">Alamat Email</label><input type="email" id="co-email" class="co-input" placeholder="email@anda.com"></div>' +
-                '<div class="co-input-group"><label class="co-label">Alamat Lengkap Pengiriman</label><input type="text" id="co-alamat" class="co-input" placeholder="Jalan, RT/RW, Kota, Kode Pos"></div>' +
-                '<button class="btn-beli" onclick="eksekusiBayarMidtrans(' + index + ')" style="margin-top:20px; font-size:16px; padding:15px;">Proses Pembayaran</button>';
+            
+            var html = `
+                <div class="co-wrapper">
+                    
+                    <div class="co-card">
+                        <div class="co-card-header"><i class="fa-solid fa-location-dot"></i> Alamat Pengiriman</div>
+                        <input type="text" id="co-nama" class="co-input-modern" placeholder="Nama Lengkap">
+                        <input type="number" id="co-wa" class="co-input-modern" placeholder="Nomor WhatsApp">
+                        <input type="email" id="co-email" class="co-input-modern" placeholder="Alamat Email">
+                        <textarea id="co-alamat" class="co-input-modern" placeholder="Alamat Lengkap (Jalan, RT/RW, Kota, Kode Pos)" rows="3"></textarea>
+                    </div>
+
+                    <div class="co-card">
+                        <div class="co-card-header"><i class="fa-solid fa-store"></i> Ousevoid Official</div>
+                        <div class="co-product-item">
+                            <img src="${p.img}" alt="Product">
+                            <div class="co-product-info">
+                                <div class="co-product-name">${p.name}</div>
+                                <div class="co-product-price">${p.price}</div>
+                            </div>
+                            <div class="co-product-qty">x 1</div>
+                        </div>
+                    </div>
+
+                    <div class="co-section-title">Opsi Pengiriman</div>
+                    <select id="co-kurir" class="kurir-select" onchange="updateOngkir()">
+                        <option value="0">Pilih Kurir Pengiriman...</option>
+                        <option value="35000">Gamoon e-Package - Jakarta (Rp 35.000)</option>
+                        <option value="50000">Gamoon e-Package - Bodetabek (Rp 50.000)</option>
+                        <option value="15000">J&T Express - Reguler (Est. Rp 15.000)</option>
+                        <option value="15000">JNE - Reguler (Est. Rp 15.000)</option>
+                    </select>
+
+                    <div class="co-section-title">Metode Pembayaran</div>
+                    <div class="payment-grid">
+                        <div class="payment-box" onclick="pilihPayment(this, 'gopay')"><img src="https://i.ibb.co.com/MDFzRSrD/Gopay-logo-svg.png" alt="Gopay"></div>
+                        <div class="payment-box" onclick="pilihPayment(this, 'shopeepay')"><img src="https://i.ibb.co.com/HLqqw8qc/shopeepay.png" alt="Shopeepay"></div>
+                        <div class="payment-box" onclick="pilihPayment(this, 'dana')"><img src="https://i.ibb.co.com/xqg0PbT4/Logo-dana-blue-svg.png" alt="DANA"></div>
+                        <div class="payment-box" onclick="pilihPayment(this, 'qris')"><img src="https://i.ibb.co.com/nq11tGCJ/Logo-QRIS-svg.png" alt="QRIS"></div>
+                        <div class="payment-box" onclick="pilihPayment(this, 'bca_va')"><img src="https://i.ibb.co.com/qLT2FX8W/500px-Bank-Central-Asia-svg.png" alt="BCA"></div>
+                        <div class="payment-box" onclick="pilihPayment(this, 'mandiri_va')"><img src="https://i.ibb.co.com/0pzHG5xN/Bank-Mandiri-logo-2016-svg.png" alt="Mandiri"></div>
+                        <div class="payment-box" onclick="pilihPayment(this, 'bni_va')"><img src="https://i.ibb.co.com/BVztVS7s/Bank-Negara-Indonesia-logo-2004-svg.png" alt="BNI"></div>
+                        <div class="payment-box" onclick="pilihPayment(this, 'bri_va')"><img src="https://i.ibb.co.com/HfWbZzbG/BRI-2025-with-full-name-svg.png" alt="BRI"></div>
+                        <div class="payment-box" onclick="pilihPayment(this, 'btn_va')"><img src="https://i.ibb.co.com/BKgDdxxY/BTN-2024-svg.png" alt="BTN"></div>
+                    </div>
+
+                    <div class="co-card" style="margin-top:20px;">
+                        <div class="co-card-header"><i class="fa-solid fa-file-invoice"></i> Ringkasan Pesanan</div>
+                        <div class="co-summary-line">
+                            <span>Subtotal Produk</span>
+                            <span>${p.price}</span>
+                        </div>
+                        <div class="co-summary-line">
+                            <span>Ongkos Kirim</span>
+                            <span id="lbl-ongkir">Menyesuaikan</span>
+                        </div>
+                        <div class="co-summary-line total-line">
+                            <span>Total Estimasi</span>
+                            <span id="lbl-total-atas" style="color:#e74c3c;">${p.price}</span>
+                        </div>
+                    </div>
+
+                    <div style="font-size: 11px; color: #888; text-align: center; margin-top: 20px;">
+                        Dengan membuat pesanan, Anda menyetujui Ketentuan Penggunaan dan Kebijakan Privasi Ousevoid. Pembayaran diproses aman oleh Midtrans.
+                    </div>
+
+                </div>
+
+                <div class="co-bottom-bar">
+                    <div class="co-bottom-total-wrapper">
+                        <span class="co-bottom-label">Total Pembayaran</span>
+                        <span id="lbl-total-bawah" class="co-bottom-price" style="color:#e74c3c;">${p.price}</span>
+                    </div>
+                    <button class="co-btn-pay" onclick="eksekusiBayarMidtrans(${index})">Buat Pesanan</button>
+                </div>
+            `;
             
             app.innerHTML = html;
             autoClose();
@@ -304,18 +424,32 @@
             var wa = document.getElementById('co-wa').value;
             var email = document.getElementById('co-email').value;
             var alamat = document.getElementById('co-alamat').value;
+            var kurirVal = parseInt(document.getElementById('co-kurir').value) || 0;
 
             if (!nama || !wa || !email || !alamat) {
-                alert("Mohon lengkapi semua formulir pengiriman terlebih dahulu!");
+                alert("Mohon lengkapi semua alamat pengiriman terlebih dahulu!");
                 return;
             }
 
-            // Ganti tombol jadi loading biar pembeli ga pencet berkali-kali
-            document.querySelector('.btn-beli').innerHTML = 'Memproses...';
-            document.querySelector('.btn-beli').disabled = true;
+            if (kurirVal === 0) {
+                alert("Mohon pilih opsi Kurir Pengiriman!");
+                return;
+            }
+
+            if (window.selectedPaymentMethod === "") {
+                alert("Mohon pilih Metode Pembayaran terlebih dahulu!");
+                return;
+            }
+
+            var totalFix = window.currentBasePrice + kurirVal;
+
+            var btn = document.querySelector('.co-btn-pay');
+            btn.innerHTML = 'Memproses...';
+            btn.disabled = true;
+            btn.style.opacity = '0.7';
 
             try {
-                // Nembak ke file functions/backend.js yang lu bikin tadi
+                // Nembak ke file functions/backend.js
                 const response = await fetch("/backend", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -323,7 +457,7 @@
                         nama: nama,
                         wa: wa,
                         email: email,
-                        total: 189000 // Fix harga sesuai produk
+                        total: totalFix // NGIRIM TOTAL HARGA YANG UDAH DITAMBAH ONGKIR
                     })
                 });
 
@@ -333,42 +467,51 @@
                     window.location.href = hasil.redirect_url;
                 } else {
                     alert("Gagal memproses transaksi: " + (hasil.error || "Coba lagi nanti."));
-                    document.querySelector('.btn-beli').innerHTML = 'Proses Pembayaran';
-                    document.querySelector('.btn-beli').disabled = false;
+                    btn.innerHTML = 'Buat Pesanan';
+                    btn.disabled = false;
+                    btn.style.opacity = '1';
                 }
             } catch (err) {
                 alert("Koneksi ke server terputus. Pastikan internet stabil.");
-                document.querySelector('.btn-beli').innerHTML = 'Proses Pembayaran';
-                document.querySelector('.btn-beli').disabled = false;
+                btn.innerHTML = 'Buat Pesanan';
+                btn.disabled = false;
+                btn.style.opacity = '1';
             }
         }
 
-        /* FUNGSI MENU KATEGORI COMING SOON */
+        /* FUNGSI MENU LAINNYA TETAP SAMA */
         function renderCS(title) {
-            toggleFooterUtama(false);
+            toggleFooterUtama(true);
             document.getElementById('app').innerHTML = '<div class="coming-soon-container"><i class="fa-solid fa-boxes-packing cs-icon"></i><h2>' + title + '</h2><p>Kategori ini sedang dalam persiapan. Nantikan koleksi terbaik dari Ousevoid segera!</p></div>';
             clearActiveMenu();
             autoClose();
         }
 
-        /* FUNGSI MENU INFORMASI SIDEBAR */
         function renderInfo(title, content) {
-            toggleFooterUtama(false);
-            document.getElementById('app').innerHTML = '<div class="info-box"><h2>' + title + '</h2><p>' + content + '</p></div>';
+            toggleFooterUtama(true);
+            document.getElementById('app').innerHTML = '<div class="info-box"><h2>' + title + '</h2><div>' + content + '</div></div>';
             clearActiveMenu();
             autoClose();
         }
         
-        function renderGaransi() { renderInfo('Garansi Resmi', 'Semua produk Ousevoid dilindungi garansi resmi selama 1 tahun penuh. Berlaku untuk kerusakan cacat pabrik (bukan karena kelalaian pengguna). Proses klaim sangat mudah melalui WhatsApp resmi kami.'); }
-        function renderPengiriman() { renderInfo('Pengiriman', 'Pesanan yang terkonfirmasi pembayarannya sebelum jam 15.00 WIB akan dikirim pada hari yang sama. Kami menggunakan layanan logistik terpercaya PT Gamoon Desember Indonesia.'); }
-        function renderPembayaran() { renderInfo('Pembayaran', 'Sistem pembayaran kami dijamin aman dan terenkripsi. Kami menerima berbagai metode pembayaran: QRIS (Gopay, OVO, Dana, ShopeePay), Transfer Bank (Virtual Account BCA, Mandiri, BNI, BRI), serta Kartu Kredit.'); }
-        function renderPrivasi() { renderInfo('Kebijakan Privasi', 'Keamanan data Anda adalah prioritas kami. Data pribadi seperti Nama, Nomor WhatsApp, dan Email hanya digunakan untuk keperluan pengiriman pesanan dan tidak akan pernah dibagikan kepada pihak ketiga.'); }
-        function renderSyarat() { renderInfo('Syarat & Ketentuan', 'Dengan melakukan pembelian di website resmi Ousevoid, Anda menyetujui seluruh kebijakan pengiriman, pengembalian dana, dan klaim garansi yang berlaku di perusahaan kami.'); }
+        function renderGaransi() { renderInfo('Garansi Resmi', '<p style="color:#555; line-height:1.6;">Semua produk Ousevoid dilindungi garansi resmi selama 1 tahun penuh. Berlaku untuk kerusakan cacat pabrik (bukan karena kelalaian pengguna). Proses klaim sangat mudah melalui WhatsApp resmi kami.</p>'); }
+        function renderPengiriman() { 
+            var konten = '<img src="https://i.ibb.co.com/DHZj9dpW/8827-2.jpg" alt="Gamoon e-Package" style="height: 35px; object-fit: contain; max-width: 120px; filter: invert(1); mix-blend-mode: multiply; margin-bottom: 15px; display: block;"><p style="color:#555; line-height:1.6; margin-top:0;">Khusus pengiriman wilayah Jakarta dan Bodetabek kami menggunakan layanan <strong>Gamoon e-Package Service</strong> dengan ketentuan tarif flat:</p><ul style="color:#555; line-height:1.6;"><li>Wilayah Jakarta: <strong>Rp 35.000</strong></li><li>Wilayah Bodetabek: <strong>Rp 50.000</strong></li></ul><p style="color:#555; line-height:1.6;">Pesanan yang terkonfirmasi pembayarannya sebelum jam 15.00 WIB akan diproses dan dikirim pada hari yang sama.</p>';
+            renderInfo('Pengiriman', konten); 
+        }
+        function renderPembayaran() { renderInfo('Pembayaran', '<p style="color:#555; line-height:1.6;">Sistem pembayaran kami dijamin aman dan terenkripsi. Kami menerima berbagai metode pembayaran: QRIS (Gopay, OVO, Dana, ShopeePay), Transfer Bank (Virtual Account BCA, Mandiri, BNI, BRI), serta Kartu Kredit.</p>'); }
+        
+        function renderPrivasi() { 
+            var konten = '<div style="font-size:13px; line-height:1.7; color:#555;"><p><strong>1. Dasar Hukum dan Komitmen</strong><br>Ousevoid menjalankan operasional situs <i>ousevoid.biz.id</i> dengan berlandaskan pada prinsip transparansi dan kepatuhan terhadap Undang-Undang Perlindungan Data Pribadi (UU PDP) Republik Indonesia. Kami berkomitmen penuh untuk menjaga integritas dan kerahasiaan informasi yang dikelola dalam sistem kami.</p><p><strong>2. Data yang Dikumpulkan</strong><br>Perusahaan hanya menghimpun data yang bersifat esensial untuk kebutuhan operasional transaksi, meliputi: Identitas diri (Nama Lengkap), Kontak (Nomor Telepon/WhatsApp dan Alamat Email), dan Informasi logistik (Alamat pengiriman).</p><p><strong>3. Kebijakan Retensi dan Pemusnahan Data</strong><br>Sebagai bentuk tanggung jawab terhadap keamanan data pelanggan, Ousevoid menerapkan protokol <i>data minimization</i>. Kami menegaskan bahwa:<br>- Data sensitif pelanggan (alamat pengiriman dan nomor telepon) bersifat temporer.<br>- <strong>Segera setelah transaksi dinyatakan selesai dan pesanan telah berhasil diserahterimakan kepada pihak logistik/kurir, seluruh data tersebut akan dihapus secara permanen dan otomatis dari basis data Perusahaan.</strong></p><p><strong>4. Keamanan Transaksi dan Pihak Ketiga</strong><br>Ousevoid tidak menyimpan, mengakses, maupun mengelola informasi finansial pengguna seperti detail kartu kredit atau data perbankan. Seluruh proses pembayaran difasilitasi oleh penyedia jasa Payment Gateway resmi yang telah tersertifikasi standar keamanan enkripsi industri.</p></div>';
+            renderInfo('Kebijakan Privasi', konten); 
+        }
+        
+        function renderSyarat() { 
+            var konten = '<div style="font-size:13px; line-height:1.7; color:#555;"><p><strong>BAB I: KETENTUAN PENGGUNAAN</strong><br>1. <strong>Definisi:</strong> Situs ousevoid.biz.id adalah layanan toko daring yang dikelola oleh Ousevoid.<br>2. <strong>Kewajiban Pengguna:</strong> Pengguna wajib memberikan informasi data diri yang akurat dan benar. Segala bentuk kerugian yang timbul akibat ketidakakuratan data oleh Pengguna sepenuhnya menjadi tanggung jawab Pengguna.<br>3. <strong>Proses Transaksi:</strong> Transaksi dianggap sah setelah Pengguna menyelesaikan proses pembayaran melalui sistem Payment Gateway yang terintegrasi.</p><p><strong>BAB II: KEBIJAKAN PENGEMBALIAN DAN PENGEMBALIAN DANA</strong><br>1. <strong>Prosedur Klaim:</strong> Segala keluhan atas ketidaksesuaian produk wajib disertai bukti video <i>unboxing</i> tanpa jeda (<i>continuous recording</i>) maksimal 2x24 jam sejak produk diterima.<br>2. <strong>Ketentuan Retur:</strong> Produk yang dikembalikan harus dalam kondisi utuh dan tidak menunjukkan tanda penggunaan. Biaya logistik retur menjadi tanggung jawab Pengguna.<br>3. <strong>Pengembalian Dana:</strong> Proses pengembalian dana (<i>refund</i>) dilakukan melalui sistem perbankan sesuai dengan prosedur yang ditetapkan oleh Payment Gateway terkait.</p><p><strong>BAB III: SANGGAHAN (DISCLAIMER)</strong><br>Informasi dan layanan yang disajikan disediakan berdasarkan kondisi yang tersedia (<i>as is</i>). Ousevoid tidak bertanggung jawab atas kerugian tidak langsung atau konsekuensial yang timbul akibat gangguan teknis di luar kendali wajar Perusahaan.</p></div>';
+            renderInfo('Syarat & Ketentuan', konten); 
+        }
 
-        // Buka halaman home saat web pertama kali dibuka
-        window.onload = function() {
-            renderHome();
-        };
+        window.onload = function() { renderHome(); };
     </script>
 </body>
 </html>
