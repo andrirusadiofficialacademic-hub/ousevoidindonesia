@@ -115,6 +115,24 @@
         .copyright { font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 15px; text-align: left; }
         #footer-main-info.hidden { display: none !important; }
 
+        /* --- CSS TOMBOL LOGIN SIDEBAR & MODAL --- */
+        .login-btn-sidebar { background: #111 !important; color: #fff !important; margin-top: 20px; text-align: center; justify-content: center;}
+        .login-btn-sidebar i { color: #fff !important; margin-right: 8px; }
+        .login-btn-sidebar:hover { background: #333 !important; }
+
+        .modal-login-overlay { visibility: hidden; opacity: 0; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 9999; display: flex; justify-content: center; align-items: center; transition: 0.3s ease; }
+        .modal-login-overlay.show { visibility: visible; opacity: 1; }
+        .modal-login-box { background: #fff; padding: 30px 25px; border-radius: 12px; width: 90%; max-width: 340px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.2); transform: translateY(20px); transition: 0.4s; position: relative; }
+        .modal-login-overlay.show .modal-login-box { transform: translateY(0); }
+        .modal-login-box img { width: 100px; margin-bottom: 15px; }
+        .modal-login-box h3 { margin: 0 0 20px 0; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; color: #111;}
+        .login-input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 13px; margin-bottom: 12px; box-sizing: border-box; background: #fafafa; }
+        .login-input:focus { border-color: #111; outline: none; }
+        .btn-masuk-sistem { width: 100%; background: #111; color: #fff; border: none; padding: 12px; border-radius: 6px; font-weight: 700; cursor: pointer; transition: 0.2s; margin-top: 5px; font-size: 13px;}
+        .btn-masuk-sistem:hover { background: #333; }
+        .close-login-btn { position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer; color: #888; }
+        /* ------------------------------------- */
+
         @media (min-width: 768px) {
             .main-content { max-width: 900px; }
             .katalog-grid { grid-template-columns: repeat(3, 1fr); }
@@ -163,6 +181,8 @@
             <div class="nav-item" id="btn-pembayaran" onclick="renderPembayaran()"><i class="fa-solid fa-credit-card"></i> Pembayaran</div>
             <div class="nav-item" id="btn-privasi" onclick="renderPrivasi()"><i class="fa-solid fa-lock"></i> Kebijakan Privasi</div>
             <div class="nav-item" id="btn-syarat" onclick="renderSyarat()"><i class="fa-solid fa-file-lines"></i> Syarat & Ketentuan</div>
+            
+            <div class="nav-item login-btn-sidebar" onclick="bukaLogin()"><i class="fa-solid fa-user-shield"></i> Akses Manajemen</div>
         </div>
     </div>
 
@@ -190,6 +210,18 @@
                 <li><strong>Connection:</strong> Bluetooth 5.3 (Ultra-Low Latency)</li>
                 <li><strong>Battery:</strong> Up to 12 Hours Continuous Playback</li>
             </ul>
+        </div>
+    </div>
+
+    <div id="loginModal" class="modal-login-overlay">
+        <div class="modal-login-box">
+            <span class="close-login-btn" onclick="tutupLogin()">&times;</span>
+            <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Logo">
+            <h3>Login Otoritas</h3>
+            <input type="text" id="log-user" class="login-input" placeholder="Username">
+            <input type="password" id="log-pass" class="login-input" placeholder="Password">
+            <input type="password" id="log-pin" class="login-input" placeholder="PIN Keamanan (6 Digit)" maxlength="6">
+            <button class="btn-masuk-sistem" onclick="prosesLoginRahasia()">Masuk Control Center</button>
         </div>
     </div>
 
@@ -258,6 +290,50 @@
             if(footerUtuh) { tampilkan ? footerUtuh.style.display = 'block' : footerUtuh.style.display = 'none'; }
         }
 
+        /* --- FUNGSI MODAL LOGIN ADMIN --- */
+        function bukaLogin() { 
+            document.getElementById('loginModal').classList.add('show');
+            // Supaya sidebar ketutup waktu modalnya kebuka
+            if (document.getElementById('sidebar').classList.contains('active')) {
+                toggleMenu();
+            }
+        }
+        function tutupLogin() { 
+            document.getElementById('loginModal').classList.remove('show'); 
+        }
+
+        async function prosesLoginRahasia() {
+            var u = document.getElementById('log-user').value;
+            var p = document.getElementById('log-pass').value;
+            var pin = document.getElementById('log-pin').value;
+            var btn = document.querySelector('.btn-masuk-sistem');
+
+            if(!u || !p || !pin) { alert("Isi semua data!"); return; }
+
+            btn.innerHTML = "Memeriksa...";
+            btn.disabled = true;
+
+            try {
+                const response = await fetch("/api/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ username: u, password: p, pin: pin })
+                });
+
+                const hasil = await response.json();
+
+                if (hasil.sukses) {
+                    window.location.href = "manajemen.html"; 
+                } else {
+                    alert("Akses Ditolak: Data salah!");
+                }
+            } catch (error) {
+                alert("Gangguan koneksi ke server keamanan.");
+            }
+            btn.innerHTML = "Masuk Control Center";
+            btn.disabled = false;
+        }
+
         /* FUNGSI MODAL SPESIFIKASI */
         function openSpecModal() {
             var modal = document.getElementById('specModalGlobal');
@@ -279,9 +355,12 @@
             }, 300);
         }
         
+        // Nutup modal kalau klik area kosong/luar modal
         document.addEventListener('click', function(event) {
-            var modal = document.getElementById('specModalGlobal');
-            if (event.target === modal) { closeSpecModal(); }
+            var m1 = document.getElementById('specModalGlobal');
+            var m2 = document.getElementById('loginModal');
+            if (event.target === m1) closeSpecModal();
+            if (event.target === m2) tutupLogin();
         });
 
         /* HALAMAN UTAMA */
