@@ -262,14 +262,43 @@
     </div>
 
     <script>
+        // DATA CADANGAN (JAGA-JAGA KALAU DATABASE KOSONG / ERROR)
         var products = [
             { id: 1, name: "VoidPods Pro - Jet Black", price: "IDR 189.000", priceValue: 189000, img: "https://i.ibb.co.com/gMs8J5pn/8504.png", specs: { warna: "Jet Black Matte", chip: "VoidCore T1", koneksi: "Bluetooth 5.3", baterai: "3-4 Jam Premium" } },
             { id: 2, name: "VoidPods Pro - Pure White", price: "IDR 189.000", priceValue: 189000, img: "https://i.ibb.co.com/S4RBg5cW/8618.png", specs: { warna: "Pure White Glossy", chip: "VoidCore T1", koneksi: "Bluetooth 5.3", baterai: "3-4 Jam Premium" } }
         ];
 
-        // Variabel untuk nyimpen pilihan pembeli di memori lokal sementara
         window.selectedPaymentMethod = "";
         window.currentBasePrice = 0;
+
+        // --- FUNGSI BARU: TARIK DATA DARI DATABASE D1 ---
+        async function muatProdukDariDatabase() {
+            var app = document.getElementById('app');
+            // Tampilkan animasi loading keren sebelum data masuk
+            app.innerHTML = '<div style="padding:100px 20px; text-align:center;"><i class="fa-solid fa-circle-notch fa-spin" style="font-size:40px; color:#111; margin-bottom:15px;"></i><div style="font-size:14px; color:#555; font-weight:600;">Memuat Katalog Terkini...</div></div>';
+            
+            try {
+                const response = await fetch("/api/produk");
+                const dataProdukApi = await response.json();
+
+                // Kalau database berhasil ditarik dan ada isinya, timpa data cadangan di atas
+                if (dataProdukApi && dataProdukApi.length > 0) {
+                    products = dataProdukApi.map(p => ({
+                        id: p.id,
+                        name: p.nama,
+                        priceValue: p.harga,
+                        price: 'IDR ' + p.harga.toLocaleString('id-ID'), // Format rupiah otomatis
+                        img: p.img_url,
+                        specs: { deskripsi: p.deskripsi } 
+                    }));
+                }
+            } catch (error) {
+                console.log("Database D1 belum merespon. Menggunakan data offline/cadangan.");
+            }
+            
+            // Render halaman utama setelah data siap
+            renderHome();
+        }
 
         function toggleMenu() {
             document.getElementById('sidebar').classList.toggle('active');
@@ -295,7 +324,6 @@
         /* --- FUNGSI MODAL LOGIN ADMIN --- */
         function bukaLogin() { 
             document.getElementById('loginModal').classList.add('show');
-            // Supaya sidebar ketutup waktu modalnya kebuka
             if (document.getElementById('sidebar').classList.contains('active')) {
                 toggleMenu();
             }
@@ -358,7 +386,6 @@
             }, 300);
         }
         
-        // Nutup modal kalau klik area kosong/luar modal
         document.addEventListener('click', function(event) {
             var m1 = document.getElementById('specModalGlobal');
             var m2 = document.getElementById('loginModal');
@@ -593,7 +620,8 @@
             renderInfo('Syarat & Ketentuan', konten); 
         }
 
-        window.onload = function() { renderHome(); };
+        // UBAH WINDOW ONLOAD: Sekarang dia bakal panggil fungsi narik database dulu
+        window.onload = function() { muatProdukDariDatabase(); };
     </script>
 </body>
 </html>
