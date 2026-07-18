@@ -173,6 +173,8 @@
             <div class="nav-item" id="btn-headphones" onclick="renderCS('Headphones')"><i class="fa-solid fa-headphones"></i> Headphones</div>
             <div class="nav-item" id="btn-speaker" onclick="renderCS('Speaker')"><i class="fa-solid fa-volume-high"></i> Speaker</div>
             <div class="nav-item" id="btn-accessories" onclick="renderCS('Accessories')"><i class="fa-solid fa-link"></i> Accessories</div>
+            
+            <div class="nav-item" id="btn-smartphone" onclick="renderCS('Smartphone')"><i class="fa-solid fa-mobile-screen-button"></i> Smartphone</div>
         </div>
         <div class="nav-group">
             <div class="nav-label">Informasi</div>
@@ -323,7 +325,8 @@
                 const hasil = await response.json();
 
                 if (hasil.sukses) {
-                    window.location.href = "manajemen.html"; 
+                    // ARAHKAN KE FILE SESUAI NAMA DI GITHUB (menajemen.html)
+                    window.location.href = "/menajemen.html"; 
                 } else {
                     alert("Akses Ditolak: Data salah!");
                 }
