@@ -50,7 +50,8 @@
         }
 
         .sidebar-logo { text-align: center; margin-bottom: 40px; }
-        .sidebar-logo img { max-width: 160px; height: auto; border-radius: 8px; }
+        /* Logo diselaraskan ukurannya dengan index.html (130px) */
+        .sidebar-logo img { width: 130px; height: auto; border-radius: 8px; }
 
         .sidebar-menu { list-style: none; padding: 0; margin: 0; }
         .sidebar-menu li { margin-bottom: 5px; }
@@ -85,7 +86,7 @@
         .admin-profile-header img { width: 40px; height: 40px; border-radius: 50%; object-fit: contain; background: #111; padding: 2px; }
         .admin-info { display: flex; flex-direction: column; }
         .admin-name { font-size: 14px; font-weight: 700; }
-        .admin-role { font-size: 12px; color: var(--text-muted); }
+        .admin-role { font-size: 11px; color: var(--text-muted); margin-top: 2px;}
         .logout-btn {
             background-color: transparent; color: var(--danger); border: 1px solid var(--danger);
             padding: 8px 15px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 12px; transition: 0.2s;
@@ -123,7 +124,7 @@
         .invoice-table tbody tr:hover { background-color: #fafafa; }
         .empty-state { text-align: center; padding: 60px 20px; color: var(--text-muted); font-size: 15px; font-weight: 500; }
 
-        /* --- HALAMAN TAMBAH PRODUK (FORM PREMIUM) --- */
+        /* --- HALAMAN FORM & PENGATURAN --- */
         .form-panel { background: var(--surface); padding: 30px; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
         .form-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; }
         .form-group { margin-bottom: 20px; }
@@ -175,10 +176,10 @@
             <h2 id="header-title">Control Center</h2>
             <div class="header-right">
                 <div class="admin-profile-header">
-                    <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Admin">
+                    <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Admin" id="header-admin-foto">
                     <div class="admin-info">
-                        <span class="admin-name">Administrator</span>
-                        <span class="admin-role">Direktur Utama</span>
+                        <span class="admin-name" id="header-admin-nama">Administrator</span>
+                        <span class="admin-role" id="header-admin-role">NIP: 00000000 | Direktur Utama</span>
                     </div>
                 </div>
                 <button class="logout-btn" onclick="logout()"><i class="fa-solid fa-power-off"></i> Log Out</button>
@@ -312,10 +313,39 @@
         </div>
 
         <div id="page-pengaturan" class="page-section">
-            <div class="form-panel" style="text-align: center; padding: 80px 20px;">
-                <i class="fa-solid fa-gear" style="font-size: 50px; color: #111; margin-bottom: 20px;"></i>
-                <h2 style="margin:0 0 10px 0;">Pengaturan Sistem</h2>
-                <p style="color: var(--text-muted);">Konfigurasi API Midtrans dan keamanan toko ada di sini.</p>
+            <div class="section-title" style="margin-bottom: 20px;">Pengaturan Profil Administrator</div>
+            
+            <div class="form-panel">
+                <div class="form-grid">
+                    <div>
+                        <div class="form-group">
+                            <label>Nama Lengkap</label>
+                            <input type="text" id="set-nama" class="form-control" placeholder="Masukkan Nama Lengkap Anda">
+                        </div>
+                        <div class="form-group">
+                            <label>NIP (Nomor Induk Pegawai)</label>
+                            <input type="text" id="set-nip" class="form-control" placeholder="Contoh: 199508172026">
+                        </div>
+                        <div class="form-group">
+                            <label>Jabatan</label>
+                            <input type="text" id="set-jabatan" class="form-control" placeholder="Contoh: Manajer Operasional">
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="form-group">
+                            <label>URL Foto Profil</label>
+                            <div class="img-upload-box" style="padding: 20px;">
+                                <i class="fa-solid fa-image-portrait"></i>
+                                <div style="font-size:12px;">Pastikan rasio foto 1:1 (Persegi)</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="set-foto" class="form-control" placeholder="Link Gambar: https://...">
+                        </div>
+                        <button class="btn-submit" onclick="simpanProfilAdmin()"><i class="fa-solid fa-user-check"></i> Simpan Profil</button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -331,6 +361,54 @@
 </div>
 
 <script>
+    // LOAD PROFIL ADMIN SAAT HALAMAN DIBUKA
+    window.onload = function() {
+        muatProfilAdmin();
+    };
+
+    // FUNGSI UNTUK MENGAMBIL DAN MENAMPILKAN PROFIL ADMIN DARI LOCAL STORAGE
+    function muatProfilAdmin() {
+        // Ambil dari local storage, kalau kosong pake default
+        var nama = localStorage.getItem('admin_nama') || 'Administrator';
+        var nip = localStorage.getItem('admin_nip') || '00000000';
+        var jabatan = localStorage.getItem('admin_jabatan') || 'Direktur Utama';
+        var foto = localStorage.getItem('admin_foto') || 'https://i.ibb.co.com/x8MrtzXr/8588.png';
+
+        // Tampilkan di Header Atas
+        document.getElementById('header-admin-nama').innerText = nama;
+        document.getElementById('header-admin-role').innerText = 'NIP: ' + nip + ' | ' + jabatan;
+        document.getElementById('header-admin-foto').src = foto;
+
+        // Tampilkan di Input Form Pengaturan
+        document.getElementById('set-nama').value = nama;
+        document.getElementById('set-nip').value = nip;
+        document.getElementById('set-jabatan').value = jabatan;
+        document.getElementById('set-foto').value = foto;
+    }
+
+    // FUNGSI UNTUK MENYIMPAN PERUBAHAN PROFIL ADMIN
+    function simpanProfilAdmin() {
+        var nama = document.getElementById('set-nama').value;
+        var nip = document.getElementById('set-nip').value;
+        var jabatan = document.getElementById('set-jabatan').value;
+        var foto = document.getElementById('set-foto').value;
+
+        if(!nama || !nip || !jabatan) { 
+            alert("Harap isi Nama, NIP, dan Jabatan terlebih dahulu!"); 
+            return; 
+        }
+
+        // Simpan ke Local Storage
+        localStorage.setItem('admin_nama', nama);
+        localStorage.setItem('admin_nip', nip);
+        localStorage.setItem('admin_jabatan', jabatan);
+        if(foto) { localStorage.setItem('admin_foto', foto); }
+
+        // Segarkan tampilan
+        muatProfilAdmin();
+        alert("Profil Administrator berhasil diperbarui!");
+    }
+
     // FUNGSI UNTUK PINDAH-PINDAH HALAMAN (SINGLE PAGE APPLICATION)
     function bukaHalaman(pageId, element = null) {
         // 1. Sembunyikan semua halaman
@@ -389,7 +467,7 @@
             return;
         }
 
-        var btn = document.querySelector('.btn-submit');
+        var btn = document.querySelector('#page-tambah-produk .btn-submit');
         btn.innerHTML = "Menyimpan...";
         btn.disabled = true;
 
