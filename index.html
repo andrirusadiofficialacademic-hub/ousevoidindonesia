@@ -139,12 +139,13 @@
         .btn-masuk-sistem:hover { background: #333; }
         .close-login-btn { position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer; color: #888; }
 
-        /* --- CSS LIVE CHAT CUSTOM (RESPONSIVE) --- */
-        .chat-widget-btn { position: fixed; bottom: 20px; right: 20px; width: 55px; height: 55px; background: #111; color: #fff; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 22px; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 9999; transition: 0.3s; }
+        /* --- CSS LIVE CHAT CUSTOM (DIPERBAIKI) --- */
+        .chat-widget-btn { position: fixed; bottom: 95px; right: 20px; width: 55px; height: 55px; background: #111; color: #fff; border-radius: 50%; display: flex !important; justify-content: center; align-items: center; font-size: 22px; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.3); z-index: 99999; transition: 0.3s; }
         .chat-widget-btn:hover { transform: scale(1.05); }
-        .chat-box-container { position: fixed; bottom: 85px; right: 15px; width: calc(100% - 30px); max-width: 340px; height: 70vh; max-height: 480px; background: #fff; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); display: flex; flex-direction: column; z-index: 9998; opacity: 0; visibility: hidden; transform: translateY(20px); transition: 0.3s; overflow: hidden; border: 1px solid #eee; }
+        .chat-box-container { position: fixed; bottom: 160px; right: 15px; width: calc(100% - 30px); max-width: 340px; height: 70vh; max-height: 480px; background: #fff; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); display: flex; flex-direction: column; z-index: 99998; opacity: 0; visibility: hidden; transform: translateY(20px); transition: 0.3s; overflow: hidden; border: 1px solid #eee; }
         .chat-box-container.show { opacity: 1; visibility: visible; transform: translateY(0); }
         .chat-header { background: #111; color: #fff; padding: 12px 15px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; font-size: 14px;}
+        .chat-avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; margin-right: 10px; border: 1px solid #444; }
         .chat-close { cursor: pointer; font-size: 18px; color: #ccc; }
         .chat-close:hover { color: #fff; }
         .chat-messages { flex: 1; padding: 15px; overflow-y: auto; background: #f9f9f9; display: flex; flex-direction: column; gap: 10px; }
@@ -169,7 +170,8 @@
             .footer-contact-info, .footer-hq { flex: 1; min-width: 250px; }
             .footer-gov, .copyright { width: 100%; text-align: center; margin-top: 30px; }
             .co-bottom-bar { justify-content: center; gap: 20px; } 
-            .chat-box-container { right: 20px; width: 340px; }
+            .chat-widget-btn { bottom: 30px; }
+            .chat-box-container { bottom: 95px; right: 20px; width: 340px; }
         }
     </style>
 </head>
@@ -256,7 +258,10 @@
     <div class="chat-widget-btn" onclick="toggleChat()"><i class="fa-solid fa-message"></i></div>
     <div class="chat-box-container" id="chatBox">
         <div class="chat-header">
-            <div><i class="fa-solid fa-headset"></i> Marsya (Agent)</div>
+            <div style="display: flex; align-items: center;">
+                <img src="https://i.ibb.co.com/TDzbDzqw/file-000000009a788208b767f7ea331a78c5.png" class="chat-avatar" alt="Marsya">
+                <span>Marsya (Agent)</span>
+            </div>
             <div class="chat-close" onclick="toggleChat()"><i class="fa-solid fa-xmark"></i></div>
         </div>
         <div class="chat-messages" id="chatMessages">
@@ -570,19 +575,6 @@
                         <option value="15000">JNE - Reguler (Est. Rp 15.000)</option>
                     </select>
 
-                    <div class="co-section-title">Metode Pembayaran</div>
-                    <div class="payment-grid">
-                        <div class="payment-box" onclick="pilihPayment(this, 'gopay')"><img src="https://i.ibb.co.com/MDFzRSrD/Gopay-logo-svg.png" alt="Gopay"></div>
-                        <div class="payment-box" onclick="pilihPayment(this, 'shopeepay')"><img src="https://i.ibb.co.com/HLqqw8qc/shopeepay.png" alt="Shopeepay"></div>
-                        <div class="payment-box" onclick="pilihPayment(this, 'dana')"><img src="https://i.ibb.co.com/xqg0PbT4/Logo-dana-blue-svg.png" alt="DANA"></div>
-                        <div class="payment-box" onclick="pilihPayment(this, 'qris')"><img src="https://i.ibb.co.com/nq11tGCJ/Logo-QRIS-svg.png" alt="QRIS"></div>
-                        <div class="payment-box" onclick="pilihPayment(this, 'bca_va')"><img src="https://i.ibb.co.com/qLT2FX8W/500px-Bank-Central-Asia-svg.png" alt="BCA"></div>
-                        <div class="payment-box" onclick="pilihPayment(this, 'mandiri_va')"><img src="https://i.ibb.co.com/0pzHG5xN/Bank-Mandiri-logo-2016-svg.png" alt="Mandiri"></div>
-                        <div class="payment-box" onclick="pilihPayment(this, 'bni_va')"><img src="https://i.ibb.co.com/BVztVS7s/Bank-Negara-Indonesia-logo-2004-svg.png" alt="BNI"></div>
-                        <div class="payment-box" onclick="pilihPayment(this, 'bri_va')"><img src="https://i.ibb.co.com/HfWbZzbG/BRI-2025-with-full-name-svg.png" alt="BRI"></div>
-                        <div class="payment-box" onclick="pilihPayment(this, 'btn_va')"><img src="https://i.ibb.co.com/BKgDdxxY/BTN-2024-svg.png" alt="BTN"></div>
-                    </div>
-
                     <div class="co-card" style="margin-top:20px;">
                         <div class="co-card-header"><i class="fa-solid fa-file-invoice"></i> Ringkasan Pesanan</div>
                         <div class="co-summary-line">
@@ -600,22 +592,23 @@
                     </div>
 
                     <div style="font-size: 11px; color: #888; text-align: center; margin-top: 20px;">
-                        Dengan membuat pesanan, Anda menyetujui Ketentuan Penggunaan dan Kebijakan Privasi Ousevoid. Pembayaran diproses aman oleh Midtrans.
+                        Dengan melanjutkan, Anda menyetujui Ketentuan Penggunaan dan Kebijakan Privasi Ousevoid.
                     </div>
                 </div>
                 <div class="co-bottom-bar">
                     <div class="co-bottom-total-wrapper">
-                        <span class="co-bottom-label">Total Pembayaran</span>
+                        <span class="co-bottom-label">Total Estimasi</span>
                         <span id="lbl-total-bawah" class="co-bottom-price" style="color:#e74c3c;">${p.price}</span>
                     </div>
-                    <button class="co-btn-pay" onclick="eksekusiBayarMidtrans(${index})">Buat Pesanan</button>
+                    <button class="co-btn-pay" onclick="lanjutKeInvoice(${index})">Lanjut Pembayaran</button>
                 </div>
             `;
             app.innerHTML = html;
             autoClose();
         }
 
-        async function eksekusiBayarMidtrans(index) {
+        /* FUNGSI TRANSISI KE HALAMAN INVOICE (SEPERTI FOTO SCREENSHOT) */
+        function lanjutKeInvoice(index) {
             var nama = document.getElementById('co-nama').value;
             var wa = document.getElementById('co-wa').value;
             var email = document.getElementById('co-email').value;
@@ -624,25 +617,95 @@
 
             if (!nama || !wa || !email || !alamat) { alert("Mohon lengkapi semua alamat pengiriman terlebih dahulu!"); return; }
             if (kurirVal === 0) { alert("Mohon pilih opsi Kurir Pengiriman!"); return; }
-            if (window.selectedPaymentMethod === "") { alert("Mohon pilih Metode Pembayaran terlebih dahulu!"); return; }
 
             var totalFix = window.currentBasePrice + kurirVal;
+            
+            // ID Transaksi random biar kelihatan profesional
+            var idTrx = "2026/OUSE/" + Math.floor(Math.random() * 90 + 10) + "/" + Math.floor(Math.random() * 90 + 10) + "/REG" + Math.floor(Math.random() * 900000 + 100000);
+            
+            window.dataPesananSementara = { index: index, nama: nama, wa: wa, email: email, alamat: alamat, total: totalFix, idTrx: idTrx };
+            renderInvoice();
+        }
+
+        /* TAMPILAN HALAMAN INVOICE PERSIS SCREENSHOT */
+        function renderInvoice() {
+            window.scrollTo(0, 0);
+            var app = document.getElementById('app');
+            var data = window.dataPesananSementara;
+            window.selectedPaymentMethod = ""; // Reset pilihan bank
+            
+            var html = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <h2 style="margin: 0; font-size: 18px; text-transform: uppercase; letter-spacing: 1px;">OUSEVOID</h2>
+                </div>
+                
+                <div class="co-wrapper" style="background: #fff; border: 1px solid #eee; padding: 25px 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.03);">
+                    
+                    <div style="text-align: center; margin-bottom: 25px; border-bottom: 1px dashed #eee; padding-bottom: 20px;">
+                        <div style="font-size: 16px; font-weight: 700; color: #111; margin-bottom: 8px;">Pembayaran Transaksi</div>
+                        <div style="font-size: 12px; color: #888;">ID Transaksi: <span style="color:#111; font-weight:600;">${data.idTrx}</span></div>
+                        
+                        <div style="margin-top: 20px; background: #f9f9f9; padding: 15px; border-radius: 8px;">
+                            <div style="font-size: 11px; color: #888; font-weight: 600; text-transform: uppercase; margin-bottom: 5px;">Total Tagihan</div>
+                            <div style="font-size: 24px; font-weight: 800; color: #111;">IDR ${data.total.toLocaleString('id-ID')},00</div>
+                            <div style="display: inline-block; background: #fff5e6; color: #d35400; padding: 5px 12px; border-radius: 20px; font-size: 10px; font-weight: 700; margin-top: 10px;">
+                                <i class="fa-regular fa-clock"></i> MENUNGGU PEMBAYARAN
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 25px;">
+                        <div style="font-size: 12px; font-weight: 700; color: #111; margin-bottom: 12px; letter-spacing: 0.5px;">DATA PENERIMA & INVOICE</div>
+                        <div style="font-size: 13px; line-height: 1.8; color: #444;">
+                            <div><strong>Nama:</strong> ${data.nama}</div>
+                            <div><strong>No Telpon:</strong> ${data.wa}</div>
+                            <div><strong>Alamat:</strong> ${data.alamat}</div>
+                            <div style="margin-top: 10px;"><strong>Email Invoice:</strong> ${data.email}</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 15px;">
+                        <div style="font-size: 12px; font-weight: 700; color: #111; margin-bottom: 12px; letter-spacing: 0.5px;">PILIH METODE PEMBAYARAN</div>
+                        <div class="payment-grid">
+                            <div class="payment-box" onclick="pilihPayment(this, 'gopay')"><img src="https://i.ibb.co.com/MDFzRSrD/Gopay-logo-svg.png" alt="Gopay"></div>
+                            <div class="payment-box" onclick="pilihPayment(this, 'shopeepay')"><img src="https://i.ibb.co.com/HLqqw8qc/shopeepay.png" alt="Shopeepay"></div>
+                            <div class="payment-box" onclick="pilihPayment(this, 'dana')"><img src="https://i.ibb.co.com/xqg0PbT4/Logo-dana-blue-svg.png" alt="DANA"></div>
+                            <div class="payment-box" onclick="pilihPayment(this, 'qris')"><img src="https://i.ibb.co.com/nq11tGCJ/Logo-QRIS-svg.png" alt="QRIS"></div>
+                            <div class="payment-box" onclick="pilihPayment(this, 'bri_va')"><img src="https://i.ibb.co.com/HfWbZzbG/BRI-2025-with-full-name-svg.png" alt="BRI"></div>
+                            <div class="payment-box" onclick="pilihPayment(this, 'bni_va')"><img src="https://i.ibb.co.com/BVztVS7s/Bank-Negara-Indonesia-logo-2004-svg.png" alt="BNI"></div>
+                            <div class="payment-box" onclick="pilihPayment(this, 'mandiri_va')"><img src="https://i.ibb.co.com/0pzHG5xN/Bank-Mandiri-logo-2016-svg.png" alt="Mandiri"></div>
+                            <div class="payment-box" onclick="pilihPayment(this, 'btn_va')"><img src="https://i.ibb.co.com/BKgDdxxY/BTN-2024-svg.png" alt="BTN"></div>
+                            <div class="payment-box" onclick="pilihPayment(this, 'bca_va')"><img src="https://i.ibb.co.com/qLT2FX8W/500px-Bank-Central-Asia-svg.png" alt="BCA"></div>
+                        </div>
+                    </div>
+
+                    <button class="co-btn-pay" style="width: 100%; margin-top: 10px;" onclick="eksekusiBayarMidtransInvoice()">Bayar Sekarang</button>
+                </div>
+            `;
+            app.innerHTML = html;
+        }
+
+        /* FUNGSI EKSEKUSI PEMBAYARAN DARI HALAMAN INVOICE */
+        async function eksekusiBayarMidtransInvoice() {
+            var data = window.dataPesananSementara;
+            
+            if (window.selectedPaymentMethod === "") { alert("Mohon pilih Metode Pembayaran terlebih dahulu!"); return; }
+
             var btn = document.querySelector('.co-btn-pay');
             btn.innerHTML = 'Memproses...'; btn.disabled = true; btn.style.opacity = '0.7';
 
             try {
-                // Di masa depan ini nanti kita arahin ke /api/backend (karena sekarang masih /backend)
                 const response = await fetch("/backend", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ nama: nama, wa: wa, email: email, total: totalFix })
+                    body: JSON.stringify({ nama: data.nama, wa: data.wa, email: data.email, total: data.total })
                 });
                 const hasil = await response.json();
                 if (hasil.redirect_url) { window.location.href = hasil.redirect_url; } 
-                else { alert("Gagal memproses transaksi: " + (hasil.error || "Coba lagi nanti.")); btn.innerHTML = 'Buat Pesanan'; btn.disabled = false; btn.style.opacity = '1'; }
+                else { alert("Gagal memproses transaksi: " + (hasil.error || "Coba lagi nanti.")); btn.innerHTML = 'Bayar Sekarang'; btn.disabled = false; btn.style.opacity = '1'; }
             } catch (err) {
                 alert("Koneksi ke server terputus. Pastikan internet stabil.");
-                btn.innerHTML = 'Buat Pesanan'; btn.disabled = false; btn.style.opacity = '1';
+                btn.innerHTML = 'Bayar Sekarang'; btn.disabled = false; btn.style.opacity = '1';
             }
         }
 
