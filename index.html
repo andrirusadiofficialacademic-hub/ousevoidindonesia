@@ -77,6 +77,12 @@
         .co-btn-pay { background: #111; color: #fff; padding: 12px 25px; border-radius: 8px; font-weight: 700; border: none; cursor: pointer; font-size: 14px; transition: 0.2s; }
         .co-btn-pay:hover { background: #333; }
 
+        /* CSS VARIAN/TIPE PRODUK */
+        .tipe-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; }
+        .tipe-box { border: 1px solid #ddd; border-radius: 8px; padding: 10px 15px; background: #fafafa; cursor: pointer; font-size: 13px; font-weight: 600; color: #444; transition: 0.2s; }
+        .tipe-box:hover { border-color: #111; }
+        .tipe-box.selected { border-color: #111; background: #111; color: #fff; }
+
         /* CSS METODE PEMBAYARAN & KURIR */
         .co-section-title { font-size: 13px; font-weight: 700; color: #555; margin: 20px 0 10px 0; text-transform: uppercase; }
         .kurir-select { width: 100%; padding: 12px; border: 1px solid #eee; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 13px; background: #fafafa; margin-bottom: 10px; color: #333; outline: none; }
@@ -148,7 +154,15 @@
         .chat-avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; margin-right: 10px; border: 1px solid #444; }
         .chat-close { cursor: pointer; font-size: 18px; color: #ccc; }
         .chat-close:hover { color: #fff; }
-        .chat-messages { flex: 1; padding: 15px; overflow-y: auto; background: #f9f9f9; display: flex; flex-direction: column; gap: 10px; }
+        
+        .chat-pre-form { padding: 20px; flex: 1; display: flex; flex-direction: column; gap: 12px; background: #fdfdfd; }
+        .chat-pre-form label { font-size: 12px; font-weight: 600; color: #555; }
+        .chat-pre-form input { padding: 10px 12px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 13px; outline: none; }
+        .chat-pre-form input:focus { border-color: #111; }
+        .chat-pre-form button { background: #111; color: #fff; border: none; padding: 12px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; margin-top: 10px; }
+        .chat-pre-form button:hover { background: #333; }
+
+        .chat-messages { padding: 15px; overflow-y: auto; background: #f9f9f9; flex-direction: column; gap: 10px; flex: 1; }
         .msg-bubble { max-width: 80%; padding: 10px 15px; border-radius: 12px; font-size: 13px; line-height: 1.5; word-wrap: break-word; }
         .msg-admin { background: #111; color: #fff; align-self: flex-start; border-bottom-left-radius: 2px; }
         .msg-user { background: #e0e0e0; color: #111; align-self: flex-end; border-bottom-right-radius: 2px; }
@@ -197,7 +211,7 @@
         <div class="nav-item active" id="btn-beranda" onclick="renderHome()"><i class="fa-solid fa-house"></i> Beranda</div>
         <div class="nav-group">
             <div class="nav-label">Kategori</div>
-            <div class="nav-item" id="btn-earbuds" onclick="renderHome()"><i class="fa-solid fa-ear-listen"></i> Earbuds</div>
+            <div class="nav-item" id="btn-earbuds" onclick="renderCS('Earbuds')"><i class="fa-solid fa-ear-listen"></i> Earbuds</div>
             <div class="nav-item" id="btn-headphones" onclick="renderCS('Headphones')"><i class="fa-solid fa-headphones"></i> Headphones</div>
             <div class="nav-item" id="btn-speaker" onclick="renderCS('Speaker')"><i class="fa-solid fa-volume-high"></i> Speaker</div>
             <div class="nav-item" id="btn-accessories" onclick="renderCS('Accessories')"><i class="fa-solid fa-link"></i> Accessories</div>
@@ -212,7 +226,7 @@
             <div class="nav-item" id="btn-privasi" onclick="renderPrivasi()"><i class="fa-solid fa-lock"></i> Kebijakan Privasi</div>
             <div class="nav-item" id="btn-syarat" onclick="renderSyarat()"><i class="fa-solid fa-file-lines"></i> Syarat & Ketentuan</div>
             
-            <div class="nav-item login-btn-sidebar" onclick="bukaLogin()"><i class="fa-solid fa-user-shield"></i> Akses Manajemen</div>
+            <div class="nav-item login-btn-sidebar" onclick="bukaLogin()"><i class="fa-solid fa-user-shield"></i> Login</div>
         </div>
     </div>
 
@@ -264,10 +278,23 @@
             </div>
             <div class="chat-close" onclick="toggleChat()"><i class="fa-solid fa-xmark"></i></div>
         </div>
-        <div class="chat-messages" id="chatMessages">
+        
+        <div class="chat-pre-form" id="chatPreForm">
+            <div style="text-align: center; margin-bottom: 10px;">
+                <i class="fa-solid fa-headset" style="font-size: 30px; color: #111; margin-bottom: 10px;"></i>
+                <div style="font-size: 13px; color: #444; line-height: 1.5;">Mohon lengkapi data berikut agar Agent kami dapat membantu Anda lebih cepat.</div>
+            </div>
+            <label>Nama Lengkap</label>
+            <input type="text" id="pre-chat-nama" placeholder="Masukkan nama Anda">
+            <label>Nomor Pesanan / Invoice</label>
+            <input type="text" id="pre-chat-invoice" placeholder="Opsional (Jika ada)">
+            <button onclick="mulaiSesiChat()">Mulai Obrolan</button>
+        </div>
+
+        <div class="chat-messages" id="chatMessages" style="display: none;">
             <div class="msg-bubble msg-admin">Selamat datang di Ousevoid Official Store! Saya Marsya. Silakan sampaikan pertanyaan Anda mengenai spesifikasi produk, ketersediaan stok, maupun panduan pemesanan.</div>
         </div>
-        <div class="chat-input-area">
+        <div class="chat-input-area" id="chatInputArea" style="display: none;">
             <input type="text" id="chatInputUser" placeholder="Ketik pesan Anda..." onkeypress="if(event.key === 'Enter') kirimPesanChat()">
             <button onclick="kirimPesanChat()"><i class="fa-solid fa-paper-plane"></i></button>
         </div>
@@ -278,12 +305,22 @@
         <div id="footer-main-info">
             <div class="footer-profile">
                 <div class="footer-profile-title">Tentang Ousevoid Lintas Batas</div>
-                <p class="footer-profile-text">Ousevoid adalah pelopor teknologi audio nirkabel premium yang didedikasikan untuk menghadirkan pengalaman mendengarkan imersif bagi masyarakat Indonesia. Kami fokus pada inovasi desain, kualitas suara superior, dan daya tahan baterai luar biasa dengan harga yang kompetitif.</p>
+                <p class="footer-profile-text">Ousevoid adalah perusahaan rintisan (startup) teknologi yang berfokus pada inovasi perangkat audio nirkabel. Kami berkomitmen untuk menghadirkan produk dengan desain fungsional, spesifikasi andal, dan harga yang kompetitif guna memenuhi kebutuhan produktivitas dan gaya hidup digital masyarakat.</p>
             </div>
             <div class="footer-contact-info">
-                Apabila kamu mengalami kendala produk silakan hubungi Contact Center kami di:<br>
-                <div style="display:flex; align-items:center; gap:8px; margin-top:5px;">📧 email: ousevoid@gmail.com</div>
-                <a href="https://wa.me/6285715000443" style="display:flex; align-items:center; gap:8px; margin-top:5px; color:inherit;">💬 WhatsApp: 0857 15000 443</a>
+                Apabila Anda mengalami kendala atau membutuhkan informasi produk silakan hubungi kami melalui:<br>
+                <div style="display:flex; align-items:center; gap:10px; margin-top:10px;">
+                    <i class="fa-solid fa-envelope" style="width:16px; text-align:center; font-size:16px;"></i> email: ousevoid@gmail.com
+                </div>
+                <a href="https://wa.me/6285715000443" style="display:flex; align-items:center; gap:10px; margin-top:8px; color:inherit;">
+                    <i class="fa-brands fa-whatsapp" style="width:16px; text-align:center; font-size:18px;"></i> WhatsApp: 0857 15000 443
+                </a>
+                <a href="#" style="display:flex; align-items:center; gap:10px; margin-top:8px; color:inherit;">
+                    <i class="fa-brands fa-facebook" style="width:16px; text-align:center; font-size:16px;"></i> Ousevoid Official
+                </a>
+                <a href="#" style="display:flex; align-items:center; gap:10px; margin-top:8px; color:inherit;">
+                    <i class="fa-brands fa-instagram" style="width:16px; text-align:center; font-size:17px;"></i> @ousevoid
+                </a>
             </div>
             <div class="footer-hq">
                 <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Ousevoid Logo" class="footer-hq-logo">
@@ -314,6 +351,7 @@
 
         window.selectedPaymentMethod = "";
         window.currentBasePrice = 0;
+        window.currentProductName = "";
 
         // DATA 6 BANNER (Bisa diatur dari admin nanti)
         var banners = [
@@ -334,20 +372,34 @@
             localStorage.setItem('ousevoid_chat_id', userSessionId);
         }
         var chatInterval = null;
+        var chatSudahLogin = false;
 
         function toggleChat() {
             var box = document.getElementById('chatBox');
             box.classList.toggle('show');
             if (box.classList.contains('show')) {
-                tarikPesanChat();
-                // Tarik pesan tiap 3 detik
-                chatInterval = setInterval(tarikPesanChat, 3000); 
+                if(chatSudahLogin) {
+                    tarikPesanChat();
+                    chatInterval = setInterval(tarikPesanChat, 3000); 
+                }
             } else {
                 clearInterval(chatInterval);
             }
         }
 
+        function mulaiSesiChat() {
+            var n = document.getElementById('pre-chat-nama').value;
+            if(!n) { alert("Mohon lengkapi Nama Anda terlebih dahulu!"); return; }
+            chatSudahLogin = true;
+            document.getElementById('chatPreForm').style.display = 'none';
+            document.getElementById('chatMessages').style.display = 'flex';
+            document.getElementById('chatInputArea').style.display = 'flex';
+            tarikPesanChat();
+            chatInterval = setInterval(tarikPesanChat, 3000);
+        }
+
         async function tarikPesanChat() {
+            if(!chatSudahLogin) return;
             try {
                 const response = await fetch("/api/chat?session_id=" + userSessionId);
                 const pesans = await response.json();
@@ -498,7 +550,7 @@
             }
             html += '</div>';
 
-            html += '<div class="page-title">Earbuds Terlaris</div><div class="katalog-grid">';
+            html += '<div class="page-title">Katalog Resmi Ousevoid</div><div class="katalog-grid">';
             
             // Render Produk atau Info Kosong
             if(products.length > 0) {
@@ -506,6 +558,7 @@
                     html += '<div class="katalog-card">' +
                         '<img src="' + products[i].img + '" onclick="renderProdukDetail(' + i + ')">' +
                         '<h3 onclick="renderProdukDetail(' + i + ')">' + products[i].name + '</h3>' +
+                        '<div style="color: #f39c12; font-size: 11px; margin-bottom: 8px; text-align:left;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i> <span style="color:#888; font-weight:600;">(4.9 Terjual)</span></div>' +
                         '<div class="harga">' + products[i].price + '</div>' +
                         '<button class="btn-beli" onclick="renderProdukDetail(' + i + ')">Beli Sekarang</button>' +
                         '</div>';
@@ -513,8 +566,18 @@
             } else {
                 html += '<div style="grid-column: 1 / -1; padding: 40px; color: #888; font-size: 14px;">Belum ada produk yang dipublikasikan. Silakan tambahkan dari Control Center.</div>';
             }
-
             html += '</div>';
+
+            // Area khusus acara / program 
+            html += `
+            <div id="program-acara-container" style="margin-top: 50px; text-align: left;">
+                <div class="page-title" style="font-size:18px;">Acara & Promo Menarik</div>
+                <div style="background: #fafafa; padding: 25px 20px; border-radius: 12px; border: 1px dashed #ddd; font-size:13px; color:#888; text-align:center;">
+                    <i class="fa-solid fa-bullhorn" style="font-size:24px; margin-bottom:10px; color:#bbb;"></i><br>
+                    Belum ada acara atau program promosi yang berlangsung saat ini.
+                </div>
+            </div>`;
+
             app.innerHTML = html;
             
             // Jalankan interval slider setiap 5 detik
@@ -524,6 +587,21 @@
             clearActiveMenu();
             document.getElementById('btn-beranda').classList.add('active');
             autoClose();
+        }
+
+        // FUNGSI GANTI VARIAN PRODUK
+        function pilihTipe(el, hargaBaru, namaTipe) {
+            var boxes = document.getElementsByClassName('tipe-box');
+            for(var i=0; i<boxes.length; i++) { boxes[i].classList.remove('selected'); }
+            el.classList.add('selected');
+            
+            window.currentBasePrice = hargaBaru;
+            window.currentProductName = namaTipe;
+            
+            document.getElementById('lbl-subtotal').innerText = 'Rp ' + hargaBaru.toLocaleString('id-ID');
+            document.getElementById('display-product-price').innerText = 'Rp ' + hargaBaru.toLocaleString('id-ID');
+            document.getElementById('display-product-name').innerText = namaTipe;
+            updateOngkir();
         }
 
         function pilihPayment(el, method) { var boxes = document.getElementsByClassName('payment-box'); for(var i=0; i<boxes.length; i++){ boxes[i].classList.remove('selected'); } el.classList.add('selected'); window.selectedPaymentMethod = method; }
@@ -541,6 +619,7 @@
             toggleFooterUtama(false); 
             var p = products[index];
             window.currentBasePrice = p.priceValue; 
+            window.currentProductName = p.name;
             window.selectedPaymentMethod = ""; 
             var app = document.getElementById('app');
             
@@ -559,11 +638,18 @@
                         <div class="co-product-item">
                             <img src="${p.img}" alt="Product">
                             <div class="co-product-info">
-                                <div class="co-product-name">${p.name}</div>
-                                <div class="co-product-price">${p.price}</div>
+                                <div class="co-product-name" id="display-product-name">${p.name}</div>
+                                <div class="co-product-price" id="display-product-price">${p.price}</div>
                             </div>
                             <div class="co-product-qty">x 1</div>
                         </div>
+                    </div>
+
+                    <div class="co-section-title">Pilih Varian (Tipe Produk)</div>
+                    <div class="tipe-grid">
+                        <div class="tipe-box selected" onclick="pilihTipe(this, ${p.priceValue}, '${p.name}')">Bawaan Pabrik</div>
+                        <div class="tipe-box" onclick="pilihTipe(this, 129000, '${p.name} (Lite)')">Lite - Rp 129.000</div>
+                        <div class="tipe-box" onclick="pilihTipe(this, 229000, '${p.name} (Pro)')">Pro - Rp 229.000</div>
                     </div>
 
                     <div class="co-section-title">Opsi Pengiriman</div>
@@ -579,7 +665,7 @@
                         <div class="co-card-header"><i class="fa-solid fa-file-invoice"></i> Ringkasan Pesanan</div>
                         <div class="co-summary-line">
                             <span>Subtotal Produk</span>
-                            <span>${p.price}</span>
+                            <span id="lbl-subtotal">${p.price}</span>
                         </div>
                         <div class="co-summary-line">
                             <span>Ongkos Kirim</span>
@@ -620,8 +706,16 @@
 
             var totalFix = window.currentBasePrice + kurirVal;
             
-            // ID Transaksi random biar kelihatan profesional
-            var idTrx = "2026/OUSE/" + Math.floor(Math.random() * 90 + 10) + "/" + Math.floor(Math.random() * 90 + 10) + "/REG" + Math.floor(Math.random() * 900000 + 100000);
+            // GENERATE NOMOR INVOICE BERDASARKAN WAKTU SEKARANG: 2026/OUSE/MM/DD/XXXXXXX
+            var d = new Date();
+            var yyyy = d.getFullYear();
+            var mm = ("0" + (d.getMonth() + 1)).slice(-2);
+            var dd = ("0" + d.getDate()).slice(-2);
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var rnd = "";
+            for(var i=0; i<7; i++) rnd += chars.charAt(Math.floor(Math.random() * chars.length));
+            
+            var idTrx = yyyy + "/OUSE/" + mm + "/" + dd + "/" + rnd;
             
             window.dataPesananSementara = { index: index, nama: nama, wa: wa, email: email, alamat: alamat, total: totalFix, idTrx: idTrx };
             renderInvoice();
@@ -657,7 +751,8 @@
                     <div style="margin-bottom: 25px;">
                         <div style="font-size: 12px; font-weight: 700; color: #111; margin-bottom: 12px; letter-spacing: 0.5px;">DATA PENERIMA & INVOICE</div>
                         <div style="font-size: 13px; line-height: 1.8; color: #444;">
-                            <div><strong>Nama:</strong> ${data.nama}</div>
+                            <div><strong>Nama Produk:</strong> ${window.currentProductName}</div>
+                            <div><strong>Nama Pembeli:</strong> ${data.nama}</div>
                             <div><strong>No Telpon:</strong> ${data.wa}</div>
                             <div><strong>Alamat:</strong> ${data.alamat}</div>
                             <div style="margin-top: 10px;"><strong>Email Invoice:</strong> ${data.email}</div>
@@ -712,11 +807,26 @@
         function renderCS(title) { toggleFooterUtama(true); document.getElementById('app').innerHTML = '<div class="coming-soon-container"><i class="fa-solid fa-boxes-packing cs-icon"></i><h2>' + title + '</h2><p>Kategori ini sedang dalam persiapan. Nantikan koleksi terbaik dari Ousevoid segera!</p></div>'; clearActiveMenu(); autoClose(); }
         function renderInfo(title, content) { toggleFooterUtama(true); document.getElementById('app').innerHTML = '<div class="info-box"><h2>' + title + '</h2><div>' + content + '</div></div>'; clearActiveMenu(); autoClose(); }
         
-        function renderGaransi() { renderInfo('Garansi Resmi', '<p style="color:#555; line-height:1.6;">Semua produk Ousevoid dilindungi garansi resmi selama 1 tahun penuh.</p>'); }
-        function renderPengiriman() { renderInfo('Pengiriman', '<p style="color:#555; line-height:1.6;">Khusus pengiriman wilayah Jakarta dan Bodetabek kami menggunakan layanan Gamoon e-Package Service.</p>'); }
-        function renderPembayaran() { renderInfo('Pembayaran', '<p style="color:#555; line-height:1.6;">Sistem pembayaran kami dijamin aman dan terenkripsi. Kami menerima berbagai metode pembayaran.</p>'); }
-        function renderPrivasi() { renderInfo('Kebijakan Privasi', '<p style="color:#555; line-height:1.6;">Ousevoid menjalankan operasional situs dengan berlandaskan pada prinsip transparansi.</p>'); }
-        function renderSyarat() { renderInfo('Syarat & Ketentuan', '<p style="color:#555; line-height:1.6;">Situs ousevoid.biz.id adalah layanan toko daring yang dikelola oleh Ousevoid.</p>'); }
+        function renderGaransi() { 
+            var konten = '<div style="font-size:13px; line-height:1.7; color:#555; text-align:left;"><p>Semua produk original Ousevoid dilindungi oleh <strong>Garansi Resmi Produsen selama 3 bulan</strong> sejak tanggal pembelian. Garansi ini secara khusus mencakup cacat pabrik (<i>manufacturing defect</i>) atau malfungsi pada perangkat keras bawaan.</p><p>Harap diperhatikan bahwa kerusakan yang diakibatkan oleh kelalaian pengguna—seperti terjatuh, terkena cairan, atau modifikasi yang tidak resmi—tidak termasuk dalam cakupan garansi. Untuk mempermudah proses klaim, pelanggan diwajibkan menyertakan bukti pembelian yang sah serta video <i>unboxing</i> saat paket pertama kali diterima.</p></div>';
+            renderInfo('Garansi Resmi', konten); 
+        }
+        function renderPengiriman() { 
+            var konten = '<div style="font-size:13px; line-height:1.7; color:#555; text-align:left;"><img src="https://i.ibb.co.com/DHZj9dpW/8827-2.jpg" alt="Gamoon e-Package" style="height: 35px; object-fit: contain; max-width: 120px; filter: invert(1); mix-blend-mode: multiply; margin-bottom: 15px; display: block;"><p>Kami berkomitmen untuk memberikan layanan logistik yang cepat dan aman. Khusus untuk pengiriman di wilayah Jakarta dan Bodetabek, kami menggunakan layanan eksklusif <strong>Gamoon e-Package Sameday</strong>, dengan jaminan pesanan pasti sampai di lokasi Anda dalam waktu maksimal <strong>8 jam</strong> setelah pembayaran terkonfirmasi.</p><p>Sementara itu, untuk pengiriman ke wilayah di luar jangkauan tersebut, pesanan Anda akan dikirim menggunakan layanan ekspedisi terpercaya seperti J&T Express dan JNE Reguler.</p></div>';
+            renderInfo('Pengiriman', konten); 
+        }
+        function renderPembayaran() { 
+            var konten = '<div style="font-size:13px; line-height:1.7; color:#555; text-align:left;"><p>Sistem pembayaran di Ousevoid diproses secara <i>real-time</i> dan dijamin keamanannya menggunakan standar enkripsi tingkat tinggi demi kenyamanan bertransaksi Anda. Kami menerima berbagai opsi metode pembayaran yang lengkap, antara lain:</p><ul style="padding-left:20px;"><li><strong>E-Wallet & QRIS Nasional:</strong> GoPay, ShopeePay, DANA, dan QRIS.</li><li><strong>Virtual Account (Transfer Bank):</strong> Bank BCA, Bank Mandiri, BNI, BRI, dan BTN.</li></ul><p>Seluruh instruksi pembayaran akan muncul secara otomatis sesaat setelah Anda melakukan <i>checkout</i>.</p></div>';
+            renderInfo('Pembayaran', konten); 
+        }
+        function renderPrivasi() { 
+            var konten = '<div style="font-size:13px; line-height:1.7; color:#555; text-align:left;"><p><strong>1. Dasar Hukum dan Kepatuhan</strong><br>Ousevoid menjalankan seluruh aktivitas pengumpulan, pemrosesan, dan penyimpanan data pelanggan secara ketat dan transparan, sepenuhnya merujuk dan tunduk pada ketentuan <strong>Undang-Undang Perlindungan Data Pribadi Republik Indonesia (UU PDP RI)</strong>. Kami berkomitmen mutlak untuk menjaga kerahasiaan dan integritas setiap informasi yang Anda berikan.</p><p><strong>2. Pengumpulan Data Informasi</strong><br>Data pribadi yang dikumpulkan sangat dibatasi hanya pada informasi yang relevan dan esensial untuk kebutuhan operasional transaksi jual beli, meliputi: Nama Lengkap, Nomor WhatsApp aktif, Alamat Email, serta Alamat Logistik Pengiriman.</p><p><strong>3. Retensi dan Keamanan Data Tingkat Lanjut</strong><br>Sebagai manifestasi komitmen kami terhadap privasi, seluruh data sensitif pelanggan akan <strong>dihapus secara permanen dari pangkalan data sistem kami segera setelah pesanan Anda berstatus selesai dan secara fisik telah diserahkan kepada pihak logistik</strong>. Perlu ditegaskan bahwa Ousevoid tidak pernah menyimpan, meminta, atau mengakses data perbankan maupun kredensial pembayaran Anda; keseluruhan proses finansial tersebut dikelola secara independen oleh penyedia <i>Payment Gateway</i> berlisensi resmi.</p></div>';
+            renderInfo('Kebijakan Privasi', konten); 
+        }
+        function renderSyarat() { 
+            var konten = '<div style="font-size:13px; line-height:1.7; color:#555; text-align:left;"><p><strong>Pasal 1: Ketentuan Umum Penggunaan</strong><br>Selamat datang di <i>ousevoid.biz.id</i>. Dengan mengakses, menelusuri, dan melakukan transaksi di situs ini, Pengguna secara sadar dan otomatis dianggap telah membaca, memahami, serta menyetujui seluruh isi Syarat dan Ketentuan ini. Pihak Ousevoid memegang hak penuh untuk melakukan perubahan atau penyesuaian atas ketentuan ini sewaktu-waktu tanpa keharusan memberikan pemberitahuan secara individual.</p><p><strong>Pasal 2: Kewajiban Akurasi Data Pengguna</strong><br>Pengguna memiliki kewajiban penuh untuk memasukkan informasi kontak dan alamat pengiriman yang benar, akurat, dan lengkap pada saat melakukan <i>checkout</i>. Segala bentuk keterlambatan, kegagalan pengiriman, atau kerugian materiel yang timbul akibat kesalahan, kelalaian, atau ketidakakuratan input data sepenuhnya menjadi tanggung jawab Pengguna.</p><p><strong>Pasal 3: Harga dan Keabsahan Transaksi</strong><br>Semua harga produk yang tertera pada katalog situs dapat berubah sewaktu-waktu sesuai dengan kebijakan internal Perusahaan. Pesanan Pengguna baru akan dianggap sah, final, dan masuk ke dalam antrean pemrosesan gudang setelah pembayaran diverifikasi secara sistematis oleh <i>Payment Gateway</i> kami.</p><p><strong>Pasal 4: Prosedur Pengembalian Barang (Refund & Return)</strong><br>Apabila terdapat indikasi kerusakan berupa cacat pabrik atau ketidaksesuaian atas produk yang diterima, Pengguna berhak mengajukan klaim. Klaim tersebut <strong>wajib</strong> melampirkan bukti video <i>unboxing</i> yang utuh, jelas, dan tanpa jeda/suntingan, selambat-lambatnya 2x24 jam terhitung sejak status resi kurir dinyatakan telah terkirim. Produk yang akan diretur wajib berada dalam kondisi fisik aslinya beserta kotak dan seluruh kelengkapan bawaan pabrik.</p></div>';
+            renderInfo('Syarat & Ketentuan', konten); 
+        }
 
         window.onload = function() { muatProdukDariDatabase(); };
     </script>
