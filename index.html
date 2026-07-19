@@ -35,10 +35,16 @@
         .overlay.active { opacity: 1; visibility: visible; }
         .main-content { padding: 30px 20px 100px 20px; max-width: 600px; margin: auto; min-height: 500px; text-align: center; }
         .page-title { font-size: 24px; font-weight: 700; margin-bottom: 25px; color: #111; text-align: left; }
-        .hero-banner { position: relative; width: 100%; border-radius: 16px; overflow: hidden; margin-bottom: 35px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .hero-banner img { width: 100%; display: block; }
+        
+        /* BANNER SLIDER CSS */
+        .slider-container { position: relative; width: 100%; border-radius: 16px; overflow: hidden; margin-bottom: 35px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .slide { display: none; width: 100%; }
+        .slide.active { display: block; animation: fadeEffect 0.8s; }
+        @keyframes fadeEffect { from {opacity: 0.5} to {opacity: 1} }
+        .slide img { width: 100%; display: block; }
         .hotspot-btn { position: absolute; bottom: 10%; left: 7%; width: 25%; height: 14%; background: rgba(255,255,255,0); border: none; border-radius: 8px; cursor: pointer; transition: 0.3s; z-index: 10; }
         .hotspot-btn:hover { background: rgba(255,255,255,0.15); box-shadow: 0 0 15px rgba(255,255,255,0.3); }
+
         .katalog-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
         .katalog-card { background: #fff; border: 1px solid #eee; padding: 12px; border-radius: 12px; transition: 0.3s; }
         .katalog-card:hover { border-color: #ccc; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
@@ -71,7 +77,7 @@
         .co-btn-pay { background: #111; color: #fff; padding: 12px 25px; border-radius: 8px; font-weight: 700; border: none; cursor: pointer; font-size: 14px; transition: 0.2s; }
         .co-btn-pay:hover { background: #333; }
 
-        /* CSS TAMBAHAN METODE PEMBAYARAN & KURIR */
+        /* CSS METODE PEMBAYARAN & KURIR */
         .co-section-title { font-size: 13px; font-weight: 700; color: #555; margin: 20px 0 10px 0; text-transform: uppercase; }
         .kurir-select { width: 100%; padding: 12px; border: 1px solid #eee; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 13px; background: #fafafa; margin-bottom: 10px; color: #333; outline: none; }
         .kurir-select:focus { border-color: #111; }
@@ -90,6 +96,7 @@
         .info-box h2 { color: #111; margin-top: 0; font-size: 20px; margin-bottom: 15px; }
         .coming-soon-container { padding: 80px 20px; }
         .cs-icon { font-size: 50px; color: #111; margin-bottom: 20px; }
+        
         .modal-spec-overlay { visibility: hidden; opacity: 0; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); z-index: 2000; display: flex; justify-content: center; align-items: center; transition: 0.3s ease; }
         .modal-spec-overlay.show { visibility: visible; opacity: 1; }
         .modal-spec-content { background: #fff; padding: 30px; border-radius: 16px; width: 90%; max-width: 400px; position: relative; color: #222; box-shadow: 0 25px 50px rgba(0,0,0,0.3); transform: translateY(30px) scale(0.95); transition: 0.4s; text-align: left; }
@@ -115,7 +122,7 @@
         .copyright { font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 15px; text-align: left; }
         #footer-main-info.hidden { display: none !important; }
 
-        /* --- CSS TOMBOL LOGIN SIDEBAR & MODAL --- */
+        /* --- CSS TOMBOL LOGIN --- */
         .login-btn-sidebar { background: #111 !important; color: #fff !important; margin-top: 20px; text-align: center; justify-content: center;}
         .login-btn-sidebar i { color: #fff !important; margin-right: 8px; }
         .login-btn-sidebar:hover { background: #333 !important; }
@@ -131,6 +138,24 @@
         .btn-masuk-sistem { width: 100%; background: #111; color: #fff; border: none; padding: 12px; border-radius: 6px; font-weight: 700; cursor: pointer; transition: 0.2s; margin-top: 5px; font-size: 13px;}
         .btn-masuk-sistem:hover { background: #333; }
         .close-login-btn { position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer; color: #888; }
+
+        /* --- CSS LIVE CHAT CUSTOM (RESPONSIVE) --- */
+        .chat-widget-btn { position: fixed; bottom: 20px; right: 20px; width: 55px; height: 55px; background: #111; color: #fff; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 22px; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 9999; transition: 0.3s; }
+        .chat-widget-btn:hover { transform: scale(1.05); }
+        .chat-box-container { position: fixed; bottom: 85px; right: 15px; width: calc(100% - 30px); max-width: 340px; height: 70vh; max-height: 480px; background: #fff; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); display: flex; flex-direction: column; z-index: 9998; opacity: 0; visibility: hidden; transform: translateY(20px); transition: 0.3s; overflow: hidden; border: 1px solid #eee; }
+        .chat-box-container.show { opacity: 1; visibility: visible; transform: translateY(0); }
+        .chat-header { background: #111; color: #fff; padding: 12px 15px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; font-size: 14px;}
+        .chat-close { cursor: pointer; font-size: 18px; color: #ccc; }
+        .chat-close:hover { color: #fff; }
+        .chat-messages { flex: 1; padding: 15px; overflow-y: auto; background: #f9f9f9; display: flex; flex-direction: column; gap: 10px; }
+        .msg-bubble { max-width: 80%; padding: 10px 15px; border-radius: 12px; font-size: 13px; line-height: 1.5; word-wrap: break-word; }
+        .msg-admin { background: #111; color: #fff; align-self: flex-start; border-bottom-left-radius: 2px; }
+        .msg-user { background: #e0e0e0; color: #111; align-self: flex-end; border-bottom-right-radius: 2px; }
+        .chat-input-area { padding: 10px 12px; background: #fff; border-top: 1px solid #eee; display: flex; gap: 10px; }
+        .chat-input-area input { flex: 1; padding: 10px 15px; border: 1px solid #ddd; border-radius: 20px; outline: none; font-family: 'Inter', sans-serif; font-size: 13px; }
+        .chat-input-area button { background: #111; color: #fff; border: none; width: 38px; height: 38px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.2s;}
+        .chat-input-area button:hover { background: #333; }
+        .chat-footer-brand { font-size: 10px; text-align: center; padding: 6px; background: #f4f6f8; color: #888; font-weight: 600; border-top: 1px solid #eee; letter-spacing: 0.5px;}
         /* ------------------------------------- */
 
         @media (min-width: 768px) {
@@ -144,6 +169,7 @@
             .footer-contact-info, .footer-hq { flex: 1; min-width: 250px; }
             .footer-gov, .copyright { width: 100%; text-align: center; margin-top: 30px; }
             .co-bottom-bar { justify-content: center; gap: 20px; } 
+            .chat-box-container { right: 20px; width: 340px; }
         }
     </style>
 </head>
@@ -227,6 +253,22 @@
         </div>
     </div>
 
+    <div class="chat-widget-btn" onclick="toggleChat()"><i class="fa-solid fa-message"></i></div>
+    <div class="chat-box-container" id="chatBox">
+        <div class="chat-header">
+            <div><i class="fa-solid fa-headset"></i> Marsya (Agent)</div>
+            <div class="chat-close" onclick="toggleChat()"><i class="fa-solid fa-xmark"></i></div>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="msg-bubble msg-admin">Selamat datang di Ousevoid Official Store! Saya Marsya. Silakan sampaikan pertanyaan Anda mengenai spesifikasi produk, ketersediaan stok, maupun panduan pemesanan.</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInputUser" placeholder="Ketik pesan Anda..." onkeypress="if(event.key === 'Enter') kirimPesanChat()">
+            <button onclick="kirimPesanChat()"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+        <div class="chat-footer-brand">Powered by Gamoon Group</div>
+    </div>
+
     <div class="footer" id="main-footer">
         <div id="footer-main-info">
             <div class="footer-profile">
@@ -262,75 +304,125 @@
     </div>
 
     <script>
-        // DATA CADANGAN (JAGA-JAGA KALAU DATABASE KOSONG / ERROR)
-        var products = [
-            { id: 1, name: "VoidPods Pro - Jet Black", price: "IDR 189.000", priceValue: 189000, img: "https://i.ibb.co.com/gMs8J5pn/8504.png", specs: { warna: "Jet Black Matte", chip: "VoidCore T1", koneksi: "Bluetooth 5.3", baterai: "3-4 Jam Premium" } },
-            { id: 2, name: "VoidPods Pro - Pure White", price: "IDR 189.000", priceValue: 189000, img: "https://i.ibb.co.com/S4RBg5cW/8618.png", specs: { warna: "Pure White Glossy", chip: "VoidCore T1", koneksi: "Bluetooth 5.3", baterai: "3-4 Jam Premium" } }
-        ];
+        // DATA DIKOSONGKAN AGAR HANYA MUNCUL DARI DATABASE
+        var products = []; 
 
         window.selectedPaymentMethod = "";
         window.currentBasePrice = 0;
 
-        // --- FUNGSI BARU: TARIK DATA DARI DATABASE D1 ---
+        // DATA 6 BANNER (Bisa diatur dari admin nanti)
+        var banners = [
+            "https://i.ibb.co.com/pjhVC7S6/SOUND-Without-20260714-173950-0000.png",
+            "https://i.ibb.co.com/pjhVC7S6/SOUND-Without-20260714-173950-0000.png",
+            "https://i.ibb.co.com/pjhVC7S6/SOUND-Without-20260714-173950-0000.png",
+            "https://i.ibb.co.com/pjhVC7S6/SOUND-Without-20260714-173950-0000.png",
+            "https://i.ibb.co.com/pjhVC7S6/SOUND-Without-20260714-173950-0000.png",
+            "https://i.ibb.co.com/pjhVC7S6/SOUND-Without-20260714-173950-0000.png"
+        ];
+        var currentSlideIndex = 0;
+        var slideInterval;
+
+        // --- SISTEM LIVE CHAT PELANGGAN ---
+        var userSessionId = localStorage.getItem('ousevoid_chat_id');
+        if (!userSessionId) {
+            userSessionId = 'user_' + Math.random().toString(36).substr(2, 9);
+            localStorage.setItem('ousevoid_chat_id', userSessionId);
+        }
+        var chatInterval = null;
+
+        function toggleChat() {
+            var box = document.getElementById('chatBox');
+            box.classList.toggle('show');
+            if (box.classList.contains('show')) {
+                tarikPesanChat();
+                // Tarik pesan tiap 3 detik
+                chatInterval = setInterval(tarikPesanChat, 3000); 
+            } else {
+                clearInterval(chatInterval);
+            }
+        }
+
+        async function tarikPesanChat() {
+            try {
+                const response = await fetch("/api/chat?session_id=" + userSessionId);
+                const pesans = await response.json();
+                
+                var area = document.getElementById('chatMessages');
+                var html = '<div class="msg-bubble msg-admin">Selamat datang di Ousevoid Official Store! Saya Marsya. Silakan sampaikan pertanyaan Anda mengenai spesifikasi produk, ketersediaan stok, maupun panduan pemesanan.</div>';
+                
+                if(pesans && pesans.length > 0) {
+                    pesans.forEach(p => {
+                        if (p.is_admin == 1) {
+                            html += `<div class="msg-bubble msg-admin">${p.pesan}</div>`;
+                        } else {
+                            html += `<div class="msg-bubble msg-user">${p.pesan}</div>`;
+                        }
+                    });
+                }
+                
+                area.innerHTML = html;
+                area.scrollTop = area.scrollHeight; // Auto scroll ke bawah
+            } catch (e) {
+                console.log("Chat belum sinkron.");
+            }
+        }
+
+        async function kirimPesanChat() {
+            var input = document.getElementById('chatInputUser');
+            var pesanTxt = input.value.trim();
+            if(!pesanTxt) return;
+
+            input.value = ''; // Kosongin kolom
+            
+            // Tampilkan sementara di layar
+            var area = document.getElementById('chatMessages');
+            area.innerHTML += `<div class="msg-bubble msg-user">${pesanTxt}</div>`;
+            area.scrollTop = area.scrollHeight;
+
+            try {
+                await fetch("/api/chat", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ session_id: userSessionId, pesan: pesanTxt, is_admin: 0 })
+                });
+            } catch (e) {
+                console.log("Gagal ngirim pesan");
+            }
+        }
+        // ----------------------------------
+
+        // TARIK DATA DARI DATABASE D1
         async function muatProdukDariDatabase() {
             var app = document.getElementById('app');
-            // Tampilkan animasi loading keren sebelum data masuk
             app.innerHTML = '<div style="padding:100px 20px; text-align:center;"><i class="fa-solid fa-circle-notch fa-spin" style="font-size:40px; color:#111; margin-bottom:15px;"></i><div style="font-size:14px; color:#555; font-weight:600;">Memuat Katalog Terkini...</div></div>';
             
             try {
                 const response = await fetch("/api/produk");
                 const dataProdukApi = await response.json();
 
-                // Kalau database berhasil ditarik dan ada isinya, timpa data cadangan di atas
                 if (dataProdukApi && dataProdukApi.length > 0) {
                     products = dataProdukApi.map(p => ({
                         id: p.id,
                         name: p.nama,
                         priceValue: p.harga,
-                        price: 'IDR ' + p.harga.toLocaleString('id-ID'), // Format rupiah otomatis
+                        price: 'IDR ' + p.harga.toLocaleString('id-ID'), 
                         img: p.img_url,
                         specs: { deskripsi: p.deskripsi } 
                     }));
                 }
             } catch (error) {
-                console.log("Database D1 belum merespon. Menggunakan data offline/cadangan.");
+                console.log("Database D1 kosong atau belum merespon.");
             }
-            
-            // Render halaman utama setelah data siap
             renderHome();
         }
 
-        function toggleMenu() {
-            document.getElementById('sidebar').classList.toggle('active');
-            document.getElementById('overlay').classList.toggle('active');
-        }
-        
-        function autoClose() {
-            if (document.getElementById('sidebar').classList.contains('active')) toggleMenu();
-        }
-        
-        function clearActiveMenu() {
-            var items = document.getElementsByClassName('nav-item');
-            for(var i=0; i<items.length; i++) { items[i].classList.remove('active'); }
-        }
-        
-        function toggleFooterUtama(tampilkan) {
-            var f = document.getElementById('footer-main-info');
-            var footerUtuh = document.getElementById('main-footer');
-            if(f) { tampilkan ? f.classList.remove('hidden') : f.classList.add('hidden'); }
-            if(footerUtuh) { tampilkan ? footerUtuh.style.display = 'block' : footerUtuh.style.display = 'none'; }
-        }
+        function toggleMenu() { document.getElementById('sidebar').classList.toggle('active'); document.getElementById('overlay').classList.toggle('active'); }
+        function autoClose() { if (document.getElementById('sidebar').classList.contains('active')) toggleMenu(); }
+        function clearActiveMenu() { var items = document.getElementsByClassName('nav-item'); for(var i=0; i<items.length; i++) { items[i].classList.remove('active'); } }
+        function toggleFooterUtama(tampilkan) { var f = document.getElementById('footer-main-info'); var footerUtuh = document.getElementById('main-footer'); if(f) { tampilkan ? f.classList.remove('hidden') : f.classList.add('hidden'); } if(footerUtuh) { tampilkan ? footerUtuh.style.display = 'block' : footerUtuh.style.display = 'none'; } }
 
-        /* --- FUNGSI MODAL LOGIN ADMIN --- */
-        function bukaLogin() { 
-            document.getElementById('loginModal').classList.add('show');
-            if (document.getElementById('sidebar').classList.contains('active')) {
-                toggleMenu();
-            }
-        }
-        function tutupLogin() { 
-            document.getElementById('loginModal').classList.remove('show'); 
-        }
+        function bukaLogin() { document.getElementById('loginModal').classList.add('show'); if (document.getElementById('sidebar').classList.contains('active')) { toggleMenu(); } }
+        function tutupLogin() { document.getElementById('loginModal').classList.remove('show'); }
 
         async function prosesLoginRahasia() {
             var u = document.getElementById('log-user').value;
@@ -353,7 +445,6 @@
                 const hasil = await response.json();
 
                 if (hasil.sukses) {
-                    // ARAHKAN KE FILE SESUAI NAMA DI GITHUB (menajemen.html)
                     window.location.href = "/manajemen.html"; 
                 } else {
                     alert("Akses Ditolak: Data salah!");
@@ -365,91 +456,91 @@
             btn.disabled = false;
         }
 
-        /* FUNGSI MODAL SPESIFIKASI */
         function openSpecModal() {
             var modal = document.getElementById('specModalGlobal');
             modal.classList.add('show');
-            setTimeout(function() {
-                document.getElementById('bar-bass').style.width = '85%';
-                document.getElementById('bar-treble').style.width = '90%';
-                document.getElementById('bar-vocal').style.width = '88%';
-            }, 300); 
+            setTimeout(function() { document.getElementById('bar-bass').style.width = '85%'; document.getElementById('bar-treble').style.width = '90%'; document.getElementById('bar-vocal').style.width = '88%'; }, 300); 
         }
         
         function closeSpecModal() {
             var modal = document.getElementById('specModalGlobal');
             modal.classList.remove('show');
-            setTimeout(function() {
-                document.getElementById('bar-bass').style.width = '0';
-                document.getElementById('bar-treble').style.width = '0';
-                document.getElementById('bar-vocal').style.width = '0';
-            }, 300);
+            setTimeout(function() { document.getElementById('bar-bass').style.width = '0'; document.getElementById('bar-treble').style.width = '0'; document.getElementById('bar-vocal').style.width = '0'; }, 300);
         }
         
-        document.addEventListener('click', function(event) {
-            var m1 = document.getElementById('specModalGlobal');
-            var m2 = document.getElementById('loginModal');
-            if (event.target === m1) closeSpecModal();
-            if (event.target === m2) tutupLogin();
-        });
+        document.addEventListener('click', function(event) { var m1 = document.getElementById('specModalGlobal'); var m2 = document.getElementById('loginModal'); if (event.target === m1) closeSpecModal(); if (event.target === m2) tutupLogin(); });
+
+        /* SISTEM SLIDER BANNER */
+        function jalankanSlider() {
+            var slides = document.getElementsByClassName('slide');
+            if(slides.length === 0) return;
+            for(var i=0; i<slides.length; i++) { slides[i].classList.remove('active'); }
+            currentSlideIndex++;
+            if(currentSlideIndex > slides.length - 1) { currentSlideIndex = 0; }
+            slides[currentSlideIndex].classList.add('active');
+        }
 
         /* HALAMAN UTAMA */
         function renderHome() {
             toggleFooterUtama(true);
             var app = document.getElementById('app');
-            var html = '<div class="hero-banner"><img src="https://i.ibb.co.com/pjhVC7S6/SOUND-Without-20260714-173950-0000.png" alt="Banner"><button type="button" class="hotspot-btn" onclick="openSpecModal()"></button></div>';
             
+            // Render Slider Banner 6 Gambar
+            var html = '<div class="slider-container" id="hero-slider">';
+            for(var b=0; b<banners.length; b++) {
+                var isAktif = (b === 0) ? 'active' : '';
+                html += `<div class="slide ${isAktif}"><img src="${banners[b]}" alt="Banner ${b+1}"><button type="button" class="hotspot-btn" onclick="openSpecModal()"></button></div>`;
+            }
+            html += '</div>';
+
             html += '<div class="page-title">Earbuds Terlaris</div><div class="katalog-grid">';
             
-            for(var i=0; i<products.length; i++) {
-                html += '<div class="katalog-card">' +
-                    '<img src="' + products[i].img + '" onclick="renderProdukDetail(' + i + ')">' +
-                    '<h3 onclick="renderProdukDetail(' + i + ')">' + products[i].name + '</h3>' +
-                    '<div class="harga">' + products[i].price + '</div>' +
-                    '<button class="btn-beli" onclick="renderProdukDetail(' + i + ')">Beli Sekarang</button>' +
-                    '</div>';
+            // Render Produk atau Info Kosong
+            if(products.length > 0) {
+                for(var i=0; i<products.length; i++) {
+                    html += '<div class="katalog-card">' +
+                        '<img src="' + products[i].img + '" onclick="renderProdukDetail(' + i + ')">' +
+                        '<h3 onclick="renderProdukDetail(' + i + ')">' + products[i].name + '</h3>' +
+                        '<div class="harga">' + products[i].price + '</div>' +
+                        '<button class="btn-beli" onclick="renderProdukDetail(' + i + ')">Beli Sekarang</button>' +
+                        '</div>';
+                }
+            } else {
+                html += '<div style="grid-column: 1 / -1; padding: 40px; color: #888; font-size: 14px;">Belum ada produk yang dipublikasikan. Silakan tambahkan dari Control Center.</div>';
             }
-            
+
             html += '</div>';
             app.innerHTML = html;
+            
+            // Jalankan interval slider setiap 5 detik
+            clearInterval(slideInterval);
+            slideInterval = setInterval(jalankanSlider, 5000);
+
             clearActiveMenu();
             document.getElementById('btn-beranda').classList.add('active');
             autoClose();
         }
 
-        /* FUNGSI PILIH METODE PEMBAYARAN UI */
-        function pilihPayment(el, method) {
-            var boxes = document.getElementsByClassName('payment-box');
-            for(var i=0; i<boxes.length; i++){
-                boxes[i].classList.remove('selected');
-            }
-            el.classList.add('selected');
-            window.selectedPaymentMethod = method; // Simpan apa yang dipilih user
-        }
+        function pilihPayment(el, method) { var boxes = document.getElementsByClassName('payment-box'); for(var i=0; i<boxes.length; i++){ boxes[i].classList.remove('selected'); } el.classList.add('selected'); window.selectedPaymentMethod = method; }
 
-        /* FUNGSI HITUNG ONGKIR DINAMIS */
         function updateOngkir() {
             var kurirVal = parseInt(document.getElementById('co-kurir').value) || 0;
             var totalFinal = window.currentBasePrice + kurirVal;
-            
-            // Update Teks di Layar
             document.getElementById('lbl-ongkir').innerText = kurirVal === 0 ? 'Menyesuaikan' : 'Rp ' + kurirVal.toLocaleString('id-ID');
             document.getElementById('lbl-total-atas').innerText = 'Rp ' + totalFinal.toLocaleString('id-ID');
             document.getElementById('lbl-total-bawah').innerText = 'Rp ' + totalFinal.toLocaleString('id-ID');
         }
 
-        /* HALAMAN CHECKOUT BARU */
+        /* HALAMAN CHECKOUT */
         function renderProdukDetail(index) {
             toggleFooterUtama(false); 
             var p = products[index];
-            window.currentBasePrice = p.priceValue; // Simpan harga dasar
-            window.selectedPaymentMethod = ""; // Reset pembayaran
-            
+            window.currentBasePrice = p.priceValue; 
+            window.selectedPaymentMethod = ""; 
             var app = document.getElementById('app');
             
             var html = `
                 <div class="co-wrapper">
-                    
                     <div class="co-card">
                         <div class="co-card-header"><i class="fa-solid fa-location-dot"></i> Alamat Pengiriman</div>
                         <input type="text" id="co-nama" class="co-input-modern" placeholder="Nama Lengkap">
@@ -511,9 +602,7 @@
                     <div style="font-size: 11px; color: #888; text-align: center; margin-top: 20px;">
                         Dengan membuat pesanan, Anda menyetujui Ketentuan Penggunaan dan Kebijakan Privasi Ousevoid. Pembayaran diproses aman oleh Midtrans.
                     </div>
-
                 </div>
-
                 <div class="co-bottom-bar">
                     <div class="co-bottom-total-wrapper">
                         <span class="co-bottom-label">Total Pembayaran</span>
@@ -522,12 +611,10 @@
                     <button class="co-btn-pay" onclick="eksekusiBayarMidtrans(${index})">Buat Pesanan</button>
                 </div>
             `;
-            
             app.innerHTML = html;
             autoClose();
         }
 
-        /* FUNGSI UTAMA MIDTRANS + CLOUDFLARE BACKEND */
         async function eksekusiBayarMidtrans(index) {
             var nama = document.getElementById('co-nama').value;
             var wa = document.getElementById('co-wa').value;
@@ -535,92 +622,39 @@
             var alamat = document.getElementById('co-alamat').value;
             var kurirVal = parseInt(document.getElementById('co-kurir').value) || 0;
 
-            if (!nama || !wa || !email || !alamat) {
-                alert("Mohon lengkapi semua alamat pengiriman terlebih dahulu!");
-                return;
-            }
-
-            if (kurirVal === 0) {
-                alert("Mohon pilih opsi Kurir Pengiriman!");
-                return;
-            }
-
-            if (window.selectedPaymentMethod === "") {
-                alert("Mohon pilih Metode Pembayaran terlebih dahulu!");
-                return;
-            }
+            if (!nama || !wa || !email || !alamat) { alert("Mohon lengkapi semua alamat pengiriman terlebih dahulu!"); return; }
+            if (kurirVal === 0) { alert("Mohon pilih opsi Kurir Pengiriman!"); return; }
+            if (window.selectedPaymentMethod === "") { alert("Mohon pilih Metode Pembayaran terlebih dahulu!"); return; }
 
             var totalFix = window.currentBasePrice + kurirVal;
-
             var btn = document.querySelector('.co-btn-pay');
-            btn.innerHTML = 'Memproses...';
-            btn.disabled = true;
-            btn.style.opacity = '0.7';
+            btn.innerHTML = 'Memproses...'; btn.disabled = true; btn.style.opacity = '0.7';
 
             try {
-                // Nembak ke file functions/backend.js
+                // Di masa depan ini nanti kita arahin ke /api/backend (karena sekarang masih /backend)
                 const response = await fetch("/backend", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        nama: nama,
-                        wa: wa,
-                        email: email,
-                        total: totalFix // NGIRIM TOTAL HARGA YANG UDAH DITAMBAH ONGKIR
-                    })
+                    body: JSON.stringify({ nama: nama, wa: wa, email: email, total: totalFix })
                 });
-
                 const hasil = await response.json();
-
-                if (hasil.redirect_url) {
-                    window.location.href = hasil.redirect_url;
-                } else {
-                    alert("Gagal memproses transaksi: " + (hasil.error || "Coba lagi nanti."));
-                    btn.innerHTML = 'Buat Pesanan';
-                    btn.disabled = false;
-                    btn.style.opacity = '1';
-                }
+                if (hasil.redirect_url) { window.location.href = hasil.redirect_url; } 
+                else { alert("Gagal memproses transaksi: " + (hasil.error || "Coba lagi nanti.")); btn.innerHTML = 'Buat Pesanan'; btn.disabled = false; btn.style.opacity = '1'; }
             } catch (err) {
                 alert("Koneksi ke server terputus. Pastikan internet stabil.");
-                btn.innerHTML = 'Buat Pesanan';
-                btn.disabled = false;
-                btn.style.opacity = '1';
+                btn.innerHTML = 'Buat Pesanan'; btn.disabled = false; btn.style.opacity = '1';
             }
         }
 
-        /* FUNGSI MENU LAINNYA TETAP SAMA */
-        function renderCS(title) {
-            toggleFooterUtama(true);
-            document.getElementById('app').innerHTML = '<div class="coming-soon-container"><i class="fa-solid fa-boxes-packing cs-icon"></i><h2>' + title + '</h2><p>Kategori ini sedang dalam persiapan. Nantikan koleksi terbaik dari Ousevoid segera!</p></div>';
-            clearActiveMenu();
-            autoClose();
-        }
+        function renderCS(title) { toggleFooterUtama(true); document.getElementById('app').innerHTML = '<div class="coming-soon-container"><i class="fa-solid fa-boxes-packing cs-icon"></i><h2>' + title + '</h2><p>Kategori ini sedang dalam persiapan. Nantikan koleksi terbaik dari Ousevoid segera!</p></div>'; clearActiveMenu(); autoClose(); }
+        function renderInfo(title, content) { toggleFooterUtama(true); document.getElementById('app').innerHTML = '<div class="info-box"><h2>' + title + '</h2><div>' + content + '</div></div>'; clearActiveMenu(); autoClose(); }
+        
+        function renderGaransi() { renderInfo('Garansi Resmi', '<p style="color:#555; line-height:1.6;">Semua produk Ousevoid dilindungi garansi resmi selama 1 tahun penuh.</p>'); }
+        function renderPengiriman() { renderInfo('Pengiriman', '<p style="color:#555; line-height:1.6;">Khusus pengiriman wilayah Jakarta dan Bodetabek kami menggunakan layanan Gamoon e-Package Service.</p>'); }
+        function renderPembayaran() { renderInfo('Pembayaran', '<p style="color:#555; line-height:1.6;">Sistem pembayaran kami dijamin aman dan terenkripsi. Kami menerima berbagai metode pembayaran.</p>'); }
+        function renderPrivasi() { renderInfo('Kebijakan Privasi', '<p style="color:#555; line-height:1.6;">Ousevoid menjalankan operasional situs dengan berlandaskan pada prinsip transparansi.</p>'); }
+        function renderSyarat() { renderInfo('Syarat & Ketentuan', '<p style="color:#555; line-height:1.6;">Situs ousevoid.biz.id adalah layanan toko daring yang dikelola oleh Ousevoid.</p>'); }
 
-        function renderInfo(title, content) {
-            toggleFooterUtama(true);
-            document.getElementById('app').innerHTML = '<div class="info-box"><h2>' + title + '</h2><div>' + content + '</div></div>';
-            clearActiveMenu();
-            autoClose();
-        }
-        
-        function renderGaransi() { renderInfo('Garansi Resmi', '<p style="color:#555; line-height:1.6;">Semua produk Ousevoid dilindungi garansi resmi selama 1 tahun penuh. Berlaku untuk kerusakan cacat pabrik (bukan karena kelalaian pengguna). Proses klaim sangat mudah melalui WhatsApp resmi kami.</p>'); }
-        function renderPengiriman() { 
-            var konten = '<img src="https://i.ibb.co.com/DHZj9dpW/8827-2.jpg" alt="Gamoon e-Package" style="height: 35px; object-fit: contain; max-width: 120px; filter: invert(1); mix-blend-mode: multiply; margin-bottom: 15px; display: block;"><p style="color:#555; line-height:1.6; margin-top:0;">Khusus pengiriman wilayah Jakarta dan Bodetabek kami menggunakan layanan <strong>Gamoon e-Package Service</strong> dengan ketentuan tarif flat:</p><ul style="color:#555; line-height:1.6;"><li>Wilayah Jakarta: <strong>Rp 35.000</strong></li><li>Wilayah Bodetabek: <strong>Rp 50.000</strong></li></ul><p style="color:#555; line-height:1.6;">Pesanan yang terkonfirmasi pembayarannya sebelum jam 15.00 WIB akan diproses dan dikirim pada hari yang sama.</p>';
-            renderInfo('Pengiriman', konten); 
-        }
-        function renderPembayaran() { renderInfo('Pembayaran', '<p style="color:#555; line-height:1.6;">Sistem pembayaran kami dijamin aman dan terenkripsi. Kami menerima berbagai metode pembayaran: QRIS (Gopay, OVO, Dana, ShopeePay), Transfer Bank (Virtual Account BCA, Mandiri, BNI, BRI), serta Kartu Kredit.</p>'); }
-        
-        function renderPrivasi() { 
-            var konten = '<div style="font-size:13px; line-height:1.7; color:#555;"><p><strong>1. Dasar Hukum dan Komitmen</strong><br>Ousevoid menjalankan operasional situs <i>ousevoid.biz.id</i> dengan berlandaskan pada prinsip transparansi dan kepatuhan terhadap Undang-Undang Perlindungan Data Pribadi (UU PDP) Republik Indonesia. Kami berkomitmen penuh untuk menjaga integritas dan kerahasiaan informasi yang dikelola dalam sistem kami.</p><p><strong>2. Data yang Dikumpulkan</strong><br>Perusahaan hanya menghimpun data yang bersifat esensial untuk kebutuhan operasional transaksi, meliputi: Identitas diri (Nama Lengkap), Kontak (Nomor Telepon/WhatsApp dan Alamat Email), dan Informasi logistik (Alamat pengiriman).</p><p><strong>3. Kebijakan Retensi dan Pemusnahan Data</strong><br>Sebagai bentuk tanggung jawab terhadap keamanan data pelanggan, Ousevoid menerapkan protokol <i>data minimization</i>. Kami menegaskan bahwa:<br>- Data sensitif pelanggan (alamat pengiriman dan nomor telepon) bersifat temporer.<br>- <strong>Segera setelah transaksi dinyatakan selesai dan pesanan telah berhasil diserahterimakan kepada pihak logistik/kurir, seluruh data tersebut akan dihapus secara permanen dan otomatis dari basis data Perusahaan.</strong></p><p><strong>4. Keamanan Transaksi dan Pihak Ketiga</strong><br>Ousevoid tidak menyimpan, mengakses, maupun mengelola informasi finansial pengguna seperti detail kartu kredit atau data perbankan. Seluruh proses pembayaran difasilitasi oleh penyedia jasa Payment Gateway resmi yang telah tersertifikasi standar keamanan enkripsi industri.</p></div>';
-            renderInfo('Kebijakan Privasi', konten); 
-        }
-        
-        function renderSyarat() { 
-            var konten = '<div style="font-size:13px; line-height:1.7; color:#555;"><p><strong>BAB I: KETENTUAN PENGGUNAAN</strong><br>1. <strong>Definisi:</strong> Situs ousevoid.biz.id adalah layanan toko daring yang dikelola oleh Ousevoid.<br>2. <strong>Kewajiban Pengguna:</strong> Pengguna wajib memberikan informasi data diri yang akurat dan benar. Segala bentuk kerugian yang timbul akibat ketidakakuratan data oleh Pengguna sepenuhnya menjadi tanggung jawab Pengguna.<br>3. <strong>Proses Transaksi:</strong> Transaksi dianggap sah setelah Pengguna menyelesaikan proses pembayaran melalui sistem Payment Gateway yang terintegrasi.</p><p><strong>BAB II: KEBIJAKAN PENGEMBALIAN DAN PENGEMBALIAN DANA</strong><br>1. <strong>Prosedur Klaim:</strong> Segala keluhan atas ketidaksesuaian produk wajib disertai bukti video <i>unboxing</i> tanpa jeda (<i>continuous recording</i>) maksimal 2x24 jam sejak produk diterima.<br>2. <strong>Ketentuan Retur:</strong> Produk yang dikembalikan harus dalam kondisi utuh dan tidak menunjukkan tanda penggunaan. Biaya logistik retur menjadi tanggung jawab Pengguna.<br>3. <strong>Pengembalian Dana:</strong> Proses pengembalian dana (<i>refund</i>) dilakukan melalui sistem perbankan sesuai dengan prosedur yang ditetapkan oleh Payment Gateway terkait.</p><p><strong>BAB III: SANGGAHAN (DISCLAIMER)</strong><br>Informasi dan layanan yang disajikan disediakan berdasarkan kondisi yang tersedia (<i>as is</i>). Ousevoid tidak bertanggung jawab atas kerugian tidak langsung atau konsekuensial yang timbul akibat gangguan teknis di luar kendali wajar Perusahaan.</p></div>';
-            renderInfo('Syarat & Ketentuan', konten); 
-        }
-
-        // UBAH WINDOW ONLOAD: Sekarang dia bakal panggil fungsi narik database dulu
         window.onload = function() { muatProdukDariDatabase(); };
     </script>
 </body>
