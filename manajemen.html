@@ -258,21 +258,21 @@
                     <div>
                         <div class="form-group">
                             <label>Nama Produk Lengkap</label>
-                            <input type="text" class="form-control" placeholder="Contoh: VoidPods Pro - Jet Black">
+                            <input type="text" id="input-nama" class="form-control" placeholder="Contoh: VoidPods Pro - Jet Black">
                         </div>
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                             <div class="form-group">
                                 <label>Harga Jual (Rp)</label>
-                                <input type="number" class="form-control" placeholder="Contoh: 189000">
+                                <input type="number" id="input-harga" class="form-control" placeholder="Contoh: 189000">
                             </div>
                             <div class="form-group">
                                 <label>Stok Awal</label>
-                                <input type="number" class="form-control" placeholder="Contoh: 50">
+                                <input type="number" id="input-stok" class="form-control" placeholder="Contoh: 50">
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Deskripsi / Spesifikasi Singkat</label>
-                            <textarea class="form-control" rows="4" placeholder="Masukkan spesifikasi warna, chip, koneksi bluetooth, dll..."></textarea>
+                            <textarea id="input-deskripsi" class="form-control" rows="4" placeholder="Masukkan spesifikasi warna, chip, koneksi bluetooth, dll..."></textarea>
                         </div>
                     </div>
 
@@ -287,9 +287,9 @@
                         </div>
                         <div class="form-group">
                             <label>Atau Gunakan Link URL Gambar</label>
-                            <input type="text" class="form-control" placeholder="https://i.ibb.co.com/...">
+                            <input type="text" id="input-img" class="form-control" placeholder="https://i.ibb.co.com/...">
                         </div>
-                        <button class="btn-submit"><i class="fa-solid fa-floppy-disk"></i> Simpan ke Database</button>
+                        <button class="btn-submit" onclick="simpanProduk()"><i class="fa-solid fa-floppy-disk"></i> Simpan ke Database</button>
                     </div>
                 </div>
             </div>
@@ -372,11 +372,62 @@
     function logout() {
         if(confirm("Apakah Anda yakin ingin keluar dari Control Center?")) {
             localStorage.removeItem("session_ousevoid");
-            window.location.href = "/login"; // Balikin ke halaman login
+            window.location.href = "/"; // Balikin ke halaman utama toko
         }
+    }
+
+    // --- FUNGSI MENGIRIM DATA KE DATABASE CLOUDFLARE D1 ---
+    async function simpanProduk() {
+        var nama = document.getElementById('input-nama').value;
+        var harga = document.getElementById('input-harga').value;
+        var stok = document.getElementById('input-stok').value;
+        var deskripsi = document.getElementById('input-deskripsi').value;
+        var img_url = document.getElementById('input-img').value;
+
+        if (!nama || !harga || !stok || !img_url) {
+            alert("Harap isi Nama, Harga, Stok, dan URL Gambar!");
+            return;
+        }
+
+        var btn = document.querySelector('.btn-submit');
+        btn.innerHTML = "Menyimpan...";
+        btn.disabled = true;
+
+        try {
+            // Ini yang bakal nembak ke file functions/api/produk.js
+            const response = await fetch("/api/produk", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    nama: nama,
+                    harga: harga,
+                    stok: stok,
+                    deskripsi: deskripsi,
+                    img_url: img_url
+                })
+            });
+
+            const hasil = await response.json();
+
+            if (hasil.sukses) {
+                alert("SUKSES! " + hasil.pesan);
+                // Kosongkan form otomatis setelah sukses
+                document.getElementById('input-nama').value = '';
+                document.getElementById('input-harga').value = '';
+                document.getElementById('input-stok').value = '';
+                document.getElementById('input-deskripsi').value = '';
+                document.getElementById('input-img').value = '';
+            } else {
+                alert("Gagal: " + (hasil.error || "Terjadi kesalahan."));
+            }
+        } catch (error) {
+            alert("Terjadi kesalahan jaringan ke Server Database.");
+        }
+
+        btn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Simpan ke Database';
+        btn.disabled = false;
     }
 </script>
 
 </body>
 </html>
-
