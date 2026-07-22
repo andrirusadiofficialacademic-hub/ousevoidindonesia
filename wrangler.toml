@@ -1,0 +1,8 @@
+name = "ousevoidindonesia"
+compatibility_date = "2026-07-15"
+pages_build_output_dir = "."
+
+[[d1_databases]]
+binding = "DB"
+database_name = "ousevoid-db"
+database_id = "4a8f9c2d-7b1e-43a9-8e12-3f5a6b7c8d9e"
