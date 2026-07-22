@@ -712,6 +712,68 @@
         }
 
         window.onload = function() { muatProdukDariDatabase(); };
-    </script>
+            // LOAD PRODUK DARI BACKEND (functions/api/produk.js)
+        async function muatProdukDariDatabase() {
+            var app = document.getElementById('app');
+            app.innerHTML = '<div style="padding:100px 20px; text-align:center;"><i class="fa-solid fa-circle-notch fa-spin" style="font-size:40px; color:#111; margin-bottom:20px;"></i><div style="font-size:14px; color:#555; font-weight:700;">Menghubungkan ke Pangkalan Data...</div></div>';
+            try {
+                // Nembak ke endpoint Cloudflare Pages Functions
+                const response = await fetch("/api/produk"); 
+                const dataProdukApi = await response.json();
+                
+                if (dataProdukApi && dataProdukApi.length > 0) {
+                    products = dataProdukApi.map(p => {
+                        let parsedVariants = []; 
+                        try { parsedVariants = p.variants ? JSON.parse(p.variants) : []; } catch(e) {}
+                        return { id: p.id, name: p.nama, priceValue: p.harga, price: 'Rp ' + p.harga.toLocaleString('id-ID'), img: p.img_url, category: p.kategori || "Earbuds", specs: { deskripsi: p.deskripsi }, variants: parsedVariants };
+                    });
+                } else {
+                    products = []; // Kosong dari database
+                }
+            } catch (error) { 
+                console.log("Gagal memuat API dari backend."); 
+                products = []; 
+            }
+            renderHome();
+        }
+
+        // FUNGSI LOGIN (Nembak ke functions/api/login.js)
+        async function prosesLogin() {
+            if(activeLoginMode === 'admin') {
+                var u = document.getElementById('log-user').value.trim();
+                var p = document.getElementById('log-pass').value.trim();
+                var pin = document.getElementById('log-pin').value.trim();
+                var btn = document.querySelector('.modal-login-box .btn-action');
+                
+                if(!u || !p || !pin) { alert("Mohon lengkapi seluruh kredensial otoritas."); return; }
+                
+                btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Memeriksa...'; btn.disabled = true;
+                
+                try {
+                    const response = await fetch("/api/login", { 
+                        method: "POST", 
+                        headers: { "Content-Type": "application/json" }, 
+                        body: JSON.stringify({ username: u, password: p, pin: pin }) 
+                    });
+                    
+                    const hasil = await response.json();
+                    
+                    if (hasil.sukses) { 
+                        window.location.href = "manajemen.html"; 
+                    } else { 
+                        alert("Akses Ditolak: Kredensial tidak valid."); 
+                    }
+                } catch (error) { 
+                    alert("Server Keamanan Tidak Merespon."); 
+                }
+                
+                btn.innerHTML = '<i class="fa-solid fa-arrow-right-to-bracket"></i> Login Sekarang'; 
+                btn.disabled = false;
+            } else {
+                alert("Layanan login pembeli sedang dalam tahap sinkronisasi sistem. Anda tetap dapat berbelanja secara langsung tanpa akun.");
+                tutupLogin();
+            }
+        }
+
 </body>
 </html>
