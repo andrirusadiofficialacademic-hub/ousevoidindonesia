@@ -315,7 +315,7 @@
     </div>
 
     <script>
-        // DATA LOKAL DUMMY (KARENA WORKER DIHAPUS)
+        // DATA DASAR
         var products = []; 
         var keranjang = [];
         var activeLoginMode = 'buyer';
@@ -331,22 +331,15 @@
             if(fu) { tampilkan ? fu.style.display = 'block' : fu.style.display = 'none'; } 
         }
 
-        // LOAD PRODUK DARI LOKAL (TANPA WORKER API)
-        function muatProdukDariDatabase() {
-            // Karena fungsi worker dihapus, ini dikembalikan pakai data dummy seperti awal
-            products = [
-                { id: 1, name: "Ousevoid Sonic Pods", priceValue: 299000, price: "Rp 299.000", img: "https://i.ibb.co.com/pjhVC7S6/SOUND-Without-20260714-173950-0000.png", category: "Earbuds", specs: { deskripsi: "TWS Terbaik" }, variants: [ {nama: "Hitam", harga: 299000}, {nama: "Putih", harga: 299000} ] },
-                { id: 2, name: "Ousevoid Boom Speaker", priceValue: 450000, price: "Rp 450.000", img: "https://i.ibb.co.com/pjhVC7S6/SOUND-Without-20260714-173950-0000.png", category: "Speaker", specs: { deskripsi: "Speaker bass memukau" }, variants: [] }
-            ];
-            renderHome();
-        }
-
         // FUNGSI MENU & LOGIN
         function toggleMenu() { 
             document.getElementById('sidebar').classList.toggle('active'); 
             document.getElementById('overlay').classList.toggle('active'); 
         }
-        function autoClose() { if (document.getElementById('sidebar').classList.contains('active')) toggleMenu(); }
+        
+        function autoClose() { 
+            if (document.getElementById('sidebar').classList.contains('active')) toggleMenu(); 
+        }
 
         function bukaLogin() { 
             document.getElementById('loginModal').classList.add('show'); 
@@ -362,33 +355,6 @@
             document.getElementById('tab-buyer').classList.toggle('active', mode === 'buyer');
             document.getElementById('tab-admin').classList.toggle('active', mode === 'admin');
             document.getElementById('pin-field').style.display = (mode === 'admin') ? 'block' : 'none';
-        }
-
-        // FUNGSI LOGIN (MANUAL TANPA WORKER)
-        function prosesLogin() {
-            if(activeLoginMode === 'admin') {
-                var u = document.getElementById('log-user').value.trim();
-                var p = document.getElementById('log-pass').value.trim();
-                var pin = document.getElementById('log-pin').value.trim();
-                var btn = document.querySelector('.modal-login-box .btn-action');
-                
-                if(!u || !p || !pin) { alert("Mohon lengkapi seluruh kredensial otoritas."); return; }
-                
-                btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Memeriksa...'; btn.disabled = true;
-                
-                // Pengecekan hardcode tanpa server backend
-                setTimeout(function() {
-                    if (u === 'admin' && p === 'ousevoid2026' && pin === '123456') {
-                        window.location.href = "manajemen.html"; 
-                    } else {
-                        alert("Akses Ditolak: Kredensial tidak valid.");
-                        btn.innerHTML = '<i class="fa-solid fa-arrow-right-to-bracket"></i> Login Sekarang'; btn.disabled = false;
-                    }
-                }, 800);
-            } else {
-                alert("Layanan login pembeli sedang dalam tahap sinkronisasi sistem. Anda tetap dapat berbelanja secara langsung tanpa akun.");
-                tutupLogin();
-            }
         }
 
         // FUNGSI LACAK PESANAN
@@ -407,6 +373,7 @@
                 </div>
             `;
         }
+        
         function prosesLacak(btn) {
             var resiInput = document.getElementById('input-resi').value.trim();
             if(!resiInput) { alert("Harap masukkan nomor resi yang sah!"); return; }
@@ -704,8 +671,7 @@
             renderInfoPage("Kebijakan Privasi", konten);
         }
 
-        window.onload = function() { muatProdukDariDatabase(); };
-            // LOAD PRODUK DARI BACKEND (functions/api/produk.js)
+        // LOAD PRODUK DARI BACKEND (functions/api/produk.js)
         async function muatProdukDariDatabase() {
             var app = document.getElementById('app');
             app.innerHTML = '<div style="padding:100px 20px; text-align:center;"><i class="fa-solid fa-circle-notch fa-spin" style="font-size:40px; color:#111; margin-bottom:20px;"></i><div style="font-size:14px; color:#555; font-weight:700;">Menghubungkan ke Pangkalan Data...</div></div>';
@@ -768,5 +734,11 @@
             }
         }
 
+        // Jalankan saat halaman dimuat
+        window.onload = function() { 
+            muatProdukDariDatabase(); 
+        };
+
+    </script>
 </body>
 </html>
