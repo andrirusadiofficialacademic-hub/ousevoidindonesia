@@ -5,4 +5,5 @@ pages_build_output_dir = "."
 [[d1_databases]]
 binding = "DB"
 database_name = "ousevoid-db"
-database_id = "MASUKIN_ID_DATABASE_D1_LU_DISINI"
+database_id = "b76afd3a-07a6-4855-8a2a-82a252e6a46c
+18"
