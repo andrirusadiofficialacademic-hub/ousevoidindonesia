@@ -1,33 +1,28 @@
-export async function onRequest(context) {
+export async function onRequestGet(context) {
+  try {
+    const db = context.env.DB;
+    if (!db) return new Response(JSON.stringify([]), { headers: { "Content-Type": "application/json" } });
+    
+    // Tarik semua data dari tabel produk
+    const { results } = await db.prepare("SELECT * FROM produk").all();
+    return new Response(JSON.stringify(results), { headers: { "Content-Type": "application/json" } });
+  } catch (err) {
+    return new Response(JSON.stringify({ error: err.message }), { status: 500, headers: { "Content-Type": "application/json" } });
+  }
+}
+
+export async function onRequestPost(context) {
+  try {
     const { request, env } = context;
-
-    // GET: Dipakai buat nampilin produk di web utama
-    if (request.method === "GET") {
-        try {
-            const { results } = await env.DB.prepare("SELECT * FROM produk ORDER BY id DESC").all();
-            return new Response(JSON.stringify(results), { 
-                headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" } 
-            });
-        } catch (e) {
-            return new Response(JSON.stringify({ error: e.message }), { status: 500 });
-        }
-    }
-
-    // POST: Dipakai buat nyimpen produk dari panel manajemen
-    if (request.method === "POST") {
-        try {
-            const data = await request.json();
-            const { nama, harga, stok, deskripsi, img_url } = data;
-
-            await env.DB.prepare(
-                "INSERT INTO produk (nama, harga, stok, deskripsi, img_url) VALUES (?, ?, ?, ?, ?)"
-            ).bind(nama, parseInt(harga), parseInt(stok), deskripsi, img_url).run();
-
-            return new Response(JSON.stringify({ sukses: true, pesan: "Produk berhasil disimpan!" }), { 
-                headers: { "Content-Type": "application/json" } 
-            });
-        } catch (e) {
-            return new Response(JSON.stringify({ error: e.message }), { status: 500 });
-        }
-    }
+    const db = env.DB;
+    if (!db) return new Response(JSON.stringify({ sukses: false, error: "DB belum terhubung" }), { status: 500, headers: { "Content-Type": "application/json" } });
+    
+    const d = await request.json();
+    const stmt = db.prepare("INSERT INTO produk (kategori, nama, harga, stok, deskripsi, img_url, variants) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    await stmt.bind(d.kategori, d.nama, d.harga, d.stok, d.deskripsi, d.img_url, d.variants).run();
+    
+    return new Response(JSON.stringify({ sukses: true }), { headers: { "Content-Type": "application/json" } });
+  } catch (err) {
+    return new Response(JSON.stringify({ sukses: false, error: err.message }), { status: 500, headers: { "Content-Type": "application/json" } });
+  }
 }
