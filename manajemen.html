@@ -31,7 +31,7 @@
         /* SIDEBAR */
         .sidebar { background-color: var(--surface); border-right: 1px solid var(--border-color); padding: 30px 20px; display: flex; flex-direction: column; position: sticky; top: 0; height: 100vh; box-sizing: border-box; z-index: 10; overflow-y: auto; }
         .sidebar-logo { text-align: center; margin-bottom: 30px; }
-        .sidebar-logo img { width: 130px; height: auto; border-radius: 8px; }
+        .sidebar-logo img { width: 140px; height: auto; }
         .menu-label { font-size: 11px; text-transform: uppercase; color: #999; font-weight: 800; margin: 25px 0 10px 15px; letter-spacing: 0.5px; }
         .sidebar-menu { list-style: none; padding: 0; margin: 0; }
         .sidebar-menu li { margin-bottom: 5px; }
@@ -39,8 +39,7 @@
         .sidebar-menu li a i { width: 20px; text-align: center; font-size: 16px; }
         .sidebar-menu li a:hover, .sidebar-menu li a.active { background-color: #f4f6f8; color: var(--primary-color); }
         .sidebar-menu li a.active { background-color: var(--primary-color); color: #fff; }
-        .badge-red { background: var(--danger); color: #fff; padding: 2px 8px; border-radius: 12px; font-size: 10px; margin-left: auto; }
-
+        
         /* HEADER & KONTEN UTAMA */
         .main-content { padding: 40px 50px; box-sizing: border-box; position: relative; }
         .top-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; background: var(--surface); padding: 15px 25px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); border: 1px solid var(--border-color); }
@@ -64,13 +63,12 @@
         .stat-card { background: var(--surface); padding: 25px; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
         .stat-card h3 { margin: 0 0 10px 0; color: var(--text-muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
         .stat-card .value { font-size: 28px; font-weight: 800; color: var(--primary-color); }
-
         .section-title { font-size: 18px; font-weight: 700; margin-bottom: 15px; color: var(--text-main); display: flex; justify-content: space-between; align-items: center; }
         
         /* TABLES */
         .invoice-section { background: var(--surface); border-radius: 12px; border: 1px solid var(--border-color); overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.02); margin-bottom: 30px; }
         .invoice-table { width: 100%; border-collapse: collapse; }
-        .invoice-table th, .invoice-table td { padding: 18px 20px; text-align: left; border-bottom: 1px solid var(--border-color); font-size: 13px; line-height: 1.5; }
+        .invoice-table th, .invoice-table td { padding: 18px 20px; text-align: left; border-bottom: 1px solid var(--border-color); font-size: 13px; line-height: 1.5; vertical-align: middle; }
         .invoice-table th { background-color: #f9fafb; color: var(--text-muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
         .invoice-table tbody tr:hover { background-color: #fafafa; }
         .empty-state { text-align: center; padding: 60px 20px; color: var(--text-muted); font-size: 14px; font-weight: 500; }
@@ -79,10 +77,10 @@
         .btn-action { border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-size: 11px; font-weight: 700; margin-right: 5px; margin-bottom: 5px; display: inline-flex; align-items: center; gap: 5px; transition: 0.2s; }
         .btn-edit { background: var(--warning); color: #fff; }
         .btn-edit:hover { background: #e67e22; }
+        .btn-delete { background: var(--danger); color: #fff; }
+        .btn-delete:hover { background: #c0392b; }
         .btn-print { background: var(--info); color: #fff; }
-        .btn-print:hover { background: #2980b9; }
         .btn-status { background: var(--primary-color); color: #fff; }
-        .btn-status:hover { background: #333; }
         .btn-success { background: var(--success); color: #fff; }
         .btn-submit { background: var(--primary-color); color: #fff; border: none; padding: 14px 25px; border-radius: 8px; font-weight: 700; font-size: 14px; cursor: pointer; transition: 0.2s; width: 100%; margin-top: 10px; }
         
@@ -93,105 +91,45 @@
         .form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #333; }
         .form-control { width: 100%; padding: 12px 15px; border: 1px solid var(--border-color); border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 13px; box-sizing: border-box; background: #fafafa; transition: 0.2s; outline: none; }
         .form-control:focus { border-color: var(--primary-color); background: #fff; }
-        .img-upload-box { border: 2px dashed var(--border-color); border-radius: 8px; padding: 40px 20px; text-align: center; color: var(--text-muted); background: #fafafa; cursor: pointer; transition: 0.2s; }
-        .variant-box { border: 1px solid #eee; padding: 15px; border-radius: 8px; margin-bottom: 10px; background: #fdfdfd; }
+        .variant-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
+        .variant-box { border: 1px solid #eee; padding: 15px; border-radius: 8px; background: #fdfdfd; display: flex; flex-direction: column; gap: 8px; }
+        .variant-box label { font-size: 12px; font-weight: 700; color: #111; margin: 0; }
 
         /* MODALS */
         .modal-overlay { visibility: hidden; opacity: 0; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); z-index: 2000; display: flex; justify-content: center; align-items: center; transition: 0.3s ease; }
         .modal-overlay.show { visibility: visible; opacity: 1; }
-        .modal-content { background: #fff; padding: 30px; border-radius: 16px; width: 90%; max-width: 600px; max-height: 90vh; overflow-y: auto; position: relative; color: #222; box-shadow: 0 25px 50px rgba(0,0,0,0.3); transform: translateY(30px) scale(0.95); transition: 0.4s; text-align: left; }
+        .modal-content { background: #fff; padding: 30px; border-radius: 16px; width: 90%; max-width: 700px; max-height: 90vh; overflow-y: auto; position: relative; color: #222; box-shadow: 0 25px 50px rgba(0,0,0,0.3); transform: translateY(30px) scale(0.95); transition: 0.4s; text-align: left; }
         .modal-overlay.show .modal-content { transform: translateY(0) scale(1); }
         .modal-close-btn { position: absolute; top: 15px; right: 20px; font-size: 26px; cursor: pointer; font-weight: bold; color: #999; }
         
         /* CHAT UI */
-        .chat-container { display: flex; height: 500px; border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; background: #fff; }
-        .chat-sidebar { width: 250px; border-right: 1px solid var(--border-color); background: #fafafa; overflow-y: auto; }
-        .chat-list-item { padding: 15px; border-bottom: 1px solid #eee; cursor: pointer; }
+        .chat-container { display: flex; height: 550px; border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; background: #fff; }
+        .chat-sidebar { width: 280px; border-right: 1px solid var(--border-color); background: #fafafa; overflow-y: auto; }
+        .chat-list-item { padding: 15px; border-bottom: 1px solid #eee; cursor: pointer; transition: 0.2s; }
+        .chat-list-item:hover { background: #f0f0f0; }
         .chat-list-item.active { background: #fff; border-left: 4px solid var(--primary-color); }
         .chat-main { flex: 1; display: flex; flex-direction: column; }
-        .chat-header { padding: 15px; border-bottom: 1px solid var(--border-color); font-weight: 700; display: flex; justify-content: space-between; align-items: center; }
+        .chat-header { padding: 15px 20px; border-bottom: 1px solid var(--border-color); font-weight: 700; display: flex; justify-content: space-between; align-items: center; background: #fff; }
         .chat-messages { flex: 1; padding: 20px; overflow-y: auto; background: #f4f6f8; display: flex; flex-direction: column; gap: 10px; }
-        .chat-input { padding: 15px; border-top: 1px solid var(--border-color); display: flex; gap: 10px; }
-        .chat-bubble { max-width: 70%; padding: 10px 15px; border-radius: 12px; font-size: 13px; }
+        .chat-input { padding: 15px; border-top: 1px solid var(--border-color); display: flex; gap: 10px; background: #fff; }
+        .chat-bubble { max-width: 70%; padding: 12px 16px; border-radius: 12px; font-size: 13px; line-height: 1.5; }
         .chat-admin { background: #111; color: #fff; align-self: flex-end; border-bottom-right-radius: 2px; }
-        .chat-user { background: #fff; border: 1px solid #eee; align-self: flex-start; border-bottom-left-radius: 2px; }
-
-        /* ==================== 
-           CSS UNTUK FITUR PRINT LABEL 
-           ==================== */
-        #print-area {
-            display: none; 
-            background-color: #f9f9f9; 
-            padding: 20px;
-            min-height: 100vh;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
+        .chat-user { background: #fff; border: 1px solid #eee; color: #111; align-self: flex-start; border-bottom-left-radius: 2px; }
         
-        .label-container {
-            width: 100%;
-            max-width: 700px;
-            background: #ffffff;
-            border: 1px solid #eee;
-            border-radius: 16px;
-            padding: 35px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            box-sizing: border-box;
-            margin-bottom: 20px;
-        }
-        .print-header-section {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 20px;
-            margin-bottom: 20px;
-        }
-        .print-logo-area img {
-            width: 130px;
-            height: auto;
-            object-fit: contain;
-        }
-        .print-barcode-area { text-align: right; }
-        .print-barcode-svg {
-            font-family: 'Courier New', monospace;
-            font-weight: 700;
-            letter-spacing: 4px;
-            font-size: 20px;
-            color: #111;
-        }
-        .print-barcode-text { font-size: 12px; font-weight: 600; color: #666; margin-top: 4px; }
-        
-        .print-info-bar { display: flex; gap: 10px; margin-bottom: 25px; }
-        .print-info-tag {
-            font-size: 11px; font-weight: 700; text-transform: uppercase; color: #fff;
-            background: #111; padding: 6px 14px; border-radius: 20px; letter-spacing: 0.5px;
-        }
-
+        /* PRINT LABEL CSS MURNI (Disembunyikan di layar, muncul saat print) */
+        #print-area { display: none; background: #fff; width: 100%; min-height: 100vh; flex-direction: column; align-items: center; padding: 20px; }
+        .label-container { width: 100%; max-width: 700px; background: #fff; border: 1px solid #eee; border-radius: 16px; padding: 35px; margin-bottom: 20px; }
+        .print-header-section { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 20px; margin-bottom: 20px; }
+        .print-barcode-svg { font-family: 'Courier New', monospace; font-weight: 700; letter-spacing: 2px; font-size: 20px; }
         .print-address-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 20px; text-align: left; }
-        .print-address-box { background: transparent; border: none; padding: 0; }
-        .print-box-title { font-size: 11px; text-transform: uppercase; font-weight: 700; color: #888; letter-spacing: 1px; margin-bottom: 15px; }
-        .print-address-content { font-size: 13px; line-height: 1.7; color: #444; }
-        .print-address-content strong { font-size: 15px; color: #111; display: block; margin-bottom: 6px; font-weight: 700; }
-        
-        .print-line-divider { border: none; border-top: 1px solid #eee; margin: 25px 0; }
-        
-        .print-footer-warning {
-            background-color: #fff5f5; border: 1px solid #ffe3e3; color: #e74c3c;
-            padding: 15px 20px; border-radius: 12px; font-size: 12px; line-height: 1.6; text-align: justify;
-        }
-        .print-footer-warning strong { font-weight: 700; letter-spacing: 0.5px; }
-
-        .print-controls { text-align: center; margin-bottom: 40px; display: flex; gap: 10px; justify-content: center; }
-        
-        /* CSS Khusus Saat Diprint */
+        .print-address-content { font-size: 13px; line-height: 1.7; }
+        .print-controls { text-align: center; margin-bottom: 20px; display: flex; gap: 10px; justify-content: center; }
         @media print {
             body * { visibility: hidden; } 
             #print-area, #print-area * { visibility: visible; }
-            #print-area { position: absolute; left: 0; top: 0; display: block !important; padding: 0; background: #fff; width: 100%; }
+            #print-area { position: absolute; left: 0; top: 0; display: block !important; padding: 0; }
             .print-controls { display: none !important; } 
-            .label-container { border: 1px solid #ccc; box-shadow: none; border-radius: 0; padding: 20px; margin: 0; max-width: 100%; }
+            .label-container { border: 2px solid #000; box-shadow: none; border-radius: 0; margin: 0; max-width: 100%; padding: 20px; }
         }
     </style>
 </head>
@@ -200,13 +138,13 @@
 <div class="admin-dashboard" id="main-dashboard-area">
     <aside class="sidebar">
         <div class="sidebar-logo">
-            <img src="https://i.ibb.co.com/0pMLQ0pV/MANAJEMEN-20260718-002340-0000-2.jpg" alt="Logo Manajemen">
+            <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Ousevoid Logo">
         </div>
         
         <ul class="sidebar-menu">
             <li><a id="nav-dashboard" class="active" onclick="bukaHalaman('dashboard', this)"><i class="fa-solid fa-house"></i> Dashboard</a></li>
             
-            <div class="menu-label">Manajemen Produk</div>
+            <div class="menu-label">Produk</div>
             <li><a onclick="bukaHalaman('daftar-produk', this)"><i class="fa-solid fa-box-open"></i> Produk Aktif</a></li>
             <li><a onclick="bukaHalaman('tambah-produk', this)"><i class="fa-solid fa-plus-circle"></i> Tambahkan Produk</a></li>
 
@@ -214,24 +152,24 @@
             <li><a onclick="bukaHalaman('pesanan-masuk', this)"><i class="fa-solid fa-cart-arrow-down"></i> Pesanan Masuk</a></li>
 
             <div class="menu-label">Manajemen Live Chat</div>
-            <li><a onclick="bukaHalaman('chat-baru', this)"><i class="fa-solid fa-message"></i> Pesan Baru <span class="badge-red">1</span></a></li>
-            <li><a onclick="bukaHalaman('chat-selesai', this)"><i class="fa-solid fa-check-double"></i> Pesan Selesai</a></li>
+            <li><a onclick="bukaHalaman('chat-baru', this)"><i class="fa-solid fa-message"></i> Pesan Masuk</a></li>
+            <li><a onclick="bukaHalaman('chat-selesai', this)"><i class="fa-solid fa-clock-rotate-left"></i> Arsip Pesan</a></li>
 
             <div class="menu-label">Pengaturan</div>
-            <li><a onclick="bukaHalaman('pengaturan', this)"><i class="fa-solid fa-gear"></i> Pengaturan Sistem</a></li>
+            <li><a onclick="bukaHalaman('pengaturan', this)"><i class="fa-solid fa-user-shield"></i> Pengaturan Sistem</a></li>
         </ul>
     </aside>
 
     <main class="main-content">
         
         <div class="top-header">
-            <h2 id="header-title">Dashboard Manajemen</h2>
+            <h2 id="header-title">Dashboard Utama</h2>
             <div class="header-right">
                 <div class="admin-profile-header">
                     <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Admin" id="header-admin-foto">
                     <div class="admin-info">
                         <span class="admin-name" id="header-admin-nama">Administrator</span>
-                        <span class="admin-role" id="header-admin-role">NIP: 00000000</span>
+                        <span class="admin-role" id="header-admin-role">Sistem Aktif</span>
                     </div>
                 </div>
                 <button class="logout-btn" onclick="logout()"><i class="fa-solid fa-power-off"></i> Keluar</button>
@@ -240,14 +178,13 @@
 
         <div id="page-dashboard" class="page-section active">
             <div class="dashboard-top-grid">
-                <div class="stat-card"><h3>Total Pendapatan</h3><div class="value">Rp 1.450.000</div></div>
-                <div class="stat-card"><h3>Unit Terjual</h3><div class="value">12</div></div>
-                <div class="stat-card"><h3>Pesanan Berlangsung</h3><div class="value">3</div></div>
+                <div class="stat-card"><h3>Total Pendapatan (Bulan Ini)</h3><div class="value" id="stat-pendapatan">Rp 0</div></div>
+                <div class="stat-card"><h3>Unit Terjual</h3><div class="value" id="stat-terjual">0</div></div>
+                <div class="stat-card"><h3>Pesanan Aktif</h3><div class="value" id="stat-pesanan">0</div></div>
             </div>
-            
-            <div class="section-title">Ringkasan Aktivitas Terkini</div>
+            <div class="section-title">Status Sistem Real-Time</div>
             <div class="invoice-section" style="padding: 30px;">
-                <p style="color: #666; font-size: 14px; margin: 0;">Sistem berjalan normal. Navigasikan menu di sebelah kiri untuk mengelola produk, memproses pesanan, atau merespon obrolan pelanggan.</p>
+                <p style="color: #666; font-size: 14px; margin: 0; line-height: 1.6;">Selamat datang di Control Center Ousevoid. Seluruh data pada panel ini terhubung langsung secara <em>real-time</em> ke pangkalan data produksi melalui API Cloudflare. Gunakan navigasi untuk mengelola operasional e-commerce.</p>
             </div>
         </div>
 
@@ -255,9 +192,9 @@
             <div class="section-title">Katalog Produk Aktif</div>
             <div class="invoice-section">
                 <table class="invoice-table">
-                    <thead><tr><th style="width:60px;">Gambar</th><th>Info Produk</th><th>Stok</th><th style="text-align:right;">Aksi Manajemen</th></tr></thead>
+                    <thead><tr><th style="width:70px;">Gambar</th><th>Info Produk (Kategori)</th><th>Nama & Harga</th><th>Stok</th><th style="text-align:right;">Aksi Manajemen</th></tr></thead>
                     <tbody id="tabel-produk-aktif">
-                        <tr><td colspan="4"><div class="empty-state"><i class="fa-solid fa-circle-notch fa-spin"></i> Memuat data...</div></td></tr>
+                        <tr><td colspan="5"><div class="empty-state"><i class="fa-solid fa-circle-notch fa-spin"></i> Memuat data dari server produksi...</div></td></tr>
                     </tbody>
                 </table>
             </div>
@@ -268,105 +205,95 @@
             <div class="form-panel">
                 <div class="form-grid">
                     <div>
-                        <div class="form-group"><label>Nama Produk Lengkap</label><input type="text" id="input-nama" class="form-control" placeholder="Contoh: VoidPods 1"></div>
-                        <div class="form-group"><label>Stok Awal Keseluruhan</label><input type="number" id="input-stok" class="form-control" placeholder="Contoh: 50"></div>
-                        <div class="form-group"><label>Deskripsi / Spesifikasi Singkat</label><textarea id="input-deskripsi" class="form-control" rows="3"></textarea></div>
-                        
-                        <div style="margin-top: 30px; border-top: 1px dashed var(--border-color); padding-top: 20px;">
-                            <label style="display:block; font-size:14px; font-weight:700; margin-bottom:15px; color:#111;">Konfigurasi Varian & Tipe Harga</label>
-                            <div class="variant-box"><label>Varian 1 (Wajib)</label><div style="display: flex; gap: 10px;"><input type="text" id="var1-nama" class="form-control" value="Bawaan Pabrik"><input type="number" id="var1-harga" class="form-control" placeholder="Harga Jual (Rp)"></div></div>
-                            <div class="variant-box"><label>Varian 2 (Opsional)</label><div style="display: flex; gap: 10px;"><input type="text" id="var2-nama" class="form-control" placeholder="Nama Tipe"><input type="number" id="var2-harga" class="form-control" placeholder="Harga Jual (Rp)"></div></div>
-                            <div class="variant-box"><label>Varian 3 (Opsional)</label><div style="display: flex; gap: 10px;"><input type="text" id="var3-nama" class="form-control" placeholder="Nama Tipe"><input type="number" id="var3-harga" class="form-control" placeholder="Harga Jual (Rp)"></div></div>
+                        <div class="form-group">
+                            <label>Kategori (Info Produk)</label>
+                            <select id="input-kategori" class="form-control">
+                                <option value="Earbuds">Earbuds</option>
+                                <option value="Smartphone">Smartphone</option>
+                                <option value="Speaker">Speaker</option>
+                                <option value="Sparepart">Sparepart</option>
+                            </select>
                         </div>
+                        <div class="form-group"><label>Nama Produk Lengkap</label><input type="text" id="input-nama" class="form-control" placeholder="Contoh: VoidPods Pro 2"></div>
+                        <div class="form-group"><label>Harga Dasar (Rp)</label><input type="number" id="input-harga" class="form-control" placeholder="Contoh: 299000"></div>
+                        <div class="form-group"><label>Stok Tersedia</label><input type="number" id="input-stok" class="form-control" placeholder="Contoh: 100"></div>
+                        <div class="form-group"><label>Deskripsi Produk Lengkap</label><textarea id="input-deskripsi" class="form-control" rows="4" placeholder="Detail spesifikasi teknis..."></textarea></div>
                     </div>
                     <div>
-                        <div class="form-group">
-                            <label>Foto Produk Utama</label>
-                            <div class="img-upload-box"><i class="fa-solid fa-cloud-arrow-up"></i><div style="font-size:12px;">Pilih Gambar (Opsional)</div></div>
+                        <div class="form-group"><label>URL Gambar Produk</label><input type="text" id="input-img" class="form-control" placeholder="https://i.ibb.co.com/..."></div>
+                        
+                        <div style="background: #fdfdfd; border: 1px solid #eee; padding: 20px; border-radius: 12px;">
+                            <label style="font-size:14px; font-weight:800; margin-bottom:15px; display:block;">SKU & Konfigurasi Varian (Maks 7)</label>
+                            <div class="variant-grid" id="container-varian-add">
+                                </div>
                         </div>
-                        <div class="form-group"><label>Atau Gunakan Link URL Gambar</label><input type="text" id="input-img" class="form-control" placeholder="https://i.ibb.co.com/..."></div>
-                        <button class="btn-submit" onclick="simpanProduk()"><i class="fa-solid fa-floppy-disk"></i> Publikasikan Produk</button>
+                        <button class="btn-submit" onclick="simpanProduk()"><i class="fa-solid fa-cloud-arrow-up"></i> Publikasikan Produk</button>
                     </div>
                 </div>
             </div>
         </div>
 
         <div id="page-pesanan-masuk" class="page-section">
-            <div class="section-title">Manajemen Pesanan Pelanggan</div>
+            <div class="section-title">Manajemen Pesanan Masuk</div>
             <div class="invoice-section">
                 <table class="invoice-table">
-                    <thead><tr><th>ID & Pembeli</th><th>Pesanan</th><th>Total Tagihan</th><th>Status Terkini</th><th>Tindakan / Aksi</th></tr></thead>
+                    <thead><tr><th>ID Transaksi & Penerima</th><th>Detail Item</th><th>Total Tagihan</th><th>Status Logistik</th><th>Aksi Operasional</th></tr></thead>
                     <tbody id="tabel-pesanan">
-                        <tr>
-                            <td><strong>2026/OUSE/XYZ/01</strong><br><span style="color:#666;">Budi Santoso</span></td>
-                            <td>VoidPods Pro (x1)</td>
-                            <td style="color:#e74c3c; font-weight:700;">Rp 210.000</td>
-                            <td><span id="status-1" style="background:#f39c12; color:#fff; padding:4px 8px; border-radius:4px; font-size:11px; font-weight:bold;">Menunggu Konfirmasi</span></td>
-                            <td>
-                                <button class="btn-action btn-status" onclick="ubahStatusPesanan('status-1', this, 1)"><i class="fa-solid fa-check"></i> Konfirmasi</button>
-                                <button class="btn-action btn-print" onclick="prepareLabel('2026/OUSE/XYZ/01', 'Budi Santoso', 'Jl. Sudirman No 10, Jakarta Selatan', '081234567890')"><i class="fa-solid fa-print"></i> Cetak Label</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><strong>2026/OUSE/ABC/02</strong><br><span style="color:#666;">Andi Wijaya</span></td>
-                            <td>Case Silicone (x2)</td>
-                            <td style="color:#e74c3c; font-weight:700;">Rp 90.000</td>
-                            <td><span id="status-2" style="background:#3498db; color:#fff; padding:4px 8px; border-radius:4px; font-size:11px; font-weight:bold;">Sedang Dikirim</span></td>
-                            <td>
-                                <button class="btn-action btn-status" onclick="ubahStatusPesanan('status-2', this, 3)"><i class="fa-solid fa-box-open"></i> Pesanan Tiba</button>
-                                <button class="btn-action btn-print" onclick="prepareLabel('2026/OUSE/ABC/02', 'Andi Wijaya', 'Jl. Merdeka 45, Bandung', '089876543210')"><i class="fa-solid fa-print"></i> Cetak Label</button>
-                            </td>
-                        </tr>
+                        <tr><td colspan="5"><div class="empty-state"><i class="fa-solid fa-circle-notch fa-spin"></i> Menarik data pesanan...</div></td></tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
         <div id="page-chat-baru" class="page-section">
-            <div class="section-title">Live Chat - Pesan Baru</div>
+            <div class="section-title">Interaksi Live Chat Terbuka</div>
             <div class="chat-container">
-                <div class="chat-sidebar">
-                    <div class="chat-list-item active">
-                        <div style="font-weight:700; font-size:13px; margin-bottom:5px;">Rina Puspita</div>
-                        <div style="font-size:11px; color:#888;">Min, mau tanya stok...</div>
-                    </div>
+                <div class="chat-sidebar" id="list-sesi-chat">
+                    <div style="padding: 20px; text-align: center; color: #888; font-size:12px;">Memuat sesi obrolan...</div>
                 </div>
                 <div class="chat-main">
-                    <div class="chat-header"><span>Obrolan: Rina Puspita</span> <button class="btn-action btn-success" style="margin:0;"><i class="fa-solid fa-check-double"></i> Tandai Selesai</button></div>
-                    <div class="chat-messages" id="area-chat-baru">
-                        <div class="chat-bubble chat-user">Min, mau tanya stok VoidPods Pro yang warna hitam masih ada?</div>
+                    <div class="chat-header">
+                        <span id="chat-aktif-nama">Pilih Sesi Obrolan</span>
+                        <button class="btn-action btn-success" style="margin:0; font-size:12px; padding:8px 15px;" onclick="selesaikanChat()"><i class="fa-solid fa-check-double"></i> Tandai Selesai</button>
+                    </div>
+                    <div class="chat-messages" id="area-chat-pesan">
+                        <div style="text-align: center; color: #999; margin-top: auto; margin-bottom: auto; font-size:13px;">Tidak ada obrolan yang dipilih.</div>
                     </div>
                     <div class="chat-input">
-                        <input type="text" id="input-balas-chat" class="form-control" placeholder="Ketik balasan untuk Rina..." style="margin-bottom:0;" onkeypress="if(event.key === 'Enter') balasChat()">
-                        <button class="btn-submit" style="margin:0; width:auto; padding:0 20px;" onclick="balasChat()"><i class="fa-solid fa-paper-plane"></i></button>
+                        <input type="text" id="input-balas-chat" class="form-control" placeholder="Ketik balasan untuk pelanggan..." style="margin-bottom:0;" onkeypress="if(event.key === 'Enter') balasChat()">
+                        <button class="btn-submit" style="margin:0; width:auto; padding:0 25px;" onclick="balasChat()"><i class="fa-solid fa-paper-plane"></i></button>
                     </div>
                 </div>
             </div>
         </div>
 
         <div id="page-chat-selesai" class="page-section">
-            <div class="section-title">Riwayat Chat (Dihapus dalam 7 hari)</div>
+            <div class="section-title">
+                Arsip Obrolan Selesai 
+                <span style="font-size: 11px; background: #e74c3c; color: #fff; padding: 4px 10px; border-radius: 12px; font-weight: 700;"><i class="fa-solid fa-trash-can"></i> Terhapus Otomatis dalam 7 Hari</span>
+            </div>
             <div class="invoice-section">
                 <table class="invoice-table">
-                    <thead><tr><th>Nama Pelanggan</th><th>Pesan Terakhir</th><th>Status</th></tr></thead>
-                    <tbody>
-                        <tr><td>Dimas Anggara</td><td>Terima kasih infonya min.</td><td><span style="color:var(--success); font-weight:bold;"><i class="fa-solid fa-check"></i> Selesai</span></td></tr>
+                    <thead><tr><th>ID Sesi / Pengguna</th><th>Status Terakhir</th><th>Aksi</th></tr></thead>
+                    <tbody id="tabel-arsip-chat">
+                        <tr><td colspan="3"><div class="empty-state">Menarik arsip...</div></td></tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
         <div id="page-pengaturan" class="page-section">
-            <div class="section-title">Pengaturan Profil Administrator</div>
+            <div class="section-title">Pengaturan Sistem & Profil Pengelola</div>
             <div class="form-panel">
                 <div class="form-grid">
                     <div>
-                        <div class="form-group"><label>Nama Lengkap</label><input type="text" id="set-nama" class="form-control"></div>
-                        <div class="form-group"><label>NIP (Nomor Induk Pegawai)</label><input type="text" id="set-nip" class="form-control"></div>
+                        <div class="form-group"><label>Nama Administrator Aktif</label><input type="text" id="set-nama" class="form-control"></div>
+                        <div class="form-group"><label>Nomor Induk / ID Karyawan</label><input type="text" id="set-nip" class="form-control"></div>
+                        <div style="font-size: 12px; color: #666; margin-top: 15px; line-height: 1.6;">Informasi ini tercatat pada log sistem (Riwayat Perubahan) setiap kali Administrator melakukan penambahan produk atau perubahan status pengiriman pesanan.</div>
                     </div>
                     <div>
-                        <div class="form-group"><label>URL Foto Profil</label><input type="text" id="set-foto" class="form-control"></div>
-                        <button class="btn-submit" onclick="simpanProfilAdmin()"><i class="fa-solid fa-user-check"></i> Simpan Profil</button>
+                        <div class="form-group"><label>URL Foto Profil Akun</label><input type="text" id="set-foto" class="form-control"></div>
+                        <button class="btn-submit" onclick="simpanProfilAdmin()"><i class="fa-solid fa-user-shield"></i> Simpan Konfigurasi</button>
                     </div>
                 </div>
             </div>
@@ -377,114 +304,114 @@
     <div id="modal-edit-produk" class="modal-overlay">
         <div class="modal-content">
             <span class="modal-close-btn" onclick="tutupModalEdit()">&times;</span>
-            <div style="font-size: 18px; font-weight: 800; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px;">Edit Data Produk</div>
+            <div style="font-size: 18px; font-weight: 800; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px;">Edit Data Terpusat Produk</div>
             
             <input type="hidden" id="edit-id">
+            <div class="form-group">
+                <label>Kategori</label>
+                <select id="edit-kategori" class="form-control">
+                    <option value="Earbuds">Earbuds</option>
+                    <option value="Smartphone">Smartphone</option>
+                    <option value="Speaker">Speaker</option>
+                    <option value="Sparepart">Sparepart</option>
+                </select>
+            </div>
             <div class="form-group"><label>Nama Produk</label><input type="text" id="edit-nama" class="form-control"></div>
-            <div class="form-group"><label>Total Stok Tersedia</label><input type="number" id="edit-stok" class="form-control"></div>
-            <div class="form-group"><label>Deskripsi Produk</label><textarea id="edit-deskripsi" class="form-control" rows="2"></textarea></div>
+            <div class="form-group"><label>Harga (Rp)</label><input type="number" id="edit-harga" class="form-control"></div>
+            <div class="form-group"><label>Stok Unit</label><input type="number" id="edit-stok" class="form-control"></div>
+            <div class="form-group"><label>URL Gambar</label><input type="text" id="edit-img" class="form-control"></div>
+            <div class="form-group"><label>Deskripsi Produk</label><textarea id="edit-deskripsi" class="form-control" rows="3"></textarea></div>
             
             <div style="border-top:1px dashed #ccc; padding-top:15px; margin-top:15px;">
-                <label style="font-size:12px; font-weight:bold; margin-bottom:10px; display:block;">Edit Varian 1 (Wajib)</label>
-                <div style="display:flex; gap:10px; margin-bottom:10px;"><input type="text" id="edit-var1-nama" class="form-control" placeholder="Nama Varian 1"><input type="number" id="edit-var1-harga" class="form-control" placeholder="Harga Varian 1"></div>
+                <label style="font-size:13px; font-weight:800; margin-bottom:15px; display:block;">Manajemen Varian (SKU)</label>
+                <div class="variant-grid" id="container-varian-edit">
+                    </div>
             </div>
             
-            <div class="form-group" style="margin-top:15px;"><label>URL Gambar Baru</label><input type="text" id="edit-img" class="form-control"></div>
-            <button class="btn-submit" onclick="simpanHasilEdit()"><i class="fa-solid fa-save"></i> Simpan Perubahan</button>
+            <button class="btn-submit" onclick="simpanHasilEdit()"><i class="fa-solid fa-server"></i> Terapkan Pembaruan ke Server</button>
         </div>
     </div>
 </div>
 
 <div id="print-area">
     <div class="print-controls">
-        <button class="btn-print" onclick="eksekusiPrint()"><i class="fa-solid fa-print"></i> Cetak Label Ini</button>
-        <button class="btn-print" style="background:#e74c3c;" onclick="tutupAreaPrint()"><i class="fa-solid fa-arrow-left"></i> Kembali ke Dashboard</button>
+        <button class="btn-submit" style="width:auto;" onclick="window.print()"><i class="fa-solid fa-print"></i> Cetak Dokumen Resi</button>
+        <button class="btn-submit" style="width:auto; background:var(--danger);" onclick="tutupAreaPrint()"><i class="fa-solid fa-arrow-left"></i> Tutup Mode Cetak</button>
     </div>
-
     <div class="label-container">
         <div class="print-header-section">
-            <div class="print-logo-area">
-                <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Ousevoid Logo">
-            </div>
-            <div class="print-barcode-area">
-                <div class="print-barcode-svg" id="print-label-barcode">||| | |||| || | || |||</div>
-                <div class="print-barcode-text" id="print-label-invoice-id">INV/0000</div>
+            <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" style="height: 40px;">
+            <div style="text-align: right;">
+                <div class="print-barcode-svg" id="print-label-barcode">||| 000 |||</div>
+                <div style="font-size: 12px; font-weight: 600; color: #666; margin-top: 4px;" id="print-label-invoice-id">INV</div>
             </div>
         </div>
-
-        <div class="print-info-bar">
-            <div class="print-info-tag">Asuransi: Ya</div>
-            <div class="print-info-tag">Cashless: Ya</div>
+        <div style="display: flex; gap: 10px; margin-bottom: 25px;">
+            <div style="background: #111; color:#fff; font-size:11px; font-weight:700; padding:6px 14px; border-radius:20px;">ASURANSI: YA</div>
+            <div style="background: #111; color:#fff; font-size:11px; font-weight:700; padding:6px 14px; border-radius:20px;">CASHLESS OJK</div>
         </div>
-
         <div class="print-address-grid">
-            <div class="print-address-box">
-                <div class="print-box-title">Pengirim (From)</div>
-                <div class="print-address-content">
-                    <strong>PT Gerbang Masa Depan</strong>
-                    Jl. K.H. Zainul Arifin No. 71, Duri Pulo, Gambir,<br>
-                    Jakarta Pusat, DKI Jakarta, Indonesia 10140<br><br>
-                    <span style="color:#666;"><i class="fa-solid fa-phone"></i> 0857 15000 443</span>
-                </div>
+            <div>
+                <div style="font-size:11px; font-weight:700; color:#888; margin-bottom:10px;">PENGIRIM:</div>
+                <div class="print-address-content"><strong>PT Gerbang Masa Depan</strong>Jl. K.H. Zainul Arifin No. 71, Gambir, Jakarta Pusat 10140<br>0857 15000 443</div>
             </div>
-
-            <div class="print-address-box">
-                <div class="print-box-title">Penerima (To)</div>
-                <div class="print-address-content">
-                    <strong id="print-dest-nama">Nama Pembeli</strong>
-                    <span id="print-dest-alamat">Alamat Lengkap</span><br><br>
-                    <span style="color:#666;"><i class="fa-solid fa-phone"></i> <span id="print-dest-telp">08xxx</span></span>
-                </div>
+            <div>
+                <div style="font-size:11px; font-weight:700; color:#888; margin-bottom:10px;">PENERIMA:</div>
+                <div class="print-address-content"><strong id="print-dest-nama">-</strong><span id="print-dest-alamat">-</span><br>Telp: <span id="print-dest-telp">-</span></div>
             </div>
         </div>
-
-        <hr class="print-line-divider">
-
-        <div class="print-footer-warning">
-            <strong>PERINGATAN KERAS:</strong> Paket ini dilindungi hukum. Dilarang membuka atau merusak paket selain pihak penerima yang bersangkutan. Segala bentuk penggelapan, pencurian, atau manipulasi status pengiriman tanpa serah terima sah akan diproses hukum pidana sesuai UU yang berlaku.
+        <div style="border-top:1px dashed #ccc; margin:20px 0;"></div>
+        <div style="font-size:12px; line-height:1.6; border:1px solid #e74c3c; background:#fff5f5; color:#e74c3c; padding:15px; border-radius:10px;">
+            <strong>HUKUM PIDANA:</strong> Paket dilindungi oleh hukum. Dilarang merusak segel pengiriman di luar hak milik penerima sah.
         </div>
     </div>
 </div>
 
 <script>
+    // URL WORKER CLOUDFLARE (HARUS SAMA DENGAN INDEX)
+    const WORKER_URL = "https://ousevoidindonesia.username.workers.dev";
+    
     let globalProducts = [];
+    let activeChatSession = null;
 
-    // Mendaftarkan fungsi secara eksplisit ke window agar anti Uncaught ReferenceError
-    window.prepareLabel = function(invoice, nama, alamat, telp) {
-        document.getElementById('main-dashboard-area').style.display = 'none';
-        document.getElementById('print-dest-nama').innerText = nama;
-        document.getElementById('print-dest-alamat').innerText = alamat;
-        document.getElementById('print-dest-telp').innerText = telp;
-        document.getElementById('print-label-invoice-id').innerText = invoice;
-        
-        // Menggunakan metode split dan join untuk menghindari error regex parser
-        let barcodeText = invoice.split('/').join(' ');
-        document.getElementById('print-label-barcode').innerText = '||| ' + barcodeText + ' |||';
-        
-        document.getElementById('print-area').style.display = 'flex';
-    };
-
-    window.eksekusiPrint = function() {
-        window.print();
-    };
-
-    window.tutupAreaPrint = function() {
-        document.getElementById('print-area').style.display = 'none';
-        document.getElementById('main-dashboard-area').style.display = 'grid'; 
-    };
-
+    // OTENTIKASI SEDERHANA
     window.onload = function() {
+        if(!localStorage.getItem('admin_nama')) { 
+            // Opsional: Redirect jika belum login. Disini dibiarkan akses untuk demo logic.
+            // window.location.href = "/";
+        }
         muatProfilAdmin();
+        generateVarianInputs('container-varian-add', 'add');
+        generateVarianInputs('container-varian-edit', 'edit');
         muatDaftarProduk(); 
+        muatPesanan();
+        muatListChat();
+        setInterval(muatListChat, 5000); // Polling chat live
     };
 
-    // --- MANAJEMEN PROFIL ADMIN ---
+    // GENERATOR VARIAN MAKS 7 SKU
+    function generateVarianInputs(containerId, prefix) {
+        let html = '';
+        for(let i = 1; i <= 7; i++) {
+            let req = i === 1 ? '(Wajib)' : '(Opsional)';
+            html += `
+            <div class="variant-box">
+                <label>SKU/Varian ${i} ${req}</label>
+                <input type="text" id="${prefix}-var${i}-sku" class="form-control" placeholder="Kode SKU" style="padding:8px;">
+                <input type="text" id="${prefix}-var${i}-nama" class="form-control" placeholder="Nama Varian" style="padding:8px;">
+                <input type="number" id="${prefix}-var${i}-harga" class="form-control" placeholder="Harga Jual" style="padding:8px;">
+            </div>`;
+        }
+        document.getElementById(containerId).innerHTML = html;
+    }
+
+    // --- PROFIL ---
     window.muatProfilAdmin = function() {
-        var nama = localStorage.getItem('admin_nama') || 'Administrator';
-        var nip = localStorage.getItem('admin_nip') || '00000000';
+        var nama = localStorage.getItem('admin_nama') || 'Administrator Utama';
+        var nip = localStorage.getItem('admin_nip') || 'NIP-00001';
         var foto = localStorage.getItem('admin_foto') || 'https://i.ibb.co.com/x8MrtzXr/8588.png';
         document.getElementById('header-admin-nama').innerText = nama;
-        document.getElementById('header-admin-role').innerText = 'NIP: ' + nip;
+        document.getElementById('header-admin-role').innerText = 'ID: ' + nip;
         document.getElementById('header-admin-foto').src = foto;
         
         if(document.getElementById('set-nama')) document.getElementById('set-nama').value = nama;
@@ -493,139 +420,276 @@
     };
 
     window.simpanProfilAdmin = function() {
-        var nama = document.getElementById('set-nama').value; var nip = document.getElementById('set-nip').value; var foto = document.getElementById('set-foto').value;
-        localStorage.setItem('admin_nama', nama); localStorage.setItem('admin_nip', nip); if(foto) localStorage.setItem('admin_foto', foto);
-        muatProfilAdmin(); alert("Profil disimpan!");
+        localStorage.setItem('admin_nama', document.getElementById('set-nama').value);
+        localStorage.setItem('admin_nip', document.getElementById('set-nip').value);
+        localStorage.setItem('admin_foto', document.getElementById('set-foto').value);
+        muatProfilAdmin(); alert("Konfigurasi Profil berhasil disimpan di sistem lokal.");
     };
 
-    // --- NAVIGASI HALAMAN ---
+    // --- NAVIGASI SPA ---
     window.bukaHalaman = function(pageId, element = null) {
-        var pages = document.querySelectorAll('.page-section');
-        pages.forEach(function(page) { page.classList.remove('active'); });
-        var targetPage = document.getElementById('page-' + pageId);
-        if (targetPage) targetPage.classList.add('active');
+        document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+        document.getElementById('page-' + pageId).classList.add('active');
         
         var titles = {
-            'dashboard': 'Dashboard', 'daftar-produk': 'Katalog Produk Aktif', 'tambah-produk': 'Tambah Produk Baru',
-            'pesanan-masuk': 'Manajemen Pesanan', 'chat-baru': 'Live Chat Pelanggan', 'chat-selesai': 'Riwayat Chat', 'pengaturan': 'Pengaturan Sistem'
+            'dashboard': 'Dashboard Sistem', 'daftar-produk': 'Katalog Produk', 'tambah-produk': 'Penambahan Entri Produk',
+            'pesanan-masuk': 'Manajemen Pesanan Logistik', 'chat-baru': 'Bantuan Pelanggan (Live)', 'chat-selesai': 'Arsip Sesi Obrolan', 'pengaturan': 'Pengaturan Keamanan'
         };
         document.getElementById('header-title').innerText = titles[pageId] || 'Control Center';
         
         if (element) {
-            var links = document.querySelectorAll('.sidebar-menu a');
-            links.forEach(function(link) { link.classList.remove('active'); });
+            document.querySelectorAll('.sidebar-menu a').forEach(l => l.classList.remove('active'));
             element.classList.add('active');
         }
         
         if(pageId === 'daftar-produk') muatDaftarProduk();
+        if(pageId === 'pesanan-masuk') muatPesanan();
     };
+    window.logout = function() { if(confirm("Otorisasi akan dicabut. Keluar?")) { window.location.href = "/"; } };
 
-    window.logout = function() { if(confirm("Keluar dari sistem?")) { localStorage.removeItem("session_ousevoid"); window.location.href = "/"; } };
-
-    // --- MANAJEMEN PESANAN (TOMBOL STATUS) ---
-    window.ubahStatusPesanan = function(idElemen, tombolEl, step) {
-        var span = document.getElementById(idElemen);
-        if(step === 1) {
-            span.innerText = "Dalam Proses"; span.style.background = "#3498db";
-            tombolEl.innerHTML = '<i class="fa-solid fa-truck"></i> Kirim'; tombolEl.setAttribute('onclick', `ubahStatusPesanan('${idElemen}', this, 2)`);
-        } else if(step === 2) {
-            span.innerText = "Sedang Dikirim"; span.style.background = "#9b59b6";
-            tombolEl.innerHTML = '<i class="fa-solid fa-box-open"></i> Pesanan Tiba'; tombolEl.setAttribute('onclick', `ubahStatusPesanan('${idElemen}', this, 3)`);
-        } else if(step === 3) {
-            span.innerText = "Selesai Terkirim"; span.style.background = "#2ecc71";
-            tombolEl.style.display = 'none'; 
-        }
-    };
-
-    // --- CHAT SIMULASI ---
-    window.balasChat = function() {
-        var input = document.getElementById('input-balas-chat'); var teks = input.value.trim();
-        if(!teks) return;
-        var area = document.getElementById('area-chat-baru');
-        area.innerHTML += `<div class="chat-bubble chat-admin">${teks}</div>`;
-        input.value = ''; area.scrollTop = area.scrollHeight;
-    };
-
-    // --- DATABASE: LOAD, ADD, EDIT PRODUK ---
+    // ==========================================
+    // 1. MANAJEMEN API PRODUK (REAL FETCH)
+    // ==========================================
     window.muatDaftarProduk = async function() {
         var tbody = document.getElementById('tabel-produk-aktif');
         try {
-            const res = await fetch("/api/produk");
+            const res = await fetch(WORKER_URL + "/api/produk");
             globalProducts = await res.json();
-            
             if(globalProducts && globalProducts.length > 0) {
                 let html = '';
                 globalProducts.forEach(p => {
+                    let totalVarian = 0; try { totalVarian = JSON.parse(p.variants).length; } catch(e){}
                     html += `<tr>
-                        <td><img src="${p.img_url}" style="width:45px; height:45px; object-fit:cover; border-radius:6px; border:1px solid #eee;"></td>
-                        <td><strong>${p.nama}</strong><br><span style="font-size:11px; color:#888;">Harga Dasar: Rp ${p.harga.toLocaleString('id-ID')}</span></td>
+                        <td><img src="${p.img_url}" style="width:50px; height:50px; object-fit:cover; border-radius:8px;"></td>
+                        <td><span style="background:#111; color:#fff; padding:2px 8px; border-radius:4px; font-size:10px; font-weight:bold;">${p.kategori || 'Uncategorized'}</span><br><span style="font-size:11px; color:#666;">${totalVarian} SKU Varian</span></td>
+                        <td><strong>${p.nama}</strong><br><span style="color:#e74c3c; font-weight:700;">Rp ${p.harga.toLocaleString('id-ID')}</span></td>
                         <td>${p.stok} Unit</td>
                         <td style="text-align:right;">
-                            <button class="btn-action btn-edit" onclick="bukaModalEdit(${p.id})"><i class="fa-solid fa-pen"></i> Edit</button>
-                            <button class="btn-action" style="background:var(--danger); color:#fff;" onclick="alert('Fitur Hapus segera hadir')"><i class="fa-solid fa-trash"></i></button>
+                            <button class="btn-action btn-edit" onclick="bukaModalEdit(${p.id})"><i class="fa-solid fa-pen"></i></button>
+                            <button class="btn-action btn-delete" onclick="hapusProduk(${p.id})"><i class="fa-solid fa-trash"></i></button>
                         </td>
                     </tr>`;
                 });
                 tbody.innerHTML = html;
-            } else { tbody.innerHTML = '<tr><td colspan="4"><div class="empty-state">Belum ada produk aktif.</div></td></tr>'; }
-        } catch(e) { tbody.innerHTML = '<tr><td colspan="4"><div class="empty-state">Gagal terhubung ke Database Cloudflare D1.</div></td></tr>'; }
+            } else { tbody.innerHTML = '<tr><td colspan="5"><div class="empty-state">Pangkalan data produk kosong.</div></td></tr>'; }
+        } catch(e) { tbody.innerHTML = '<tr><td colspan="5"><div class="empty-state" style="color:var(--danger);">Koneksi Worker Terputus. Pastikan Endpoint API aktif.</div></td></tr>'; }
     };
+
+    function ambilDataVarian(prefix) {
+        let vars = [];
+        for(let i=1; i<=7; i++) {
+            let sku = document.getElementById(`${prefix}-var${i}-sku`).value;
+            let n = document.getElementById(`${prefix}-var${i}-nama`).value;
+            let h = document.getElementById(`${prefix}-var${i}-harga`).value;
+            if(n && h) vars.push({ sku: sku, nama: n, harga: parseInt(h) });
+        }
+        return vars;
+    }
 
     window.simpanProduk = async function() {
-        var nama = document.getElementById('input-nama').value; var stok = document.getElementById('input-stok').value; var desk = document.getElementById('input-deskripsi').value; var img = document.getElementById('input-img').value;
-        var v1_n = document.getElementById('var1-nama').value; var v1_h = document.getElementById('var1-harga').value;
-        var v2_n = document.getElementById('var2-nama').value; var v2_h = document.getElementById('var2-harga').value;
-        var v3_n = document.getElementById('var3-nama').value; var v3_h = document.getElementById('var3-harga').value;
-
-        if (!nama || !stok || !img || !v1_n || !v1_h) { alert("Isi Nama, Stok, URL Gambar, dan Varian 1 (Wajib)!"); return; }
-
-        var varsArr = [{ nama: v1_n, harga: parseInt(v1_h) }];
-        if(v2_n && v2_h) varsArr.push({ nama: v2_n, harga: parseInt(v2_h) });
-        if(v3_n && v3_h) varsArr.push({ nama: v3_n, harga: parseInt(v3_h) });
-
-        var btn = document.querySelector('#page-tambah-produk .btn-submit'); btn.innerHTML = "Menyimpan..."; btn.disabled = true;
-
+        var btn = document.querySelector('#page-tambah-produk .btn-submit'); 
+        var payload = {
+            kategori: document.getElementById('input-kategori').value,
+            nama: document.getElementById('input-nama').value,
+            harga: parseInt(document.getElementById('input-harga').value),
+            stok: parseInt(document.getElementById('input-stok').value),
+            deskripsi: document.getElementById('input-deskripsi').value,
+            img_url: document.getElementById('input-img').value,
+            variants: JSON.stringify(ambilDataVarian('add'))
+        };
+        if (!payload.nama || !payload.harga || !payload.img_url) { alert("Sistem menolak: Field Esensial (Nama, Harga, URL Gambar) tidak boleh kosong."); return; }
+        
+        btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Memproses Injeksi Database...'; btn.disabled = true;
         try {
-            const response = await fetch("/api/produk", {
-                method: "POST", headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ nama: nama, harga: parseInt(v1_h), stok: parseInt(stok), deskripsi: desk, img_url: img, variants: JSON.stringify(varsArr) })
-            });
-            const hasil = await response.json();
-            if (hasil.sukses) {
-                alert("Produk berhasil ditambahkan!");
-                bukaHalaman('daftar-produk', document.querySelector('.sidebar-menu a[onclick*="daftar-produk"]'));
-            } else { alert("Gagal: " + (hasil.error || "Kesalahan server.")); }
-        } catch (error) { alert("Koneksi ke Database gagal."); }
-
-        btn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Publikasikan Produk'; btn.disabled = false;
+            const res = await fetch(WORKER_URL + "/api/produk", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+            const data = await res.json();
+            if (data.sukses) { alert("Produk berhasil masuk ke pangkalan data aktif."); bukaHalaman('daftar-produk', document.querySelector('.sidebar-menu a[onclick*="daftar-produk"]')); } 
+            else { alert("Penolakan Server: " + data.error); }
+        } catch (e) { alert("Kegagalan transmisi jaringan ke Cloudflare."); }
+        btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Publikasikan Produk'; btn.disabled = false;
     };
 
-    // --- MODAL EDIT PRODUK ---
+    window.hapusProduk = async function(id) {
+        if(confirm("Tindakan ini bersifat ireversibel. Yakin menghapus entri katalog ini?")) {
+            try {
+                await fetch(WORKER_URL + "/api/produk?id=" + id, { method: "DELETE" });
+                muatDaftarProduk();
+            } catch (e) { alert("Gagal memproses penghapusan."); }
+        }
+    };
+
     window.bukaModalEdit = function(id) {
-        var p = globalProducts.find(x => x.id === id);
-        if(!p) return;
-        
+        var p = globalProducts.find(x => x.id === id); if(!p) return;
         document.getElementById('edit-id').value = p.id;
+        document.getElementById('edit-kategori').value = p.kategori || 'Earbuds';
         document.getElementById('edit-nama').value = p.nama;
+        document.getElementById('edit-harga').value = p.harga;
         document.getElementById('edit-stok').value = p.stok;
         document.getElementById('edit-deskripsi').value = p.deskripsi;
         document.getElementById('edit-img').value = p.img_url;
 
         let vars = []; try { vars = JSON.parse(p.variants); } catch(e) {}
-        if(vars.length > 0) {
-            document.getElementById('edit-var1-nama').value = vars[0].nama;
-            document.getElementById('edit-var1-harga').value = vars[0].harga;
+        for(let i=1; i<=7; i++) {
+            document.getElementById(`edit-var${i}-sku`).value = (vars[i-1] ? (vars[i-1].sku||'') : '');
+            document.getElementById(`edit-var${i}-nama`).value = (vars[i-1] ? vars[i-1].nama : '');
+            document.getElementById(`edit-var${i}-harga`).value = (vars[i-1] ? vars[i-1].harga : '');
         }
-
         document.getElementById('modal-edit-produk').classList.add('show');
     };
-    
     window.tutupModalEdit = function() { document.getElementById('modal-edit-produk').classList.remove('show'); };
     
-    window.simpanHasilEdit = function() {
-        alert("Simulasi berhasil! Perubahan data disimpan (Data asli di database Cloudflare D1 memerlukan konfigurasi Endpoint PUT di backend).");
-        tutupModalEdit();
-        muatDaftarProduk(); 
+    window.simpanHasilEdit = async function() {
+        var id = document.getElementById('edit-id').value;
+        var payload = {
+            id: id,
+            kategori: document.getElementById('edit-kategori').value,
+            nama: document.getElementById('edit-nama').value,
+            harga: parseInt(document.getElementById('edit-harga').value),
+            stok: parseInt(document.getElementById('edit-stok').value),
+            deskripsi: document.getElementById('edit-deskripsi').value,
+            img_url: document.getElementById('edit-img').value,
+            variants: JSON.stringify(ambilDataVarian('edit'))
+        };
+        try {
+            await fetch(WORKER_URL + "/api/produk", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+            tutupModalEdit(); muatDaftarProduk();
+        } catch (e) { alert("Kegagalan modifikasi data server."); }
+    };
+
+    // ==========================================
+    // 2. MANAJEMEN API PESANAN
+    // ==========================================
+    window.muatPesanan = async function() {
+        var tbody = document.getElementById('tabel-pesanan');
+        try {
+            const res = await fetch(WORKER_URL + "/api/pesanan");
+            const pesananArr = await res.json();
+            if(pesananArr && pesananArr.length > 0) {
+                let html = '';
+                pesananArr.forEach(ps => {
+                    let btnAksi = ''; let statusBadge = '';
+                    if(ps.status === 1) { 
+                        statusBadge = '<span style="background:#f39c12; color:#fff; padding:4px 8px; border-radius:4px; font-size:11px; font-weight:bold;">Terkonfirmasi OJK</span>';
+                        btnAksi = `<button class="btn-action btn-status" onclick="ubahStatusPesanan('${ps.id}', 2)"><i class="fa-solid fa-truck"></i> Masuk Logistik</button>`;
+                    }
+                    else if(ps.status === 2) { 
+                        statusBadge = '<span style="background:#9b59b6; color:#fff; padding:4px 8px; border-radius:4px; font-size:11px; font-weight:bold;">Sedang Dikirim</span>';
+                        btnAksi = `<button class="btn-action btn-status" onclick="ubahStatusPesanan('${ps.id}', 3)"><i class="fa-solid fa-check"></i> Selesai Terkirim</button>`;
+                    }
+                    else { statusBadge = '<span style="background:#2ecc71; color:#fff; padding:4px 8px; border-radius:4px; font-size:11px; font-weight:bold;">Diserahkan</span>'; }
+
+                    html += `<tr>
+                        <td><strong>${ps.id_trx}</strong><br><span style="color:#666; font-size:11px;">Penerima: ${ps.nama}</span></td>
+                        <td style="font-size:12px; max-width:200px;">${ps.barang}</td>
+                        <td style="color:#e74c3c; font-weight:800;">Rp ${ps.total.toLocaleString('id-ID')}</td>
+                        <td>${statusBadge}</td>
+                        <td>
+                            ${btnAksi}
+                            <button class="btn-action btn-print" onclick="prepareLabel('${ps.id_trx}', '${ps.nama}', '${ps.alamat}', '${ps.wa}')"><i class="fa-solid fa-print"></i> Cetak Label</button>
+                        </td>
+                    </tr>`;
+                });
+                tbody.innerHTML = html;
+            } else { tbody.innerHTML = '<tr><td colspan="5"><div class="empty-state">Belum ada transaksi logistik baru.</div></td></tr>'; }
+        } catch(e) { tbody.innerHTML = '<tr><td colspan="5"><div class="empty-state" style="color:var(--danger);">Sistem gagal menarik log transaksi.</div></td></tr>'; }
+    };
+
+    window.ubahStatusPesanan = async function(id_db, statusBaru) {
+        try {
+            await fetch(WORKER_URL + "/api/pesanan/status", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id: id_db, status: statusBaru, admin_oleh: localStorage.getItem('admin_nama') }) });
+            muatPesanan();
+        } catch (e) { alert("Kesalahan pembaruan status logistik."); }
+    };
+
+    // ==========================================
+    // 3. CETAK RESI (PRINT LABEL)
+    // ==========================================
+    window.prepareLabel = function(invoice, nama, alamat, telp) {
+        document.getElementById('main-dashboard-area').style.display = 'none';
+        document.getElementById('print-dest-nama').innerText = nama;
+        document.getElementById('print-dest-alamat').innerText = alamat;
+        document.getElementById('print-dest-telp').innerText = telp;
+        document.getElementById('print-label-invoice-id').innerText = invoice;
+        document.getElementById('print-label-barcode').innerText = '||| ' + invoice.split('/').join(' ') + ' |||';
+        document.getElementById('print-area').style.display = 'flex';
+    };
+    window.tutupAreaPrint = function() {
+        document.getElementById('print-area').style.display = 'none';
+        document.getElementById('main-dashboard-area').style.display = 'grid'; 
+    };
+
+    // ==========================================
+    // 4. API LIVE CHAT
+    // ==========================================
+    window.muatListChat = async function() {
+        try {
+            const res = await fetch(WORKER_URL + "/api/chat/sessions");
+            const sessions = await res.json();
+            let htmlAktif = ''; let htmlArsip = '';
+            
+            sessions.forEach(s => {
+                if(s.status === 'aktif') {
+                    htmlAktif += `<div class="chat-list-item ${activeChatSession === s.session_id ? 'active':''}" onclick="bukaSesiChat('${s.session_id}')">
+                        <div style="font-weight:700; font-size:12px;">ID: ${s.session_id.substring(0,8)}...</div>
+                        <div style="font-size:10px; color:#888;">Klik untuk merespon</div>
+                    </div>`;
+                } else {
+                    htmlArsip += `<tr>
+                        <td><strong>${s.session_id}</strong></td>
+                        <td style="color:#888; font-size:12px; font-style:italic;">Arsip ditutup. Menunggu siklus hapus otomatis.</td>
+                        <td><span style="color:var(--success); font-weight:800;"><i class="fa-solid fa-check"></i> Selesai</span></td>
+                    </tr>`;
+                }
+            });
+            document.getElementById('list-sesi-chat').innerHTML = htmlAktif || '<div style="padding:20px; text-align:center; color:#999; font-size:12px;">Tidak ada sesi aktif.</div>';
+            document.getElementById('tabel-arsip-chat').innerHTML = htmlArsip || '<tr><td colspan="3"><div class="empty-state">Pangkalan data arsip kosong.</div></td></tr>';
+            
+            if(activeChatSession) muatIsiPesan(activeChatSession);
+        } catch(e) { console.log("Silent fail chat pull"); }
+    };
+
+    window.bukaSesiChat = function(sessId) {
+        activeChatSession = sessId;
+        document.getElementById('chat-aktif-nama').innerText = "Otoritas Chat ID: " + sessId.substring(0,8);
+        muatListChat(); // Update visual active
+    };
+
+    window.muatIsiPesan = async function(sessId) {
+        try {
+            const res = await fetch(WORKER_URL + "/api/chat?session_id=" + sessId);
+            const pesans = await res.json();
+            let html = '';
+            pesans.forEach(p => {
+                html += `<div class="chat-bubble ${p.is_admin == 1 ? 'chat-admin' : 'chat-user'}">${p.pesan}</div>`;
+            });
+            var area = document.getElementById('area-chat-pesan');
+            area.innerHTML = html;
+            area.scrollTop = area.scrollHeight;
+        } catch(e) {}
+    };
+
+    window.balasChat = async function() {
+        if(!activeChatSession) { alert("Pilih sesi obrolan di bilah kiri terlebih dahulu."); return; }
+        var input = document.getElementById('input-balas-chat'); var teks = input.value.trim();
+        if(!teks) return; input.value = '';
+        
+        try {
+            await fetch(WORKER_URL + "/api/chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ session_id: activeChatSession, pesan: teks, is_admin: 1 }) });
+            muatIsiPesan(activeChatSession);
+        } catch(e) { alert("Kegagalan transmisi pesan."); }
+    };
+
+    window.selesaikanChat = async function() {
+        if(!activeChatSession) return;
+        if(confirm("Tandai sesi ini selesai? Data akan diarsipkan dan terhapus permanen sistem dalam 7 hari.")) {
+            try {
+                await fetch(WORKER_URL + "/api/chat/selesai", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ session_id: activeChatSession }) });
+                activeChatSession = null;
+                document.getElementById('chat-aktif-nama').innerText = "Pilih Sesi Obrolan";
+                document.getElementById('area-chat-pesan').innerHTML = '<div style="text-align:center; color:#999; margin-top:auto; margin-bottom:auto;">Sesi telah ditutup.</div>';
+                muatListChat();
+            } catch(e) { alert("Gagal memperbarui status arsip."); }
+        }
     };
 </script>
 
