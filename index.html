@@ -162,6 +162,10 @@
         .login-input-wrapper { text-align: left; margin-bottom: 12px; }
         .login-label { font-size: 10px; font-weight: 800; color: #6b7280; text-transform: uppercase; margin-bottom: 4px; display: block; }
         
+        /* GAYA BARU UNTUK INPUT LOGIN (SEIRAMA) */
+        .login-input { width: 100%; padding: 14px 16px; border: 1px solid #d1d5db; border-radius: 12px; font-family: 'Inter', sans-serif; font-size: 13px; outline: none; background: #f9fafb; margin-bottom: 5px; box-sizing: border-box; transition: 0.3s; }
+        .login-input:focus { border-color: #111; background: #fff; }
+        
         .info-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 20px; padding: 30px; text-align: left; line-height: 1.8; font-size: 13px; color: #374151; margin-bottom: 20px; }
         .info-card h2 { font-size: 22px; font-weight: 800; color: #111; margin-top: 0; margin-bottom: 20px; border-bottom: 2px solid #f3f4f6; padding-bottom: 10px; }
         .info-card h4 { font-size: 14px; color: #111; font-weight: 800; margin: 15px 0 5px 0; }
@@ -276,7 +280,7 @@
         </div>
     </div>
 
-    <div class="chat-widget-btn" onclick="alert('Layanan Customer Support Marsya Siap Membantu via Chat.')"><i class="fa-solid fa-message"></i></div>
+    <div class="chat-widget-btn" onclick="window.location.href='manajemen.html'"><i class="fa-solid fa-message"></i></div>
 
     <div class="footer" id="main-footer">
         <div id="footer-main-info">
@@ -311,15 +315,8 @@
     </div>
 
     <script>
-        // API URL Midtrans/Cloudflare (Ganti dengan Worker Asli Lu)
-        const WORKER_URL = "https://ousevoid.biz.id";
-        
-        // Data dikosongkan. Murni narik dari Database!
+        // DATA LOKAL DUMMY (KARENA WORKER DIHAPUS)
         var products = []; 
-        /* Contoh Struktur jika ditarik dari Worker DB:
-        [ { id: 1, name: "Ousevoid Sonic Pods", priceValue: 299000, price: "Rp 299.000", img: "url.jpg", category: "Earbuds", specs: { deskripsi: "TWS Terbaik" }, variants: [ {nama: "Hitam", harga: 299000} ] } ]
-        */
-
         var keranjang = [];
         var activeLoginMode = 'buyer';
         window.currentBasePrice = 0;
@@ -334,20 +331,13 @@
             if(fu) { tampilkan ? fu.style.display = 'block' : fu.style.display = 'none'; } 
         }
 
-        // LOAD PRODUK DARI BACKEND
-        async function muatProdukDariDatabase() {
-            var app = document.getElementById('app');
-            app.innerHTML = '<div style="padding:100px 20px; text-align:center;"><i class="fa-solid fa-circle-notch fa-spin" style="font-size:40px; color:#111; margin-bottom:20px;"></i><div style="font-size:14px; color:#555; font-weight:700;">Menghubungkan ke Pangkalan Data...</div></div>';
-            try {
-                const response = await fetch(WORKER_URL + "/api/produk"); 
-                const dataProdukApi = await response.json();
-                if (dataProdukApi && dataProdukApi.length > 0) {
-                    products = dataProdukApi.map(p => {
-                        let parsedVariants = []; try { parsedVariants = p.variants ? JSON.parse(p.variants) : []; } catch(e) {}
-                        return { id: p.id, name: p.nama, priceValue: p.harga, price: 'Rp ' + p.harga.toLocaleString('id-ID'), img: p.img_url, category: p.kategori || "Earbuds", specs: { deskripsi: p.deskripsi }, variants: parsedVariants };
-                    });
-                }
-            } catch (error) { console.log("Gagal memuat API Worker."); }
+        // LOAD PRODUK DARI LOKAL (TANPA WORKER API)
+        function muatProdukDariDatabase() {
+            // Karena fungsi worker dihapus, ini dikembalikan pakai data dummy seperti awal
+            products = [
+                { id: 1, name: "Ousevoid Sonic Pods", priceValue: 299000, price: "Rp 299.000", img: "https://i.ibb.co.com/pjhVC7S6/SOUND-Without-20260714-173950-0000.png", category: "Earbuds", specs: { deskripsi: "TWS Terbaik" }, variants: [ {nama: "Hitam", harga: 299000}, {nama: "Putih", harga: 299000} ] },
+                { id: 2, name: "Ousevoid Boom Speaker", priceValue: 450000, price: "Rp 450.000", img: "https://i.ibb.co.com/pjhVC7S6/SOUND-Without-20260714-173950-0000.png", category: "Speaker", specs: { deskripsi: "Speaker bass memukau" }, variants: [] }
+            ];
             renderHome();
         }
 
@@ -374,7 +364,8 @@
             document.getElementById('pin-field').style.display = (mode === 'admin') ? 'block' : 'none';
         }
 
-        async function prosesLogin() {
+        // FUNGSI LOGIN (MANUAL TANPA WORKER)
+        function prosesLogin() {
             if(activeLoginMode === 'admin') {
                 var u = document.getElementById('log-user').value.trim();
                 var p = document.getElementById('log-pass').value.trim();
@@ -384,12 +375,16 @@
                 if(!u || !p || !pin) { alert("Mohon lengkapi seluruh kredensial otoritas."); return; }
                 
                 btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Memeriksa...'; btn.disabled = true;
-                try {
-                    const response = await fetch(WORKER_URL + "/api/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ username: u, password: p, pin: pin }) });
-                    const hasil = await response.json();
-                    if (hasil.sukses) { window.location.href = "/manajemen.html"; } else { alert("Akses Ditolak: Kredensial tidak valid."); }
-                } catch (error) { alert("Server Keamanan Tidak Merespon."); }
-                btn.innerHTML = '<i class="fa-solid fa-arrow-right-to-bracket"></i> Login Sekarang'; btn.disabled = false;
+                
+                // Pengecekan hardcode tanpa server backend
+                setTimeout(function() {
+                    if (u === 'admin' && p === 'ousevoid2026' && pin === '123456') {
+                        window.location.href = "manajemen.html"; 
+                    } else {
+                        alert("Akses Ditolak: Kredensial tidak valid.");
+                        btn.innerHTML = '<i class="fa-solid fa-arrow-right-to-bracket"></i> Login Sekarang'; btn.disabled = false;
+                    }
+                }, 800);
             } else {
                 alert("Layanan login pembeli sedang dalam tahap sinkronisasi sistem. Anda tetap dapat berbelanja secara langsung tanpa akun.");
                 tutupLogin();
@@ -451,7 +446,6 @@
                 </div>
             `;
 
-            // Kategori Render
             const kategoriList = [
                 { id: 'Earbuds', icon: 'fa-ear-listen', keywords: ['earbud', 'tws', 'headset', 'earphone', 'airpod'] },
                 { id: 'Smartphone', icon: 'fa-mobile-screen-button', keywords: ['smartphone', 'phone', 'hp', 'ponsel', 'galaxy', 'iphone'] },
@@ -541,7 +535,7 @@
 
         function ubahQty(idx, delta) { keranjang[idx].qty += delta; if(keranjang[idx].qty <= 0) keranjang.splice(idx, 1); renderKeranjang(); updateCartBadge(); }
 
-        // CHECKOUT ASLI MIDTRANS
+        // CHECKOUT 
         function renderKeranjang() {
             toggleFooterUtama(false); autoClose(); window.scrollTo(0,0);
             var app = document.getElementById('app');
@@ -614,13 +608,12 @@
             el.classList.add('selected'); window.selectedPaymentMethod = method; 
         }
 
-        async function eksekusiBayarMidtransInvoice() {
-            var btn = document.querySelector('.co-btn-pay'); btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Menghubungkan ke OJK Gateway...'; btn.disabled = true;
-            try {
-                const res = await fetch(WORKER_URL + "/backend", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(window.dataPesananSementara) });
-                const hasil = await res.json();
-                if (hasil.redirect_url) { window.location.href = hasil.redirect_url; } else { alert("Penolakan Sistem: Terjadi anomali pada integrasi pembayaran."); btn.innerHTML = 'Ulangi Otorisasi'; btn.disabled = false; }
-            } catch (err) { alert("Koneksi gagal. Periksa jaringan Anda."); btn.disabled = false; btn.innerHTML = 'Ulangi Otorisasi'; }
+        function eksekusiBayarMidtransInvoice() {
+            var btn = document.querySelector('.co-btn-pay'); btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Memproses Pesanan...'; btn.disabled = true;
+            setTimeout(() => {
+                alert("Pesanan berhasil dicatat secara lokal. Terima kasih!");
+                window.location.reload();
+            }, 1500);
         }
 
         function renderCS(t) { toggleFooterUtama(true); document.getElementById('app').innerHTML = `<div class="info-card" style="text-align:center;"><h2>${t}</h2><p>Data inventaris sedang dalam pemutakhiran sistem pusat.</p></div>`; autoClose(); }
