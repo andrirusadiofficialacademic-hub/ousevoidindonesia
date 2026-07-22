@@ -140,7 +140,7 @@
         .toast-notif.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
         /* ==========================================
-           8. FOOTER KEMBALI SEPERTI SEMULA
+           8. FOOTER
            ========================================== */
         .footer { padding: 80px 20px 40px 20px; background: #fff; text-align: left; font-size: 13px; color: #555; border-top: 1px solid #eee; }
         .footer-profile-title { font-weight: 800; color: #111; margin-bottom: 15px; font-size: 16px; letter-spacing: 0.5px; }
@@ -152,7 +152,8 @@
         .copyright { font-size: 12px; color: #888; border-top: 1px solid #eee; padding-top: 25px; text-align: left; font-weight: 600; }
         #footer-main-info.hidden { display: none !important; }
 
-        .info-box { text-align: left; background: #fff; padding: 35px; border-radius: 20px; border: 1px solid #eee; }
+        .info-box { text-align: left; background: #fff; padding: 35px; border-radius: 20px; border: 1px solid #eee; line-height: 1.8; font-size: 14px; color: #444; }
+        .info-box h2 { font-size: 22px; font-weight: 800; color: #111; margin-top: 0; margin-bottom: 20px; }
         .track-input-wrapper { display: flex; flex-direction: column; gap: 18px; align-items: center; padding: 40px 20px; background: #fff; border-radius: 24px; border: 1px solid #eee; }
 
         @media (min-width: 768px) {
@@ -189,7 +190,7 @@
         </div>
         <div class="nav-item active" id="btn-beranda" onclick="renderHome()"><i class="fa-solid fa-house"></i> Beranda</div>
         <div class="nav-group">
-            <div class="nav-label">Kategori</div>
+            <div class="nav-label">Kategori Produk</div>
             <div class="nav-item" onclick="renderCS('Earbuds')"><i class="fa-solid fa-ear-listen"></i> Earbuds</div>
             <div class="nav-item" onclick="renderCS('Smartphone')"><i class="fa-solid fa-mobile-screen-button"></i> Smartphone</div>
             <div class="nav-item" onclick="renderCS('Speaker')"><i class="fa-solid fa-volume-high"></i> Speaker</div>
@@ -197,13 +198,13 @@
         </div>
         <div class="nav-group">
             <div class="nav-label">Layanan Pelanggan</div>
-            <div class="nav-item" onclick="renderLacakPesanan()"><i class="fa-solid fa-map-location-dot"></i> Lacak Pesanan</div>
-            <div class="nav-item" onclick="renderGaransi()"><i class="fa-solid fa-shield-halved"></i> Garansi Resmi</div>
-            <div class="nav-item" onclick="renderPengiriman()"><i class="fa-solid fa-truck-fast"></i> Pengiriman</div>
-            <div class="nav-item" onclick="renderPembayaran()"><i class="fa-solid fa-credit-card"></i> Pembayaran</div>
-            <div class="nav-item" onclick="renderPrivasi()"><i class="fa-solid fa-lock"></i> Kebijakan Privasi</div>
-            <div class="nav-item" onclick="renderSyarat()"><i class="fa-solid fa-file-lines"></i> Syarat & Ketentuan</div>
-            <div class="nav-item login-btn-sidebar btn-masuk-sistem" onclick="bukaLogin()"><i class="fa-solid fa-user-shield"></i> Login Admin</div>
+            <div class="nav-item" onclick="renderLacakPesanan()"><i class="fa-solid fa-map-location-dot"></i> Pelacakan Pesanan</div>
+            <div class="nav-item" onclick="renderGaransi()"><i class="fa-solid fa-shield-halved"></i> Kebijakan Garansi Resmi</div>
+            <div class="nav-item" onclick="renderPengiriman()"><i class="fa-solid fa-truck-fast"></i> Ketentuan Logistik & Pengiriman</div>
+            <div class="nav-item" onclick="renderPembayaran()"><i class="fa-solid fa-credit-card"></i> Regulasi Pembayaran & OJK</div>
+            <div class="nav-item" onclick="renderPrivasi()"><i class="fa-solid fa-lock"></i> Kebijakan Privasi & UU PDP</div>
+            <div class="nav-item" onclick="renderSyarat()"><i class="fa-solid fa-file-lines"></i> Syarat & Ketentuan Umum</div>
+            <div class="nav-item login-btn-sidebar btn-masuk-sistem" onclick="bukaLogin()"><i class="fa-solid fa-user-shield"></i> Portal Otoritas Admin</div>
         </div>
     </div>
 
@@ -229,7 +230,7 @@
             <div style="display: flex; align-items: center;"><img src="https://i.ibb.co.com/TDzbDzqw/file-000000009a788208b767f7ea331a78c5.png" class="chat-avatar" alt="Marsya"><span>Marsya (Agent)</span></div>
             <div class="chat-close" onclick="toggleChat()"><i class="fa-solid fa-xmark"></i></div>
         </div>
-        <div class="chat-messages" id="chatMessages"><div class="msg-bubble msg-admin">Selamat datang di Ousevoid! Ada yang bisa Marsya bantu?</div></div>
+        <div class="chat-messages" id="chatMessages"><div class="msg-bubble msg-admin">Selamat datang di Layanan Bantuan Pelanggan resmi PT Gerbang Masa Depan. Ada yang dapat kami bantu?</div></div>
         <div class="chat-input-area" id="chatInputArea">
             <input type="text" id="chatInputUser" placeholder="Ketik pesan..." onkeypress="if(event.key === 'Enter') kirimPesanChat()">
             <button onclick="kirimPesanChat()"><i class="fa-solid fa-paper-plane"></i></button>
@@ -306,7 +307,7 @@
             try {
                 const res = await fetch(WORKER_URL + "/api/chat?session_id=" + userSessionId); const pesans = await res.json();
                 var area = document.getElementById('chatMessages');
-                var html = '<div class="msg-bubble msg-admin">Halo! Ada yang bisa dibantu?</div>';
+                var html = '<div class="msg-bubble msg-admin">Selamat datang di layanan bantuan resmi PT Gerbang Masa Depan. Ada yang dapat kami bantu?</div>';
                 if(pesans && pesans.length > 0) { pesans.forEach(p => { html += `<div class="msg-bubble ${p.is_admin == 1 ? 'msg-admin' : 'msg-user'}">${p.pesan}</div>`; }); }
                 area.innerHTML = html; area.scrollTop = area.scrollHeight;
             } catch (e) { }
@@ -360,7 +361,7 @@
             slides[currentSlideIndex].classList.add('active');
         }
 
-        // --- RENDER HALAMAN UTAMA (SCROLL HORIZONTAL PER KATEGORI) ---
+        // --- RENDER HALAMAN UTAMA ---
         function renderHome() {
             toggleFooterUtama(true); 
             var app = document.getElementById('app');
@@ -410,7 +411,6 @@
                 { id: 'Sparepart', icon: 'fa-link', keywords: ['sparepart', 'kabel', 'charger', 'baterai', 'case', 'pelindung'] }
             ];
 
-            // RENDER BARIS PER KATEGORI
             kategoriList.forEach(kat => {
                 let produkKategoriIni = products.filter(p => {
                     let namaLower = p.name.toLowerCase();
@@ -440,7 +440,7 @@
                         </div>`;
                     });
                 } else {
-                    html += `<div style="padding: 20px; color:#888; font-size:13px; font-style:italic;">Belum ada produk untuk kategori ${kat.id}.</div>`;
+                    html += `<div style="padding: 20px; color:#888; font-size:13px; font-style:italic;">Belum tersedia unit produk dalam kategori ${kat.id}.</div>`;
                 }
                 html += `</div></div>`;
             });
@@ -476,9 +476,9 @@
                     <div style="font-size:24px; font-weight:800;">${p.name}</div>
                     <div style="font-size:22px; font-weight:800; color:#e74c3c;" id="display-product-price">Rp ${window.currentBasePrice.toLocaleString('id-ID')}</div>
                     ${varianHtml}
-                    <div class="info-box" style="margin-top:20px; padding:20px;"><strong>Spesifikasi:</strong><br>${p.specs.deskripsi || '-'}</div>
+                    <div class="info-box" style="margin-top:20px; padding:20px;"><strong>Spesifikasi Teknis:</strong><br>${p.specs.deskripsi || '-'}</div>
                 </div>
-                <button class="co-btn-pay" onclick="tambahKeKeranjang()"><i class="fa-solid fa-cart-plus"></i> Tambah ke Keranjang</button>
+                <button class="co-btn-pay" onclick="tambahKeKeranjang()"><i class="fa-solid fa-cart-plus"></i> Tambahkan ke Keranjang Belanja</button>
             `; autoClose();
         }
 
@@ -499,7 +499,7 @@
         function renderKeranjang() {
             toggleFooterUtama(false); var app = document.getElementById('app');
             if (keranjang.length === 0) {
-                app.innerHTML = `<div style="padding:100px 20px; text-align:center;"><h2>Keranjang Kosong</h2><button class="co-btn-pay" onclick="renderHome()">Belanja Sekarang</button></div>`; return;
+                app.innerHTML = `<div style="padding:100px 20px; text-align:center;"><h2>Keranjang Belanja Kosong</h2><button class="co-btn-pay" onclick="renderHome()">Kembali Berbelanja</button></div>`; return;
             }
             var htmlItems = ''; var subtotal = 0;
             keranjang.forEach((item, idx) => {
@@ -508,17 +508,17 @@
             });
             app.innerHTML = `
                 <div class="co-wrapper">
-                    <div class="co-card"><div class="co-card-header">Barang Anda</div>${htmlItems}</div>
-                    <div class="co-card"><div class="co-card-header">Alamat Pengiriman</div><input type="text" id="co-nama" class="co-input-modern" placeholder="Nama Lengkap"><input type="number" id="co-wa" class="co-input-modern" placeholder="No WhatsApp"><input type="email" id="co-email" class="co-input-modern" placeholder="Email (Untuk Invoice)"><textarea id="co-alamat" class="co-input-modern" placeholder="Alamat Lengkap" rows="3"></textarea></div>
+                    <div class="co-card"><div class="co-card-header">Daftar Pesanan</div>${htmlItems}</div>
+                    <div class="co-card"><div class="co-card-header">Informasi Alamat Pengiriman</div><input type="text" id="co-nama" class="co-input-modern" placeholder="Nama Lengkap Penerima"><input type="number" id="co-wa" class="co-input-modern" placeholder="Nomor Telepon / WhatsApp"><input type="email" id="co-email" class="co-input-modern" placeholder="Alamat Surel (Email)"><textarea id="co-alamat" class="co-input-modern" placeholder="Alamat Domisili Pengiriman Secara Lengkap" rows="3"></textarea></div>
                     <select id="co-kurir" class="kurir-select"><option value="35000">Gamoon e-Package - Rp 35.000</option></select>
                 </div>
-                <div class="co-bottom-bar"><div class="co-bottom-total-wrapper"><span class="co-bottom-label">Total</span><span class="co-bottom-price">Rp ${(subtotal+35000).toLocaleString('id-ID')}</span></div><button class="co-btn-pay" style="width:auto; padding:14px 20px;" onclick="lanjutKeInvoiceMulti()">Lanjut Pembayaran</button></div>
+                <div class="co-bottom-bar"><div class="co-bottom-total-wrapper"><span class="co-bottom-label">Total Tagihan</span><span class="co-bottom-price">Rp ${(subtotal+35000).toLocaleString('id-ID')}</span></div><button class="co-btn-pay" style="width:auto; padding:14px 20px;" onclick="lanjutKeInvoiceMulti()">Lanjutkan ke Proses Pembayaran</button></div>
             `; autoClose();
         }
 
         function lanjutKeInvoiceMulti() {
             var n = document.getElementById('co-nama').value, w = document.getElementById('co-wa').value, e = document.getElementById('co-email').value, a = document.getElementById('co-alamat').value;
-            if (!n || !w || !e || !a) { alert("Lengkapi data!"); return; }
+            if (!n || !w || !e || !a) { alert("Mohon lengkapi seluruh field data pengiriman."); return; }
             var sub = keranjang.reduce((s, i) => s + (i.price * i.qty), 0) + 35000;
             var trx = new Date().getFullYear() + "/OUSE/" + Math.floor(Math.random()*99999);
             window.dataPesananSementara = { nama: n, wa: w, email: e, total: sub, idTrx: trx, barang: keranjang.map(i => i.name).join(', ') };
@@ -530,17 +530,17 @@
             document.getElementById('app').innerHTML = `
                 <div class="co-wrapper">
                     <div style="text-align:center; margin-bottom:20px; padding-bottom:20px; border-bottom:1px dashed #ccc;">
-                        <h3 style="margin:0 0 10px 0;">ID: ${d.idTrx}</h3>
+                        <h3 style="margin:0 0 10px 0;">Nomor Transaksi: ${d.idTrx}</h3>
                         <div style="font-size:30px; font-weight:800;">Rp ${d.total.toLocaleString('id-ID')}</div>
                     </div>
-                    <div style="margin-bottom:20px;"><strong>Penerima:</strong> ${d.nama}<br><strong>Email:</strong> ${d.email}</div>
-                    <div style="margin-bottom:20px;"><strong>Pilih Pembayaran:</strong></div>
+                    <div style="margin-bottom:20px;"><strong>Nama Pemesan:</strong> ${d.nama}<br><strong>Surel:</strong> ${d.email}</div>
+                    <div style="margin-bottom:20px;"><strong>Pilih Kanal Pembayaran Resmi:</strong></div>
                     <div class="payment-grid">
                         <div class="payment-box selected" onclick="pilihPayment(this, 'gopay')"><img src="https://i.ibb.co.com/MDFzRSrD/Gopay-logo-svg.png"></div>
                         <div class="payment-box" onclick="pilihPayment(this, 'dana')"><img src="https://i.ibb.co.com/xqg0PbT4/Logo-dana-blue-svg.png"></div>
                         <div class="payment-box" onclick="pilihPayment(this, 'bca_va')"><img src="https://i.ibb.co.com/qLT2FX8W/500px-Bank-Central-Asia-svg.png"></div>
                     </div>
-                    <button class="co-btn-pay" onclick="eksekusiBayarMidtransInvoice()">Bayar Sekarang</button>
+                    <button class="co-btn-pay" onclick="eksekusiBayarMidtransInvoice()">Konfirmasi Pembayaran</button>
                 </div>
             `;
         }
@@ -553,23 +553,116 @@
         }
 
         async function eksekusiBayarMidtransInvoice() {
-            var btn = document.querySelector('.co-btn-pay'); btn.innerHTML = 'Memproses...'; btn.disabled = true;
+            var btn = document.querySelector('.co-btn-pay'); btn.innerHTML = 'Memproses Transaksi...'; btn.disabled = true;
             try {
                 const res = await fetch(WORKER_URL + "/backend", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(window.dataPesananSementara) });
                 const hasil = await res.json();
-                if (hasil.redirect_url) { window.location.href = hasil.redirect_url; } else { alert("Gagal koneksi ke server pembayaran."); btn.innerHTML = 'Coba Lagi'; btn.disabled = false; }
-            } catch (err) { alert("Server error."); btn.disabled = false; }
+                if (hasil.redirect_url) { window.location.href = hasil.redirect_url; } else { alert("Gagal melakukan otorisasi pembayaran."); btn.innerHTML = 'Coba Lagi'; btn.disabled = false; }
+            } catch (err) { alert("Gangguan koneksi jaringan server."); btn.disabled = false; }
         }
 
-        function renderCS(t) { document.getElementById('app').innerHTML = `<div style="padding:100px 20px; text-align:center;"><h2>${t}</h2><p>Halaman sedang dibangun.</p></div>`; autoClose(); }
+        function renderCS(t) { 
+            toggleFooterUtama(true); 
+            document.getElementById('app').innerHTML = `<div class="info-box"><h2>Informasi Kategori: ${t}</h2><p>Direktorat katalog produk untuk lini masa ${t} saat ini sedang dalam tahap pemutakhiran data secara berkala oleh manajemen PT Gerbang Masa Depan.</p></div>`; 
+            autoClose(); 
+        }
         
-        // Halaman Informasi Lainnya
-        function renderGaransi() { toggleFooterUtama(true); document.getElementById('app').innerHTML = '<div class="info-box"><h2>Garansi Resmi</h2><p>Semua produk original Ousevoid dilindungi oleh <strong>Garansi Resmi Produsen selama 3 bulan</strong> sejak tanggal pembelian. Garansi ini secara khusus mencakup cacat pabrik (manufacturing defect).</p></div>'; autoClose(); }
-        function renderPengiriman() { toggleFooterUtama(true); document.getElementById('app').innerHTML = '<div class="info-box"><h2>Pengiriman</h2><p>Khusus untuk pengiriman di wilayah Jakarta dan Bodetabek, kami menggunakan layanan eksklusif <strong>Gamoon e-Package Sameday</strong> (maks 8 jam).</p></div>'; autoClose(); }
-        function renderPembayaran() { toggleFooterUtama(true); document.getElementById('app').innerHTML = '<div class="info-box"><h2>Pembayaran</h2><p>Sistem pembayaran diproses secara real-time dan diawasi oleh OJK. Kami menerima GoPay, DANA, QRIS, dan Virtual Account.</p></div>'; autoClose(); }
-        function renderPrivasi() { toggleFooterUtama(true); document.getElementById('app').innerHTML = '<div class="info-box"><h2>Kebijakan Privasi</h2><p>Kami tunduk pada ketentuan UU PDP RI. Data Anda hanya digunakan untuk keperluan pengiriman dan tidak akan disalahgunakan.</p></div>'; autoClose(); }
-        function renderSyarat() { toggleFooterUtama(true); document.getElementById('app').innerHTML = '<div class="info-box"><h2>Syarat & Ketentuan</h2><p>Dengan mengakses situs ini, Anda menyetujui seluruh syarat dan ketentuan yang berlaku. Untuk refund, wajib menyertakan video unboxing utuh.</p></div>'; autoClose(); }
-        
+        // --- HALAMAN LAYANAN PELANGGAN FORMAL ALA PEMERINTAHAN ---
+        function renderLacakPesanan() {
+            toggleFooterUtama(true); clearActiveMenu(); autoClose();
+            var app = document.getElementById('app');
+            app.innerHTML = `
+                <div class="page-title" style="text-align:center;">Pelacakan Status Pengiriman Pesanan</div>
+                <div style="font-size:14px; font-weight:500; color:#666; text-align:center; margin-bottom:30px;">Silakan masukkan Nomor Invoice atau Resi resmi yang diterbitkan melalui surel untuk memantau status logistik secara periodik.</div>
+                <div class="track-input-wrapper">
+                    <input type="text" id="input-resi" class="track-input" placeholder="Contoh: 2026/OUSE/..." style="max-width:380px;">
+                    <button class="track-btn" onclick="prosesLacak(this)"><i class="fa-solid fa-magnifying-glass"></i> Periksa Status Logistik</button>
+                    <div id="hasil-tracking" style="width:100%; max-width:380px;"></div>
+                </div>
+            `;
+        }
+
+        function prosesLacak(btn) {
+            var resi = document.getElementById('input-resi').value.trim();
+            if(!resi) { alert("Harap memasukkan Nomor Invoice/Resi yang sah."); return; }
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Memvalidasi...'; btn.disabled = true;
+            document.getElementById('hasil-tracking').innerHTML = '';
+            setTimeout(function() {
+                btn.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> Periksa Status Logistik'; btn.disabled = false;
+                document.getElementById('hasil-tracking').innerHTML = `
+                    <div class="timeline" style="display:block;">
+                        <div class="timeline-item done"><div class="timeline-icon"></div><div class="timeline-content"><h4>Registrasi Pesanan</h4><p>Data transaksi telah tercatat resmi dalam basis data pusat.</p></div></div>
+                        <div class="timeline-item done"><div class="timeline-icon"></div><div class="timeline-content"><h4>Tahap Pengemasan</h4><p>Logistik barang sedang dipersiapkan dan melewati uji mutu.</p></div></div>
+                        <div class="timeline-item active"><div class="timeline-icon"></div><div class="timeline-content"><h4>Dalam Pengiriman</h4><p>Kurir bertugas sedang mengantar paket ke alamat tujuan.</p></div></div>
+                        <div class="timeline-item"><div class="timeline-icon"></div><div class="timeline-content"><h4>Selesai</h4><p>Serah terima paket kepada penerima.</p></div></div>
+                    </div>
+                `;
+            }, 1200);
+        }
+
+        function renderGaransi() { 
+            toggleFooterUtama(true); 
+            document.getElementById('app').innerHTML = `
+                <div class="info-box">
+                    <h2>Kebijakan Garansi Resmi Produk</h2>
+                    <p>Berdasarkan ketentuan operasional PT Gerbang Masa Depan, seluruh produk resmi merek Ousevoid dilindungi oleh program <strong>Garansi Resmi Produsen selama 3 (tiga) bulan</strong> terhitung sejak tanggal diterbitkannya bukti transaksi pembelian yang sah.</p>
+                    <p><strong>Cakupan Garansi:</strong><br>Garansi ini secara eksklusif hanya mencakup kerusakan atau cacat bawaan pabrik (<em>manufacturing defects</em>) serta malfungsi pada perangkat keras utama.</p>
+                    <p><strong>Pengecualian Garansi:</strong><br>Kerusakan yang diakibatkan oleh kelalaian atau kesalahan penggunaan oleh pihak konsumen—termasuk namun tidak terbatas pada paparan cairan, benturan fisik, terjatuh, maupun upaya perbaikan atau modifikasi mandiri di luar pusat servis resmi—dinyatakan gugur dari klaim garansi.</p>
+                </div>`; 
+            autoClose(); 
+        }
+
+        function renderPengiriman() { 
+            toggleFooterUtama(true); 
+            document.getElementById('app').innerHTML = `
+                <div class="info-box">
+                    <h2>Ketentuan Layanan Logistik dan Pengiriman</h2>
+                    <img src="https://i.ibb.co.com/DHZj9dpW/8827-2.jpg" alt="Gamoon e-Package" style="height: 40px; object-fit: contain; max-width: 140px; filter: invert(1); mix-blend-mode: multiply; margin-bottom: 20px; display: block;">
+                    <p>PT Gerbang Masa Depan berkomitmen untuk menjamin ketepatan waktu pengiriman barang demi kepuasan konsumen. Untuk wilayah operasional khusus Jakarta dan Bodetabek, kami menggunakan jasa pengiriman prioritas <strong>Gamoon e-Package Sameday</strong>, dengan ketentuan batas waktu tiba maksimal <strong>8 (delapan) jam</strong> setelah konfirmasi pembayaran berhasil diverifikasi oleh sistem.</p>
+                    <p>Adapun untuk wilayah di luar jangkauan tersebut, pengiriman logistik dikoordinasikan melalui mitra perusahaan ekspedisi nasional terpercaya seperti J&T Express dan JNE Reguler.</p>
+                </div>`; 
+            autoClose(); 
+        }
+
+        function renderPembayaran() { 
+            toggleFooterUtama(true); 
+            document.getElementById('app').innerHTML = `
+                <div class="info-box">
+                    <h2>Regulasi dan Keamanan Sistem Pembayaran</h2>
+                    <p>Seluruh infrastruktur dan mekanisme pemrosesan transaksi finansial pada situs web resmi <em>ousevoid.biz.id</em> dioperasikan secara transparan, menggunakan protokol enkripsi berstandar perbankan tinggi, serta mematuhi ketentuan regulasi yang berlaku dan <strong>diawasi langsung oleh Otoritas Jasa Keuangan (OJK)</strong> melalui mitra gerbang pembayaran resmi.</p>
+                    <p>Metode transaksi yang didukung mencakup:</p>
+                    <ul>
+                        <li>Layanan Dompet Digital (E-Wallet): GoPay, DANA, ShopeePay, serta QRIS Nasional.</li>
+                        <li>Layanan Transfer Bank (Virtual Account): Bank BCA, Bank Mandiri, BNI, BRI, dan BTN.</li>
+                    </ul>
+                </div>`; 
+            autoClose(); 
+        }
+
+        function renderPrivasi() { 
+            toggleFooterUtama(true); 
+            document.getElementById('app').innerHTML = `
+                <div class="info-box">
+                    <h2>Kebijakan Privasi dan Perlindungan Data Pribadi</h2>
+                    <p><strong>1. Dasar Hukum Kepatuhan</strong><br>PT Gerbang Masa Depan tunduk dan patuh terhadap ketentuan <strong>Undang-Undang Perlindungan Data Pribadi Republik Indonesia (UU PDP)</strong> dalam mengumpulkan, mengelola, serta melindungi kerahasiaan data seluruh konsumen.</p>
+                    <p><strong>2. Pembatasan Pengumpulan Data</strong><br>Data pribadi yang dimintai dari Pengguna dibatasi secara ketat hanya pada informasi esensial yang diperlukan untuk kepentingan administrasi transaksi dan pengiriman logistik, meliputi: nama lengkap, nomor kontak telekomunikasi, alamat surel, serta alamat domisili penerima.</p>
+                    <p><strong>3. Retensi Data dan Keamanan</strong><br>Data sensitif konsumen akan dihapus secara permanen dari server aktif kami segera setelah proses pengiriman logistik dinyatakan tuntas. Perusahaan tidak menyimpan informasi kredensial finansial atau perbankan milik Pengguna.</p>
+                </div>`; 
+            autoClose(); 
+        }
+
+        function renderSyarat() { 
+            toggleFooterUtama(true); 
+            document.getElementById('app').innerHTML = `
+                <div class="info-box">
+                    <h2>Syarat dan Ketentuan Umum Penggunaan Layanan</h2>
+                    <p><strong>Pasal 1: Ketentuan Umum</strong><br>Dengan mengakses serta melakukan transaksi jual beli melalui portal <em>ousevoid.biz.id</em>, Pengguna menyatakan telah membaca, memahami, serta menyatakan setuju untuk terikat secara hukum pada seluruh klausul Syarat dan Ketentuan Umum ini.</p>
+                    <p><strong>Pasal 2: Keabsahan Data Pengguna</strong><br>Pengguna bertanggung jawab penuh atas keakuratan, kebenaran, dan kelengkapan data informasi yang diinput saat melakukan pemesanan. Segala bentuk kerugian akibat kesalahan pencantuman alamat atau kontak di luar tanggung jawab PT Gerbang Masa Depan.</p>
+                    <p><strong>Pasal 3: Prosedur Pengembalian (Return & Refund)</strong><br>Klaim pengembalian barang akibat ketidaksesuaian atau cacat produk wajib disertakan dengan dokumen rekam video proses pembukaan paket (<em>unboxing</em>) secara utuh tanpa suntingan, selambat-lambatnya 2x24 jam sejak barang diterima.</p>
+                </div>`; 
+            autoClose(); 
+        }
+
         window.onload = function() { muatProdukDariDatabase(); };
     </script>
 </body>
