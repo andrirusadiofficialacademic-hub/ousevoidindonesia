@@ -1,8 +1,69 @@
-name = "ousevoidindonesia"
-compatibility_date = "2026-07-15"
-pages_build_output_dir = "."
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+    
+    // 1. ATUR CORS BIAR HTML BISA NGAKSES
+    const corsHeaders = {
+      "Access-Control-Allow-Origin": "*", // Ganti "*" pakai domain lu biar lebih aman
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
+    };
 
-[[d1_databases]]
-binding = "DB"
-database_name = "ousevoid-db"
-database_id = "4a8f9c2d-7b1e-43a9-8e12-3f5a6b7c8d9e"
+    // Handle preflight request dari browser
+    if (request.method === "OPTIONS") {
+      return new Response(null, { headers: corsHeaders });
+    }
+
+    try {
+      // 2. ENDPOINT: PROSES LOGIN ADMIN
+      if (url.pathname === "/api/login" && request.method === "POST") {
+        const body = await request.json();
+        const { username, password, pin } = body;
+
+        // Cek ke database D1
+        const stmt = env.DB.prepare("SELECT * FROM users WHERE username = ? AND password = ? AND pin = ?");
+        const admin = await stmt.bind(username, password, pin).first();
+
+        if (admin) {
+          return new Response(JSON.stringify({ sukses: true, pesan: "Otorisasi berhasil" }), { 
+            headers: { "Content-Type": "application/json", ...corsHeaders } 
+          });
+        } else {
+          return new Response(JSON.stringify({ sukses: false, error: "Kredensial salah" }), { 
+            status: 401, headers: { "Content-Type": "application/json", ...corsHeaders } 
+          });
+        }
+      }
+
+      // 3. ENDPOINT: TARIK DATA PRODUK BUAT INDEX.HTML & MANAJEMEN.HTML
+      if (url.pathname === "/api/produk" && request.method === "GET") {
+        const { results } = await env.DB.prepare("SELECT * FROM produk").all();
+        return new Response(JSON.stringify(results), { 
+          headers: { "Content-Type": "application/json", ...corsHeaders } 
+        });
+      }
+
+      // 4. ENDPOINT: TAMBAH PRODUK DARI MANAJEMEN.HTML
+      if (url.pathname === "/api/produk" && request.method === "POST") {
+        const data = await request.json();
+        const stmt = env.DB.prepare(
+          "INSERT INTO produk (kategori, nama, harga, stok, deskripsi, img_url, variants) VALUES (?, ?, ?, ?, ?, ?, ?)"
+        );
+        await stmt.bind(data.kategori, data.nama, data.harga, data.stok, data.deskripsi, data.img_url, data.variants).run();
+        
+        return new Response(JSON.stringify({ sukses: true }), { 
+          headers: { "Content-Type": "application/json", ...corsHeaders } 
+        });
+      }
+
+      // Kalau endpoint gak ketemu
+      return new Response("Not Found", { status: 404, headers: corsHeaders });
+
+    } catch (err) {
+      // Kalau ada error di server/database
+      return new Response(JSON.stringify({ sukses: false, error: err.message }), { 
+        status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } 
+      });
+    }
+  }
+};
