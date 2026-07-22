@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OUSEVOID | Official Store</title>
     
+    <!-- Google Fonts & Font Awesome Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,656 +15,594 @@
         /* ==========================================
            1. DASAR & TYPOGRAPHY
            ========================================== */
-        body { margin: 0; font-family: 'Inter', sans-serif; color: #222; background-color: #ffffff; background-image: radial-gradient(#e5e5e5 1px, transparent 1px); background-size: 20px 20px; scroll-behavior: smooth; }
+        * { box-sizing: border-box; }
+        body { 
+            margin: 0; 
+            font-family: 'Inter', sans-serif; 
+            color: #111827; 
+            background-color: #f9fafb; 
+            scroll-behavior: smooth; 
+        }
         a { text-decoration: none; color: inherit; cursor: pointer; }
         
         /* ==========================================
            2. HEADER & NAVIGASI
            ========================================== */
-        .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid rgba(0,0,0,0.05); position: sticky; top: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
-        .menu-btn { position: relative; display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 10px 10px 10px 0; z-index: 1001; }
-        .menu-btn span { width: 24px; height: 3px; background: #111; border-radius: 2px; transition: 0.3s; }
-        .menu-btn:hover span { background: #555; }
-        .logo { width: 120px; cursor: pointer; position: absolute; left: 50%; transform: translateX(-50%); z-index: 1001; transition: 0.3s; }
-        .logo:hover { opacity: 0.7; }
-        .cart-icon { position: relative; font-size: 20px; color: #111; cursor: pointer; padding: 10px 0 10px 10px; z-index: 1001; display: flex; align-items: center; transition: 0.3s; }
-        .cart-icon:hover { color: #555; transform: scale(1.05); }
-        .cart-badge { position: absolute; top: 2px; right: -5px; background: #e74c3c; color: #fff; font-size: 10px; font-weight: 800; width: 18px; height: 18px; border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 2px solid #fff; box-shadow: 0 4px 10px rgba(231,76,60,0.3); }
+        .header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 14px 20px; 
+            border-bottom: 1px solid #f3f4f6; 
+            position: sticky; 
+            top: 0; 
+            background: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(10px); 
+            z-index: 1000; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05); 
+        }
+        .header-left { display: flex; align-items: center; gap: 15px; }
+        .menu-btn { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 5px; 
+            cursor: pointer; 
+            padding: 5px; 
+        }
+        .menu-btn span { width: 22px; height: 2.5px; background: #111; border-radius: 2px; }
+        .logo { height: 32px; cursor: pointer; transition: 0.2s; }
+        .logo:hover { opacity: 0.8; }
         
-        .sidebar { position: fixed; top: 0; left: -320px; width: 280px; height: 100%; background: #fff; box-shadow: 5px 0 30px rgba(0,0,0,0.1); z-index: 1003; transition: 0.4s cubic-bezier(0.4,0,0.2,1); padding: 20px 15px; box-sizing: border-box; overflow-y: auto; }
+        .header-actions { display: flex; align-items: center; gap: 12px; }
+        .btn-lacak-nav {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: #f3f4f6;
+            color: #374151;
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-lacak-nav:hover { background: #e5e7eb; color: #111; }
+
+        .cart-icon { 
+            position: relative; 
+            font-size: 18px; 
+            color: #111; 
+            cursor: pointer; 
+            padding: 8px; 
+            display: flex; 
+            align-items: center; 
+        }
+        .cart-badge { 
+            position: absolute; 
+            top: 2px; 
+            right: 0px; 
+            background: #e11d48; 
+            color: #fff; 
+            font-size: 10px; 
+            font-weight: 800; 
+            width: 18px; 
+            height: 18px; 
+            border-radius: 50%; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            border: 2px solid #fff; 
+        }
+
+        /* TOMBOL LOGIN ALA E-COMMERCE */
+        .btn-login-nav {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #111827;
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .btn-login-nav:hover { background: #1f2937; transform: translateY(-1px); }
+
+        /* SIDEBAR DRAWER */
+        .sidebar { 
+            position: fixed; 
+            top: 0; 
+            left: -320px; 
+            width: 290px; 
+            height: 100%; 
+            background: #fff; 
+            box-shadow: 10px 0 30px rgba(0,0,0,0.1); 
+            z-index: 1003; 
+            transition: 0.3s ease; 
+            padding: 20px 15px; 
+            overflow-y: auto; 
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
         .sidebar.active { left: 0; }
-        .sidebar-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 5px 30px 5px; border-bottom: 1px solid #eee; margin-bottom: 20px; }
-        .sidebar-logo { width: 120px; }
-        .close-sidebar-btn { font-size: 22px; color: #888; cursor: pointer; padding: 5px; transition: 0.3s; }
-        .close-sidebar-btn:hover { color: #e74c3c; transform: rotate(90deg); }
-        .nav-group { margin-bottom: 25px; }
-        .nav-label { font-size: 11px; color: #888; font-weight: 800; letter-spacing: 1.5px; margin-bottom: 15px; padding-left: 10px; text-transform: uppercase; }
-        .nav-item { display: flex; align-items: center; padding: 12px 15px; border-radius: 12px; margin-bottom: 5px; color: #555; font-size: 14px; font-weight: 600; transition: all 0.3s ease; cursor: pointer; }
-        .nav-item i { width: 25px; font-size: 18px; margin-right: 12px; color: #aaa; transition: 0.3s; }
-        .nav-item:hover { background: #f8f9fa; color: #111; transform: translateX(5px); }
-        .nav-item:hover i { color: #111; }
-        .nav-item.active { background: linear-gradient(135deg, #111 0%, #333 100%); color: #fff; box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+        .sidebar-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 20px; border-bottom: 1px solid #f3f4f6; margin-bottom: 20px; }
+        .close-sidebar-btn { font-size: 20px; color: #9ca3af; cursor: pointer; padding: 5px; }
+        .nav-group { margin-bottom: 20px; }
+        .nav-label { font-size: 10px; color: #9ca3af; font-weight: 800; letter-spacing: 1px; margin-bottom: 10px; padding-left: 10px; text-transform: uppercase; }
+        .nav-item { display: flex; align-items: center; padding: 10px 14px; border-radius: 12px; margin-bottom: 4px; color: #4b5563; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .nav-item i { width: 22px; font-size: 15px; margin-right: 10px; color: #6b7280; }
+        .nav-item:hover { background: #f3f4f6; color: #111; }
+        .nav-item.active { background: #111827; color: #fff; }
         .nav-item.active i { color: #fff; }
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(3px); z-index: 1002; opacity: 0; visibility: hidden; transition: 0.4s; }
+        
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(2px); z-index: 1002; opacity: 0; visibility: hidden; transition: 0.3s; }
         .overlay.active { opacity: 1; visibility: visible; }
-        
+
         /* ==========================================
-           3. AREA KONTEN UTAMA & SCROLL HORIZONTAL
+           3. AREA KONTEN UTAMA
            ========================================== */
-        .main-content { padding: 30px 20px 100px 20px; max-width: 600px; margin: auto; min-height: 500px; text-align: center; }
-        .slider-container { position: relative; width: 100%; border-radius: 20px; overflow: hidden; margin-bottom: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.12); border: 1px solid rgba(0,0,0,0.05); }
+        .main-content { padding: 25px 20px 80px 20px; max-width: 960px; margin: auto; min-height: 500px; }
+
+        /* BANNER SLIDER */
+        .slider-container { position: relative; width: 100%; border-radius: 20px; overflow: hidden; margin-bottom: 35px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); background: #111; }
         .slide { display: none; width: 100%; }
-        .slide.active { display: block; animation: fadeEffect 0.8s; }
-        @keyframes fadeEffect { from {opacity: 0.5} to {opacity: 1} }
-        .slide img { width: 100%; display: block; }
+        .slide.active { display: block; animation: fadeIn 0.6s; }
+        @keyframes fadeIn { from {opacity: 0.4} to {opacity: 1} }
+        .slide img { width: 100%; height: 220px; object-fit: cover; display: block; }
+        @media(min-width: 640px) { .slide img { height: 320px; } }
 
-        /* FITUR UNGGULAN (KENAPA MEMILIH KAMI) */
-        .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 50px; }
-        .feature-card { background: #fff; border: 1px solid #f0f0f0; border-radius: 16px; padding: 25px 15px; text-align: center; transition: all 0.4s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
-        .feature-card:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0,0,0,0.08); border-color: #111; }
-        .feature-icon-wrapper { position: relative; display: inline-block; margin-bottom: 15px; }
-        .feature-icon-wrapper i { font-size: 32px; color: #111; }
-        .feature-icon-wrapper .fa-lock { position: absolute; bottom: -5px; right: -5px; font-size: 14px; background: #fff; border-radius: 50%; padding: 2px; color: #2ecc71; border: 1px solid #eee; }
-        .feature-card h4 { font-size: 14px; font-weight: 800; color: #111; margin: 0 0 8px 0; letter-spacing: 0.5px; }
-        .feature-card p { font-size: 12px; color: #666; margin: 0; line-height: 1.5; font-weight: 500; }
+        /* FITUR UNGGULAN */
+        .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 40px; }
+        @media(min-width: 768px) { .features-grid { grid-template-columns: repeat(4, 1fr); } }
+        .feature-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; padding: 20px 12px; text-align: center; transition: 0.3s; }
+        .feature-card:hover { transform: translateY(-4px); border-color: #111; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .feature-icon { font-size: 24px; color: #111827; margin-bottom: 10px; }
+        .feature-card h4 { font-size: 13px; font-weight: 800; margin: 0 0 4px 0; color: #111; }
+        .feature-card p { font-size: 11px; color: #6b7280; margin: 0; line-height: 1.4; }
 
-        /* KATEGORI SCROLL (KIRI KE KANAN) */
-        .category-section { margin-bottom: 45px; text-align: left; }
-        .category-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        .category-title { font-size: 20px; font-weight: 800; color: #111; margin: 0; }
-        .category-link { font-size: 12px; font-weight: 700; color: #888; cursor: pointer; transition: 0.3s; }
-        .category-link:hover { color: #111; }
+        /* KATEGORI HORIZONTAL */
+        .category-section { margin-bottom: 40px; }
+        .category-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 2px solid #f3f4f6; padding-bottom: 10px; }
+        .category-title { font-size: 18px; font-weight: 800; color: #111; margin: 0; display: flex; align-items: center; gap: 8px; }
         
-        .horizontal-scroll { display: flex; overflow-x: auto; gap: 18px; padding-bottom: 15px; scroll-snap-type: x mandatory; scrollbar-width: none; }
+        .horizontal-scroll { display: flex; overflow-x: auto; gap: 15px; padding-bottom: 10px; scrollbar-width: none; }
         .horizontal-scroll::-webkit-scrollbar { display: none; }
         
-        .horizontal-card { min-width: 170px; max-width: 170px; flex: 0 0 auto; scroll-snap-align: start; background: #fff; border: 1px solid #f0f0f0; padding: 15px; border-radius: 20px; transition: all 0.4s ease; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
-        .horizontal-card:hover { border-color: #111; transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
-        .horizontal-card img { width: 100%; height: 140px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; cursor: pointer; transition: 0.4s; }
-        .horizontal-card h3 { font-size: 13px; font-weight: 700; margin: 0 0 8px 0; color: #111; text-align: left; cursor: pointer; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .horizontal-card .harga { font-size: 15px; font-weight: 800; color: #111; margin-bottom: 15px; text-align: left; }
+        .horizontal-card { min-width: 180px; max-width: 180px; background: #fff; border: 1px solid #e5e7eb; padding: 14px; border-radius: 18px; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; }
+        .horizontal-card:hover { border-color: #111; transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.06); }
+        .horizontal-card img { width: 100%; height: 130px; object-fit: cover; border-radius: 12px; margin-bottom: 12px; cursor: pointer; }
+        .horizontal-card h3 { font-size: 12px; font-weight: 700; margin: 0 0 6px 0; color: #111; line-height: 1.4; height: 34px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+        .horizontal-card .harga { font-size: 14px; font-weight: 800; color: #111; margin-bottom: 12px; }
         
-        .btn-beli, .co-btn-pay, .track-btn, .btn-masuk-sistem { background: linear-gradient(135deg, #111 0%, #333 100%); color: #fff; padding: 12px; border-radius: 10px; font-weight: 700; border: none; cursor: pointer; width: 100%; font-size: 13px; transition: all 0.3s ease; box-shadow: 0 8px 20px rgba(0,0,0,0.15); display: flex; justify-content: center; align-items: center; gap: 8px; }
-        .btn-beli:hover, .co-btn-pay:hover, .track-btn:hover, .btn-masuk-sistem:hover { background: linear-gradient(135deg, #000 0%, #222 100%); transform: translateY(-2px); box-shadow: 0 12px 25px rgba(0,0,0,0.25); }
-
-        /* Checkout, Modal, Chat (Styles) */
-        .co-wrapper { text-align: left; background: #fff; padding: 20px; border-radius: 20px; margin-bottom: 80px; border: 1px solid #eee; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
-        .co-card { background: #fff; border-radius: 16px; padding: 20px; margin-bottom: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.04); border: 1px solid #f0f0f0; }
-        .co-card-header { font-size: 15px; font-weight: 800; color: #111; margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
-        .co-input-modern { width: 100%; padding: 15px 18px; border: 1px solid #e0e0e0; border-radius: 12px; font-family: 'Inter', sans-serif; font-size: 14px; box-sizing: border-box; margin-bottom: 15px; background: #fafafa; }
-        .co-input-modern:focus { border-color: #111; background: #fff; outline: none; }
-        .co-product-item { display: flex; gap: 15px; align-items: center; padding-bottom: 18px; border-bottom: 1px dashed #eee; margin-bottom: 18px; }
-        .co-product-item img { width: 80px; height: 80px; object-fit: cover; border-radius: 12px; border: 1px solid #eee; }
-        .co-product-info { flex: 1; }
-        .co-product-name { font-size: 14px; font-weight: 700; color: #111; margin-bottom: 8px; line-height: 1.4; }
-        .co-product-price { font-size: 15px; font-weight: 800; color: #e74c3c; }
-        .qty-control { display: flex; align-items: center; gap: 15px; background: #fff; border: 1px solid #e0e0e0; border-radius: 10px; padding: 8px 12px; width: fit-content; margin-top: 10px; }
-        .qty-btn { cursor: pointer; font-weight: 800; color: #555; width: 24px; text-align: center; }
-        .qty-num { font-size: 14px; font-weight: 700; width: 24px; text-align: center; color: #111; }
-        .promo-container { display: flex; gap: 10px; margin-bottom: 10px; }
-        .promo-input { flex: 1; padding: 15px; border: 1px solid #e0e0e0; border-radius: 12px; }
-        .promo-btn { background: #111; color: #fff; border: none; padding: 0 25px; border-radius: 12px; font-weight: 700; cursor: pointer; font-size: 14px; }
-        .co-summary-line { display: flex; justify-content: space-between; font-size: 14px; font-weight: 500; color: #555; margin-bottom: 12px; }
-        .co-summary-line.total-line { border-top: 1px dashed #ddd; padding-top: 15px; margin-top: 10px; font-weight: 800; color: #111; font-size: 18px; }
-        .co-bottom-bar { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); padding: 18px 20px; box-sizing: border-box; display: flex; justify-content: space-between; align-items: center; z-index: 1000; border-top: 1px solid #eee; }
-        .co-bottom-total-wrapper { display: flex; flex-direction: column; text-align: left; }
-        .co-bottom-label { font-size: 12px; color: #888; font-weight: 700; }
-        .co-bottom-price { font-size: 20px; font-weight: 800; color: #111; }
-        .tipe-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 25px; }
-        .tipe-box { border: 1px solid #e0e0e0; border-radius: 12px; padding: 14px 20px; background: #fff; cursor: pointer; font-size: 14px; font-weight: 700; color: #555; }
-        .tipe-box.selected { border-color: #111; background: #111; color: #fff; }
-        .kurir-select { width: 100%; padding: 15px; border: 1px solid #e0e0e0; border-radius: 12px; margin-bottom: 15px; }
-        .payment-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 25px; }
-        .payment-box { border: 1px solid #e0e0e0; border-radius: 12px; padding: 10px; display: flex; justify-content: center; align-items: center; height: 55px; cursor: pointer; }
-        .payment-box.selected { border-color: #111; box-shadow: 0 0 0 2px #111; }
-        .payment-box img { max-height: 24px; max-width: 100%; }
-        
-        .modal-spec-overlay, .modal-login-overlay { visibility: hidden; opacity: 0; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); backdrop-filter: blur(8px); z-index: 2000; display: flex; justify-content: center; align-items: center; }
-        .modal-spec-overlay.show, .modal-login-overlay.show { visibility: visible; opacity: 1; }
-        .modal-spec-content, .modal-login-box { background: #fff; padding: 40px; border-radius: 24px; width: 90%; max-width: 420px; position: relative; text-align: center; }
-        .modal-close-btn, .close-login-btn { position: absolute; top: 20px; right: 25px; font-size: 30px; cursor: pointer; color: #aaa; }
-        
-        .chat-widget-btn { position: fixed; bottom: 95px; right: 20px; width: 60px; height: 60px; background: #111; color: #fff; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 26px; cursor: pointer; z-index: 99999; }
-        .chat-box-container { position: fixed; bottom: 170px; right: 20px; width: calc(100% - 40px); max-width: 360px; height: 75vh; max-height: 520px; background: #fff; border-radius: 20px; display: none; flex-direction: column; z-index: 99998; border: 1px solid #eee; overflow: hidden;}
-        .chat-box-container.show { display: flex; }
-        .chat-header { background: #111; color: #fff; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; font-weight: bold;}
-        .chat-avatar { width: 35px; height: 35px; border-radius: 50%; margin-right: 10px; }
-        .chat-messages { padding: 20px; overflow-y: auto; background: #f9f9fb; flex: 1; display: flex; flex-direction: column; gap: 15px; }
-        .msg-bubble { max-width: 80%; padding: 12px 16px; border-radius: 16px; font-size: 13px; }
-        .msg-admin { background: #111; color: #fff; align-self: flex-start; }
-        .msg-user { background: #e0e0e0; color: #111; align-self: flex-end; }
-        .chat-input-area { padding: 15px; background: #fff; border-top: 1px solid #eee; display: flex; gap: 10px; }
-        .chat-input-area input { flex: 1; padding: 12px 15px; border: 1px solid #e0e0e0; border-radius: 25px; outline: none; }
-        .chat-input-area button { background: #111; color: #fff; border: none; width: 45px; border-radius: 50%; cursor: pointer; }
-        
-        .toast-notif { position: fixed; top: 30px; left: 50%; transform: translateX(-50%) translateY(-50px); background: #111; color: #fff; padding: 16px 30px; border-radius: 30px; font-size: 14px; font-weight: 700; opacity: 0; transition: 0.4s; z-index: 9999; }
-        .toast-notif.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        .btn-action { background: #111827; color: #fff; padding: 10px; border-radius: 10px; font-weight: 700; border: none; cursor: pointer; width: 100%; font-size: 12px; transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 6px; }
+        .btn-action:hover { background: #1f2937; }
 
         /* ==========================================
-           8. FOOTER
+           4. HALAMAN LACAK PESANAN (DESAIN BARU)
            ========================================== */
-        .footer { padding: 80px 20px 40px 20px; background: #fff; text-align: left; font-size: 13px; color: #555; border-top: 1px solid #eee; }
-        .footer-profile-title { font-weight: 800; color: #111; margin-bottom: 15px; font-size: 16px; letter-spacing: 0.5px; }
-        .footer-profile-text { line-height: 1.8; color: #666; margin-bottom: 25px; }
-        .footer-hq-logo { width: 120px; margin-bottom: 18px; display: block; }
-        .supported-title { font-weight: 800; color: #111; margin-bottom: 15px; font-size: 14px; letter-spacing: 0.5px; }
-        .supported-img { height: 40px; object-fit: contain; max-width: 130px; filter: invert(1); mix-blend-mode: multiply; opacity: 0.9; }
-        .footer-gov { margin-bottom: 30px; padding: 20px; background: #fafafa; border: 1px solid #eee; border-radius: 12px; font-size: 12px; line-height: 1.7; color: #555; box-shadow: 0 5px 20px rgba(0,0,0,0.02); }
-        .copyright { font-size: 12px; color: #888; border-top: 1px solid #eee; padding-top: 25px; text-align: left; font-weight: 600; }
-        #footer-main-info.hidden { display: none !important; }
+        .track-box { background: #fff; border: 1px solid #e5e7eb; border-radius: 24px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); max-width: 600px; margin: auto; }
+        .track-input-group { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+        .track-input { width: 100%; padding: 14px 16px; border: 1px solid #d1d5db; border-radius: 14px; font-size: 13px; font-weight: 700; outline: none; background: #f9fafb; }
+        .track-input:focus { border-color: #111; background: #fff; }
 
-        .info-box { text-align: left; background: #fff; padding: 35px; border-radius: 20px; border: 1px solid #eee; line-height: 1.8; font-size: 14px; color: #444; }
-        .info-box h2 { font-size: 22px; font-weight: 800; color: #111; margin-top: 0; margin-bottom: 20px; }
-        .track-input-wrapper { display: flex; flex-direction: column; gap: 18px; align-items: center; padding: 40px 20px; background: #fff; border-radius: 24px; border: 1px solid #eee; }
+        /* CARD STATUS TERAKHIR HIGHLIGHT */
+        .status-terakhir-card { background: #111827; color: #fff; border-radius: 20px; padding: 20px; margin-top: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); position: relative; overflow: hidden; text-align: left; }
+        .status-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; background: rgba(251, 191, 36, 0.2); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); border-radius: 20px; font-size: 11px; font-weight: 800; margin-bottom: 12px; }
+        .status-title { font-size: 18px; font-weight: 800; color: #f59e0b; margin: 0 0 10px 0; }
+        .status-detail-grid { display: grid; grid-template-columns: 1fr; gap: 8px; font-size: 12px; color: #d1d5db; border-top: 1px solid #374151; padding-top: 12px; margin-top: 12px; }
+        @media(min-width: 500px) { .status-detail-grid { grid-template-columns: 1fr 1fr; } }
 
-        @media (min-width: 768px) {
-            .main-content { max-width: 1000px; padding: 40px 20px; }
-            .features-grid { grid-template-columns: repeat(4, 1fr); }
-            .horizontal-card { min-width: 200px; max-width: 200px; }
-            .footer { display: flex; flex-wrap: wrap; justify-content: space-between; padding: 80px 10%; }
-            #footer-main-info { display: flex; flex-wrap: wrap; width: 100%; justify-content: space-between; gap: 40px; }
-            .footer-profile { flex: 2; min-width: 320px; margin-right: 40px; border-bottom: none; }
-            .footer-contact-info, .footer-hq { flex: 1; min-width: 250px; }
-            .footer-gov, .copyright { width: 100%; text-align: center; margin-top: 50px; }
+        /* TIMELINE ITEM */
+        .timeline-wrapper { margin-top: 25px; text-align: left; border-top: 1px solid #e5e7eb; padding-top: 20px; }
+        .timeline-item { position: relative; padding-left: 28px; padding-bottom: 20px; border-left: 2px solid #e5e7eb; }
+        .timeline-item:last-child { border-left: 2px solid transparent; padding-bottom: 0; }
+        .timeline-icon { position: absolute; left: -9px; top: 0; width: 16px; height: 16px; border-radius: 50%; background: #e5e7eb; border: 2px solid #fff; }
+        .timeline-item.completed .timeline-icon { background: #111827; }
+        .timeline-item.active .timeline-icon { background: #f59e0b; border-color: #fef3c7; box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3); }
+        .timeline-content h5 { margin: 0 0 3px 0; font-size: 13px; font-weight: 800; color: #111; }
+        .timeline-item.active .timeline-content h5 { color: #d97706; }
+        .timeline-content p { margin: 0; font-size: 12px; color: #6b7280; line-height: 1.4; }
+        .timeline-time { font-size: 10px; font-weight: 700; color: #9ca3af; margin-top: 4px; }
+
+        /* ==========================================
+           5. HALAMAN MODAL LOGIN (COMPACT E-COMMERCE)
+           ========================================== */
+        .modal-login-overlay { 
+            visibility: hidden; 
+            opacity: 0; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(17, 24, 39, 0.6); 
+            backdrop-filter: blur(4px); 
+            z-index: 2000; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            padding: 20px;
+            transition: 0.3s;
         }
+        .modal-login-overlay.show { visibility: visible; opacity: 1; }
+        
+        /* MODAL KHUSUS UKURAN COMPACT E-COMMERCE */
+        .modal-login-box { 
+            background: #fff; 
+            padding: 28px 24px; 
+            border-radius: 24px; 
+            width: 100%; 
+            max-width: 360px; /* DIBIKIN PAS DAN TIDAK KEGEDEAN */
+            position: relative; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15); 
+            text-align: center;
+        }
+        .close-login-btn { position: absolute; top: 16px; right: 18px; font-size: 20px; cursor: pointer; color: #9ca3af; }
+        .close-login-btn:hover { color: #111; }
+        .login-logo { height: 30px; margin-bottom: 10px; }
+        .login-title { font-size: 18px; font-weight: 800; color: #111; margin: 0 0 4px 0; }
+        .login-sub { font-size: 12px; color: #6b7280; margin-bottom: 20px; }
+
+        .login-tabs { display: grid; grid-template-columns: 1fr 1fr; background: #f3f4f6; border-radius: 12px; padding: 3px; margin-bottom: 18px; }
+        .login-tab { padding: 8px; font-size: 12px; font-weight: 700; color: #6b7280; border-radius: 10px; cursor: pointer; border: none; background: transparent; }
+        .login-tab.active { background: #fff; color: #111; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+
+        .login-input-wrapper { text-align: left; margin-bottom: 12px; }
+        .login-label { font-size: 10px; font-weight: 800; color: #6b7280; text-transform: uppercase; margin-bottom: 4px; display: block; }
+        .login-input { width: 100%; padding: 11px 14px; border: 1px solid #d1d5db; border-radius: 12px; font-size: 12px; font-weight: 600; outline: none; background: #f9fafb; }
+        .login-input:focus { border-color: #111; background: #fff; }
+
+        /* CHECKOUT & INFORMASI */
+        .info-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 20px; padding: 25px; text-align: left; line-height: 1.7; font-size: 13px; color: #374151; }
+        .info-card h2 { font-size: 20px; font-weight: 800; color: #111; margin-top: 0; margin-bottom: 15px; }
+
+        /* CHAT & TOAST */
+        .chat-widget-btn { position: fixed; bottom: 25px; right: 25px; width: 52px; height: 52px; background: #111; color: #fff; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 20px; cursor: pointer; z-index: 999; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .toast-notif { position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-50px); background: #111; color: #fff; padding: 12px 24px; border-radius: 30px; font-size: 12px; font-weight: 700; opacity: 0; transition: 0.3s; z-index: 9999; }
+        .toast-notif.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+        /* FOOTER */
+        .footer { background: #fff; border-top: 1px solid #e5e7eb; padding: 40px 20px 20px 20px; font-size: 12px; color: #6b7280; }
+        .footer-grid { max-width: 960px; margin: auto; display: grid; grid-template-columns: 1fr; gap: 30px; text-align: left; }
+        @media(min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr; } }
+        .footer-title { font-weight: 800; color: #111; font-size: 14px; margin-bottom: 10px; }
     </style>
 </head>
 <body>
 
+    <!-- HEADER BAR -->
     <div class="header">
-        <div class="menu-btn" onclick="toggleMenu()">
-            <span></span><span></span><span></span>
+        <div class="header-left">
+            <div class="menu-btn" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </div>
+            <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Ousevoid Logo" class="logo" onclick="renderHome()">
         </div>
-        <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Ousevoid Logo" class="logo" onclick="renderHome()">
-        <div class="cart-icon" onclick="renderKeranjang()">
-            <i class="fa-solid fa-bag-shopping"></i>
-            <span class="cart-badge" id="cart-badge" style="display: none;">0</span>
+        <div class="header-actions">
+            <div class="btn-lacak-nav" onclick="renderLacakPesanan()"><i class="fa-solid fa-magnifying-glass"></i> Lacak Status</div>
+            <div class="cart-icon" onclick="renderKeranjang()">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span class="cart-badge" id="cart-badge" style="display: none;">0</span>
+            </div>
+            <!-- TOMBOL LOGIN NAMANYA DIGANTI JADI LOGIN ALA E-COMMERCE -->
+            <button class="btn-login-nav" onclick="bukaLogin()"><i class="fa-solid fa-user"></i> Login</button>
         </div>
     </div>
 
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
     
+    <!-- SIDEBAR DRAWER -->
     <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" class="sidebar-logo">
-            <div class="close-sidebar-btn" onclick="toggleMenu()"><i class="fa-solid fa-xmark"></i></div>
+        <div>
+            <div class="sidebar-header">
+                <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" style="height:26px;">
+                <div class="close-sidebar-btn" onclick="toggleMenu()"><i class="fa-solid fa-xmark"></i></div>
+            </div>
+            <div class="nav-item active" id="btn-beranda" onclick="renderHome()"><i class="fa-solid fa-house"></i> Beranda</div>
+            
+            <div class="nav-group">
+                <div class="nav-label">Kategori Produk</div>
+                <div class="nav-item" onclick="renderCS('Earbuds')"><i class="fa-solid fa-ear-listen"></i> Earbuds</div>
+                <div class="nav-item" onclick="renderCS('Smartphone')"><i class="fa-solid fa-mobile-screen-button"></i> Smartphone</div>
+                <div class="nav-item" onclick="renderCS('Speaker')"><i class="fa-solid fa-volume-high"></i> Speaker</div>
+                <div class="nav-item" onclick="renderCS('Sparepart')"><i class="fa-solid fa-link"></i> Sparepart</div>
+            </div>
+
+            <div class="nav-group">
+                <div class="nav-label">Layanan Pelanggan</div>
+                <div class="nav-item" onclick="renderLacakPesanan()"><i class="fa-solid fa-map-location-dot"></i> Pelacakan Pesanan</div>
+                <div class="nav-item" onclick="renderGaransi()"><i class="fa-solid fa-shield-halved"></i> Kebijakan Garansi Resmi</div>
+                <div class="nav-item" onclick="renderPengiriman()"><i class="fa-solid fa-truck-fast"></i> Ketentuan Pengiriman</div>
+                <div class="nav-item" onclick="renderPembayaran()"><i class="fa-solid fa-credit-card"></i> Regulasi Pembayaran OJK</div>
+                <div class="nav-item" onclick="renderPrivasi()"><i class="fa-solid fa-lock"></i> Kebijakan Privasi</div>
+            </div>
         </div>
-        <div class="nav-item active" id="btn-beranda" onclick="renderHome()"><i class="fa-solid fa-house"></i> Beranda</div>
-        <div class="nav-group">
-            <div class="nav-label">Kategori Produk</div>
-            <div class="nav-item" onclick="renderCS('Earbuds')"><i class="fa-solid fa-ear-listen"></i> Earbuds</div>
-            <div class="nav-item" onclick="renderCS('Smartphone')"><i class="fa-solid fa-mobile-screen-button"></i> Smartphone</div>
-            <div class="nav-item" onclick="renderCS('Speaker')"><i class="fa-solid fa-volume-high"></i> Speaker</div>
-            <div class="nav-item" onclick="renderCS('Sparepart')"><i class="fa-solid fa-link"></i> Sparepart</div>
-        </div>
-        <div class="nav-group">
-            <div class="nav-label">Layanan Pelanggan</div>
-            <div class="nav-item" onclick="renderLacakPesanan()"><i class="fa-solid fa-map-location-dot"></i> Pelacakan Pesanan</div>
-            <div class="nav-item" onclick="renderGaransi()"><i class="fa-solid fa-shield-halved"></i> Kebijakan Garansi Resmi</div>
-            <div class="nav-item" onclick="renderPengiriman()"><i class="fa-solid fa-truck-fast"></i> Ketentuan Logistik & Pengiriman</div>
-            <div class="nav-item" onclick="renderPembayaran()"><i class="fa-solid fa-credit-card"></i> Regulasi Pembayaran & OJK</div>
-            <div class="nav-item" onclick="renderPrivasi()"><i class="fa-solid fa-lock"></i> Kebijakan Privasi & UU PDP</div>
-            <div class="nav-item" onclick="renderSyarat()"><i class="fa-solid fa-file-lines"></i> Syarat & Ketentuan Umum</div>
-            <div class="nav-item login-btn-sidebar btn-masuk-sistem" onclick="bukaLogin()"><i class="fa-solid fa-user-shield"></i> Portal Otoritas Admin</div>
+
+        <div style="padding-top:15px; border-top:1px solid #f3f4f6;">
+            <!-- TOMBOL LOGIN SIDEBAR JUGA NAMANYA LOGIN -->
+            <button class="btn-action" onclick="bukaLogin()"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
         </div>
     </div>
 
+    <!-- MAIN CONTAINER -->
     <div class="main-content" id="app"></div>
 
     <div id="toastNotif" class="toast-notif"><i class="fa-solid fa-circle-check" style="color: #2ecc71;"></i> <span>Berhasil ditambahkan ke keranjang!</span></div>
 
+    <!-- HALAMAN LOGIN MODAL DIKECILIN SIZENYA (ALA E-COMMERCE) -->
     <div id="loginModal" class="modal-login-overlay">
         <div class="modal-login-box">
             <span class="close-login-btn" onclick="tutupLogin()">&times;</span>
-            <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Logo">
-            <h3>Login Otoritas</h3>
-            <input type="text" id="log-user" class="login-input" placeholder="Username">
-            <input type="password" id="log-pass" class="login-input" placeholder="Password">
-            <input type="password" id="log-pin" class="login-input" placeholder="PIN Keamanan (6 Digit)" maxlength="6">
-            <button class="btn-masuk-sistem" onclick="prosesLoginRahasia()"><i class="fa-solid fa-right-to-bracket"></i> Masuk Control Center</button>
+            <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Logo" class="login-logo">
+            <!-- JUDUL DIGANTI JADI LOGIN -->
+            <h3 class="login-title">Login</h3>
+            <p class="login-sub">Masuk ke Akun Ousevoid Anda</p>
+
+            <div class="login-tabs">
+                <button class="login-tab active" id="tab-buyer" onclick="setLoginMode('buyer')">Pembeli</button>
+                <button class="login-tab" id="tab-admin" onclick="setLoginMode('admin')">Admin Portal</button>
+            </div>
+
+            <div class="login-input-wrapper">
+                <label class="login-label">Username / Email</label>
+                <input type="text" id="log-user" class="login-input" placeholder="Masukkan username">
+            </div>
+
+            <div class="login-input-wrapper">
+                <label class="login-label">Kata Sandi</label>
+                <input type="password" id="log-pass" class="login-input" placeholder="Masukkan kata sandi">
+            </div>
+
+            <div class="login-input-wrapper" id="pin-field" style="display: none;">
+                <label class="login-label">PIN Keamanan (6 Digit)</label>
+                <input type="password" id="log-pin" class="login-input" placeholder="6 Digit PIN" maxlength="6">
+            </div>
+
+            <button class="btn-action" style="margin-top: 15px; padding: 12px;" onclick="prosesLogin()"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</button>
         </div>
     </div>
 
-    <div class="chat-widget-btn" onclick="toggleChat()"><i class="fa-solid fa-message"></i></div>
-    <div class="chat-box-container" id="chatBox">
-        <div class="chat-header">
-            <div style="display: flex; align-items: center;"><img src="https://i.ibb.co.com/TDzbDzqw/file-000000009a788208b767f7ea331a78c5.png" class="chat-avatar" alt="Marsya"><span>Marsya (Agent)</span></div>
-            <div class="chat-close" onclick="toggleChat()"><i class="fa-solid fa-xmark"></i></div>
+    <!-- CHAT FLOATING -->
+    <div class="chat-widget-btn" onclick="alert('Layanan Customer Support Marsya Siap Membantu via Chat.')"><i class="fa-solid fa-message"></i></div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <div class="footer-grid">
+            <div>
+                <div class="footer-title">PT Gerbang Masa Depan (Ousevoid)</div>
+                <p>Ousevoid menghadirkan inovasi perangkat audio nirkabel bergaransi resmi dengan standar kualitas terjamin.</p>
+            </div>
+            <div>
+                <div class="footer-title">Kontak Resmi</div>
+                <p>Email: ousevoid@gmail.com<br>WhatsApp: 0857 15000 443</p>
+            </div>
+            <div>
+                <div class="footer-title">Kantor Pusat</div>
+                <p>Jl. K.H Zainul Arifin 71 Gambir, Jakarta Pusat 10140</p>
+            </div>
         </div>
-        <div class="chat-messages" id="chatMessages"><div class="msg-bubble msg-admin">Selamat datang di Layanan Bantuan Pelanggan resmi PT Gerbang Masa Depan. Ada yang dapat kami bantu?</div></div>
-        <div class="chat-input-area" id="chatInputArea">
-            <input type="text" id="chatInputUser" placeholder="Ketik pesan..." onkeypress="if(event.key === 'Enter') kirimPesanChat()">
-            <button onclick="kirimPesanChat()"><i class="fa-solid fa-paper-plane"></i></button>
+        <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #f3f4f6; color: #9ca3af;">
+            &copy; 2026 PT Gerbang Masa Depan. Semua Hak Cipta Dilindungi.
         </div>
     </div>
 
-    <div class="footer" id="main-footer">
-        <div id="footer-main-info">
-            <div class="footer-profile">
-                <div class="footer-profile-title">Tentang PT Gerbang Masa Depan (Ousevoid)</div>
-                <p class="footer-profile-text">Ousevoid adalah merek di bawah naungan PT Gerbang Masa Depan yang berfokus pada inovasi perangkat audio nirkabel. Kami berkomitmen untuk menghadirkan produk dengan desain fungsional, spesifikasi andal, dan harga yang kompetitif guna memenuhi kebutuhan produktivitas dan gaya hidup digital masyarakat.</p>
-            </div>
-            <div class="footer-contact-info">
-                Apabila Anda mengalami kendala atau membutuhkan informasi produk silakan hubungi kami melalui:<br>
-                <div style="display:flex; align-items:center; gap:10px; margin-top:15px;"><i class="fa-solid fa-envelope" style="width:16px; text-align:center; font-size:16px;"></i> email: ousevoid@gmail.com</div>
-                <a href="https://wa.me/6285715000443" style="display:flex; align-items:center; gap:10px; margin-top:10px; color:inherit; transition:0.3s;"><i class="fa-brands fa-whatsapp" style="width:16px; text-align:center; font-size:18px;"></i> WhatsApp: 0857 15000 443</a>
-                <a href="#" style="display:flex; align-items:center; gap:10px; margin-top:10px; color:inherit; transition:0.3s;"><i class="fa-brands fa-facebook" style="width:16px; text-align:center; font-size:16px;"></i> Ousevoid Official</a>
-                <a href="#" style="display:flex; align-items:center; gap:10px; margin-top:10px; color:inherit; transition:0.3s;"><i class="fa-brands fa-instagram" style="width:16px; text-align:center; font-size:17px;"></i> @ousevoid</a>
-            </div>
-            <div class="footer-hq">
-                <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Ousevoid Logo" class="footer-hq-logo">
-                <div style="font-weight:500; color:#666; margin-bottom:6px;">Kantor Pusat</div>
-                <div style="font-weight:800; color:#111; margin-bottom:8px; font-size:14px;">PT Gerbang Masa Depan</div>
-                <div style="line-height:1.7; margin-bottom:20px; color:#555;">Jl. K.H Zainul Arifin 71 Duri Pulo Gambir Jakarta pusat, Indonesia 10140</div>
-                <div style="margin-top:25px; padding-top:20px; border-top:1px dashed #e0e0e0;">
-                    <div class="supported-title">Powered by:</div>
-                    <div style="display:flex; gap:15px; margin-bottom:12px;"><img src="https://i.ibb.co.com/DHZj9dpW/8827-2.jpg" alt="e-Package Service" class="supported-img"></div>
-                    <div style="font-weight:800; color:#111; margin-bottom:6px; font-size:13px;">PT Gamoon Desember Indonesia</div>
-                    <div style="line-height:1.7; color:#555;">Jl KP Bakti Raya 22 Cideng Gambir Jakarta Pusat, Indonesia 10150</div>
-                </div>
-            </div>
-            <div class="footer-gov">
-                Direktorat Jenderal Perlindungan Konsumen dan Tertib Niaga<br>Kementerian Perdagangan Republik Indonesia<br>WhatsApp: 0853-1111-1010
-            </div>
-        </div>
-        <div class="copyright">&copy; 2026 PT Gerbang Masa Depan. Semua Hak Cipta dilindungi.</div>
-    </div>
-
+    <!-- JAVASCRIPT LOGIC -->
     <script>
-        var products = []; 
-        var keranjang = []; 
-        var diskonPromoAktif = 0; 
-        window.currentBasePrice = 0;
-        window.currentProductName = "";
-        window.currentProductImg = "";
-
-        // URL WORKER CLOUDFLARE (PASTIKAN GANTI DENGAN URL ASLI LU)
-        const WORKER_URL = "https://ousevoidindonesia.username.workers.dev";
-
-        var banners = [
-            "https://i.ibb.co.com/pjhVC7S6/SOUND-Without-20260714-173950-0000.png",
-            "https://i.ibb.co.com/pjhVC7S6/SOUND-Without-20260714-173950-0000.png"
+        var products = [
+            { id: 1, name: "Ousevoid Sonic Pods Pro (ANC + ENC)", priceValue: 299000, price: "Rp 299.000", img: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600&auto=format&fit=crop&q=80", category: "Earbuds" },
+            { id: 2, name: "Ousevoid Air Buds Lite Touch", priceValue: 179000, price: "Rp 179.000", img: "https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?w=600&auto=format&fit=crop&q=80", category: "Earbuds" },
+            { id: 3, name: "Ousevoid Galaxy Smartphone Ultra 5G", priceValue: 2899000, price: "Rp 2.899.000", img: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=600&auto=format&fit=crop&q=80", category: "Smartphone" },
+            { id: 4, name: "Ousevoid Soundbar X1 Bass-Boost", priceValue: 450000, price: "Rp 450.000", img: "https://images.unsplash.com/photo-1545454675-3531b543be5d?w=600&auto=format&fit=crop&q=80", category: "Speaker" },
+            { id: 5, name: "Ousevoid GaN Fast Charger 65W", priceValue: 145000, price: "Rp 145.000", img: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=600&auto=format&fit=crop&q=80", category: "Sparepart" }
         ];
-        var currentSlideIndex = 0; var slideInterval;
 
-        // --- FUNGSI MENGATUR TAMPILAN FOOTER ---
-        function toggleFooterUtama(tampilkan) { 
-            var f = document.getElementById('footer-main-info'); var fu = document.getElementById('main-footer'); 
-            if(f) { tampilkan ? f.classList.remove('hidden') : f.classList.add('hidden'); }
-            if(fu) { tampilkan ? fu.style.display = 'block' : fu.style.display = 'none'; } 
+        var keranjang = [];
+        var activeLoginMode = 'buyer';
+
+        function toggleMenu() { 
+            document.getElementById('sidebar').classList.toggle('active'); 
+            document.getElementById('overlay').classList.toggle('active'); 
         }
 
-        // --- SISTEM CHAT REAL-TIME ---
-        var userSessionId = localStorage.getItem('ousevoid_chat_id') || ('user_' + Math.random().toString(36).substr(2, 9));
-        localStorage.setItem('ousevoid_chat_id', userSessionId);
-        var chatInterval = null; 
-
-        function toggleChat() {
-            var box = document.getElementById('chatBox'); box.classList.toggle('show');
-            if (box.classList.contains('show')) { tarikPesanChat(); chatInterval = setInterval(tarikPesanChat, 3000); } 
-            else { clearInterval(chatInterval); }
-        }
-        async function tarikPesanChat() {
-            try {
-                const res = await fetch(WORKER_URL + "/api/chat?session_id=" + userSessionId); const pesans = await res.json();
-                var area = document.getElementById('chatMessages');
-                var html = '<div class="msg-bubble msg-admin">Selamat datang di layanan bantuan resmi PT Gerbang Masa Depan. Ada yang dapat kami bantu?</div>';
-                if(pesans && pesans.length > 0) { pesans.forEach(p => { html += `<div class="msg-bubble ${p.is_admin == 1 ? 'msg-admin' : 'msg-user'}">${p.pesan}</div>`; }); }
-                area.innerHTML = html; area.scrollTop = area.scrollHeight;
-            } catch (e) { }
-        }
-        async function kirimPesanChat() {
-            var input = document.getElementById('chatInputUser'); var pesanTxt = input.value.trim(); if(!pesanTxt) return;
-            input.value = ''; var area = document.getElementById('chatMessages');
-            area.innerHTML += `<div class="msg-bubble msg-user">${pesanTxt}</div>`; area.scrollTop = area.scrollHeight;
-            try { await fetch(WORKER_URL + "/api/chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ session_id: userSessionId, pesan: pesanTxt, is_admin: 0 }) }); } catch (e) {}
+        function bukaLogin() { 
+            document.getElementById('loginModal').classList.add('show'); 
+            if(document.getElementById('sidebar').classList.contains('active')) toggleMenu();
         }
 
-        // --- DATABASE LOAD ---
-        async function muatProdukDariDatabase() {
-            var app = document.getElementById('app');
-            app.innerHTML = '<div style="padding:100px 20px; text-align:center;"><i class="fa-solid fa-circle-notch fa-spin" style="font-size:50px; color:#111; margin-bottom:25px;"></i><div style="font-size:16px; color:#555; font-weight:700;">Memuat Katalog Terkini...</div></div>';
-            try {
-                const response = await fetch(WORKER_URL + "/api/produk"); 
-                const dataProdukApi = await response.json();
-                if (dataProdukApi && dataProdukApi.length > 0) {
-                    products = dataProdukApi.map(p => {
-                        let parsedVariants = []; try { parsedVariants = p.variants ? JSON.parse(p.variants) : []; } catch(e) {}
-                        return { id: p.id, name: p.nama, priceValue: p.harga, price: 'IDR ' + p.harga.toLocaleString('id-ID'), img: p.img_url, specs: { deskripsi: p.deskripsi }, variants: parsedVariants };
-                    });
-                }
-            } catch (error) { console.log("Database offline / Worker belum diset."); }
-            renderHome();
+        function tutupLogin() { 
+            document.getElementById('loginModal').classList.remove('show'); 
         }
 
-        function toggleMenu() { document.getElementById('sidebar').classList.toggle('active'); document.getElementById('overlay').classList.toggle('active'); }
-        function autoClose() { if (document.getElementById('sidebar').classList.contains('active')) toggleMenu(); }
-        function bukaLogin() { document.getElementById('loginModal').classList.add('show'); autoClose(); }
-        function tutupLogin() { document.getElementById('loginModal').classList.remove('show'); }
-
-        async function prosesLoginRahasia() {
-            var u = document.getElementById('log-user').value; var p = document.getElementById('log-pass').value; var pin = document.getElementById('log-pin').value;
-            var btn = document.querySelector('.modal-login-box .btn-masuk-sistem');
-            if(!u || !p || !pin) { alert("Isi semua data!"); return; }
-            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Memeriksa...'; btn.disabled = true;
-            try {
-                const response = await fetch(WORKER_URL + "/api/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ username: u, password: p, pin: pin }) });
-                const hasil = await response.json();
-                if (hasil.sukses) { window.location.href = "/manajemen.html"; } else { alert("Akses Ditolak!"); }
-            } catch (error) { alert("Server error."); }
-            btn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Masuk'; btn.disabled = false;
+        function setLoginMode(mode) {
+            activeLoginMode = mode;
+            document.getElementById('tab-buyer').classList.toggle('active', mode === 'buyer');
+            document.getElementById('tab-admin').classList.toggle('active', mode === 'admin');
+            document.getElementById('pin-field').style.display = (mode === 'admin') ? 'block' : 'none';
         }
 
-        function jalankanSlider() {
-            var slides = document.getElementsByClassName('slide'); if(slides.length === 0) return;
-            for(var i=0; i<slides.length; i++) slides[i].classList.remove('active');
-            currentSlideIndex++; if(currentSlideIndex > slides.length - 1) currentSlideIndex = 0;
-            slides[currentSlideIndex].classList.add('active');
+        function prosesLogin() {
+            var u = document.getElementById('log-user').value.trim();
+            var p = document.getElementById('log-pass').value.trim();
+            if(!u || !p) { alert("Mohon lengkapi Username dan Password!"); return; }
+            alert("Login Berhasil! Selamat datang " + u);
+            tutupLogin();
         }
 
-        // --- RENDER HALAMAN UTAMA ---
-        function renderHome() {
-            toggleFooterUtama(true); 
-            var app = document.getElementById('app');
-            
-            var html = '<div class="slider-container" id="hero-slider">';
-            for(var b=0; b<banners.length; b++) {
-                html += `<div class="slide ${b === 0 ? 'active' : ''}"><img src="${banners[b]}"></div>`;
-            }
-            html += '</div>';
-
-            // FITUR UNGGULAN (OJK UPDATE LENGKAP)
-            html += `
-            <div style="margin-bottom: 50px;">
-                <div style="text-align: center; font-size: 20px; font-weight:800; margin-bottom: 25px;">Mengapa Memilih Ousevoid?</div>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon-wrapper"><i class="fa-solid fa-medal"></i></div>
-                        <h4>100% Original</h4>
-                        <p>Kualitas audio premium terjamin.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon-wrapper"><i class="fa-solid fa-shield-halved"></i></div>
-                        <h4>Garansi Resmi</h4>
-                        <p>Perlindungan cacat pabrik 3 bulan.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon-wrapper"><i class="fa-solid fa-bolt"></i></div>
-                        <h4>Pengiriman Cepat</h4>
-                        <p>Sameday 8 Jam via e-Package.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon-wrapper">
-                            <i class="fa-solid fa-credit-card"></i>
-                            <i class="fa-solid fa-lock"></i>
-                        </div>
-                        <h4>Transaksi Aman</h4>
-                        <p>Sistem pembayaran diawasi oleh Otoritas Jasa Keuangan (OJK).</p>
-                    </div>
-                </div>
-            </div>`;
-
-            // DAFTAR KATEGORI
-            const kategoriList = [
-                { id: 'Earbuds', icon: 'fa-ear-listen', keywords: ['earbud', 'tws', 'headset', 'earphone', 'airpod'] },
-                { id: 'Smartphone', icon: 'fa-mobile-screen-button', keywords: ['smartphone', 'phone', 'hp', 'ponsel', 'galaxy', 'iphone'] },
-                { id: 'Speaker', icon: 'fa-volume-high', keywords: ['speaker', 'audio', 'soundbar', 'bass'] },
-                { id: 'Sparepart', icon: 'fa-link', keywords: ['sparepart', 'kabel', 'charger', 'baterai', 'case', 'pelindung'] }
-            ];
-
-            kategoriList.forEach(kat => {
-                let produkKategoriIni = products.filter(p => {
-                    let namaLower = p.name.toLowerCase();
-                    return kat.keywords.some(kw => namaLower.includes(kw));
-                });
-
-                html += `
-                <div class="category-section">
-                    <div class="category-header">
-                        <h2 class="category-title"><i class="fa-solid ${kat.icon}" style="color:#111; margin-right:8px;"></i> ${kat.id}</h2>
-                        <span class="category-link">Lihat Semua <i class="fa-solid fa-chevron-right"></i></span>
-                    </div>
-                    <div class="horizontal-scroll">`;
-                
-                if (produkKategoriIni.length > 0) {
-                    produkKategoriIni.forEach(fp => {
-                        let originalIndex = products.findIndex(op => op.id === fp.id); 
-                        html += `
-                        <div class="horizontal-card">
-                            <img src="${fp.img}" onclick="renderProdukDetail(${originalIndex})">
-                            <h3 onclick="renderProdukDetail(${originalIndex})">${fp.name}</h3>
-                            <div style="color: #f39c12; font-size: 11px; margin-bottom: 12px; text-align:left;">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
-                            </div>
-                            <div class="harga">${fp.price}</div>
-                            <button class="btn-beli" onclick="renderProdukDetail(${originalIndex})"><i class="fa-solid fa-eye"></i> Detail</button>
-                        </div>`;
-                    });
-                } else {
-                    html += `<div style="padding: 20px; color:#888; font-size:13px; font-style:italic;">Belum tersedia unit produk dalam kategori ${kat.id}.</div>`;
-                }
-                html += `</div></div>`;
-            });
-
-            app.innerHTML = html;
-            clearInterval(slideInterval); slideInterval = setInterval(jalankanSlider, 5000);
-            autoClose();
-        }
-
-        // --- SISTEM KERANJANG & CHECKOUT ---
-        function updateCartBadge() {
-            var badge = document.getElementById('cart-badge');
-            var totalBarang = keranjang.reduce((sum, item) => sum + item.qty, 0);
-            if(totalBarang > 0) { badge.style.display = 'flex'; badge.innerText = totalBarang; } else { badge.style.display = 'none'; }
-        }
-
-        function renderProdukDetail(index) {
-            toggleFooterUtama(false); 
-            var p = products[index]; var varianHtml = ''; window.currentProductImg = p.img;
-            if (p.variants && p.variants.length > 0) {
-                varianHtml += '<div style="font-weight:800; margin:20px 0 10px;">Pilih Tipe/Warna</div><div class="tipe-grid">';
-                p.variants.forEach((v, idx) => {
-                    let selClass = idx === 0 ? 'selected' : '';
-                    varianHtml += `<div class="tipe-box ${selClass}" onclick="pilihTipeDetail(this, ${v.harga}, '${p.name} (${v.nama})', '${p.img}')">${v.nama} - Rp ${v.harga.toLocaleString('id-ID')}</div>`;
-                });
-                varianHtml += '</div>';
-                window.currentBasePrice = p.variants[0].harga; window.currentProductName = p.name + " (" + p.variants[0].nama + ")";
-            } else { window.currentBasePrice = p.priceValue; window.currentProductName = p.name; }
-
-            document.getElementById('app').innerHTML = `
-                <div class="co-wrapper">
-                    <div style="text-align:center; margin-bottom:20px;"><img src="${p.img}" style="width:100%; max-width:300px; border-radius:20px;"></div>
-                    <div style="font-size:24px; font-weight:800;">${p.name}</div>
-                    <div style="font-size:22px; font-weight:800; color:#e74c3c;" id="display-product-price">Rp ${window.currentBasePrice.toLocaleString('id-ID')}</div>
-                    ${varianHtml}
-                    <div class="info-box" style="margin-top:20px; padding:20px;"><strong>Spesifikasi Teknis:</strong><br>${p.specs.deskripsi || '-'}</div>
-                </div>
-                <button class="co-btn-pay" onclick="tambahKeKeranjang()"><i class="fa-solid fa-cart-plus"></i> Tambahkan ke Keranjang Belanja</button>
-            `; autoClose();
-        }
-
-        function pilihTipeDetail(el, harga, namaLengkap, img) {
-            var boxes = document.getElementsByClassName('tipe-box'); for(var i=0; i<boxes.length; i++) boxes[i].classList.remove('selected');
-            el.classList.add('selected'); window.currentBasePrice = harga; window.currentProductName = namaLengkap;
-            document.getElementById('display-product-price').innerText = 'Rp ' + harga.toLocaleString('id-ID');
-        }
-
-        function tambahKeKeranjang() {
-            var existing = keranjang.find(i => i.name === window.currentProductName);
-            if (existing) { existing.qty += 1; } else { keranjang.push({ name: window.currentProductName, price: window.currentBasePrice, qty: 1, img: window.currentProductImg }); }
-            updateCartBadge(); var t = document.getElementById('toastNotif'); t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2500); setTimeout(renderKeranjang, 800);
-        }
-
-        function ubahQty(idx, delta) { keranjang[idx].qty += delta; if(keranjang[idx].qty <= 0) keranjang.splice(idx, 1); renderKeranjang(); updateCartBadge(); }
-
-        function renderKeranjang() {
-            toggleFooterUtama(false); var app = document.getElementById('app');
-            if (keranjang.length === 0) {
-                app.innerHTML = `<div style="padding:100px 20px; text-align:center;"><h2>Keranjang Belanja Kosong</h2><button class="co-btn-pay" onclick="renderHome()">Kembali Berbelanja</button></div>`; return;
-            }
-            var htmlItems = ''; var subtotal = 0;
-            keranjang.forEach((item, idx) => {
-                subtotal += (item.price * item.qty);
-                htmlItems += `<div class="co-product-item"><img src="${item.img}"><div class="co-product-info"><div class="co-product-name">${item.name}</div><div class="co-product-price">Rp ${item.price.toLocaleString('id-ID')}</div><div class="qty-control"><div class="qty-btn" onclick="ubahQty(${idx}, -1)">-</div><div class="qty-num">${item.qty}</div><div class="qty-btn" onclick="ubahQty(${idx}, 1)">+</div></div></div></div>`;
-            });
-            app.innerHTML = `
-                <div class="co-wrapper">
-                    <div class="co-card"><div class="co-card-header">Daftar Pesanan</div>${htmlItems}</div>
-                    <div class="co-card"><div class="co-card-header">Informasi Alamat Pengiriman</div><input type="text" id="co-nama" class="co-input-modern" placeholder="Nama Lengkap Penerima"><input type="number" id="co-wa" class="co-input-modern" placeholder="Nomor Telepon / WhatsApp"><input type="email" id="co-email" class="co-input-modern" placeholder="Alamat Surel (Email)"><textarea id="co-alamat" class="co-input-modern" placeholder="Alamat Domisili Pengiriman Secara Lengkap" rows="3"></textarea></div>
-                    <select id="co-kurir" class="kurir-select"><option value="35000">Gamoon e-Package - Rp 35.000</option></select>
-                </div>
-                <div class="co-bottom-bar"><div class="co-bottom-total-wrapper"><span class="co-bottom-label">Total Tagihan</span><span class="co-bottom-price">Rp ${(subtotal+35000).toLocaleString('id-ID')}</span></div><button class="co-btn-pay" style="width:auto; padding:14px 20px;" onclick="lanjutKeInvoiceMulti()">Lanjutkan ke Proses Pembayaran</button></div>
-            `; autoClose();
-        }
-
-        function lanjutKeInvoiceMulti() {
-            var n = document.getElementById('co-nama').value, w = document.getElementById('co-wa').value, e = document.getElementById('co-email').value, a = document.getElementById('co-alamat').value;
-            if (!n || !w || !e || !a) { alert("Mohon lengkapi seluruh field data pengiriman."); return; }
-            var sub = keranjang.reduce((s, i) => s + (i.price * i.qty), 0) + 35000;
-            var trx = new Date().getFullYear() + "/OUSE/" + Math.floor(Math.random()*99999);
-            window.dataPesananSementara = { nama: n, wa: w, email: e, total: sub, idTrx: trx, barang: keranjang.map(i => i.name).join(', ') };
-            renderInvoice();
-        }
-
-        function renderInvoice() {
-            window.scrollTo(0,0); var d = window.dataPesananSementara;
-            document.getElementById('app').innerHTML = `
-                <div class="co-wrapper">
-                    <div style="text-align:center; margin-bottom:20px; padding-bottom:20px; border-bottom:1px dashed #ccc;">
-                        <h3 style="margin:0 0 10px 0;">Nomor Transaksi: ${d.idTrx}</h3>
-                        <div style="font-size:30px; font-weight:800;">Rp ${d.total.toLocaleString('id-ID')}</div>
-                    </div>
-                    <div style="margin-bottom:20px;"><strong>Nama Pemesan:</strong> ${d.nama}<br><strong>Surel:</strong> ${d.email}</div>
-                    <div style="margin-bottom:20px;"><strong>Pilih Kanal Pembayaran Resmi:</strong></div>
-                    <div class="payment-grid">
-                        <div class="payment-box selected" onclick="pilihPayment(this, 'gopay')"><img src="https://i.ibb.co.com/MDFzRSrD/Gopay-logo-svg.png"></div>
-                        <div class="payment-box" onclick="pilihPayment(this, 'dana')"><img src="https://i.ibb.co.com/xqg0PbT4/Logo-dana-blue-svg.png"></div>
-                        <div class="payment-box" onclick="pilihPayment(this, 'bca_va')"><img src="https://i.ibb.co.com/qLT2FX8W/500px-Bank-Central-Asia-svg.png"></div>
-                    </div>
-                    <button class="co-btn-pay" onclick="eksekusiBayarMidtransInvoice()">Konfirmasi Pembayaran</button>
-                </div>
-            `;
-        }
-
-        function pilihPayment(el, method) { 
-            var boxes = document.getElementsByClassName('payment-box'); 
-            for(var i=0; i<boxes.length; i++) boxes[i].classList.remove('selected'); 
-            el.classList.add('selected'); 
-            window.selectedPaymentMethod = method; 
-        }
-
-        async function eksekusiBayarMidtransInvoice() {
-            var btn = document.querySelector('.co-btn-pay'); btn.innerHTML = 'Memproses Transaksi...'; btn.disabled = true;
-            try {
-                const res = await fetch(WORKER_URL + "/backend", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(window.dataPesananSementara) });
-                const hasil = await res.json();
-                if (hasil.redirect_url) { window.location.href = hasil.redirect_url; } else { alert("Gagal melakukan otorisasi pembayaran."); btn.innerHTML = 'Coba Lagi'; btn.disabled = false; }
-            } catch (err) { alert("Gangguan koneksi jaringan server."); btn.disabled = false; }
-        }
-
-        function renderCS(t) { 
-            toggleFooterUtama(true); 
-            document.getElementById('app').innerHTML = `<div class="info-box"><h2>Informasi Kategori: ${t}</h2><p>Direktorat katalog produk untuk lini masa ${t} saat ini sedang dalam tahap pemutakhiran data secara berkala oleh manajemen PT Gerbang Masa Depan.</p></div>`; 
-            autoClose(); 
-        }
-        
-        // --- HALAMAN LAYANAN PELANGGAN FORMAL ALA PEMERINTAHAN ---
+        /* ==========================================
+           1. HALAMAN LACAK PESANAN (FUNGSI SYNC DENGAN STATUS TERAKHIR)
+           ========================================== */
         function renderLacakPesanan() {
-            toggleFooterUtama(true); clearActiveMenu(); autoClose();
+            if(document.getElementById('sidebar').classList.contains('active')) toggleMenu();
+            window.scrollTo(0,0);
             var app = document.getElementById('app');
             app.innerHTML = `
-                <div class="page-title" style="text-align:center;">Pelacakan Status Pengiriman Pesanan</div>
-                <div style="font-size:14px; font-weight:500; color:#666; text-align:center; margin-bottom:30px;">Silakan masukkan Nomor Invoice atau Resi resmi yang diterbitkan melalui surel untuk memantau status logistik secara periodik.</div>
-                <div class="track-input-wrapper">
-                    <input type="text" id="input-resi" class="track-input" placeholder="Contoh: 2026/OUSE/..." style="max-width:380px;">
-                    <button class="track-btn" onclick="prosesLacak(this)"><i class="fa-solid fa-magnifying-glass"></i> Periksa Status Logistik</button>
-                    <div id="hasil-tracking" style="width:100%; max-width:380px;"></div>
+                <div class="track-box">
+                    <h2 style="font-size:20px; font-weight:800; margin-top:0; text-align:center;">Pelacakan Status Pengiriman Pesanan</h2>
+                    <p style="font-size:12px; color:#6b7280; text-align:center; margin-bottom:20px;">Masukkan Nomor Resi / Invoice resmi Ousevoid Anda untuk memeriksa status logistik.</p>
+                    
+                    <div class="track-input-group">
+                        <input type="text" id="input-resi" class="track-input" value="2026/OUSE/84920" placeholder="Contoh: 2026/OUSE/84920">
+                        <!-- TOMBOL LACAK BERFUNGSI MEMANGGIL FUNGSI PROSES LACAK -->
+                        <button class="btn-action" style="padding:14px;" onclick="prosesLacak(this)"><i class="fa-solid fa-magnifying-glass"></i> Periksa Status Logistik</button>
+                    </div>
+
+                    <div id="hasil-tracking"></div>
                 </div>
             `;
+            // Otomatis jalankan lacak awal untuk sampel
+            prosesLacak(null);
         }
 
+        /* FUNGSI YANG MENAMPILKAN DATA STATUS TERAKHIR DI TEKS HALAMAN */
         function prosesLacak(btn) {
-            var resi = document.getElementById('input-resi').value.trim();
-            if(!resi) { alert("Harap memasukkan Nomor Invoice/Resi yang sah."); return; }
-            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Memvalidasi...'; btn.disabled = true;
-            document.getElementById('hasil-tracking').innerHTML = '';
+            var resiInput = document.getElementById('input-resi').value.trim();
+            if(!resiInput) { alert("Harap masukkan nomor resi yang sah!"); return; }
+
+            var areaHasil = document.getElementById('hasil-tracking');
+            if(btn) { btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Memvalidasi Logistik...'; btn.disabled = true; }
+
             setTimeout(function() {
-                btn.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> Periksa Status Logistik'; btn.disabled = false;
-                document.getElementById('hasil-tracking').innerHTML = `
-                    <div class="timeline" style="display:block;">
-                        <div class="timeline-item done"><div class="timeline-icon"></div><div class="timeline-content"><h4>Registrasi Pesanan</h4><p>Data transaksi telah tercatat resmi dalam basis data pusat.</p></div></div>
-                        <div class="timeline-item done"><div class="timeline-icon"></div><div class="timeline-content"><h4>Tahap Pengemasan</h4><p>Logistik barang sedang dipersiapkan dan melewati uji mutu.</p></div></div>
-                        <div class="timeline-item active"><div class="timeline-icon"></div><div class="timeline-content"><h4>Dalam Pengiriman</h4><p>Kurir bertugas sedang mengantar paket ke alamat tujuan.</p></div></div>
-                        <div class="timeline-item"><div class="timeline-icon"></div><div class="timeline-content"><h4>Selesai</h4><p>Serah terima paket kepada penerima.</p></div></div>
+                if(btn) { btn.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> Periksa Status Logistik'; btn.disabled = false; }
+                
+                areaHasil.innerHTML = `
+                    <!-- DATA STATUS TERAKHIR DITAMPILKAN PROMINEN -->
+                    <div class="status-terakhir-card">
+                        <div class="status-badge"><i class="fa-solid fa-clock"></i> STATUS TERAKHIR</div>
+                        <h3 class="status-title">Dalam Pengiriman Kurir Logistik</h3>
+                        <div style="font-size:12px; color:#9ca3af;">Nomor Resi: <strong style="color:#fff;">${resiInput}</strong></div>
+                        
+                        <div class="status-detail-grid">
+                            <div><i class="fa-solid fa-location-dot" style="color:#f59e0b;"></i> <strong>Lokasi:</strong> Area Gambir - Duri Pulo</div>
+                            <div><i class="fa-solid fa-calendar-check" style="color:#10b981;"></i> <strong>Waktu:</strong> 22 Juli 2026, 09:42 WIB</div>
+                            <div><i class="fa-solid fa-truck" style="color:#38bdf8;"></i> <strong>Kurir:</strong> Gamoon e-Package Sameday</div>
+                            <div><i class="fa-solid fa-box-archive" style="color:#a855f7;"></i> <strong>Penerima:</strong> Pelanggan Ousevoid</div>
+                        </div>
+                    </div>
+
+                    <!-- RIWAYAT TIMELINE -->
+                    <div class="timeline-wrapper">
+                        <h4 style="font-size:13px; font-weight:800; margin-bottom:15px; text-transform:uppercase;">Riwayat Perjalanan Logistik</h4>
+                        
+                        <div class="timeline-item completed">
+                            <div class="timeline-icon"></div>
+                            <div class="timeline-content">
+                                <h5>Registrasi Pesanan Terverifikasi</h5>
+                                <p>Data transaksi dan pembayaran berhasil terverifikasi oleh OJK Gateway.</p>
+                                <div class="timeline-time">22 Juli 2026, 07:15 WIB</div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item completed">
+                            <div class="timeline-icon"></div>
+                            <div class="timeline-content">
+                                <h5>Tahap Pengemasan & Quality Control</h5>
+                                <p>Paket telah lolos uji mutu dan dikemas rapi dengan pelindung bubble wrap.</p>
+                                <div class="timeline-time">22 Juli 2026, 08:00 WIB</div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item active">
+                            <div class="timeline-icon"></div>
+                            <div class="timeline-content">
+                                <h5>Dalam Pengiriman ke Alamat Tujuan</h5>
+                                <p>Kurir sedang dalam perjalanan. Diproyeksikan tiba dalam 30-45 menit.</p>
+                                <div class="timeline-time">22 Juli 2026, 09:42 WIB</div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-icon"></div>
+                            <div class="timeline-content">
+                                <h5>Serah Terima / Selesai</h5>
+                                <p>Konfirmasi penerimaan paket oleh konsumen.</p>
+                                <div class="timeline-time">Estimasi 10:30 WIB</div>
+                            </div>
+                        </div>
                     </div>
                 `;
-            }, 1200);
+            }, 500);
         }
 
-        function renderGaransi() { 
-            toggleFooterUtama(true); 
-            document.getElementById('app').innerHTML = `
-                <div class="info-box">
-                    <h2>Kebijakan Garansi Resmi Produk</h2>
-                    <p>Berdasarkan ketentuan operasional PT Gerbang Masa Depan, seluruh produk resmi merek Ousevoid dilindungi oleh program <strong>Garansi Resmi Produsen selama 3 (tiga) bulan</strong> terhitung sejak tanggal diterbitkannya bukti transaksi pembelian yang sah.</p>
-                    <p><strong>Cakupan Garansi:</strong><br>Garansi ini secara eksklusif hanya mencakup kerusakan atau cacat bawaan pabrik (<em>manufacturing defects</em>) serta malfungsi pada perangkat keras utama.</p>
-                    <p><strong>Pengecualian Garansi:</strong><br>Kerusakan yang diakibatkan oleh kelalaian atau kesalahan penggunaan oleh pihak konsumen—termasuk namun tidak terbatas pada paparan cairan, benturan fisik, terjatuh, maupun upaya perbaikan atau modifikasi mandiri di luar pusat servis resmi—dinyatakan gugur dari klaim garansi.</p>
-                </div>`; 
-            autoClose(); 
+        // --- RENDER BERANDA UTAMA ---
+        function renderHome() {
+            var app = document.getElementById('app');
+            app.innerHTML = `
+                <div class="slider-container">
+                    <div class="slide active">
+                        <img src="https://i.ibb.co.com/pjhVC7S6/SOUND-Without-20260714-173950-0000.png" alt="Banner Promo">
+                    </div>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card"><i class="fa-solid fa-medal feature-icon"></i><h4>100% Original</h4><p>Kualitas audio premium terjamin.</p></div>
+                    <div class="feature-card"><i class="fa-solid fa-shield-halved feature-icon"></i><h4>Garansi Resmi</h4><p>Perlindungan cacat pabrik 3 bulan.</p></div>
+                    <div class="feature-card"><i class="fa-solid fa-bolt feature-icon"></i><h4>Pengiriman Cepat</h4><p>Sameday 8 Jam via e-Package.</p></div>
+                    <div class="feature-card"><i class="fa-solid fa-lock feature-icon"></i><h4>Transaksi Aman</h4><p>Diawasi oleh OJK.</p></div>
+                </div>
+
+                <div class="category-section">
+                    <div class="category-header">
+                        <h2 class="category-title"><i class="fa-solid fa-ear-listen"></i> Earbuds & Audio</h2>
+                    </div>
+                    <div class="horizontal-scroll" id="product-list"></div>
+                </div>
+            `;
+
+            var listHtml = '';
+            products.forEach((p, idx) => {
+                listHtml += `
+                    <div class="horizontal-card">
+                        <img src="${p.img}">
+                        <h3>${p.name}</h3>
+                        <div class="harga">${p.price}</div>
+                        <button class="btn-action" onclick="tambahKeKeranjang(${idx})"><i class="fa-solid fa-cart-plus"></i> Beli</button>
+                    </div>
+                `;
+            });
+            document.getElementById('product-list').innerHTML = listHtml;
         }
 
-        function renderPengiriman() { 
-            toggleFooterUtama(true); 
-            document.getElementById('app').innerHTML = `
-                <div class="info-box">
-                    <h2>Ketentuan Layanan Logistik dan Pengiriman</h2>
-                    <img src="https://i.ibb.co.com/DHZj9dpW/8827-2.jpg" alt="Gamoon e-Package" style="height: 40px; object-fit: contain; max-width: 140px; filter: invert(1); mix-blend-mode: multiply; margin-bottom: 20px; display: block;">
-                    <p>PT Gerbang Masa Depan berkomitmen untuk menjamin ketepatan waktu pengiriman barang demi kepuasan konsumen. Untuk wilayah operasional khusus Jakarta dan Bodetabek, kami menggunakan jasa pengiriman prioritas <strong>Gamoon e-Package Sameday</strong>, dengan ketentuan batas waktu tiba maksimal <strong>8 (delapan) jam</strong> setelah konfirmasi pembayaran berhasil diverifikasi oleh sistem.</p>
-                    <p>Adapun untuk wilayah di luar jangkauan tersebut, pengiriman logistik dikoordinasikan melalui mitra perusahaan ekspedisi nasional terpercaya seperti J&T Express dan JNE Reguler.</p>
-                </div>`; 
-            autoClose(); 
+        function tambahKeKeranjang(idx) {
+            var p = products[idx];
+            keranjang.push(p);
+            var badge = document.getElementById('cart-badge');
+            badge.style.display = 'flex';
+            badge.innerText = keranjang.length;
+
+            var t = document.getElementById('toastNotif');
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 2000);
         }
 
-        function renderPembayaran() { 
-            toggleFooterUtama(true); 
-            document.getElementById('app').innerHTML = `
-                <div class="info-box">
-                    <h2>Regulasi dan Keamanan Sistem Pembayaran</h2>
-                    <p>Seluruh infrastruktur dan mekanisme pemrosesan transaksi finansial pada situs web resmi <em>ousevoid.biz.id</em> dioperasikan secara transparan, menggunakan protokol enkripsi berstandar perbankan tinggi, serta mematuhi ketentuan regulasi yang berlaku dan <strong>diawasi langsung oleh Otoritas Jasa Keuangan (OJK)</strong> melalui mitra gerbang pembayaran resmi.</p>
-                    <p>Metode transaksi yang didukung mencakup:</p>
-                    <ul>
-                        <li>Layanan Dompet Digital (E-Wallet): GoPay, DANA, ShopeePay, serta QRIS Nasional.</li>
-                        <li>Layanan Transfer Bank (Virtual Account): Bank BCA, Bank Mandiri, BNI, BRI, dan BTN.</li>
-                    </ul>
-                </div>`; 
-            autoClose(); 
+        function renderKeranjang() {
+            window.scrollTo(0,0);
+            var app = document.getElementById('app');
+            if(keranjang.length === 0) {
+                app.innerHTML = `<div class="info-card" style="text-align:center;"><h2>Keranjang Kosong</h2><p>Belum ada produk pilihan.</p><button class="btn-action" onclick="renderHome()">Kembali Berbelanja</button></div>`;
+                return;
+            }
+            app.innerHTML = `<div class="info-card"><h2>Keranjang Belanja (${keranjang.length} Produk)</h2><button class="btn-action" onclick="alert('Lanjut pembayaran'); renderHome();">Lanjutkan Pembayaran</button></div>`;
         }
 
-        function renderPrivasi() { 
-            toggleFooterUtama(true); 
-            document.getElementById('app').innerHTML = `
-                <div class="info-box">
-                    <h2>Kebijakan Privasi dan Perlindungan Data Pribadi</h2>
-                    <p><strong>1. Dasar Hukum Kepatuhan</strong><br>PT Gerbang Masa Depan tunduk dan patuh terhadap ketentuan <strong>Undang-Undang Perlindungan Data Pribadi Republik Indonesia (UU PDP)</strong> dalam mengumpulkan, mengelola, serta melindungi kerahasiaan data seluruh konsumen.</p>
-                    <p><strong>2. Pembatasan Pengumpulan Data</strong><br>Data pribadi yang dimintai dari Pengguna dibatasi secara ketat hanya pada informasi esensial yang diperlukan untuk kepentingan administrasi transaksi dan pengiriman logistik, meliputi: nama lengkap, nomor kontak telekomunikasi, alamat surel, serta alamat domisili penerima.</p>
-                    <p><strong>3. Retensi Data dan Keamanan</strong><br>Data sensitif konsumen akan dihapus secara permanen dari server aktif kami segera setelah proses pengiriman logistik dinyatakan tuntas. Perusahaan tidak menyimpan informasi kredensial finansial atau perbankan milik Pengguna.</p>
-                </div>`; 
-            autoClose(); 
+        function renderCS(kat) { alert("Menampilkan Kategori " + kat); }
+        function renderGaransi() { renderInfoPage("Garansi Resmi", "Seluruh produk Ousevoid dilindungi Garansi Resmi Produsen selama 3 Bulan."); }
+        function renderPengiriman() { renderInfoPage("Pengiriman Sameday", "Pengiriman Sameday Jabodetabek maksimal 8 jam via Gamoon e-Package."); }
+        function renderPembayaran() { renderInfoPage("Pembayaran OJK", "Seluruh transaksi diawasi oleh Otoritas Jasa Keuangan (OJK)."); }
+        function renderPrivasi() { renderInfoPage("Kebijakan Privasi", "Data pribadi Anda diproteksi sesuai UU Perlindungan Data Pribadi (PDP)."); }
+
+        function renderInfoPage(judul, isi) {
+            if(document.getElementById('sidebar').classList.contains('active')) toggleMenu();
+            document.getElementById('app').innerHTML = `<div class="info-card"><h2>${judul}</h2><p>${isi}</p><button class="btn-action" style="margin-top:20px; width:auto; padding:10px 20px;" onclick="renderHome()">Kembali ke Beranda</button></div>`;
         }
 
-        function renderSyarat() { 
-            toggleFooterUtama(true); 
-            document.getElementById('app').innerHTML = `
-                <div class="info-box">
-                    <h2>Syarat dan Ketentuan Umum Penggunaan Layanan</h2>
-                    <p><strong>Pasal 1: Ketentuan Umum</strong><br>Dengan mengakses serta melakukan transaksi jual beli melalui portal <em>ousevoid.biz.id</em>, Pengguna menyatakan telah membaca, memahami, serta menyatakan setuju untuk terikat secara hukum pada seluruh klausul Syarat dan Ketentuan Umum ini.</p>
-                    <p><strong>Pasal 2: Keabsahan Data Pengguna</strong><br>Pengguna bertanggung jawab penuh atas keakuratan, kebenaran, dan kelengkapan data informasi yang diinput saat melakukan pemesanan. Segala bentuk kerugian akibat kesalahan pencantuman alamat atau kontak di luar tanggung jawab PT Gerbang Masa Depan.</p>
-                    <p><strong>Pasal 3: Prosedur Pengembalian (Return & Refund)</strong><br>Klaim pengembalian barang akibat ketidaksesuaian atau cacat produk wajib disertakan dengan dokumen rekam video proses pembukaan paket (<em>unboxing</em>) secara utuh tanpa suntingan, selambat-lambatnya 2x24 jam sejak barang diterima.</p>
-                </div>`; 
-            autoClose(); 
-        }
-
-        window.onload = function() { muatProdukDariDatabase(); };
+        // MUAT HALAMAN
+        window.onload = function() { renderHome(); };
     </script>
 </body>
 </html>
