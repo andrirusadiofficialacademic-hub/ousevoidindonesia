@@ -60,12 +60,15 @@
         .main-content { padding: 25px 20px 80px 20px; max-width: 960px; margin: auto; min-height: 500px; }
 
         /* BANNER SLIDER */
-        .slider-container { position: relative; width: 100%; border-radius: 20px; overflow: hidden; margin-bottom: 35px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); background: #111; }
-        .slide { display: none; width: 100%; }
-        .slide.active { display: block; animation: fadeIn 0.6s; }
-        @keyframes fadeIn { from {opacity: 0.4} to {opacity: 1} }
-        .slide img { width: 100%; height: 220px; object-fit: cover; display: block; }
-        @media(min-width: 640px) { .slide img { height: 320px; } }
+        .slider-container { position: relative; width: 100%; border-radius: 20px; overflow: hidden; margin-bottom: 35px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); background: #111; height: 220px; }
+        @media(min-width: 768px) { .slider-container { height: 380px; } }
+        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.8s ease-in-out; z-index: 1; }
+        .slide.active { opacity: 1; z-index: 2; }
+        .slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        
+        .slider-indicators { position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 3; }
+        .indicator { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: 0.3s; }
+        .indicator.active { background: #fff; width: 24px; border-radius: 4px; }
 
         /* FITUR UNGGULAN */
         .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 40px; }
@@ -76,7 +79,7 @@
         .feature-card h4 { font-size: 13px; font-weight: 800; margin: 0 0 4px 0; color: #111; }
         .feature-card p { font-size: 11px; color: #6b7280; margin: 0; line-height: 1.4; }
 
-        /* KATEGORI HORIZONTAL */
+        /* KATEGORI HORIZONTAL & UKURAN GAMBAR */
         .category-section { margin-bottom: 40px; }
         .category-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 2px solid #f3f4f6; padding-bottom: 10px; }
         .category-title { font-size: 18px; font-weight: 800; color: #111; margin: 0; display: flex; align-items: center; gap: 8px; }
@@ -85,144 +88,125 @@
         .horizontal-scroll::-webkit-scrollbar { display: none; }
         
         .horizontal-card { min-width: 180px; max-width: 180px; background: #fff; border: 1px solid #e5e7eb; padding: 14px; border-radius: 18px; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; scroll-snap-align: start; }
+        
+        .horizontal-card img { width: 100%; height: 140px; object-fit: cover; border-radius: 12px; margin-bottom: 12px; cursor: pointer; transition: 0.3s; }
+        @media(min-width: 768px) {
+            .horizontal-card { min-width: 220px; max-width: 220px; }
+            .horizontal-card img { height: 180px; }
+        }
+        
         .horizontal-card:hover { border-color: #111; transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.06); }
-        .horizontal-card img { width: 100%; height: 130px; object-fit: cover; border-radius: 12px; margin-bottom: 12px; cursor: pointer; }
-        .horizontal-card h3 { font-size: 12px; font-weight: 700; margin: 0 0 6px 0; color: #111; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .horizontal-card h3 { font-size: 13px; font-weight: 700; margin: 0 0 6px 0; color: #111; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .horizontal-card .harga { font-size: 14px; font-weight: 800; color: #111; margin-bottom: 12px; }
         
         .btn-action, .co-btn-pay { background: #111827; color: #fff; padding: 10px; border-radius: 10px; font-weight: 700; border: none; cursor: pointer; width: 100%; font-size: 12px; transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 6px; }
         .btn-action:hover, .co-btn-pay:hover { background: #1f2937; }
 
         /* ==========================================
-           4. HALAMAN LACAK PESANAN
+           5. CHECKOUT SATU HALAMAN & INVOICE
            ========================================== */
-        .track-box { background: #fff; border: 1px solid #e5e7eb; border-radius: 24px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); max-width: 600px; margin: auto; }
-        .track-input-group { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
-        .track-input { width: 100%; padding: 14px 16px; border: 1px solid #d1d5db; border-radius: 14px; font-size: 13px; font-weight: 700; outline: none; background: #f9fafb; }
-        .track-input:focus { border-color: #111; background: #fff; }
-        .status-terakhir-card { background: #111827; color: #fff; border-radius: 20px; padding: 20px; margin-top: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); position: relative; overflow: hidden; text-align: left; }
-        .status-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; background: rgba(251, 191, 36, 0.2); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); border-radius: 20px; font-size: 11px; font-weight: 800; margin-bottom: 12px; }
-        .status-title { font-size: 18px; font-weight: 800; color: #f59e0b; margin: 0 0 10px 0; }
-        .status-detail-grid { display: grid; grid-template-columns: 1fr; gap: 8px; font-size: 12px; color: #d1d5db; border-top: 1px solid #374151; padding-top: 12px; margin-top: 12px; }
-        @media(min-width: 500px) { .status-detail-grid { grid-template-columns: 1fr 1fr; } }
-        .timeline-wrapper { margin-top: 25px; text-align: left; border-top: 1px solid #e5e7eb; padding-top: 20px; }
-        .timeline-item { position: relative; padding-left: 28px; padding-bottom: 20px; border-left: 2px solid #e5e7eb; }
-        .timeline-item:last-child { border-left: 2px solid transparent; padding-bottom: 0; }
-        .timeline-icon { position: absolute; left: -9px; top: 0; width: 16px; height: 16px; border-radius: 50%; background: #e5e7eb; border: 2px solid #fff; }
-        .timeline-item.completed .timeline-icon { background: #111827; }
-        .timeline-item.active .timeline-icon { background: #f59e0b; border-color: #fef3c7; box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3); }
-        .timeline-content h5 { margin: 0 0 3px 0; font-size: 13px; font-weight: 800; color: #111; }
-        .timeline-item.active .timeline-content h5 { color: #d97706; }
-        .timeline-content p { margin: 0; font-size: 12px; color: #6b7280; line-height: 1.4; }
-        .timeline-time { font-size: 10px; font-weight: 700; color: #9ca3af; margin-top: 4px; }
-
-        /* ==========================================
-           5. CHECKOUT & KERANJANG ASLI MIDTRANS
-           ========================================== */
-        .co-wrapper { text-align: left; background: #fff; padding: 20px; border-radius: 20px; margin-bottom: 80px; border: 1px solid #e5e7eb; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
-        .co-card { background: #fff; border-radius: 16px; padding: 20px; margin-bottom: 20px; border: 1px solid #f3f4f6; }
-        .co-card-header { font-size: 15px; font-weight: 800; color: #111; margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
-        .co-input-modern { width: 100%; padding: 14px 16px; border: 1px solid #d1d5db; border-radius: 12px; font-family: 'Inter', sans-serif; font-size: 13px; margin-bottom: 12px; outline: none; background: #f9fafb; }
+        .co-wrapper { text-align: left; background: #fff; padding: 25px; border-radius: 20px; margin-bottom: 80px; border: 1px solid #e5e7eb; box-shadow: 0 4px 15px rgba(0,0,0,0.03); max-width: 800px; margin-left: auto; margin-right: auto; }
+        .co-header-title { font-size: 20px; font-weight: 800; color: #111; margin-bottom: 5px; display: flex; align-items: center; gap: 10px; }
+        .co-header-id { font-size: 12px; color: #6b7280; margin-bottom: 25px; font-family: monospace; letter-spacing: 0.5px; }
+        
+        .co-section-title { font-size: 14px; font-weight: 800; color: #111; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #f3f4f6; }
+        .co-input-modern { width: 100%; padding: 14px 16px; border: 1px solid #d1d5db; border-radius: 12px; font-family: 'Inter', sans-serif; font-size: 13px; margin-bottom: 15px; outline: none; background: #f9fafb; transition: 0.3s; }
         .co-input-modern:focus { border-color: #111; background: #fff; }
-        .co-product-item { display: flex; gap: 15px; align-items: center; padding-bottom: 18px; border-bottom: 1px dashed #e5e7eb; margin-bottom: 18px; }
-        .co-product-item img { width: 70px; height: 70px; object-fit: cover; border-radius: 12px; border: 1px solid #f3f4f6; }
+        
+        .co-product-item { display: flex; gap: 15px; align-items: center; padding-bottom: 15px; border-bottom: 1px dashed #e5e7eb; margin-bottom: 15px; }
+        .co-product-item img { width: 80px; height: 80px; object-fit: cover; border-radius: 12px; border: 1px solid #f3f4f6; }
         .co-product-info { flex: 1; }
         .co-product-name { font-size: 13px; font-weight: 700; color: #111; margin-bottom: 6px; }
         .co-product-price { font-size: 14px; font-weight: 800; color: #e11d48; }
+        
         .qty-control { display: flex; align-items: center; gap: 12px; background: #fff; border: 1px solid #d1d5db; border-radius: 8px; padding: 6px 10px; width: fit-content; margin-top: 8px; }
         .qty-btn { cursor: pointer; font-weight: 800; color: #4b5563; width: 20px; text-align: center; }
         .qty-num { font-size: 13px; font-weight: 700; width: 20px; text-align: center; color: #111; }
-        .co-summary-line { display: flex; justify-content: space-between; font-size: 13px; font-weight: 500; color: #4b5563; margin-bottom: 10px; }
-        .co-summary-line.total-line { border-top: 1px dashed #d1d5db; padding-top: 12px; margin-top: 8px; font-weight: 800; color: #111; font-size: 16px; }
-        .kurir-select { width: 100%; padding: 14px 16px; border: 1px solid #d1d5db; border-radius: 12px; margin-bottom: 15px; font-family: 'Inter'; font-size: 13px; outline: none; }
-        .payment-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
-        .payment-box { border: 1px solid #d1d5db; border-radius: 12px; padding: 10px; display: flex; justify-content: center; align-items: center; height: 50px; cursor: pointer; transition: 0.2s; }
-        .payment-box.selected { border-color: #111; box-shadow: 0 0 0 2px #111; }
-        .payment-box img { max-height: 20px; max-width: 100%; }
-        .tipe-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
-        .tipe-box { border: 1px solid #d1d5db; border-radius: 10px; padding: 10px 15px; background: #fff; cursor: pointer; font-size: 12px; font-weight: 700; color: #4b5563; }
-        .tipe-box.selected { border-color: #111; background: #111; color: #fff; }
         
+        .payment-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 25px; }
+        @media(min-width: 600px) { .payment-grid { grid-template-columns: repeat(4, 1fr); } }
+        .payment-box { border: 1px solid #d1d5db; border-radius: 12px; padding: 12px; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; transition: 0.2s; background: #fff; gap: 8px; }
+        .payment-box.selected { border-color: #111; box-shadow: 0 0 0 2px #111; background: #f9fafb; }
+        .payment-box img { max-height: 24px; max-width: 100%; object-fit: contain; }
+        .payment-box span { font-size: 11px; font-weight: 700; color: #4b5563; text-align: center; }
+        
+        .va-box { background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 16px; padding: 25px; text-align: center; margin-bottom: 20px; }
+        .va-bank-name { font-size: 14px; font-weight: 800; color: #334155; margin-bottom: 10px; text-transform: uppercase; }
+        .va-number { font-size: 28px; font-weight: 800; color: #111; letter-spacing: 2px; margin-bottom: 15px; user-select: all; }
+        .va-amount { font-size: 20px; font-weight: 800; color: #e11d48; margin-bottom: 10px; }
+
         .co-bottom-bar { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); padding: 15px 20px; box-sizing: border-box; display: flex; justify-content: space-between; align-items: center; z-index: 1000; border-top: 1px solid #f3f4f6; }
+        @media(min-width: 768px) { .co-bottom-bar { padding: 15px 40px; } }
 
         /* ==========================================
-           6. MODAL & LAINNYA
+           7. UI KOTAK CHAT (ALUR BANK CS)
            ========================================== */
+        /* WIDGET ICON HEADSET LENGKAP */
+        .chat-widget-btn { position: fixed; bottom: 25px; right: 25px; width: 56px; height: 56px; border-radius: 50%; cursor: pointer; z-index: 999; box-shadow: 0 10px 25px rgba(0,0,0,0.25); transition: 0.3s; background: #111827; color: #fff; display: flex; justify-content: center; align-items: center; font-size: 22px; border: 2px solid #fff; }
+        .chat-widget-btn:hover { transform: scale(1.08); background: #1f2937; }
+        
+        .chat-window { position: fixed; bottom: 90px; right: 25px; width: 350px; background: #fff; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.18); z-index: 9999; display: none; flex-direction: column; overflow: hidden; border: 1px solid #e5e7eb; transition: 0.3s; }
+        @media(max-width: 400px) { .chat-window { width: calc(100% - 30px); right: 15px; } }
+        .chat-window.show { display: flex; animation: slideUp 0.3s ease; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .chat-header { background: #111827; padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; color: #fff; }
+        .chat-header-info { display: flex; align-items: center; gap: 12px; }
+        .chat-avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #374151; background: #fff; }
+        .chat-name-status { display: flex; flex-direction: column; }
+        .chat-name { font-size: 13px; font-weight: 700; color: #fff; }
+        .chat-status-wrap { display: flex; align-items: center; gap: 5px; font-size: 10px; color: #d1d5db; margin-top: 2px; }
+        
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #2ecc71; } /* Hijau CS Online */
+        .status-dot.bot { background: #3b82f6; } /* Biru Bot */
+        .status-dot.offline { background: #9ca3af; } 
+        .status-dot.error { background: #e74c3c; } 
+        
+        .close-chat-btn { cursor: pointer; color: #9ca3af; font-size: 18px; transition: 0.2s; padding: 4px; }
+        .close-chat-btn:hover { color: #fff; }
+        
+        .chat-body { padding: 15px; height: 320px; overflow-y: auto; background: #f9fafb; display: flex; flex-direction: column; gap: 12px; scroll-behavior: smooth; }
+        .chat-bubble { max-width: 88%; padding: 12px 14px; border-radius: 14px; font-size: 12px; line-height: 1.5; word-wrap: break-word; }
+        .chat-bubble.cs { background: #fff; color: #111; border: 1px solid #e5e7eb; align-self: flex-start; border-bottom-left-radius: 2px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .chat-bubble.user { background: #111827; color: #fff; align-self: flex-end; border-bottom-right-radius: 2px; }
+        
+        /* ITEM QNA BAR (INTERAKTIF) */
+        .qna-options-wrapper { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
+        .qna-bar-item { background: #f3f4f6; border: 1px solid #e5e7eb; padding: 10px 12px; border-radius: 10px; font-size: 11px; font-weight: 700; color: #374151; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: space-between; }
+        .qna-bar-item:hover { background: #111827; color: #fff; border-color: #111827; }
+        .qna-bar-item i { font-size: 10px; opacity: 0.7; }
+
+        /* FORM INPUT UNTUK HUBUNGI CS */
+        .chat-form-box { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 14px; margin-top: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+        .chat-form-input { width: 100%; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 12px; margin-bottom: 10px; font-family: 'Inter'; outline: none; background: #f9fafb; }
+        .chat-form-input:focus { border-color: #111; background: #fff; }
+        .chat-form-btn { background: #111827; color: #fff; border: none; padding: 10px; border-radius: 8px; font-size: 12px; font-weight: 700; width: 100%; cursor: pointer; transition: 0.2s; }
+        .chat-form-btn:hover { background: #1f2937; }
+        
+        .chat-input-area { padding: 12px; background: #fff; border-top: 1px solid #e5e7eb; display: flex; gap: 8px; align-items: center; }
+        .chat-input { flex: 1; padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 20px; font-size: 12px; outline: none; font-family: 'Inter'; background: #f9fafb; }
+        .chat-input:focus { border-color: #111; background: #fff; }
+        .chat-send-btn { background: #111; color: #fff; border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.2s; }
+        .chat-send-btn:hover { background: #374151; }
+
+        /* TOAST NOTIF & MODAL */
+        .toast-notif { position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-50px); background: #111; color: #fff; padding: 12px 24px; border-radius: 30px; font-size: 12px; font-weight: 700; opacity: 0; transition: 0.3s; z-index: 9999; }
+        .toast-notif.show { opacity: 1; transform: translateX(-50%) translateY(0); }
         .modal-login-overlay { visibility: hidden; opacity: 0; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(17, 24, 39, 0.6); backdrop-filter: blur(4px); z-index: 2000; display: flex; justify-content: center; align-items: center; padding: 20px; transition: 0.3s; }
         .modal-login-overlay.show { visibility: visible; opacity: 1; }
         .modal-login-box { background: #fff; padding: 28px 24px; border-radius: 24px; width: 100%; max-width: 360px; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.15); text-align: center; }
         .close-login-btn { position: absolute; top: 16px; right: 18px; font-size: 20px; cursor: pointer; color: #9ca3af; }
-        .close-login-btn:hover { color: #111; }
-        .login-logo { height: 30px; margin-bottom: 10px; }
-        .login-title { font-size: 18px; font-weight: 800; color: #111; margin: 0 0 4px 0; }
-        .login-sub { font-size: 12px; color: #6b7280; margin-bottom: 20px; }
-        .login-tabs { display: grid; grid-template-columns: 1fr 1fr; background: #f3f4f6; border-radius: 12px; padding: 3px; margin-bottom: 18px; }
-        .login-tab { padding: 8px; font-size: 12px; font-weight: 700; color: #6b7280; border-radius: 10px; cursor: pointer; border: none; background: transparent; }
-        .login-tab.active { background: #fff; color: #111; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
         .login-input-wrapper { text-align: left; margin-bottom: 12px; }
         .login-label { font-size: 10px; font-weight: 800; color: #6b7280; text-transform: uppercase; margin-bottom: 4px; display: block; }
-        
         .login-input { width: 100%; padding: 14px 16px; border: 1px solid #d1d5db; border-radius: 12px; font-family: 'Inter', sans-serif; font-size: 13px; outline: none; background: #f9fafb; margin-bottom: 5px; box-sizing: border-box; transition: 0.3s; }
         .login-input:focus { border-color: #111; background: #fff; }
-        
         .info-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 20px; padding: 30px; text-align: left; line-height: 1.8; font-size: 13px; color: #374151; margin-bottom: 20px; }
-        .info-card h2 { font-size: 22px; font-weight: 800; color: #111; margin-top: 0; margin-bottom: 20px; border-bottom: 2px solid #f3f4f6; padding-bottom: 10px; }
-        .info-card h4 { font-size: 14px; color: #111; font-weight: 800; margin: 15px 0 5px 0; }
         
-        .chat-widget-btn { position: fixed; bottom: 25px; right: 25px; width: 52px; height: 52px; background: #111; color: #fff; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 20px; cursor: pointer; z-index: 999; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
-        .toast-notif { position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-50px); background: #111; color: #fff; padding: 12px 24px; border-radius: 30px; font-size: 12px; font-weight: 700; opacity: 0; transition: 0.3s; z-index: 9999; }
-        .toast-notif.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-        /* ==========================================
-           7. UI KOTAK CHAT (BARU)
-           ========================================== */
-        .chat-window { position: fixed; bottom: 90px; right: 25px; width: 320px; background: #fff; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); z-index: 9999; display: none; flex-direction: column; overflow: hidden; border: 1px solid #e5e7eb; transition: 0.3s; }
-        .chat-window.show { display: flex; animation: slideUp 0.3s ease; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .chat-header { background: #111827; padding: 15px; display: flex; align-items: center; justify-content: space-between; color: #fff; }
-        .chat-header-info { display: flex; align-items: center; gap: 10px; }
-        .chat-avatar { width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 2px solid #374151; background: #fff; }
-        .chat-name-status { display: flex; flex-direction: column; }
-        .chat-name { font-size: 13px; font-weight: 700; }
-        .chat-status-wrap { display: flex; align-items: center; gap: 5px; font-size: 10px; color: #d1d5db; margin-top:2px; }
-        
-        /* Indikator Status */
-        .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #2ecc71; } /* Default Hijau Online */
-        .status-dot.offline { background: #9ca3af; } /* Abu-abu Offline */
-        .status-dot.error { background: #e74c3c; } /* Merah Gangguan */
-        
-        .close-chat-btn { cursor: pointer; color: #9ca3af; font-size: 16px; transition: 0.2s; padding: 5px; }
-        .close-chat-btn:hover { color: #fff; }
-        
-        .chat-body { padding: 15px; height: 260px; overflow-y: auto; background: #f9fafb; display: flex; flex-direction: column; gap: 10px; scroll-behavior: smooth; }
-        .chat-bubble { max-width: 85%; padding: 10px 14px; border-radius: 12px; font-size: 12px; line-height: 1.5; word-wrap: break-word; }
-        .chat-bubble.cs { background: #fff; color: #111; border: 1px solid #e5e7eb; align-self: flex-start; border-bottom-left-radius: 2px; }
-        .chat-bubble.user { background: #111827; color: #fff; align-self: flex-end; border-bottom-right-radius: 2px; }
-        
-        .chat-input-area { padding: 12px; background: #fff; border-top: 1px solid #e5e7eb; display: flex; gap: 8px; align-items: center; }
-        .chat-input { flex: 1; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 20px; font-size: 12px; outline: none; font-family: 'Inter'; background: #f9fafb; }
-        .chat-input:focus { border-color: #111; background: #fff; }
-        .chat-send-btn { background: #111; color: #fff; border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.2s; }
-        .chat-send-btn:hover { background: #374151; }
-
-        /* FOOTER (DIKEMBALIKAN UTUH) */
         .footer { padding: 60px 20px 30px 20px; background: #fff; text-align: left; font-size: 13px; color: #555; border-top: 1px solid #eee; }
-        .footer-profile-title { font-weight: 800; color: #111; margin-bottom: 15px; font-size: 16px; letter-spacing: 0.5px; }
-        .footer-profile-text { line-height: 1.8; color: #666; margin-bottom: 25px; }
+        .footer-profile-title { font-weight: 800; color: #111; margin-bottom: 15px; font-size: 16px; }
         .footer-hq-logo { width: 120px; margin-bottom: 18px; display: block; }
-        .supported-title { font-weight: 800; color: #111; margin-bottom: 15px; font-size: 14px; letter-spacing: 0.5px; }
-        .supported-img { height: 40px; object-fit: contain; max-width: 130px; filter: invert(1); mix-blend-mode: multiply; opacity: 0.9; }
-        .footer-gov { margin-bottom: 30px; padding: 20px; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; font-size: 12px; line-height: 1.7; color: #4b5563; }
         .copyright { font-size: 12px; color: #9ca3af; border-top: 1px solid #f3f4f6; padding-top: 25px; text-align: left; font-weight: 600; }
-        #footer-main-info.hidden { display: none !important; }
-        
-        @media(min-width: 768px) {
-            #footer-main-info { display: flex; flex-wrap: wrap; width: 100%; justify-content: space-between; gap: 40px; max-width: 960px; margin: auto; }
-            .footer-profile { flex: 2; min-width: 320px; margin-right: 40px; }
-            .footer-contact-info, .footer-hq { flex: 1; min-width: 250px; }
-            .footer-gov, .copyright { width: 100%; max-width: 960px; margin: 40px auto 0 auto; text-align: center; }
-        }
+        @media(min-width: 768px) { #footer-main-info { display: flex; flex-wrap: wrap; width: 100%; justify-content: space-between; gap: 40px; max-width: 960px; margin: auto; } .footer-profile { flex: 2; min-width: 320px; margin-right: 40px; } .footer-contact-info, .footer-hq { flex: 1; min-width: 250px; } .footer-gov, .copyright { width: 100%; max-width: 960px; margin: 40px auto 0 auto; text-align: center; } }
     </style>
 </head>
 <body>
@@ -271,7 +255,6 @@
                 <div class="nav-item" onclick="renderPrivasi()"><i class="fa-solid fa-lock"></i> Kebijakan Privasi</div>
             </div>
         </div>
-
         <div style="padding-top:15px; border-top:1px solid #f3f4f6;">
             <button class="btn-action" onclick="bukaLogin()"><i class="fa-solid fa-right-to-bracket"></i> Login Admin Portal</button>
         </div>
@@ -281,59 +264,50 @@
 
     <div id="toastNotif" class="toast-notif"><i class="fa-solid fa-circle-check" style="color: #2ecc71;"></i> <span>Berhasil ditambahkan ke keranjang!</span></div>
 
-    <div id="loginModal" class="modal-login-overlay">
-        <div class="modal-login-box">
-            <span class="close-login-btn" onclick="tutupLogin()">&times;</span>
-            <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Logo" class="login-logo">
-            <h3 class="login-title">Login</h3>
-            <p class="login-sub">Masuk ke Sistem Ousevoid</p>
-
-            <div class="login-tabs">
-                <button class="login-tab active" id="tab-buyer" onclick="setLoginMode('buyer')">Pembeli</button>
-                <button class="login-tab" id="tab-admin" onclick="setLoginMode('admin')">Admin Portal</button>
-            </div>
-
-            <div class="login-input-wrapper">
-                <label class="login-label">Username / Email</label>
-                <input type="text" id="log-user" class="login-input" placeholder="Masukkan username">
-            </div>
-
-            <div class="login-input-wrapper">
-                <label class="login-label">Kata Sandi</label>
-                <input type="password" id="log-pass" class="login-input" placeholder="Masukkan kata sandi">
-            </div>
-
-            <div class="login-input-wrapper" id="pin-field" style="display: none;">
-                <label class="login-label">PIN Keamanan (6 Digit)</label>
-                <input type="password" id="log-pin" class="login-input" placeholder="6 Digit PIN Rahasia" maxlength="6">
-            </div>
-
-            <button class="btn-action" style="margin-top: 15px; padding: 12px;" onclick="prosesLogin()"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login Sekarang</button>
-        </div>
+    <div class="chat-widget-btn" onclick="toggleChatWindow()">
+        <i class="fa-solid fa-headset"></i>
     </div>
-
-    <div class="chat-widget-btn" onclick="toggleChatWindow()"><i class="fa-solid fa-message"></i></div>
 
     <div class="chat-window" id="chatWindow">
         <div class="chat-header">
             <div class="chat-header-info">
-                <img src="https://ui-avatars.com/api/?name=Tiara&background=111827&color=fff&rounded=true&bold=true" alt="CS Tiara" class="chat-avatar">
+                <img src="uploaded:10685.jpg-840c644b-ea44-451f-b6af-9acc5d41cfcb" id="chatAvatarImg" alt="CS Avatar" class="chat-avatar">
                 <div class="chat-name-status">
-                    <span class="chat-name">Tiara (Agent)</span>
+                    <span class="chat-name" id="chatAgentName">Marsya (No Reply)</span>
                     <div class="chat-status-wrap">
-                        <span class="status-dot" id="cs-status-dot"></span>
-                        <span id="cs-status-text">Online</span>
+                        <span class="status-dot bot" id="cs-status-dot"></span>
+                        <span id="cs-status-text">Bot</span>
                     </div>
                 </div>
             </div>
             <i class="fa-solid fa-xmark close-chat-btn" onclick="toggleChatWindow()"></i>
         </div>
-        <div class="chat-body" id="chatBody">
-            <div class="chat-bubble cs">Halo! Ada yang bisa Tiara bantu seputar produk Ousevoid hari ini? 😊</div>
-        </div>
+        <div class="chat-body" id="chatBody"></div>
         <div class="chat-input-area">
-            <input type="text" id="chat-input-teks" class="chat-input" placeholder="Ketik pesan Anda..." onkeypress="handleChatEnter(event)">
+            <input type="text" id="chat-input-teks" class="chat-input" placeholder="Ketik nomor pilihan (1-5)..." onkeypress="handleChatEnter(event)">
             <button class="chat-send-btn" onclick="kirimPesanChat()"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <div id="loginModal" class="modal-login-overlay">
+        <div class="modal-login-box">
+            <span class="close-login-btn" onclick="tutupLogin()">&times;</span>
+            <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Logo" class="login-logo">
+            <h3 style="font-size:18px; margin:0 0 4px 0; font-weight:800;">Login</h3>
+            <p style="font-size:12px; color:#6b7280; margin-bottom:20px;">Masuk ke Sistem Ousevoid</p>
+            <div style="text-align:left; margin-bottom:12px;">
+                <label class="login-label">Username / Email</label>
+                <input type="text" id="log-user" class="login-input" placeholder="Masukkan username">
+            </div>
+            <div style="text-align:left; margin-bottom:12px;">
+                <label class="login-label">Kata Sandi</label>
+                <input type="password" id="log-pass" class="login-input" placeholder="Masukkan kata sandi">
+            </div>
+            <div style="text-align:left; margin-bottom:12px;" id="pin-field">
+                <label class="login-label">PIN Keamanan (6 Digit)</label>
+                <input type="password" id="log-pin" class="login-input" placeholder="6 Digit PIN Rahasia" maxlength="6">
+            </div>
+            <button class="btn-action" style="margin-top:15px; padding:12px;" onclick="prosesLogin()"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login Admin Portal</button>
         </div>
     </div>
 
@@ -341,78 +315,455 @@
         <div id="footer-main-info">
             <div class="footer-profile">
                 <div class="footer-profile-title">Tentang PT Gerbang Masa Depan (Ousevoid)</div>
-                <p class="footer-profile-text">Ousevoid adalah merek di bawah naungan PT Gerbang Masa Depan yang berfokus pada inovasi perangkat audio nirkabel. Kami berkomitmen untuk menghadirkan produk dengan desain fungsional, spesifikasi andal, dan harga yang kompetitif guna memenuhi kebutuhan produktivitas dan gaya hidup digital masyarakat.</p>
+                <p style="line-height:1.8; color:#666; margin-bottom:25px;">Ousevoid adalah merek di bawah naungan PT Gerbang Masa Depan yang berfokus pada inovasi perangkat audio nirkabel. Kami berkomitmen untuk menghadirkan produk dengan desain fungsional, spesifikasi andal, dan harga yang kompetitif guna memenuhi kebutuhan produktivitas dan gaya hidup digital masyarakat.</p>
             </div>
             <div class="footer-contact-info">
                 Apabila Anda mengalami kendala atau membutuhkan informasi produk silakan hubungi kami melalui:<br>
-                <div style="display:flex; align-items:center; gap:10px; margin-top:15px;"><i class="fa-solid fa-envelope" style="width:16px; text-align:center; font-size:16px;"></i> email: ousevoid@gmail.com</div>
-                <a href="https://wa.me/6285715000443" style="display:flex; align-items:center; gap:10px; margin-top:10px; color:inherit; transition:0.3s;"><i class="fa-brands fa-whatsapp" style="width:16px; text-align:center; font-size:18px;"></i> WhatsApp: 0857 15000 443</a>
-                <a href="#" style="display:flex; align-items:center; gap:10px; margin-top:10px; color:inherit; transition:0.3s;"><i class="fa-brands fa-facebook" style="width:16px; text-align:center; font-size:16px;"></i> Ousevoid Official</a>
-                <a href="#" style="display:flex; align-items:center; gap:10px; margin-top:10px; color:inherit; transition:0.3s;"><i class="fa-brands fa-instagram" style="width:16px; text-align:center; font-size:17px;"></i> @ousevoid</a>
+                <div style="display:flex; align-items:center; gap:10px; margin-top:15px;"><i class="fa-solid fa-envelope" style="width:16px;"></i> email: ousevoid@gmail.com</div>
+                <a href="https://wa.me/6285715000443" style="display:flex; align-items:center; gap:10px; margin-top:10px; color:inherit; transition:0.3s;"><i class="fa-brands fa-whatsapp" style="width:16px; font-size:18px;"></i> WhatsApp: 0857 15000 443</a>
+                <a href="#" style="display:flex; align-items:center; gap:10px; margin-top:10px; color:inherit;"><i class="fa-brands fa-instagram" style="width:16px; font-size:17px;"></i> @ousevoid</a>
             </div>
             <div class="footer-hq">
                 <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Ousevoid Logo" class="footer-hq-logo">
-                <div style="font-weight:500; color:#666; margin-bottom:6px;">Kantor Pusat</div>
                 <div style="font-weight:800; color:#111; margin-bottom:8px; font-size:14px;">PT Gerbang Masa Depan</div>
                 <div style="line-height:1.7; margin-bottom:20px; color:#555;">Jl. K.H Zainul Arifin 71 Duri Pulo Gambir Jakarta pusat, Indonesia 10140</div>
-                <div style="margin-top:25px; padding-top:20px; border-top:1px dashed #e5e7eb;">
-                    <div class="supported-title">Powered by:</div>
-                    <div style="display:flex; gap:15px; margin-bottom:12px;"><img src="https://i.ibb.co.com/DHZj9dpW/8827-2.jpg" alt="e-Package Service" class="supported-img"></div>
-                    <div style="font-weight:800; color:#111; margin-bottom:6px; font-size:13px;">PT Gamoon Desember Indonesia</div>
-                    <div style="line-height:1.7; color:#555;">Jl KP Bakti Raya 22 Cideng Gambir Jakarta Pusat, Indonesia 10150</div>
-                </div>
-            </div>
-            <div class="footer-gov">
-                Direktorat Jenderal Perlindungan Konsumen dan Tertib Niaga<br>Kementerian Perdagangan Republik Indonesia<br>WhatsApp: 0853-1111-1010
             </div>
         </div>
         <div class="copyright">&copy; 2026 PT Gerbang Masa Depan. Semua Hak Cipta dilindungi.</div>
     </div>
 
     <script>
-        // DATA DASAR
+        // DATA GLOBAL
         var products = []; 
         var keranjang = [];
-        var activeLoginMode = 'buyer';
         window.currentBasePrice = 0;
         window.currentProductName = "";
         window.currentProductImg = "";
         window.selectedPaymentMethod = "";
+        
+        function generateTrxId() { return "2026/OUSEVOID/" + Math.floor(1000000 + Math.random() * 9000000); }
 
-        // TAMPILAN FOOTER TOGGLE
         function toggleFooterUtama(tampilkan) { 
             var f = document.getElementById('footer-main-info'); var fu = document.getElementById('main-footer'); 
             if(f) { tampilkan ? f.classList.remove('hidden') : f.classList.add('hidden'); }
             if(fu) { tampilkan ? fu.style.display = 'block' : fu.style.display = 'none'; } 
         }
 
-        // FUNGSI MENU & LOGIN
         function toggleMenu() { 
             document.getElementById('sidebar').classList.toggle('active'); 
             document.getElementById('overlay').classList.toggle('active'); 
         }
-        
-        function autoClose() { 
-            if (document.getElementById('sidebar').classList.contains('active')) toggleMenu(); 
+        function autoClose() { if (document.getElementById('sidebar').classList.contains('active')) toggleMenu(); }
+        function bukaLogin() { document.getElementById('loginModal').classList.add('show'); autoClose(); }
+        function tutupLogin() { document.getElementById('loginModal').classList.remove('show'); }
+
+        // RENDER BERANDA
+        function renderHome() {
+            toggleFooterUtama(true);
+            var app = document.getElementById('app');
+            
+            var html = `
+                <div class="slider-container" id="mainBannerSlider">
+                    <div class="slide active"><img src="https://i.ibb.co.com/pjhVC7S6/SOUND-Without-20260714-173950-0000.png" alt="Banner 1"></div>
+                    <div class="slide"><img src="https://i.ibb.co.com/pjhVC7S6/SOUND-Without-20260714-173950-0000.png" alt="Banner 2" style="filter: hue-rotate(45deg);"></div>
+                    <div class="slide"><img src="https://i.ibb.co.com/pjhVC7S6/SOUND-Without-20260714-173950-0000.png" alt="Banner 3" style="filter: hue-rotate(90deg);"></div>
+                    <div class="slide"><img src="https://i.ibb.co.com/pjhVC7S6/SOUND-Without-20260714-173950-0000.png" alt="Banner 4" style="filter: hue-rotate(135deg);"></div>
+                    <div class="slide"><img src="https://i.ibb.co.com/pjhVC7S6/SOUND-Without-20260714-173950-0000.png" alt="Banner 5" style="filter: hue-rotate(180deg);"></div>
+                    <div class="slider-indicators">
+                        <div class="indicator active"></div><div class="indicator"></div><div class="indicator"></div><div class="indicator"></div><div class="indicator"></div>
+                    </div>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card"><i class="fa-solid fa-medal feature-icon"></i><h4>100% Original</h4><p>Kualitas audio premium terjamin.</p></div>
+                    <div class="feature-card"><i class="fa-solid fa-shield-halved feature-icon"></i><h4>Garansi Resmi</h4><p>Perlindungan cacat pabrik 3 bulan.</p></div>
+                    <div class="feature-card"><i class="fa-solid fa-bolt feature-icon"></i><h4>Pengiriman Cepat</h4><p>Pengiriman Sameday Gamoon Prioritas.</p></div>
+                    <div class="feature-card"><i class="fa-solid fa-lock feature-icon"></i><h4>Transaksi Aman</h4><p>Pembayaran Aman diawasi OJK.</p></div>
+                </div>
+            `;
+
+            const kategoriList = [
+                { id: 'Earbuds', icon: 'fa-ear-listen', keywords: ['earbud', 'tws', 'headset', 'earphone', 'airpod'] },
+                { id: 'Smartphone', icon: 'fa-mobile-screen-button', keywords: ['smartphone', 'phone', 'hp', 'ponsel', 'galaxy', 'iphone'] },
+                { id: 'Speaker', icon: 'fa-volume-high', keywords: ['speaker', 'audio', 'soundbar', 'bass'] },
+                { id: 'Sparepart', icon: 'fa-link', keywords: ['sparepart', 'kabel', 'charger', 'baterai', 'case', 'pelindung'] }
+            ];
+
+            kategoriList.forEach(kat => {
+                let produkKategoriIni = products.filter(p => {
+                    let namaLower = p.name.toLowerCase();
+                    let matchCategory = (p.category && p.category.toLowerCase() === kat.id.toLowerCase());
+                    let matchName = kat.keywords.some(kw => namaLower.includes(kw));
+                    return matchCategory || matchName;
+                });
+                
+                html += `<div class="category-section"><div class="category-header"><h2 class="category-title"><i class="fa-solid ${kat.icon}"></i> ${kat.id}</h2></div><div class="horizontal-scroll">`;
+                if (produkKategoriIni.length > 0) {
+                    produkKategoriIni.forEach(fp => {
+                        let originalIndex = products.findIndex(op => op.id === fp.id);
+                        html += `
+                        <div class="horizontal-card">
+                            <img src="${fp.img}" onclick="renderProdukDetail(${originalIndex})">
+                            <h3 onclick="renderProdukDetail(${originalIndex})">${fp.name}</h3>
+                            <div class="harga">${fp.price}</div>
+                            <button class="btn-action" onclick="renderProdukDetail(${originalIndex})"><i class="fa-solid fa-eye"></i> Detail</button>
+                        </div>`;
+                    });
+                } else { html += `<div style="padding: 20px; font-size:12px; color:#9ca3af;">Belum ada unit tersedia.</div>`; }
+                html += `</div></div>`;
+            });
+            app.innerHTML = html;
+            mulaiSliderBanner();
         }
 
-        function bukaLogin() { 
-            document.getElementById('loginModal').classList.add('show'); 
-            autoClose();
+        var sliderInterval;
+        function mulaiSliderBanner() {
+            clearInterval(sliderInterval);
+            let slides = document.querySelectorAll('#mainBannerSlider .slide');
+            let indicators = document.querySelectorAll('#mainBannerSlider .indicator');
+            if(slides.length === 0) return;
+            let current = 0;
+            sliderInterval = setInterval(() => {
+                slides[current].classList.remove('active');
+                indicators[current].classList.remove('active');
+                current = (current + 1) % slides.length;
+                slides[current].classList.add('active');
+                indicators[current].classList.add('active');
+            }, 7000);
         }
 
-        function tutupLogin() { 
-            document.getElementById('loginModal').classList.remove('show'); 
+        function updateCartBadge() {
+            var badge = document.getElementById('cart-badge');
+            var total = keranjang.reduce((sum, item) => sum + item.qty, 0);
+            if(total > 0) { badge.style.display = 'flex'; badge.innerText = total; } else { badge.style.display = 'none'; }
         }
 
-        function setLoginMode(mode) {
-            activeLoginMode = mode;
-            document.getElementById('tab-buyer').classList.toggle('active', mode === 'buyer');
-            document.getElementById('tab-admin').classList.toggle('active', mode === 'admin');
-            document.getElementById('pin-field').style.display = (mode === 'admin') ? 'block' : 'none';
+        function renderProdukDetail(index) {
+            toggleFooterUtama(false); autoClose(); window.scrollTo(0,0);
+            var p = products[index]; var varianHtml = ''; window.currentProductImg = p.img;
+            
+            if (p.variants && p.variants.length > 0) {
+                varianHtml += `<div style="font-size:12px; font-weight:800; margin:15px 0 10px; color:#6b7280;">Pilih Varian Tipe</div><div class="tipe-grid">`;
+                p.variants.forEach((v, idx) => {
+                    let selClass = idx === 0 ? 'selected' : '';
+                    varianHtml += `<div class="tipe-box ${selClass}" onclick="pilihTipeDetail(this, ${v.harga}, '${p.name} (${v.nama})', '${p.img}')">${v.nama}</div>`;
+                });
+                varianHtml += `</div>`;
+                window.currentBasePrice = p.variants[0].harga; window.currentProductName = p.name + " (" + p.variants[0].nama + ")";
+            } else { 
+                window.currentBasePrice = p.priceValue; window.currentProductName = p.name; 
+            }
+
+            document.getElementById('app').innerHTML = `
+                <div class="co-wrapper">
+                    <div style="text-align:center; margin-bottom:20px;"><img src="${p.img}" style="width:100%; max-width:400px; border-radius:20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);"></div>
+                    <div style="font-size:22px; font-weight:800;">${p.name}</div>
+                    <div style="font-size:20px; font-weight:800; color:#e11d48; margin-top:5px;" id="display-product-price">Rp ${window.currentBasePrice.toLocaleString('id-ID')}</div>
+                    ${varianHtml}
+                    <div style="margin-top:20px; padding-top:20px; border-top:1px solid #f3f4f6; font-size:13px; line-height:1.6; color:#4b5563;">
+                        <strong>Spesifikasi Lengkap:</strong><br>${p.specs.deskripsi || 'Spesifikasi tidak tersedia.'}
+                    </div>
+                </div>
+                <div class="co-bottom-bar" style="justify-content:center;">
+                    <button class="co-btn-pay" style="padding:15px; font-size:14px; max-width:600px;" onclick="tambahKeKeranjang()"><i class="fa-solid fa-cart-plus"></i> Tambahkan ke Keranjang</button>
+                </div>
+            `;
         }
 
-        // FUNGSI LACAK PESANAN
+        function pilihTipeDetail(el, harga, namaLengkap, img) {
+            var boxes = document.getElementsByClassName('tipe-box'); for(var i=0; i<boxes.length; i++) boxes[i].classList.remove('selected');
+            el.classList.add('selected'); window.currentBasePrice = harga; window.currentProductName = namaLengkap;
+            document.getElementById('display-product-price').innerText = 'Rp ' + harga.toLocaleString('id-ID');
+        }
+
+        function tambahKeKeranjang() {
+            var existing = keranjang.find(i => i.name === window.currentProductName);
+            if (existing) { existing.qty += 1; } else { keranjang.push({ name: window.currentProductName, price: window.currentBasePrice, qty: 1, img: window.currentProductImg }); }
+            updateCartBadge(); var t = document.getElementById('toastNotif'); t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2000); setTimeout(renderKeranjang, 800);
+        }
+
+        function ubahQty(idx, delta) { keranjang[idx].qty += delta; if(keranjang[idx].qty <= 0) keranjang.splice(idx, 1); renderKeranjang(); updateCartBadge(); }
+
+        // CHECKOUT ONE PAGE
+        function renderKeranjang() {
+            toggleFooterUtama(false); autoClose(); window.scrollTo(0,0);
+            var app = document.getElementById('app');
+            if (keranjang.length === 0) {
+                app.innerHTML = `<div class="info-card" style="text-align:center;"><h2>Keranjang Kosong</h2><p>Pilih produk unggulan kami sekarang.</p><button class="btn-action" style="margin:auto; max-width:200px;" onclick="renderHome()">Mulai Belanja</button></div>`; return;
+            }
+            
+            var htmlItems = ''; var subtotal = 0; window.currentTrxId = generateTrxId();
+            keranjang.forEach((item, idx) => {
+                subtotal += (item.price * item.qty);
+                htmlItems += `<div class="co-product-item"><img src="${item.img}"><div class="co-product-info"><div class="co-product-name">${item.name}</div><div class="co-product-price">Rp ${item.price.toLocaleString('id-ID')}</div><div class="qty-control"><div class="qty-btn" onclick="ubahQty(${idx}, -1)">-</div><div class="qty-num">${item.qty}</div><div class="qty-btn" onclick="ubahQty(${idx}, 1)">+</div></div></div></div>`;
+            });
+            
+            app.innerHTML = `
+                <div class="co-wrapper">
+                    <div class="co-header-title"><img src="https://i.ibb.co.com/x8MrtzXr/8588.png" style="height:24px;"> Checkout Pesanan</div>
+                    <div class="co-header-id">ID Transaksi: ${window.currentTrxId}</div>
+
+                    <div class="co-section-title"><i class="fa-solid fa-map-location-dot"></i> Data Pengiriman</div>
+                    <input type="text" id="co-nama" class="co-input-modern" placeholder="Nama Lengkap Penerima">
+                    <textarea id="co-alamat" class="co-input-modern" placeholder="Alamat Lengkap (Jalan, RT/RW, Kelurahan, Kecamatan, Kota)" rows="3"></textarea>
+                    <input type="number" id="co-wa" class="co-input-modern" placeholder="Nomor Handphone / WhatsApp">
+                    <input type="email" id="co-email" class="co-input-modern" placeholder="Alamat Email (Untuk Invoice)">
+
+                    <div class="co-section-title" style="margin-top:10px;"><i class="fa-solid fa-box-open"></i> Ringkasan Produk</div>
+                    ${htmlItems}
+
+                    <div class="co-section-title" style="margin-top:20px;"><i class="fa-solid fa-truck-fast"></i> Logistik Pengiriman</div>
+                    <div style="font-size:12px; color:#6b7280; margin-bottom:8px;">*Terintegrasi API RajaOngkir (Estimasi Berat Total: 500gr)</div>
+                    <select id="co-kurir" class="kurir-select">
+                        <option value="35000">Gamoon e-Package Prioritas - Rp 35.000</option>
+                        <option value="15000">JNE Reguler (REG) - Rp 15.000</option>
+                        <option value="18000">J&T Express (EZ) - Rp 18.000</option>
+                        <option value="22000">SiCepat (BEST) - Rp 22.000</option>
+                    </select>
+
+                    <div class="co-section-title" style="margin-top:10px;"><i class="fa-solid fa-credit-card"></i> Pilih Metode Pembayaran</div>
+                    <div class="payment-grid">
+                        <div class="payment-box selected" onclick="pilihPayment(this, 'gopay')"><img src="https://i.ibb.co.com/MDFzRSrD/Gopay-logo-svg.png"><span>GoPay</span></div>
+                        <div class="payment-box" onclick="pilihPayment(this, 'dana')"><img src="https://i.ibb.co.com/xqg0PbT4/Logo-dana-blue-svg.png"><span>DANA</span></div>
+                        <div class="payment-box" onclick="pilihPayment(this, 'shopeepay')"><img src="https://upload.wikimedia.org/wikipedia/commons/f/fe/Shopee.svg" style="filter: grayscale(100%) contrast(200%);"><span>ShopeePay</span></div>
+                        <div class="payment-box" onclick="pilihPayment(this, 'bca_va')"><img src="https://i.ibb.co.com/qLT2FX8W/500px-Bank-Central-Asia-svg.png"><span>BCA VA</span></div>
+                        <div class="payment-box" onclick="pilihPayment(this, 'bri_va')"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/BRI_2020.svg"><span>BRI VA</span></div>
+                        <div class="payment-box" onclick="pilihPayment(this, 'bni_va')"><img src="https://upload.wikimedia.org/wikipedia/id/5/55/BNI_logo.svg"><span>BNI VA</span></div>
+                        <div class="payment-box" onclick="pilihPayment(this, 'mandiri_va')"><img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/Bank_Mandiri_logo_2016.svg"><span>Mandiri VA</span></div>
+                        <div class="payment-box" onclick="pilihPayment(this, 'btn_va')"><img src="https://upload.wikimedia.org/wikipedia/commons/2/25/Bank_BTN_logo.svg"><span>BTN VA</span></div>
+                    </div>
+                </div>
+                
+                <div class="co-bottom-bar">
+                    <div>
+                        <div style="font-size:10px; font-weight:700; color:#6b7280;">Subtotal (+Ongkir)</div>
+                        <div style="font-size:18px; font-weight:800; color:#111;" id="co-display-total">Rp ${(subtotal+35000).toLocaleString('id-ID')}</div>
+                    </div>
+                    <button class="co-btn-pay" style="width:auto; padding:14px 24px; font-size:14px;" onclick="eksekusiPembayaran()"><i class="fa-solid fa-shield-halved"></i> Proses Pembayaran</button>
+                </div>
+            `;
+            
+            window.selectedPaymentMethod = 'gopay';
+            window.currentSubtotal = subtotal;
+            
+            document.getElementById('co-kurir').addEventListener('change', function() {
+                var ongkir = parseInt(this.value);
+                document.getElementById('co-display-total').innerText = 'Rp ' + (window.currentSubtotal + ongkir).toLocaleString('id-ID');
+            });
+        }
+
+        function pilihPayment(el, method) { 
+            var boxes = document.getElementsByClassName('payment-box'); 
+            for(var i=0; i<boxes.length; i++) boxes[i].classList.remove('selected'); 
+            el.classList.add('selected'); window.selectedPaymentMethod = method; 
+        }
+
+        async function eksekusiPembayaran() {
+            var n = document.getElementById('co-nama').value, w = document.getElementById('co-wa').value, e = document.getElementById('co-email').value, a = document.getElementById('co-alamat').value;
+            if (!n || !w || !e || !a) { alert("Sistem menolak: Mohon lengkapi seluruh formulir data pengiriman."); return; }
+            
+            var ongkir = parseInt(document.getElementById('co-kurir').value);
+            var totalFinal = window.currentSubtotal + ongkir;
+            
+            window.dataPesananSementara = { nama: n, wa: w, email: e, alamat: a, total: totalFinal, idTrx: window.currentTrxId, method: window.selectedPaymentMethod };
+
+            var btn = document.querySelector('.co-btn-pay'); 
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Otorisasi...'; 
+            btn.disabled = true;
+
+            if(window.selectedPaymentMethod.includes('_va')) {
+                setTimeout(() => renderVirtualAccountUI(), 1000);
+            } else {
+                try {
+                    const response = await fetch("/api/payment", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(window.dataPesananSementara) });
+                    const hasil = await response.json();
+                    if (hasil.redirect_url) { window.location.href = hasil.redirect_url; } 
+                    else { alert("Gagal memproses pembayaran: Kesalahan server Midtrans"); btn.innerHTML = 'Proses Pembayaran'; btn.disabled = false; }
+                } catch (error) {
+                    setTimeout(() => renderBerhasil(), 1000); 
+                }
+            }
+        }
+
+        function renderVirtualAccountUI() {
+            window.scrollTo(0,0);
+            var d = window.dataPesananSementara;
+            var bankName = d.method.replace('_va', '').toUpperCase();
+            var dummyVA = Math.floor(100000000000 + Math.random() * 900000000000);
+            
+            document.getElementById('app').innerHTML = `
+                <div class="co-wrapper" style="text-align:center; max-width:500px;">
+                    <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" style="height:30px; margin-bottom:20px;">
+                    <h2 style="margin:0 0 5px 0; font-size:18px;">Proses Pembayaran</h2>
+                    <div style="font-size:12px; color:#6b7280; font-family:monospace; margin-bottom:25px;">ID: ${d.idTrx}</div>
+                    
+                    <div class="va-box">
+                        <div class="va-bank-name">VIRTUAL ACCOUNT ${bankName}</div>
+                        <div class="va-number">${dummyVA}</div>
+                        <div style="font-size:12px; color:#64748b; margin-bottom:5px;">Total Tagihan:</div>
+                        <div class="va-amount">Rp ${d.total.toLocaleString('id-ID')}</div>
+                    </div>
+                    
+                    <div style="font-size:12px; color:#4b5563; line-height:1.6; margin-bottom:25px;">Silakan salin nomor Virtual Account di atas dan selesaikan pembayaran melalui ATM atau Mobile Banking Anda. Sistem akan memverifikasi secara otomatis.</div>
+                    
+                    <button class="co-btn-pay" style="padding:15px; font-size:14px;" onclick="renderBerhasil()"><i class="fa-solid fa-check-circle"></i> Saya Sudah Bayar</button>
+                </div>
+            `;
+            document.querySelector('.co-bottom-bar').style.display = 'none';
+        }
+
+        function renderBerhasil() {
+            window.scrollTo(0,0);
+            document.getElementById('app').innerHTML = `
+                <div class="co-wrapper" style="text-align:center; max-width:500px; padding:50px 20px;">
+                    <i class="fa-solid fa-circle-check" style="font-size:60px; color:#2ecc71; margin-bottom:20px;"></i>
+                    <h2 style="margin:0 0 10px 0;">Pembayaran Berhasil!</h2>
+                    <p style="font-size:13px; color:#6b7280; line-height:1.6;">Terima kasih, pembayaran untuk pesanan <strong>${window.dataPesananSementara.idTrx}</strong> telah kami terima. Pesanan Anda segera diproses oleh tim gudang.</p>
+                    <button class="btn-action" style="margin:30px auto 0; max-width:200px; padding:12px;" onclick="keranjang=[]; updateCartBadge(); renderHome();">Kembali ke Beranda</button>
+                </div>
+            `;
+        }
+
+
+        // =========================================================================
+        // LOGIKA CHATBOT FORMAL ALA BANK (MARSYA BOT -> TIARA SABRINA CS)
+        // =========================================================================
+        var chatState = 0; // 0: Bot Marsya, 1: Form Input CS, 2: Terhubung ke Tiara Agent
+
+        function initChatMarsya() {
+            chatState = 0;
+            document.getElementById('chatAvatarImg').src = "uploaded:10685.jpg-840c644b-ea44-451f-b6af-9acc5d41cfcb";
+            document.getElementById('chatAgentName').innerText = "Marsya (No Reply)";
+            document.getElementById('cs-status-dot').className = "status-dot bot";
+            document.getElementById('cs-status-text').innerText = "Bot";
+            
+            document.getElementById('chatBody').innerHTML = `
+                <div class="chat-bubble cs">
+                    Selamat datang di <b>Ousevoid Official Care</b>. Saya Marsya, asisten virtual Anda.<br><br>
+                    Silakan pilih topik informasi yang Anda butuhkan melalui tombol di bawah atau ketik angka (1-5):
+                    <div class="qna-options-wrapper">
+                        <div class="qna-bar-item" onclick="pilihQnA(1)">1. Informasi Produk <i class="fa-solid fa-chevron-right"></i></div>
+                        <div class="qna-bar-item" onclick="pilihQnA(2)">2. Metode Pembayaran <i class="fa-solid fa-chevron-right"></i></div>
+                        <div class="qna-bar-item" onclick="pilihQnA(3)">3. Kebijakan Garansi <i class="fa-solid fa-chevron-right"></i></div>
+                        <div class="qna-bar-item" onclick="pilihQnA(4)">4. Tentang Ousevoid <i class="fa-solid fa-chevron-right"></i></div>
+                        <div class="qna-bar-item" style="background:#111827; color:#fff;" onclick="pilihQnA(5)">5. Hubungi Customer Service <i class="fa-solid fa-headset"></i></div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function toggleChatWindow() {
+            var cw = document.getElementById('chatWindow');
+            cw.classList.toggle('show');
+            if(cw.classList.contains('show') && chatState === 0 && document.getElementById('chatBody').innerHTML.trim() === "") {
+                initChatMarsya();
+            }
+        }
+
+        function handleChatEnter(e) { if (e.key === 'Enter') kirimPesanChat(); }
+
+        function pilihQnA(nomor) {
+            var body = document.getElementById('chatBody');
+            var labelText = ["Informasi Produk", "Metode Pembayaran", "Kebijakan Garansi", "Tentang Ousevoid", "Hubungi Customer Service"];
+            
+            body.innerHTML += `<div class="chat-bubble user">${nomor}. ${labelText[nomor-1]}</div>`;
+            body.scrollTop = body.scrollHeight;
+            
+            prosesOpsiQnA(nomor.toString());
+        }
+
+        function kirimPesanChat() {
+            var input = document.getElementById('chat-input-teks');
+            var text = input.value.trim();
+            if (!text) return;
+            var body = document.getElementById('chatBody');
+            
+            body.innerHTML += `<div class="chat-bubble user">${text}</div>`;
+            input.value = '';
+            body.scrollTop = body.scrollHeight;
+
+            if (chatState === 0) {
+                prosesOpsiQnA(text);
+            } else if (chatState === 2) {
+                tryForwardToAdmin(text);
+            }
+        }
+
+        function prosesOpsiQnA(opsi) {
+            var body = document.getElementById('chatBody');
+            setTimeout(() => {
+                if (opsi === '1') {
+                    body.innerHTML += `<div class="chat-bubble cs"><b>[Informasi Produk]</b><br>Seluruh produk Ousevoid terjamin 100% Original dengan standar mutakhir audio nirkabel dan garansi resmi. Anda dapat melihat spesifikasi lengkap pada katalog di halaman beranda.</div>`;
+                } else if (opsi === '2') {
+                    body.innerHTML += `<div class="chat-bubble cs"><b>[Metode Pembayaran]</b><br>Kami menerima pembayaran digital aman melalui E-Wallet (GoPay, DANA, ShopeePay) serta Bank Virtual Account (BCA, BRI, BNI, Mandiri, BTN) yang terverifikasi otomatis.</div>`;
+                } else if (opsi === '3') {
+                    body.innerHTML += `<div class="chat-bubble cs"><b>[Kebijakan Garansi]</b><br>Setiap pembelian dilindungi Garansi Resmi 3 Bulan untuk kerusakan bawaan pabrik. Klaim wajib menyertakan bukti invoice dan video unboxing yang valid.</div>`;
+                } else if (opsi === '4') {
+                    body.innerHTML += `<div class="chat-bubble cs"><b>[Tentang Ousevoid]</b><br>Ousevoid adalah merek resmi di bawah PT Gerbang Masa Depan (Gambir, Jakarta Pusat) yang berkomitmen pada inovasi teknologi perangkat audio nirkabel Indonesia.</div>`;
+                } else if (opsi === '5') {
+                    chatState = 1;
+                    body.innerHTML += `
+                        <div class="chat-bubble cs">
+                            Untuk terhubung dengan Petugas Layanan Pelanggan (Human Agent), mohon melengkapi formulir identitas singkat di bawah ini:
+                            <div class="chat-form-box">
+                                <label style="font-size:10px; font-weight:800; color:#6b7280; text-transform:uppercase;">Nama Lengkap:</label>
+                                <input type="text" id="chatFormNama" class="chat-form-input" placeholder="Contoh: Budi Santoso">
+                                <label style="font-size:10px; font-weight:800; color:#6b7280; text-transform:uppercase;">Nomor Invoice / Pesanan (Jika ada):</label>
+                                <input type="text" id="chatFormInv" class="chat-form-input" placeholder="Contoh: 2026/OUSEVOID/123456">
+                                <button class="chat-form-btn" onclick="submitChatForm()"><i class="fa-solid fa-paper-plane"></i> Hubungkan ke Agent Tiara</button>
+                            </div>
+                        </div>`;
+                } else {
+                    body.innerHTML += `<div class="chat-bubble cs">Pilihan tidak valid. Silakan pilih angka <b>1 - 5</b> sesuai dengan menu yang tersedia.</div>`;
+                }
+                body.scrollTop = body.scrollHeight;
+            }, 400);
+        }
+
+        function submitChatForm() {
+            var nama = document.getElementById('chatFormNama').value.trim() || 'Nasabah/Pelanggan';
+            var inv = document.getElementById('chatFormInv').value.trim() || '-';
+            var body = document.getElementById('chatBody');
+            
+            chatState = 2;
+            
+            // GANTI AVATAR HEADER KE TIARA SABRINA (AGEN MANUSIA)
+            document.getElementById('chatAvatarImg').src = "https://i.ibb.co.com/NgnYF4vP/10852.jpg";
+            document.getElementById('chatAgentName').innerText = "Tiara Sabrina (Agent)";
+            document.getElementById('cs-status-dot').className = "status-dot"; // Indikator Hijau
+            document.getElementById('cs-status-text').innerText = "Online";
+
+            body.innerHTML += `<div class="chat-bubble cs" style="background:#e8f5e9; border-color:#c8e6c9; color:#2e7d32;"><i class="fa-solid fa-circle-check"></i> Sesi beralih. Anda telah terhubung dengan Agent Tiara Sabrina.</div>`;
+            
+            // SALAM FORMAL ALA CUSTOMER SERVICE BANK
+            setTimeout(() => {
+                var waktu = new Date().getHours() < 12 ? "Pagi" : (new Date().getHours() < 15 ? "Siang" : (new Date().getHours() < 18 ? "Sore" : "Malam"));
+                body.innerHTML += `<div class="chat-bubble cs">Selamat ${waktu}, Bapak/Ibu <b>${nama}</b>. Terima kasih telah menghubungi Layanan Pelanggan Resmi Ousevoid. Saya <b>Tiara Sabrina</b>, ada keluhan atau bantuan informasi pesanan yang dapat saya bantu proses hari ini?</div>`;
+                body.scrollTop = body.scrollHeight;
+            }, 800);
+        }
+
+        async function tryForwardToAdmin(pesanTeks) {
+            var body = document.getElementById('chatBody');
+            try {
+                // Meneruskan pesan ke backend manajemen.html
+                await fetch("/api/chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ pesan: pesanTeks }) });
+                setTimeout(() => {
+                    body.innerHTML += `<div class="chat-bubble cs">Baik Bapak/Ibu, pesan Anda telah dicatat oleh sistem pangkalan data kami. Mohon bersenang hati menunggu respons selanjutnya dari tim terkait.</div>`;
+                    body.scrollTop = body.scrollHeight;
+                }, 1200);
+            } catch(e) {
+                setTimeout(() => {
+                    body.innerHTML += `<div class="chat-bubble cs" style="color:#e74c3c;">Maaf, terjadi gangguan jaringan ke server manajemen. Mohon kirim ulang pesan Anda.</div>`;
+                    body.scrollTop = body.scrollHeight;
+                }, 800);
+            }
+        }
+
+
+        // =========================================================================
+        // FUNGSI INFORMASI LAINNYA
+        // =========================================================================
         function renderLacakPesanan() {
             toggleFooterUtama(true); autoClose(); window.scrollTo(0,0);
             var app = document.getElementById('app');
@@ -452,386 +803,38 @@
             }, 1000);
         }
 
-        // RENDER BERANDA UTAMA (PERBAIKAN FILTER KATEGORI)
-        function renderHome() {
-            toggleFooterUtama(true);
-            var app = document.getElementById('app');
-            var html = `
-                <div class="slider-container">
-                    <div class="slide active"><img src="https://i.ibb.co.com/pjhVC7S6/SOUND-Without-20260714-173950-0000.png" alt="Banner Promo"></div>
-                </div>
-                <div class="features-grid">
-                    <div class="feature-card"><i class="fa-solid fa-medal feature-icon"></i><h4>100% Original</h4><p>Kualitas audio premium terjamin.</p></div>
-                    <div class="feature-card"><i class="fa-solid fa-shield-halved feature-icon"></i><h4>Garansi Resmi</h4><p>Perlindungan cacat pabrik 3 bulan.</p></div>
-                    <div class="feature-card"><i class="fa-solid fa-bolt feature-icon"></i><h4>Pengiriman Cepat</h4><p>Pengiriman Sameday 8 Jam dengan Gamoon e-Package Service Prioritas.</p></div>
-                    <div class="feature-card"><i class="fa-solid fa-lock feature-icon"></i><h4>Transaksi Aman</h4><p>Pembayaran Aman, diawasi oleh Otoritas Jasa Keuangan (OJK).</p></div>
-                </div>
-            `;
-
-            const kategoriList = [
-                { id: 'Earbuds', icon: 'fa-ear-listen', keywords: ['earbud', 'tws', 'headset', 'earphone', 'airpod'] },
-                { id: 'Smartphone', icon: 'fa-mobile-screen-button', keywords: ['smartphone', 'phone', 'hp', 'ponsel', 'galaxy', 'iphone'] },
-                { id: 'Speaker', icon: 'fa-volume-high', keywords: ['speaker', 'audio', 'soundbar', 'bass'] },
-                { id: 'Sparepart', icon: 'fa-link', keywords: ['sparepart', 'kabel', 'charger', 'baterai', 'case', 'pelindung'] }
-            ];
-
-            kategoriList.forEach(kat => {
-                let produkKategoriIni = products.filter(p => {
-                    let namaLower = p.name.toLowerCase();
-                    // FIX: Sekarang filter mengecek kolom kategori asli dari database, BUKAN cuma dari nama
-                    let matchCategory = (p.category && p.category.toLowerCase() === kat.id.toLowerCase());
-                    let matchName = kat.keywords.some(kw => namaLower.includes(kw));
-                    return matchCategory || matchName;
-                });
-                
-                html += `
-                <div class="category-section">
-                    <div class="category-header"><h2 class="category-title"><i class="fa-solid ${kat.icon}"></i> ${kat.id}</h2></div>
-                    <div class="horizontal-scroll">`;
-                
-                if (produkKategoriIni.length > 0) {
-                    produkKategoriIni.forEach(fp => {
-                        let originalIndex = products.findIndex(op => op.id === fp.id);
-                        html += `
-                        <div class="horizontal-card">
-                            <img src="${fp.img}" onclick="renderProdukDetail(${originalIndex})">
-                            <h3 onclick="renderProdukDetail(${originalIndex})">${fp.name}</h3>
-                            <div class="harga">${fp.price}</div>
-                            <button class="btn-action" onclick="renderProdukDetail(${originalIndex})"><i class="fa-solid fa-eye"></i> Detail</button>
-                        </div>`;
-                    });
-                } else {
-                    html += `<div style="padding: 20px; font-size:12px; color:#9ca3af;">Belum ada unit tersedia untuk kategori ini.</div>`;
-                }
-                html += `</div></div>`;
-            });
-            app.innerHTML = html;
-        }
-
-        // RENDER PRODUK DETAIL & KERANJANG
-        function updateCartBadge() {
-            var badge = document.getElementById('cart-badge');
-            var totalBarang = keranjang.reduce((sum, item) => sum + item.qty, 0);
-            if(totalBarang > 0) { badge.style.display = 'flex'; badge.innerText = totalBarang; } else { badge.style.display = 'none'; }
-        }
-
-        function renderProdukDetail(index) {
-            toggleFooterUtama(false); autoClose(); window.scrollTo(0,0);
-            var p = products[index]; var varianHtml = ''; window.currentProductImg = p.img;
-            
-            if (p.variants && p.variants.length > 0) {
-                varianHtml += `<div style="font-size:12px; font-weight:800; margin:15px 0 10px; color:#6b7280;">Pilih Varian Tipe</div><div class="tipe-grid">`;
-                p.variants.forEach((v, idx) => {
-                    let selClass = idx === 0 ? 'selected' : '';
-                    varianHtml += `<div class="tipe-box ${selClass}" onclick="pilihTipeDetail(this, ${v.harga}, '${p.name} (${v.nama})', '${p.img}')">${v.nama}</div>`;
-                });
-                varianHtml += `</div>`;
-                window.currentBasePrice = p.variants[0].harga; window.currentProductName = p.name + " (" + p.variants[0].nama + ")";
-            } else { 
-                window.currentBasePrice = p.priceValue; window.currentProductName = p.name; 
-            }
-
-            document.getElementById('app').innerHTML = `
-                <div class="co-wrapper">
-                    <div style="text-align:center; margin-bottom:20px;"><img src="${p.img}" style="width:100%; max-width:300px; border-radius:20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);"></div>
-                    <div style="font-size:20px; font-weight:800;">${p.name}</div>
-                    <div style="font-size:20px; font-weight:800; color:#e11d48; margin-top:5px;" id="display-product-price">Rp ${window.currentBasePrice.toLocaleString('id-ID')}</div>
-                    ${varianHtml}
-                    <div style="margin-top:20px; padding-top:20px; border-top:1px solid #f3f4f6; font-size:13px; line-height:1.6; color:#4b5563;">
-                        <strong>Spesifikasi Lengkap:</strong><br>${p.specs.deskripsi || 'Spesifikasi tidak tersedia.'}
-                    </div>
-                </div>
-                <div class="co-bottom-bar" style="justify-content:center;">
-                    <button class="co-btn-pay" style="padding:15px; font-size:14px; max-width:500px;" onclick="tambahKeKeranjang()"><i class="fa-solid fa-cart-plus"></i> Tambahkan ke Keranjang</button>
-                </div>
-            `;
-        }
-
-        function pilihTipeDetail(el, harga, namaLengkap, img) {
-            var boxes = document.getElementsByClassName('tipe-box'); for(var i=0; i<boxes.length; i++) boxes[i].classList.remove('selected');
-            el.classList.add('selected'); window.currentBasePrice = harga; window.currentProductName = namaLengkap;
-            document.getElementById('display-product-price').innerText = 'Rp ' + harga.toLocaleString('id-ID');
-        }
-
-        function tambahKeKeranjang() {
-            var existing = keranjang.find(i => i.name === window.currentProductName);
-            if (existing) { existing.qty += 1; } else { keranjang.push({ name: window.currentProductName, price: window.currentBasePrice, qty: 1, img: window.currentProductImg }); }
-            updateCartBadge(); var t = document.getElementById('toastNotif'); t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2000); setTimeout(renderKeranjang, 800);
-        }
-
-        function ubahQty(idx, delta) { keranjang[idx].qty += delta; if(keranjang[idx].qty <= 0) keranjang.splice(idx, 1); renderKeranjang(); updateCartBadge(); }
-
-        // CHECKOUT 
-        function renderKeranjang() {
-            toggleFooterUtama(false); autoClose(); window.scrollTo(0,0);
-            var app = document.getElementById('app');
-            if (keranjang.length === 0) {
-                app.innerHTML = `<div class="info-card" style="text-align:center;"><h2>Keranjang Kosong</h2><p>Pilih produk unggulan kami sekarang.</p><button class="btn-action" style="margin:auto; max-width:200px;" onclick="renderHome()">Mulai Belanja</button></div>`; return;
-            }
-            var htmlItems = ''; var subtotal = 0;
-            keranjang.forEach((item, idx) => {
-                subtotal += (item.price * item.qty);
-                htmlItems += `<div class="co-product-item"><img src="${item.img}"><div class="co-product-info"><div class="co-product-name">${item.name}</div><div class="co-product-price">Rp ${item.price.toLocaleString('id-ID')}</div><div class="qty-control"><div class="qty-btn" onclick="ubahQty(${idx}, -1)">-</div><div class="qty-num">${item.qty}</div><div class="qty-btn" onclick="ubahQty(${idx}, 1)">+</div></div></div></div>`;
-            });
-            app.innerHTML = `
-                <div class="co-wrapper">
-                    <div class="co-card"><div class="co-card-header">Barang Belanjaan Anda</div>${htmlItems}</div>
-                    <div class="co-card">
-                        <div class="co-card-header">Formulir Logistik Pengiriman</div>
-                        <input type="text" id="co-nama" class="co-input-modern" placeholder="Nama Lengkap Penerima">
-                        <input type="number" id="co-wa" class="co-input-modern" placeholder="Nomor Telepon / WhatsApp Aktif">
-                        <input type="email" id="co-email" class="co-input-modern" placeholder="Alamat Surel (Email) untuk Invoice">
-                        <textarea id="co-alamat" class="co-input-modern" placeholder="Alamat Domisili Pengiriman Lengkap" rows="3"></textarea>
-                    </div>
-                    <select id="co-kurir" class="kurir-select"><option value="35000">Gamoon e-Package - Estimasi Pengiriman (Rp 35.000)</option></select>
-                </div>
-                <div class="co-bottom-bar">
-                    <div>
-                        <div style="font-size:10px; font-weight:700; color:#6b7280;">Total Tagihan</div>
-                        <div style="font-size:16px; font-weight:800; color:#111;">Rp ${(subtotal+35000).toLocaleString('id-ID')}</div>
-                    </div>
-                    <button class="co-btn-pay" style="width:auto; padding:12px 20px;" onclick="lanjutKeInvoiceMulti()">Konfirmasi Logistik</button>
-                </div>
-            `;
-        }
-
-        function lanjutKeInvoiceMulti() {
-            var n = document.getElementById('co-nama').value, w = document.getElementById('co-wa').value, e = document.getElementById('co-email').value, a = document.getElementById('co-alamat').value;
-            if (!n || !w || !e || !a) { alert("Sistem menolak: Mohon lengkapi seluruh formulir data pengiriman."); return; }
-            var sub = keranjang.reduce((s, i) => s + (i.price * i.qty), 0) + 35000;
-            var trx = new Date().getFullYear() + "/OUSE/" + Math.floor(Math.random()*99999);
-            window.dataPesananSementara = { nama: n, wa: w, email: e, total: sub, idTrx: trx, barang: keranjang.map(i => i.name).join(', ') };
-            renderInvoice();
-        }
-
-        function renderInvoice() {
-            window.scrollTo(0,0); var d = window.dataPesananSementara;
-            document.getElementById('app').innerHTML = `
-                <div class="co-wrapper">
-                    <div style="text-align:center; margin-bottom:20px; padding-bottom:20px; border-bottom:1px dashed #d1d5db;">
-                        <div style="font-size:12px; color:#6b7280; font-weight:700;">Kode Transaksi Logistik:</div>
-                        <h3 style="margin:5px 0 10px 0;">${d.idTrx}</h3>
-                        <div style="font-size:26px; font-weight:800; color:#e11d48;">Rp ${d.total.toLocaleString('id-ID')}</div>
-                    </div>
-                    <div style="margin-bottom:20px; font-size:13px; line-height:1.8; color:#4b5563;">
-                        <strong>Penerima:</strong> ${d.nama}<br>
-                        <strong>Alamat Surel:</strong> ${d.email}
-                    </div>
-                    <div style="margin-bottom:15px; font-size:13px; font-weight:800; color:#111;">Pilih Otoritas Gerbang Pembayaran Resmi:</div>
-                    <div class="payment-grid">
-                        <div class="payment-box selected" onclick="pilihPayment(this, 'gopay')"><img src="https://i.ibb.co.com/MDFzRSrD/Gopay-logo-svg.png"></div>
-                        <div class="payment-box" onclick="pilihPayment(this, 'dana')"><img src="https://i.ibb.co.com/xqg0PbT4/Logo-dana-blue-svg.png"></div>
-                        <div class="payment-box" onclick="pilihPayment(this, 'bca_va')"><img src="https://i.ibb.co.com/qLT2FX8W/500px-Bank-Central-Asia-svg.png"></div>
-                    </div>
-                    <button class="co-btn-pay" style="padding:14px; font-size:14px;" onclick="eksekusiBayarMidtransInvoice()">Otorisasi Pembayaran Sekarang</button>
-                </div>
-            `;
-        }
-
-        function pilihPayment(el, method) { 
-            var boxes = document.getElementsByClassName('payment-box'); 
-            for(var i=0; i<boxes.length; i++) boxes[i].classList.remove('selected'); 
-            el.classList.add('selected'); window.selectedPaymentMethod = method; 
-        }
-
-        async function eksekusiBayarMidtransInvoice() {
-            var btn = document.querySelector('.co-btn-pay'); 
-            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Memproses ke Midtrans...'; 
-            btn.disabled = true;
-
-            try {
-                // Nembak ke backend Functions Cloudflare
-                const response = await fetch("/api/payment", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(window.dataPesananSementara)
-                });
-                
-                const hasil = await response.json();
-                
-                if (hasil.redirect_url) {
-                    window.location.href = hasil.redirect_url;
-                } else {
-                    alert("Gagal memproses pembayaran: " + (hasil.error || "Kesalahan pada server Midtrans"));
-                    btn.innerHTML = 'Otorisasi Pembayaran Sekarang'; 
-                    btn.disabled = false;
-                }
-            } catch (error) {
-                alert("Terjadi kesalahan koneksi ke server pembayaran.");
-                btn.innerHTML = 'Otorisasi Pembayaran Sekarang'; 
-                btn.disabled = false;
-            }
-        }
-
-        // =========================================================================
-        // FUNGSI CHAT WIDGET (BARU)
-        // =========================================================================
-        function toggleChatWindow() {
-            var cw = document.getElementById('chatWindow');
-            cw.classList.toggle('show');
-            if(cw.classList.contains('show')) {
-                cekStatusCS(); // Cek status tiara saat box dibuka
-            }
-        }
-
-        function handleChatEnter(e) {
-            if (e.key === 'Enter') kirimPesanChat();
-        }
-
-        async function kirimPesanChat() {
-            var input = document.getElementById('chat-input-teks');
-            var text = input.value.trim();
-            if (!text) return;
-            
-            var body = document.getElementById('chatBody');
-            
-            // Masukin bubble pesan pembeli ke layar
-            body.innerHTML += `<div class="chat-bubble user">${text}</div>`;
-            input.value = '';
-            body.scrollTop = body.scrollHeight; // Auto scroll ke bawah
-
-            // Nembak API ke server manajemen chat
-            try {
-                const response = await fetch("/api/chat");
-                
-                // Balasan otomatis dari agen Tiara
-                setTimeout(() => {
-                    body.innerHTML += `<div class="chat-bubble cs">Pesan Anda sedang diteruskan ke sistem Manajemen. Admin akan segera membalasnya sesaat lagi. Mohon tunggu sebentar ya!</div>`;
-                    body.scrollTop = body.scrollHeight;
-                }, 1000);
-            } catch(e) {
-                setTimeout(() => {
-                    body.innerHTML += `<div class="chat-bubble cs" style="color:#e74c3c;">Gagal terhubung ke server manajemen. Mohon coba lagi.</div>`;
-                    body.scrollTop = body.scrollHeight;
-                    setChatStatus('error');
-                }, 500);
-            }
-        }
-
-        function setChatStatus(status) {
-            var dot = document.getElementById('cs-status-dot');
-            var text = document.getElementById('cs-status-text');
-            dot.className = 'status-dot'; // Reset class
-            
-            if (status === 'online') {
-                text.innerText = 'Online';
-            } else if (status === 'offline') {
-                dot.classList.add('offline');
-                text.innerText = 'Offline';
-            } else if (status === 'error') {
-                dot.classList.add('error');
-                text.innerText = 'Gangguan Sistem';
-            }
-        }
-
-        async function cekStatusCS() {
-            try {
-                // Mengecek ke file chat.js di backend
-                const res = await fetch("/api/chat");
-                if(res.ok) {
-                    setChatStatus('online');
-                } else {
-                    setChatStatus('error');
-                }
-            } catch(e) {
-                setChatStatus('error');
-            }
-        }
-
         function renderCS(t) { toggleFooterUtama(true); document.getElementById('app').innerHTML = `<div class="info-card" style="text-align:center;"><h2>${t}</h2><p>Data inventaris sedang dalam pemutakhiran sistem pusat.</p></div>`; autoClose(); }
-
-        // =========================================================================
-        // HALAMAN INFORMASI FORMAL (10 POIN PER HALAMAN)
-        // =========================================================================
 
         function renderInfoPage(judul, kontenHTML) {
             toggleFooterUtama(true); autoClose(); window.scrollTo(0,0);
-            document.getElementById('app').innerHTML = `
-                <div class="info-card">
-                    <h2>${judul}</h2>
-                    ${kontenHTML}
-                </div>
-            `;
+            document.getElementById('app').innerHTML = `<div class="info-card"><h2>${judul}</h2>${kontenHTML}</div>`;
         }
 
         function renderGaransi() {
-            let konten = `
-                <p>Sebagai bentuk komitmen PT Gerbang Masa Depan terhadap mutu dan kepuasan pelanggan, kami menetapkan regulasi perlindungan purnajual melalui Kebijakan Garansi Resmi. Seluruh konsumen berhak mendapatkan perlindungan dengan ketentuan sebagai berikut:</p>
-                <ol style="padding-left: 18px; margin-top: 15px;">
-                    <li style="margin-bottom: 10px;"><strong>Status Barang:</strong> Garansi berlaku eksklusif untuk barang original yang didistribusikan melalui jalur resmi Ousevoid.</li>
-                    <li style="margin-bottom: 10px;"><strong>Masa Berlaku:</strong> Masa garansi aktif selama 3 (tiga) bulan, dihitung secara presisi sejak tanggal cetak bukti transaksi/invoice pembelian.</li>
-                    <li style="margin-bottom: 10px;"><strong>Cakupan Insiden:</strong> Garansi secara sah hanya menanggung kerusakan fisik berupa cacat bawaan pabrik <em>(manufacturing defect)</em> atau malfungsi sistem yang bukan disebabkan oleh kelalaian manusia.</li>
-                    <li style="margin-bottom: 10px;"><strong>Pengecualian Mutlak:</strong> Kerusakan akibat cairan <em>(water damage)</em>, korsleting arus eksternal, benturan keras, maupun modifikasi oleh teknisi tidak resmi tidak termasuk dalam perlindungan ini.</li>
-                    <li style="margin-bottom: 10px;"><strong>Prosedur Pelaporan:</strong> Klaim harus diajukan melalui portal komunikasi resmi perusahaan dalam batas waktu masa aktif garansi.</li>
-                    <li style="margin-bottom: 10px;"><strong>Dokumen Wajib:</strong> Pemohon wajib melampirkan invoice asli dan video <em>unboxing</em> tanpa manipulasi penyuntingan.</li>
-                    <li style="margin-bottom: 10px;"><strong>Validasi Fisik:</strong> Produk yang diklaim harus dikirim kembali ke pusat inspeksi Ousevoid untuk tahapan verifikasi teknis secara mendalam.</li>
-                    <li style="margin-bottom: 10px;"><strong>Estimasi Waktu:</strong> Evaluasi teknis dan perbaikan memakan waktu 7 hingga 14 hari kerja operasional.</li>
-                    <li style="margin-bottom: 10px;"><strong>Penggantian Unit:</strong> Jika unit dipastikan cacat produksi massal dan tidak dapat direparasi, perusahaan akan mengganti dengan unit baru dengan spesifikasi setara.</li>
-                    <li style="margin-bottom: 10px;"><strong>Ketentuan Akhir:</strong> Hasil audit dari teknisi in-house PT Gerbang Masa Depan bersifat mengikat dan menjadi keputusan mutlak (final).</li>
-                </ol>`;
+            let konten = `<p>Sebagai bentuk komitmen PT Gerbang Masa Depan terhadap mutu dan kepuasan pelanggan, kami menetapkan regulasi perlindungan purnajual melalui Kebijakan Garansi Resmi. Seluruh konsumen berhak mendapatkan perlindungan dengan ketentuan sebagai berikut:</p><ol style="padding-left: 18px; margin-top: 15px;"><li style="margin-bottom: 10px;"><strong>Status Barang:</strong> Garansi berlaku eksklusif untuk barang original yang didistribusikan melalui jalur resmi Ousevoid.</li><li style="margin-bottom: 10px;"><strong>Masa Berlaku:</strong> Masa garansi aktif selama 3 (tiga) bulan, dihitung secara presisi sejak tanggal cetak bukti transaksi/invoice pembelian.</li><li style="margin-bottom: 10px;"><strong>Cakupan Insiden:</strong> Garansi secara sah hanya menanggung kerusakan fisik berupa cacat bawaan pabrik <em>(manufacturing defect)</em> atau malfungsi sistem yang bukan disebabkan oleh kelalaian manusia.</li><li style="margin-bottom: 10px;"><strong>Pengecualian Mutlak:</strong> Kerusakan akibat cairan <em>(water damage)</em>, korsleting arus eksternal, benturan keras, maupun modifikasi oleh teknisi tidak resmi tidak termasuk dalam perlindungan ini.</li><li style="margin-bottom: 10px;"><strong>Prosedur Pelaporan:</strong> Klaim harus diajukan melalui portal komunikasi resmi perusahaan dalam batas waktu masa aktif garansi.</li><li style="margin-bottom: 10px;"><strong>Dokumen Wajib:</strong> Pemohon wajib melampirkan invoice asli dan video <em>unboxing</em> tanpa manipulasi penyuntingan.</li><li style="margin-bottom: 10px;"><strong>Validasi Fisik:</strong> Produk yang diklaim harus dikirim kembali ke pusat inspeksi Ousevoid untuk tahapan verifikasi teknis secara mendalam.</li><li style="margin-bottom: 10px;"><strong>Estimasi Waktu:</strong> Evaluasi teknis dan perbaikan memakan waktu 7 hingga 14 hari kerja operasional.</li><li style="margin-bottom: 10px;"><strong>Penggantian Unit:</strong> Jika unit dipastikan cacat produksi massal dan tidak dapat direparasi, perusahaan akan mengganti dengan unit baru dengan spesifikasi setara.</li><li style="margin-bottom: 10px;"><strong>Ketentuan Akhir:</strong> Hasil audit dari teknisi in-house PT Gerbang Masa Depan bersifat mengikat dan menjadi keputusan mutlak (final).</li></ol>`;
             renderInfoPage("Kebijakan Garansi Resmi", konten);
         }
 
         function renderPengiriman() {
-            let konten = `
-                <p>Kami menyadari bahwa kecepatan distribusi adalah kunci integritas e-commerce. Berikut adalah ketentuan mutlak operasional logistik dan pengiriman di Ousevoid:</p>
-                <ol style="padding-left: 18px; margin-top: 15px;">
-                    <li style="margin-bottom: 10px;"><strong>Mitra Logistik Utama:</strong> Ousevoid menunjuk Gamoon e-Package sebagai garda depan pengiriman prioritas kami, didukung oleh jasa ekspedisi konvensional berskala nasional.</li>
-                    <li style="margin-bottom: 10px;"><strong>Layanan Prioritas Sameday:</strong> Tersedia fasilitas tiba maksimal 8 jam operasional, berlaku secara eksklusif untuk wilayah yurisdiksi Jakarta dan Bodetabek.</li>
-                    <li style="margin-bottom: 10px;"><strong>Layanan Ekspedisi Nasional:</strong> Pengiriman reguler antar-provinsi memakan waktu 2 hingga 5 hari kerja, mengacu pada SLA dari kurir masing-masing.</li>
-                    <li style="margin-bottom: 10px;"><strong>Waktu Pemrosesan Gudang:</strong> Transaksi yang terkonfirmasi pembayarannya sebelum pukul 15.00 WIB akan dikemas dan diserahkan ke pihak logistik pada hari yang sama (H+0).</li>
-                    <li style="margin-bottom: 10px;"><strong>Kewajiban Alamat:</strong> Pengguna layanan memikul tanggung jawab penuh terhadap kebenaran dan presisi penulisan alamat domisili.</li>
-                    <li style="margin-bottom: 10px;"><strong>Asuransi Muatan:</strong> Setiap produk yang memiliki nilai tinggi (High Value Goods) secara otomatis akan diproteksi oleh asuransi pengiriman terintegrasi.</li>
-                    <li style="margin-bottom: 10px;"><strong>Pemantauan Real-time:</strong> Pelanggan diberikan otorisasi penuh untuk melacak pergerakan paket menggunakan Nomor Resi melalui portal situs web kami.</li>
-                    <li style="margin-bottom: 10px;"><strong>Kebijakan Keterlambatan:</strong> Segala bentuk keterlambatan di luar SLA normal akan kami bantu mediasi (eskalasi) ke pihak manajemen kurir.</li>
-                    <li style="margin-bottom: 10px;"><strong>Syarat Penerimaan Barang:</strong> Penerima disarankan melakukan dokumentasi visual saat serah terima barang sebagai bukti sah terhindar dari penyusutan logistik.</li>
-                    <li style="margin-bottom: 10px;"><strong>Force Majeure:</strong> Durasi pengiriman bisa tertangguhkan akibat keadaan kahar (bencana alam, huru-hara, atau gangguan sistem lalu lintas nasional).</li>
-                </ol>`;
+            let konten = `<p>Kami menyadari bahwa kecepatan distribusi adalah kunci integritas e-commerce. Berikut adalah ketentuan mutlak operasional logistik dan pengiriman di Ousevoid:</p><ol style="padding-left: 18px; margin-top: 15px;"><li style="margin-bottom: 10px;"><strong>Mitra Logistik Utama:</strong> Ousevoid menunjuk Gamoon e-Package sebagai garda depan pengiriman prioritas kami, didukung oleh jasa ekspedisi konvensional berskala nasional.</li><li style="margin-bottom: 10px;"><strong>Layanan Prioritas Sameday:</strong> Tersedia fasilitas tiba maksimal 8 jam operasional, berlaku secara eksklusif untuk wilayah yurisdiksi Jakarta dan Bodetabek.</li><li style="margin-bottom: 10px;"><strong>Layanan Ekspedisi Nasional:</strong> Pengiriman reguler antar-provinsi memakan waktu 2 hingga 5 hari kerja, mengacu pada SLA dari kurir masing-masing.</li><li style="margin-bottom: 10px;"><strong>Waktu Pemrosesan Gudang:</strong> Transaksi yang terkonfirmasi pembayarannya sebelum pukul 15.00 WIB akan dikemas dan diserahkan ke pihak logistik pada hari yang sama (H+0).</li><li style="margin-bottom: 10px;"><strong>Kewajiban Alamat:</strong> Pengguna layanan memikul tanggung jawab penuh terhadap kebenaran dan presisi penulisan alamat domisili.</li><li style="margin-bottom: 10px;"><strong>Asuransi Muatan:</strong> Setiap produk yang memiliki nilai tinggi (High Value Goods) secara otomatis akan diproteksi oleh asuransi pengiriman terintegrasi.</li><li style="margin-bottom: 10px;"><strong>Pemantauan Real-time:</strong> Pelanggan diberikan otorisasi penuh untuk melacak pergerakan paket menggunakan Nomor Resi melalui portal situs web kami.</li><li style="margin-bottom: 10px;"><strong>Kebijakan Keterlambatan:</strong> Segala bentuk keterlambatan di luar SLA normal akan kami bantu mediasi (eskalasi) ke pihak manajemen kurir.</li><li style="margin-bottom: 10px;"><strong>Syarat Penerimaan Barang:</strong> Penerima disarankan melakukan dokumentasi visual saat serah terima barang sebagai bukti sah terhindar dari penyusutan logistik.</li><li style="margin-bottom: 10px;"><strong>Force Majeure:</strong> Durasi pengiriman bisa tertangguhkan akibat keadaan kahar (bencana alam, huru-hara, atau gangguan sistem lalu lintas nasional).</li></ol>`;
             renderInfoPage("Ketentuan Pengiriman", konten);
         }
 
         function renderPembayaran() {
-            let konten = `
-                <p>Ekosistem finansial pada platform Ousevoid diproteksi secara siber untuk mencegah adanya rekayasa transaksi. Hal ini tertuang dalam poin Regulasi Pembayaran berikut:</p>
-                <ol style="padding-left: 18px; margin-top: 15px;">
-                    <li style="margin-bottom: 10px;"><strong>Otoritas Pengawasan:</strong> Semua transaksi yang masuk diproses dengan gerbang pembayaran berlisensi yang diawasi penuh oleh Otoritas Jasa Keuangan (OJK).</li>
-                    <li style="margin-bottom: 10px;"><strong>Enkripsi Siber:</strong> Platform menggunakan Secure Socket Layer (SSL) 256-bit guna menjamin perlindungan peretasan terhadap data perbankan Pengguna.</li>
-                    <li style="margin-bottom: 10px;"><strong>Metode E-Wallet:</strong> Dukungan penuh untuk pembayaran dompet digital (GoPay, DANA, ShopeePay) dengan proses validasi <em>real-time</em> milidetik.</li>
-                    <li style="margin-bottom: 10px;"><strong>Metode Virtual Account:</strong> Dukungan setoran bank konvensional melalui nomor seri unik (BCA, Mandiri, BNI, BRI) yang dihasilkan otomatis.</li>
-                    <li style="margin-bottom: 10px;"><strong>Integrasi QRIS Nasional:</strong> Transaksi lintas platform didukung melalui standarisasi kode respon cepat Bank Indonesia.</li>
-                    <li style="margin-bottom: 10px;"><strong>Batas Kedaluwarsa Tagihan:</strong> Pengguna diwajibkan menyelesaikan pembayaran maksimal 24 jam setelah invoice diterbitkan. Lewat dari itu, status pemesanan digugurkan secara sistem (auto-cancel).</li>
-                    <li style="margin-bottom: 10px;"><strong>Otomasi Verifikasi:</strong> Konfirmasi penyelesaian transaksi akan masuk secara otomatis tanpa perlu mengunggah struk/bukti transfer manual.</li>
-                    <li style="margin-bottom: 10px;"><strong>Bukti Legal:</strong> Struk digital / e-Invoice yang diterbitkan sistem adalah sah di mata hukum perniagaan nasional sebagai alat tukar garansi.</li>
-                    <li style="margin-bottom: 10px;"><strong>Kebijakan Pengembalian Dana (Refund):</strong> Proses pencairan ulang hanya dapat ditindaklanjuti apabila status ketersediaan barang di gudang kosong pasca-pembayaran berhasil.</li>
-                    <li style="margin-bottom: 10px;"><strong>Anti Fraud:</strong> Kami menggunakan kecerdasan sistem (AI risk scoring) yang dapat membatalkan sepihak jika terdeteksi aktivitas kartu kredit / transaksi mencurigakan.</li>
-                </ol>`;
+            let konten = `<p>Ekosistem finansial pada platform Ousevoid diproteksi secara siber untuk mencegah adanya rekayasa transaksi. Hal ini tertuang dalam poin Regulasi Pembayaran berikut:</p><ol style="padding-left: 18px; margin-top: 15px;"><li style="margin-bottom: 10px;"><strong>Otoritas Pengawasan:</strong> Semua transaksi yang masuk diproses dengan gerbang pembayaran berlisensi yang diawasi penuh oleh Otoritas Jasa Keuangan (OJK).</li><li style="margin-bottom: 10px;"><strong>Enkripsi Siber:</strong> Platform menggunakan Secure Socket Layer (SSL) 256-bit guna menjamin perlindungan peretasan terhadap data perbankan Pengguna.</li><li style="margin-bottom: 10px;"><strong>Metode E-Wallet:</strong> Dukungan penuh untuk pembayaran dompet digital (GoPay, DANA, ShopeePay) dengan proses validasi <em>real-time</em> milidetik.</li><li style="margin-bottom: 10px;"><strong>Metode Virtual Account:</strong> Dukungan setoran bank konvensional melalui nomor seri unik (BCA, Mandiri, BNI, BRI) yang dihasilkan otomatis.</li><li style="margin-bottom: 10px;"><strong>Integrasi QRIS Nasional:</strong> Transaksi lintas platform didukung melalui standarisasi kode respon cepat Bank Indonesia.</li><li style="margin-bottom: 10px;"><strong>Batas Kedaluwarsa Tagihan:</strong> Pengguna diwajibkan menyelesaikan pembayaran maksimal 24 jam setelah invoice diterbitkan. Lewat dari itu, status pemesanan digugurkan secara sistem (auto-cancel).</li><li style="margin-bottom: 10px;"><strong>Otomasi Verifikasi:</strong> Konfirmasi penyelesaian transaksi akan masuk secara otomatis tanpa perlu mengunggah struk/bukti transfer manual.</li><li style="margin-bottom: 10px;"><strong>Bukti Legal:</strong> Struk digital / e-Invoice yang diterbitkan sistem adalah sah di mata hukum perniagaan nasional sebagai alat tukar garansi.</li><li style="margin-bottom: 10px;"><strong>Kebijakan Pengembalian Dana (Refund):</strong> Proses pencairan ulang hanya dapat ditindaklanjuti apabila status ketersediaan barang di gudang kosong pasca-pembayaran berhasil.</li><li style="margin-bottom: 10px;"><strong>Anti Fraud:</strong> Kami menggunakan kecerdasan sistem (AI risk scoring) yang dapat membatalkan sepihak jika terdeteksi aktivitas kartu kredit / transaksi mencurigakan.</li></ol>`;
             renderInfoPage("Pembayaran", konten);
         }
 
         function renderPrivasi() {
-            let konten = `
-                <p>Data pribadi Anda merupakan komoditas yang wajib dilindungi. PT Gerbang Masa Depan berkomitmen menegakkan integritas berdasarkan klausul kebijakan berikut:</p>
-                <ol style="padding-left: 18px; margin-top: 15px;">
-                    <li style="margin-bottom: 10px;"><strong>Kepatuhan Hukum:</strong> Pedoman manajemen data kami berjalan 100% selaras dengan Undang-Undang Perlindungan Data Pribadi (UU PDP) Republik Indonesia.</li>
-                    <li style="margin-bottom: 10px;"><strong>Klasifikasi Data Terkumpul:</strong> Perusahaan hanya akan memproses nama sah, alamat rumah/domisili, kontak handphone, serta surel pembeli.</li>
-                    <li style="margin-bottom: 10px;"><strong>Tujuan Pengolahan:</strong> Eksploitasi data sangat dibatasi semata-mata untuk verifikasi pembayaran, pencetakan resi kurir logistik, dan administrasi pasca-jual.</li>
-                    <li style="margin-bottom: 10px;"><strong>Larangan Komersialisasi:</strong> Dengan tegas dinyatakan bahwa kami tidak memperjualbelikan, menukar, maupun menyewakan data Anda ke entitas bisnis pihak ketiga (Third Party).</li>
-                    <li style="margin-bottom: 10px;"><strong>Pengamanan Pangkalan Data:</strong> Infrastruktur Cloudflare digunakan untuk melindungi sistem database dari serangan injeksi dan pencurian data masif (DDoS protection).</li>
-                    <li style="margin-bottom: 10px;"><strong>Isolasi Hak Akses:</strong> Hanya staf berotoritas tingkat tinggi dalam divisi <em>Customer Support</em> yang dapat mengakses kredensial pesanan Anda.</li>
-                    <li style="margin-bottom: 10px;"><strong>Transparansi Finansial:</strong> Perusahaan tidak memiliki kewenangan teknis maupun akses untuk menahan atau membaca rincian pin/CVV perbankan pelanggan.</li>
-                    <li style="margin-bottom: 10px;"><strong>Prosedur Pemusnahan Data:</strong> Setelah kurun waktu kewajiban audit pajak selesai, metadata spesifik identitas pengguna akan dianonimkan dari server primer.</li>
-                    <li style="margin-bottom: 10px;"><strong>Pelacakan Cookies:</strong> Kami hanya menyematkan 'Essential Cookies' guna mempertahankan sesi keranjang belanja (Cart Session) pada peramban web Pengguna.</li>
-                    <li style="margin-bottom: 10px;"><strong>Hak Pengguna:</strong> Anda memegang kedaulatan mutlak untuk memohon koreksi kesalahan data cetak sebelum resi logistik dicetak oleh gudang pengemasan.</li>
-                </ol>`;
+            let konten = `<p>Data pribadi Anda merupakan komoditas yang wajib dilindungi. PT Gerbang Masa Depan berkomitmen menegakkan integritas berdasarkan klausul kebijakan berikut:</p><ol style="padding-left: 18px; margin-top: 15px;"><li style="margin-bottom: 10px;"><strong>Kepatuhan Hukum:</strong> Pedoman manajemen data kami berjalan 100% selaras dengan Undang-Undang Perlindungan Data Pribadi (UU PDP) Republik Indonesia.</li><li style="margin-bottom: 10px;"><strong>Klasifikasi Data Terkumpul:</strong> Perusahaan hanya akan memproses nama sah, alamat rumah/domisili, kontak handphone, serta surel pembeli.</li><li style="margin-bottom: 10px;"><strong>Tujuan Pengolahan:</strong> Eksploitasi data sangat dibatasi semata-mata untuk verifikasi pembayaran, pencetakan resi kurir logistik, dan administrasi pasca-jual.</li><li style="margin-bottom: 10px;"><strong>Larangan Komersialisasi:</strong> Dengan tegas dinyatakan bahwa kami tidak memperjualbelikan, menukar, maupun menyewakan data Anda ke entitas bisnis pihak ketiga (Third Party).</li><li style="margin-bottom: 10px;"><strong>Pengamanan Pangkalan Data:</strong> Infrastruktur Cloudflare digunakan untuk melindungi sistem database dari serangan injeksi dan pencurian data masif (DDoS protection).</li><li style="margin-bottom: 10px;"><strong>Isolasi Hak Akses:</strong> Hanya staf berotoritas tingkat tinggi dalam divisi <em>Customer Support</em> yang dapat mengakses kredensial pesanan Anda.</li><li style="margin-bottom: 10px;"><strong>Transparansi Finansial:</strong> Perusahaan tidak memiliki kewenangan teknis maupun akses untuk menahan atau membaca rincian pin/CVV perbankan pelanggan.</li><li style="margin-bottom: 10px;"><strong>Prosedur Pemusnahan Data:</strong> Setelah kurun waktu kewajiban audit pajak selesai, metadata spesifik identitas pengguna akan dianonimkan dari server primer.</li><li style="margin-bottom: 10px;"><strong>Pelacakan Cookies:</strong> Kami hanya menyematkan 'Essential Cookies' guna mempertahankan sesi keranjang belanja (Cart Session) pada peramban web Pengguna.</li><li style="margin-bottom: 10px;"><strong>Hak Pengguna:</strong> Anda memegang kedaulatan mutlak untuk memohon koreksi kesalahan data cetak sebelum resi logistik dicetak oleh gudang pengemasan.</li></ol>`;
             renderInfoPage("Kebijakan Privasi", konten);
         }
 
-        // LOAD PRODUK DARI BACKEND (functions/api/produk.js)
+        // LOAD PRODUK DATABASE & PROSES LOGIN
         async function muatProdukDariDatabase() {
             var app = document.getElementById('app');
             app.innerHTML = '<div style="padding:100px 20px; text-align:center;"><i class="fa-solid fa-circle-notch fa-spin" style="font-size:40px; color:#111; margin-bottom:20px;"></i><div style="font-size:14px; color:#555; font-weight:700;">Menghubungkan ke Pangkalan Data...</div></div>';
             try {
-                // Nembak ke endpoint Cloudflare Pages Functions
                 const response = await fetch("/api/produk"); 
                 const dataProdukApi = await response.json();
                 
@@ -841,55 +844,26 @@
                         try { parsedVariants = p.variants ? JSON.parse(p.variants) : []; } catch(e) {}
                         return { id: p.id, name: p.nama, priceValue: p.harga, price: 'Rp ' + p.harga.toLocaleString('id-ID'), img: p.img_url, category: p.kategori || "Earbuds", specs: { deskripsi: p.deskripsi }, variants: parsedVariants };
                     });
-                } else {
-                    products = []; // Kosong dari database
-                }
-            } catch (error) { 
-                console.log("Gagal memuat API dari backend."); 
-                products = []; 
-            }
+                } else { products = []; }
+            } catch (error) { products = []; }
             renderHome();
         }
 
-        // FUNGSI LOGIN (Nembak ke functions/api/login.js)
         async function prosesLogin() {
-            if(activeLoginMode === 'admin') {
-                var u = document.getElementById('log-user').value.trim();
-                var p = document.getElementById('log-pass').value.trim();
-                var pin = document.getElementById('log-pin').value.trim();
-                var btn = document.querySelector('.modal-login-box .btn-action');
-                
-                if(!u || !p || !pin) { alert("Mohon lengkapi seluruh kredensial otoritas."); return; }
-                
-                btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Memeriksa...'; btn.disabled = true;
-                
-                try {
-                    const response = await fetch("/api/login", { 
-                        method: "POST", 
-                        headers: { "Content-Type": "application/json" }, 
-                        body: JSON.stringify({ username: u, password: p, pin: pin }) 
-                    });
-                    
-                    const hasil = await response.json();
-                    
-                    if (hasil.sukses) { 
-                        window.location.href = "manajemen.html"; 
-                    } else { 
-                        alert("Akses Ditolak: Kredensial tidak valid."); 
-                    }
-                } catch (error) { 
-                    alert("Server Keamanan Tidak Merespon."); 
-                }
-                
-                btn.innerHTML = '<i class="fa-solid fa-arrow-right-to-bracket"></i> Login Sekarang'; 
-                btn.disabled = false;
-            } else {
-                alert("Layanan login pembeli sedang dalam tahap sinkronisasi sistem. Anda tetap dapat berbelanja secara langsung tanpa akun.");
-                tutupLogin();
-            }
+            var u = document.getElementById('log-user').value.trim();
+            var p = document.getElementById('log-pass').value.trim();
+            var pin = document.getElementById('log-pin').value.trim();
+            var btn = document.querySelector('.modal-login-box .btn-action');
+            if(!u || !p || !pin) { alert("Mohon lengkapi seluruh kredensial otoritas."); return; }
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Memeriksa...'; btn.disabled = true;
+            try {
+                const response = await fetch("/api/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ username: u, password: p, pin: pin }) });
+                const hasil = await response.json();
+                if (hasil.sukses) { window.location.href = "manajemen.html"; } else { alert("Akses Ditolak: Kredensial tidak valid."); }
+            } catch (error) { alert("Server Keamanan Tidak Merespon."); }
+            btn.innerHTML = '<i class="fa-solid fa-arrow-right-to-bracket"></i> Login Sekarang'; btn.disabled = false;
         }
 
-        // Jalankan saat halaman dimuat
         window.onload = function() { 
             muatProdukDariDatabase(); 
         };
