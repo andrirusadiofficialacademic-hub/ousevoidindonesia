@@ -106,8 +106,10 @@
            5. CHECKOUT SATU HALAMAN & INVOICE
            ========================================== */
         .co-wrapper { text-align: left; background: #fff; padding: 25px; border-radius: 20px; margin-bottom: 80px; border: 1px solid #e5e7eb; box-shadow: 0 4px 15px rgba(0,0,0,0.03); max-width: 800px; margin-left: auto; margin-right: auto; }
-        .co-header-title { font-size: 20px; font-weight: 800; color: #111; margin-bottom: 5px; display: flex; align-items: center; gap: 10px; }
-        .co-header-id { font-size: 12px; color: #6b7280; margin-bottom: 25px; font-family: monospace; letter-spacing: 0.5px; }
+        /* SIMETRIS CEKOUT */
+        .co-header-center { text-align: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px dashed #e5e7eb; }
+        .co-header-title { font-size: 22px; font-weight: 800; color: #111; margin: 10px 0 5px 0; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .co-header-id { font-size: 12px; color: #6b7280; font-family: monospace; letter-spacing: 0.5px; }
         
         .co-section-title { font-size: 14px; font-weight: 800; color: #111; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #f3f4f6; }
         .co-input-modern { width: 100%; padding: 14px 16px; border: 1px solid #d1d5db; border-radius: 12px; font-family: 'Inter', sans-serif; font-size: 13px; margin-bottom: 15px; outline: none; background: #f9fafb; transition: 0.3s; }
@@ -122,6 +124,15 @@
         .qty-control { display: flex; align-items: center; gap: 12px; background: #fff; border: 1px solid #d1d5db; border-radius: 8px; padding: 6px 10px; width: fit-content; margin-top: 8px; }
         .qty-btn { cursor: pointer; font-weight: 800; color: #4b5563; width: 20px; text-align: center; }
         .qty-num { font-size: 13px; font-weight: 700; width: 20px; text-align: center; color: #111; }
+        
+        /* LOGISTIK UI ALA CHAT BOT & ASURANSI */
+        .qna-options-wrapper { display: flex; flex-direction: column; gap: 8px; margin-bottom: 15px; }
+        .qna-bar-item { background: #f9fafb; border: 1px solid #d1d5db; padding: 14px 16px; border-radius: 12px; font-size: 13px; font-weight: 700; color: #374151; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: space-between; }
+        .qna-bar-item:hover { background: #111827; color: #fff; border-color: #111827; }
+        .qna-bar-item.selected { background: #111827; color: #fff; border-color: #111827; }
+        
+        .asuransi-box { display: flex; align-items: center; gap: 10px; background: #fefce8; border: 1px solid #fef08a; padding: 12px 16px; border-radius: 12px; margin-bottom: 20px; cursor: pointer; }
+        .asuransi-box label { font-size: 12px; font-weight: 600; color: #854d0e; cursor: pointer; flex: 1; }
         
         .payment-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 25px; }
         @media(min-width: 600px) { .payment-grid { grid-template-columns: repeat(4, 1fr); } }
@@ -139,13 +150,36 @@
         @media(min-width: 768px) { .co-bottom-bar { padding: 15px 40px; } }
 
         /* ==========================================
+           6. HALAMAN PELACAKAN (TRACKING) UI FIX
+           ========================================== */
+        .track-box { background: #fff; border: 1px solid #e5e7eb; border-radius: 24px; padding: 30px 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); max-width: 600px; margin: 40px auto; }
+        .track-input-group { display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; }
+        .track-input { width: 100%; padding: 14px 16px; border: 1px solid #d1d5db; border-radius: 14px; font-size: 13px; font-weight: 700; outline: none; background: #f9fafb; text-align: center; letter-spacing: 1px; }
+        .track-input:focus { border-color: #111; background: #fff; }
+        
+        .status-terakhir-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; padding: 20px; margin-top: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); text-align: left; }
+        .status-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: #fef3c7; color: #d97706; border-radius: 20px; font-size: 11px; font-weight: 800; margin-bottom: 12px; }
+        .status-title { font-size: 16px; font-weight: 800; color: #111; margin: 0 0 8px 0; }
+        
+        .timeline-wrapper { margin-top: 25px; text-align: left; border-top: 1px solid #f3f4f6; padding-top: 25px; }
+        .timeline-item { position: relative; padding-left: 28px; padding-bottom: 20px; border-left: 2px solid #e5e7eb; }
+        .timeline-item:last-child { border-left: 2px solid transparent; padding-bottom: 0; }
+        .timeline-icon { position: absolute; left: -9px; top: 0; width: 16px; height: 16px; border-radius: 50%; background: #e5e7eb; border: 2px solid #fff; }
+        .timeline-item.completed .timeline-icon { background: #111827; }
+        .timeline-item.active .timeline-icon { background: #f59e0b; box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2); }
+        .timeline-content h5 { margin: 0 0 4px 0; font-size: 13px; font-weight: 800; color: #111; }
+        .timeline-item.active .timeline-content h5 { color: #d97706; }
+        .timeline-content p { margin: 0; font-size: 12px; color: #6b7280; line-height: 1.5; }
+
+
+        /* ==========================================
            7. UI KOTAK CHAT (ALUR BANK CS)
            ========================================== */
-        /* WIDGET ICON HEADSET LENGKAP */
-        .chat-widget-btn { position: fixed; bottom: 25px; right: 25px; width: 56px; height: 56px; border-radius: 50%; cursor: pointer; z-index: 999; box-shadow: 0 10px 25px rgba(0,0,0,0.25); transition: 0.3s; background: #111827; color: #fff; display: flex; justify-content: center; align-items: center; font-size: 22px; border: 2px solid #fff; }
+        /* WIDGET ICON HEADSET LENGKAP - DIPOSISIKAN LEBIH KE ATAS (bottom 85px) */
+        .chat-widget-btn { position: fixed; bottom: 85px; right: 25px; width: 56px; height: 56px; border-radius: 50%; cursor: pointer; z-index: 999; box-shadow: 0 10px 25px rgba(0,0,0,0.25); transition: 0.3s; background: #111827; color: #fff; display: flex; justify-content: center; align-items: center; font-size: 22px; border: 2px solid #fff; }
         .chat-widget-btn:hover { transform: scale(1.08); background: #1f2937; }
         
-        .chat-window { position: fixed; bottom: 90px; right: 25px; width: 350px; background: #fff; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.18); z-index: 9999; display: none; flex-direction: column; overflow: hidden; border: 1px solid #e5e7eb; transition: 0.3s; }
+        .chat-window { position: fixed; bottom: 155px; right: 25px; width: 350px; background: #fff; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.18); z-index: 9999; display: none; flex-direction: column; overflow: hidden; border: 1px solid #e5e7eb; transition: 0.3s; }
         @media(max-width: 400px) { .chat-window { width: calc(100% - 30px); right: 15px; } }
         .chat-window.show { display: flex; animation: slideUp 0.3s ease; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -159,8 +193,6 @@
         
         .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #2ecc71; } /* Hijau CS Online */
         .status-dot.bot { background: #3b82f6; } /* Biru Bot */
-        .status-dot.offline { background: #9ca3af; } 
-        .status-dot.error { background: #e74c3c; } 
         
         .close-chat-btn { cursor: pointer; color: #9ca3af; font-size: 18px; transition: 0.2s; padding: 4px; }
         .close-chat-btn:hover { color: #fff; }
@@ -170,36 +202,34 @@
         .chat-bubble.cs { background: #fff; color: #111; border: 1px solid #e5e7eb; align-self: flex-start; border-bottom-left-radius: 2px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
         .chat-bubble.user { background: #111827; color: #fff; align-self: flex-end; border-bottom-right-radius: 2px; }
         
-        /* ITEM QNA BAR (INTERAKTIF) */
-        .qna-options-wrapper { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
-        .qna-bar-item { background: #f3f4f6; border: 1px solid #e5e7eb; padding: 10px 12px; border-radius: 10px; font-size: 11px; font-weight: 700; color: #374151; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: space-between; }
-        .qna-bar-item:hover { background: #111827; color: #fff; border-color: #111827; }
-        .qna-bar-item i { font-size: 10px; opacity: 0.7; }
-
-        /* FORM INPUT UNTUK HUBUNGI CS */
         .chat-form-box { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 14px; margin-top: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
         .chat-form-input { width: 100%; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 12px; margin-bottom: 10px; font-family: 'Inter'; outline: none; background: #f9fafb; }
         .chat-form-input:focus { border-color: #111; background: #fff; }
         .chat-form-btn { background: #111827; color: #fff; border: none; padding: 10px; border-radius: 8px; font-size: 12px; font-weight: 700; width: 100%; cursor: pointer; transition: 0.2s; }
-        .chat-form-btn:hover { background: #1f2937; }
         
         .chat-input-area { padding: 12px; background: #fff; border-top: 1px solid #e5e7eb; display: flex; gap: 8px; align-items: center; }
         .chat-input { flex: 1; padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 20px; font-size: 12px; outline: none; font-family: 'Inter'; background: #f9fafb; }
-        .chat-input:focus { border-color: #111; background: #fff; }
         .chat-send-btn { background: #111; color: #fff; border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.2s; }
-        .chat-send-btn:hover { background: #374151; }
 
-        /* TOAST NOTIF & MODAL */
+        /* TOAST NOTIF & MODAL LOGIN BARU */
         .toast-notif { position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-50px); background: #111; color: #fff; padding: 12px 24px; border-radius: 30px; font-size: 12px; font-weight: 700; opacity: 0; transition: 0.3s; z-index: 9999; }
         .toast-notif.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        
         .modal-login-overlay { visibility: hidden; opacity: 0; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(17, 24, 39, 0.6); backdrop-filter: blur(4px); z-index: 2000; display: flex; justify-content: center; align-items: center; padding: 20px; transition: 0.3s; }
         .modal-login-overlay.show { visibility: visible; opacity: 1; }
         .modal-login-box { background: #fff; padding: 28px 24px; border-radius: 24px; width: 100%; max-width: 360px; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.15); text-align: center; }
         .close-login-btn { position: absolute; top: 16px; right: 18px; font-size: 20px; cursor: pointer; color: #9ca3af; }
+        
+        .login-tabs { display: flex; background: #f3f4f6; border-radius: 12px; padding: 4px; margin-bottom: 20px; }
+        .login-tab { flex: 1; padding: 10px; font-size: 12px; font-weight: 700; color: #6b7280; border: none; background: transparent; cursor: pointer; border-radius: 10px; transition: 0.3s; }
+        .login-tab.active { background: #fff; color: #111; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        
         .login-input-wrapper { text-align: left; margin-bottom: 12px; }
         .login-label { font-size: 10px; font-weight: 800; color: #6b7280; text-transform: uppercase; margin-bottom: 4px; display: block; }
         .login-input { width: 100%; padding: 14px 16px; border: 1px solid #d1d5db; border-radius: 12px; font-family: 'Inter', sans-serif; font-size: 13px; outline: none; background: #f9fafb; margin-bottom: 5px; box-sizing: border-box; transition: 0.3s; }
         .login-input:focus { border-color: #111; background: #fff; }
+        .login-link { font-size: 11px; color: #3b82f6; font-weight: 600; cursor: pointer; margin-top: 15px; display: block; text-decoration: underline; }
+        
         .info-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 20px; padding: 30px; text-align: left; line-height: 1.8; font-size: 13px; color: #374151; margin-bottom: 20px; }
         
         .footer { padding: 60px 20px 30px 20px; background: #fff; text-align: left; font-size: 13px; color: #555; border-top: 1px solid #eee; }
@@ -240,10 +270,10 @@
             
             <div class="nav-group">
                 <div class="nav-label">Kategori Produk</div>
-                <div class="nav-item" onclick="renderCS('Earbuds')"><i class="fa-solid fa-ear-listen"></i> Earbuds</div>
-                <div class="nav-item" onclick="renderCS('Smartphone')"><i class="fa-solid fa-mobile-screen-button"></i> Smartphone</div>
-                <div class="nav-item" onclick="renderCS('Speaker')"><i class="fa-solid fa-volume-high"></i> Speaker</div>
-                <div class="nav-item" onclick="renderCS('Sparepart')"><i class="fa-solid fa-link"></i> Sparepart</div>
+                <div class="nav-item" onclick="renderKategoriSidebar('Earbuds')"><i class="fa-solid fa-ear-listen"></i> Earbuds</div>
+                <div class="nav-item" onclick="renderKategoriSidebar('Smartphone')"><i class="fa-solid fa-mobile-screen-button"></i> Smartphone</div>
+                <div class="nav-item" onclick="renderKategoriSidebar('Speaker')"><i class="fa-solid fa-volume-high"></i> Speaker</div>
+                <div class="nav-item" onclick="renderKategoriSidebar('Sparepart')"><i class="fa-solid fa-link"></i> Sparepart</div>
             </div>
 
             <div class="nav-group">
@@ -256,7 +286,7 @@
             </div>
         </div>
         <div style="padding-top:15px; border-top:1px solid #f3f4f6;">
-            <button class="btn-action" onclick="bukaLogin()"><i class="fa-solid fa-right-to-bracket"></i> Login Admin Portal</button>
+            <button class="btn-action" onclick="bukaLogin()"><i class="fa-solid fa-right-to-bracket"></i> Login / Daftar</button>
         </div>
     </div>
 
@@ -271,9 +301,9 @@
     <div class="chat-window" id="chatWindow">
         <div class="chat-header">
             <div class="chat-header-info">
-                <img src="uploaded:10685.jpg-840c644b-ea44-451f-b6af-9acc5d41cfcb" id="chatAvatarImg" alt="CS Avatar" class="chat-avatar">
+                <img src="uploaded:10685.jpg-840c644b-ea44-451f-b6af-9acc5d41cfcb" id="chatAvatarImg" alt="Bot Chat" class="chat-avatar">
                 <div class="chat-name-status">
-                    <span class="chat-name" id="chatAgentName">Marsya (No Reply)</span>
+                    <span class="chat-name" id="chatAgentName">Marsya (Bot Chat)</span>
                     <div class="chat-status-wrap">
                         <span class="status-dot bot" id="cs-status-dot"></span>
                         <span id="cs-status-text">Bot</span>
@@ -292,22 +322,52 @@
     <div id="loginModal" class="modal-login-overlay">
         <div class="modal-login-box">
             <span class="close-login-btn" onclick="tutupLogin()">&times;</span>
-            <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Logo" class="login-logo">
-            <h3 style="font-size:18px; margin:0 0 4px 0; font-weight:800;">Login</h3>
-            <p style="font-size:12px; color:#6b7280; margin-bottom:20px;">Masuk ke Sistem Ousevoid</p>
-            <div style="text-align:left; margin-bottom:12px;">
-                <label class="login-label">Username / Email</label>
-                <input type="text" id="log-user" class="login-input" placeholder="Masukkan username">
+            <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Logo" class="login-logo" style="height: 28px; margin-bottom: 15px;">
+            
+            <div class="login-tabs">
+                <button class="login-tab active" id="tab-pengguna" onclick="switchLogin('pengguna')">Pengguna</button>
+                <button class="login-tab" id="tab-admin" onclick="switchLogin('admin')">Admin</button>
             </div>
-            <div style="text-align:left; margin-bottom:12px;">
-                <label class="login-label">Kata Sandi</label>
-                <input type="password" id="log-pass" class="login-input" placeholder="Masukkan kata sandi">
+
+            <div id="area-pengguna">
+                <h3 style="font-size:16px; margin:0 0 15px 0; font-weight:800;">Login Pengguna</h3>
+                <div class="login-input-wrapper">
+                    <label class="login-label">Username / Email</label>
+                    <input type="text" id="user-pengguna" class="login-input" placeholder="Username Anda">
+                </div>
+                <div class="login-input-wrapper">
+                    <label class="login-label">Kata Sandi</label>
+                    <input type="password" id="pass-pengguna" class="login-input" placeholder="Kata sandi">
+                </div>
+                <button class="btn-action" style="margin-top:10px; padding:12px;" onclick="prosesLoginPengguna()">Login</button>
+                <span class="login-link">Belum punya akun? Daftar sekarang!</span>
             </div>
-            <div style="text-align:left; margin-bottom:12px;" id="pin-field">
-                <label class="login-label">PIN Keamanan (6 Digit)</label>
-                <input type="password" id="log-pin" class="login-input" placeholder="6 Digit PIN Rahasia" maxlength="6">
+
+            <div id="area-admin" style="display: none;">
+                <div id="area-admin-step1">
+                    <h3 style="font-size:16px; margin:0 0 15px 0; font-weight:800;">Login Admin</h3>
+                    <div class="login-input-wrapper">
+                        <label class="login-label">Username Admin</label>
+                        <input type="text" id="log-user" class="login-input" placeholder="Masukkan username">
+                    </div>
+                    <div class="login-input-wrapper">
+                        <label class="login-label">Kata Sandi</label>
+                        <input type="password" id="log-pass" class="login-input" placeholder="Masukkan kata sandi">
+                    </div>
+                    <button class="btn-action" style="margin-top:10px; padding:12px;" onclick="lanjutLoginAdmin()">Login</button>
+                </div>
+
+                <div id="area-admin-step2" style="display: none;">
+                    <h3 style="font-size:16px; margin:0 0 15px 0; font-weight:800;">Verifikasi Keamanan</h3>
+                    <p style="font-size:12px; color:#6b7280; margin-bottom:15px;">Masukkan PIN akses Anda.</p>
+                    <div class="login-input-wrapper">
+                        <label class="login-label">PIN Rahasia (6 Digit)</label>
+                        <input type="password" id="log-pin" class="login-input" placeholder="6 Digit PIN" maxlength="6" style="text-align: center; font-size: 20px; letter-spacing: 5px;">
+                    </div>
+                    <button class="btn-action" id="btn-admin-final" style="margin-top:10px; padding:12px;" onclick="prosesLoginAdminFinal()">Verifikasi & Login</button>
+                    <span class="login-link" style="color: #6b7280;" onclick="kembaliLoginAdmin()"><i class="fa-solid fa-arrow-left"></i> Kembali</span>
+                </div>
             </div>
-            <button class="btn-action" style="margin-top:15px; padding:12px;" onclick="prosesLogin()"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login Admin Portal</button>
         </div>
     </div>
 
@@ -340,6 +400,8 @@
         window.currentProductName = "";
         window.currentProductImg = "";
         window.selectedPaymentMethod = "";
+        window.currentOngkir = 35000;
+        window.useAsuransi = false;
         
         function generateTrxId() { return "2026/OUSEVOID/" + Math.floor(1000000 + Math.random() * 9000000); }
 
@@ -355,7 +417,107 @@
         }
         function autoClose() { if (document.getElementById('sidebar').classList.contains('active')) toggleMenu(); }
         function bukaLogin() { document.getElementById('loginModal').classList.add('show'); autoClose(); }
-        function tutupLogin() { document.getElementById('loginModal').classList.remove('show'); }
+        function tutupLogin() { document.getElementById('loginModal').classList.remove('show'); switchLogin('pengguna'); }
+
+        // =========================================================================
+        // LOGIKA LOGIN PENGGUNA & ADMIN (BARU)
+        // =========================================================================
+        function switchLogin(mode) {
+            document.getElementById('tab-pengguna').classList.toggle('active', mode === 'pengguna');
+            document.getElementById('tab-admin').classList.toggle('active', mode === 'admin');
+            
+            document.getElementById('area-pengguna').style.display = (mode === 'pengguna') ? 'block' : 'none';
+            document.getElementById('area-admin').style.display = (mode === 'admin') ? 'block' : 'none';
+            
+            if (mode === 'admin') {
+                kembaliLoginAdmin(); // Reset ke step 1
+            }
+        }
+
+        function prosesLoginPengguna() {
+            alert("Fitur pendaftaran dan login pengguna sedang dalam pemeliharaan. Anda tetap bisa berbelanja tanpa login.");
+            tutupLogin();
+        }
+
+        function lanjutLoginAdmin() {
+            var u = document.getElementById('log-user').value.trim();
+            var p = document.getElementById('log-pass').value.trim();
+            if(!u || !p) { alert("Masukkan username dan password admin."); return; }
+            
+            document.getElementById('area-admin-step1').style.display = 'none';
+            document.getElementById('area-admin-step2').style.display = 'block';
+            document.getElementById('log-pin').value = '';
+            document.getElementById('log-pin').focus();
+        }
+
+        function kembaliLoginAdmin() {
+            document.getElementById('area-admin-step2').style.display = 'none';
+            document.getElementById('area-admin-step1').style.display = 'block';
+        }
+
+        async function prosesLoginAdminFinal() {
+            var u = document.getElementById('log-user').value.trim();
+            var p = document.getElementById('log-pass').value.trim();
+            var pin = document.getElementById('log-pin').value.trim();
+            var btn = document.getElementById('btn-admin-final');
+            
+            if(!pin || pin.length < 6) { alert("PIN harus 6 digit."); return; }
+            
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Memeriksa...'; btn.disabled = true;
+            try {
+                const response = await fetch("/api/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ username: u, password: p, pin: pin }) });
+                const hasil = await response.json();
+                if (hasil.sukses) { window.location.href = "manajemen.html"; } else { alert("Akses Ditolak: Kredensial tidak valid."); kembaliLoginAdmin(); }
+            } catch (error) { alert("Server Keamanan Tidak Merespon."); }
+            btn.innerHTML = 'Verifikasi & Login'; btn.disabled = false;
+        }
+
+
+        // =========================================================================
+        // FILTER KATEGORI SIDEBAR (BUG FIXED)
+        // =========================================================================
+        function renderKategoriSidebar(katId) {
+            toggleFooterUtama(true); autoClose(); window.scrollTo(0,0);
+            var app = document.getElementById('app');
+            
+            let produkKategoriIni = products.filter(p => {
+                let matchCategory = (p.category && p.category.toLowerCase() === katId.toLowerCase());
+                // Optional: tambah keyword search kalo category di db kosong
+                return matchCategory || p.name.toLowerCase().includes(katId.toLowerCase()); 
+            });
+            
+            let html = `
+                <div class="category-section" style="margin-top: 20px;">
+                    <div class="category-header">
+                        <h2 class="category-title"><i class="fa-solid fa-box-open"></i> Etalase Kategori: ${katId}</h2>
+                    </div>
+            `;
+            
+            if (produkKategoriIni.length > 0) {
+                html += `<div class="features-grid" style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));">`;
+                produkKategoriIni.forEach(fp => {
+                    let originalIndex = products.findIndex(op => op.id === fp.id);
+                    html += `
+                    <div class="horizontal-card" style="width: 100%; max-width: 100%;">
+                        <img src="${fp.img}" style="height: 160px;" onclick="renderProdukDetail(${originalIndex})">
+                        <h3 onclick="renderProdukDetail(${originalIndex})">${fp.name}</h3>
+                        <div class="harga">${fp.price}</div>
+                        <button class="btn-action" onclick="renderProdukDetail(${originalIndex})"><i class="fa-solid fa-eye"></i> Detail</button>
+                    </div>`;
+                });
+                html += `</div>`;
+            } else { 
+                html += `
+                <div class="info-card" style="text-align:center; padding: 40px 20px;">
+                    <i class="fa-solid fa-box-open" style="font-size:40px; color:#d1d5db; margin-bottom:15px;"></i>
+                    <p style="font-weight:700; color:#6b7280;">Belum ada unit yang tersedia untuk kategori ${katId} saat ini.</p>
+                </div>`; 
+            }
+            html += `</div>`;
+            
+            app.innerHTML = html;
+        }
+
 
         // RENDER BERANDA
         function renderHome() {
@@ -484,7 +646,10 @@
 
         function ubahQty(idx, delta) { keranjang[idx].qty += delta; if(keranjang[idx].qty <= 0) keranjang.splice(idx, 1); renderKeranjang(); updateCartBadge(); }
 
-        // CHECKOUT ONE PAGE
+
+        // =========================================================================
+        // HALAMAN CHECKOUT SIMETRIS & LOGISTIK + ASURANSI
+        // =========================================================================
         function renderKeranjang() {
             toggleFooterUtama(false); autoClose(); window.scrollTo(0,0);
             var app = document.getElementById('app');
@@ -498,10 +663,17 @@
                 htmlItems += `<div class="co-product-item"><img src="${item.img}"><div class="co-product-info"><div class="co-product-name">${item.name}</div><div class="co-product-price">Rp ${item.price.toLocaleString('id-ID')}</div><div class="qty-control"><div class="qty-btn" onclick="ubahQty(${idx}, -1)">-</div><div class="qty-num">${item.qty}</div><div class="qty-btn" onclick="ubahQty(${idx}, 1)">+</div></div></div></div>`;
             });
             
+            window.currentSubtotal = subtotal;
+            window.currentOngkir = 35000; // default
+            window.useAsuransi = false;
+            
             app.innerHTML = `
                 <div class="co-wrapper">
-                    <div class="co-header-title"><img src="https://i.ibb.co.com/x8MrtzXr/8588.png" style="height:24px;"> Checkout Pesanan</div>
-                    <div class="co-header-id">ID Transaksi: ${window.currentTrxId}</div>
+                    <div class="co-header-center">
+                        <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" style="height:35px; margin:auto; display:block;"> 
+                        <div class="co-header-title">Checkout Pesanan</div>
+                        <div class="co-header-id">ID Transaksi: ${window.currentTrxId}</div>
+                    </div>
 
                     <div class="co-section-title"><i class="fa-solid fa-map-location-dot"></i> Data Pengiriman</div>
                     <input type="text" id="co-nama" class="co-input-modern" placeholder="Nama Lengkap Penerima">
@@ -513,13 +685,19 @@
                     ${htmlItems}
 
                     <div class="co-section-title" style="margin-top:20px;"><i class="fa-solid fa-truck-fast"></i> Logistik Pengiriman</div>
-                    <div style="font-size:12px; color:#6b7280; margin-bottom:8px;">*Terintegrasi API RajaOngkir (Estimasi Berat Total: 500gr)</div>
-                    <select id="co-kurir" class="kurir-select">
-                        <option value="35000">Gamoon e-Package Prioritas - Rp 35.000</option>
-                        <option value="15000">JNE Reguler (REG) - Rp 15.000</option>
-                        <option value="18000">J&T Express (EZ) - Rp 18.000</option>
-                        <option value="22000">SiCepat (BEST) - Rp 22.000</option>
-                    </select>
+                    <div style="font-size:12px; color:#6b7280; margin-bottom:12px;">*Terintegrasi API RajaOngkir (Estimasi Berat Total: 500gr)</div>
+                    
+                    <div class="qna-options-wrapper" id="kurir-wrapper">
+                        <div class="qna-bar-item selected" onclick="pilihKurir(35000, this)">Gamoon e-Package Prioritas - Rp 35.000 <i class="fa-solid fa-circle-check"></i></div>
+                        <div class="qna-bar-item" onclick="pilihKurir(22000, this)">SiCepat (BEST) - Rp 22.000 <i class="fa-solid fa-circle-check" style="display:none;"></i></div>
+                        <div class="qna-bar-item" onclick="pilihKurir(18000, this)">J&T Express (EZ) - Rp 18.000 <i class="fa-solid fa-circle-check" style="display:none;"></i></div>
+                        <div class="qna-bar-item" onclick="pilihKurir(15000, this)">JNE Reguler (REG) - Rp 15.000 <i class="fa-solid fa-circle-check" style="display:none;"></i></div>
+                    </div>
+
+                    <label class="asuransi-box">
+                        <input type="checkbox" id="cb-asuransi" style="transform: scale(1.3); margin-left: 5px;" onchange="toggleAsuransi(this)">
+                        <label for="cb-asuransi">Tambahan asuransi perlindungan barang 9% per transaksi dari total nilai.</label>
+                    </label>
 
                     <div class="co-section-title" style="margin-top:10px;"><i class="fa-solid fa-credit-card"></i> Pilih Metode Pembayaran</div>
                     <div class="payment-grid">
@@ -536,20 +714,39 @@
                 
                 <div class="co-bottom-bar">
                     <div>
-                        <div style="font-size:10px; font-weight:700; color:#6b7280;">Subtotal (+Ongkir)</div>
-                        <div style="font-size:18px; font-weight:800; color:#111;" id="co-display-total">Rp ${(subtotal+35000).toLocaleString('id-ID')}</div>
+                        <div style="font-size:10px; font-weight:700; color:#6b7280;">Total Tagihan</div>
+                        <div style="font-size:18px; font-weight:800; color:#111;" id="co-display-total">Rp 0</div>
                     </div>
                     <button class="co-btn-pay" style="width:auto; padding:14px 24px; font-size:14px;" onclick="eksekusiPembayaran()"><i class="fa-solid fa-shield-halved"></i> Proses Pembayaran</button>
                 </div>
             `;
             
             window.selectedPaymentMethod = 'gopay';
-            window.currentSubtotal = subtotal;
-            
-            document.getElementById('co-kurir').addEventListener('change', function() {
-                var ongkir = parseInt(this.value);
-                document.getElementById('co-display-total').innerText = 'Rp ' + (window.currentSubtotal + ongkir).toLocaleString('id-ID');
+            hitungTotalKalkulasi();
+        }
+
+        function pilihKurir(ongkir, el) {
+            window.currentOngkir = ongkir;
+            // Update UI
+            document.querySelectorAll('#kurir-wrapper .qna-bar-item').forEach(e => {
+                e.classList.remove('selected');
+                e.querySelector('i').style.display = 'none';
             });
+            el.classList.add('selected');
+            el.querySelector('i').style.display = 'inline-block';
+            hitungTotalKalkulasi();
+        }
+
+        function toggleAsuransi(cb) {
+            window.useAsuransi = cb.checked;
+            hitungTotalKalkulasi();
+        }
+
+        function hitungTotalKalkulasi() {
+            let dasar = window.currentSubtotal + window.currentOngkir;
+            let biayaAsuransi = window.useAsuransi ? (dasar * 0.09) : 0;
+            window.currentTotalFinal = Math.round(dasar + biayaAsuransi);
+            document.getElementById('co-display-total').innerText = 'Rp ' + window.currentTotalFinal.toLocaleString('id-ID');
         }
 
         function pilihPayment(el, method) { 
@@ -562,10 +759,7 @@
             var n = document.getElementById('co-nama').value, w = document.getElementById('co-wa').value, e = document.getElementById('co-email').value, a = document.getElementById('co-alamat').value;
             if (!n || !w || !e || !a) { alert("Sistem menolak: Mohon lengkapi seluruh formulir data pengiriman."); return; }
             
-            var ongkir = parseInt(document.getElementById('co-kurir').value);
-            var totalFinal = window.currentSubtotal + ongkir;
-            
-            window.dataPesananSementara = { nama: n, wa: w, email: e, alamat: a, total: totalFinal, idTrx: window.currentTrxId, method: window.selectedPaymentMethod };
+            window.dataPesananSementara = { nama: n, wa: w, email: e, alamat: a, total: window.currentTotalFinal, idTrx: window.currentTrxId, method: window.selectedPaymentMethod };
 
             var btn = document.querySelector('.co-btn-pay'); 
             btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Otorisasi...'; 
@@ -628,12 +822,12 @@
         // =========================================================================
         // LOGIKA CHATBOT FORMAL ALA BANK (MARSYA BOT -> TIARA SABRINA CS)
         // =========================================================================
-        var chatState = 0; // 0: Bot Marsya, 1: Form Input CS, 2: Terhubung ke Tiara Agent
+        var chatState = 0; 
 
         function initChatMarsya() {
             chatState = 0;
             document.getElementById('chatAvatarImg').src = "uploaded:10685.jpg-840c644b-ea44-451f-b6af-9acc5d41cfcb";
-            document.getElementById('chatAgentName').innerText = "Marsya (No Reply)";
+            document.getElementById('chatAgentName').innerText = "Marsya (Bot Chat)";
             document.getElementById('cs-status-dot').className = "status-dot bot";
             document.getElementById('cs-status-text').innerText = "Bot";
             
@@ -727,15 +921,14 @@
             
             chatState = 2;
             
-            // GANTI AVATAR HEADER KE TIARA SABRINA (AGEN MANUSIA)
+            // GANTI AVATAR HEADER KE TIARA SABRINA (AGEN MANUSIA) & STATUS JAM KERJA
             document.getElementById('chatAvatarImg').src = "https://i.ibb.co.com/NgnYF4vP/10852.jpg";
             document.getElementById('chatAgentName').innerText = "Tiara Sabrina (Agent)";
-            document.getElementById('cs-status-dot').className = "status-dot"; // Indikator Hijau
-            document.getElementById('cs-status-text').innerText = "Online";
+            document.getElementById('cs-status-dot').className = "status-dot"; 
+            document.getElementById('cs-status-text').innerText = "08:00 - 18:00"; // Ubah status Online ke Jam Kerja
 
             body.innerHTML += `<div class="chat-bubble cs" style="background:#e8f5e9; border-color:#c8e6c9; color:#2e7d32;"><i class="fa-solid fa-circle-check"></i> Sesi beralih. Anda telah terhubung dengan Agent Tiara Sabrina.</div>`;
             
-            // SALAM FORMAL ALA CUSTOMER SERVICE BANK
             setTimeout(() => {
                 var waktu = new Date().getHours() < 12 ? "Pagi" : (new Date().getHours() < 15 ? "Siang" : (new Date().getHours() < 18 ? "Sore" : "Malam"));
                 body.innerHTML += `<div class="chat-bubble cs">Selamat ${waktu}, Bapak/Ibu <b>${nama}</b>. Terima kasih telah menghubungi Layanan Pelanggan Resmi Ousevoid. Saya <b>Tiara Sabrina</b>, ada keluhan atau bantuan informasi pesanan yang dapat saya bantu proses hari ini?</div>`;
@@ -760,9 +953,8 @@
             }
         }
 
-
         // =========================================================================
-        // FUNGSI INFORMASI LAINNYA
+        // HALAMAN PELACAKAN STATUS & INFO STATIS (TEMA DIPERBAIKI)
         // =========================================================================
         function renderLacakPesanan() {
             toggleFooterUtama(true); autoClose(); window.scrollTo(0,0);
@@ -772,7 +964,7 @@
                     <h2 style="font-size:20px; font-weight:800; margin-top:0; text-align:center;">Pelacakan Status Pengiriman Pesanan</h2>
                     <p style="font-size:12px; color:#6b7280; text-align:center; margin-bottom:20px;">Masukkan Nomor Resi / Invoice resmi Ousevoid Anda untuk memeriksa status logistik.</p>
                     <div class="track-input-group">
-                        <input type="text" id="input-resi" class="track-input" placeholder="Contoh: 2026/OUSE/84920">
+                        <input type="text" id="input-resi" class="track-input" placeholder="Contoh: 2026/OUSEVOID/84920">
                         <button class="btn-action" style="padding:14px;" onclick="prosesLacak(this)"><i class="fa-solid fa-magnifying-glass"></i> Periksa Status Logistik</button>
                     </div>
                     <div id="hasil-tracking"></div>
@@ -791,19 +983,16 @@
                     <div class="status-terakhir-card">
                         <div class="status-badge"><i class="fa-solid fa-clock"></i> STATUS TERAKHIR</div>
                         <h3 class="status-title">Dalam Pengiriman Kurir Logistik</h3>
-                        <div style="font-size:12px; color:#9ca3af;">Nomor Resi: <strong style="color:#fff;">${resiInput}</strong></div>
+                        <div style="font-size:12px; color:#6b7280;">Nomor Resi: <strong style="color:#111;">${resiInput}</strong></div>
                     </div>
                     <div class="timeline-wrapper">
-                        <h4 style="font-size:13px; font-weight:800; margin-bottom:15px; text-transform:uppercase;">Riwayat Perjalanan Logistik</h4>
-                        <div class="timeline-item completed"><div class="timeline-icon"></div><div class="timeline-content"><h5>Registrasi Pesanan Terverifikasi</h5><p>Data transaksi terverifikasi oleh OJK Gateway.</p></div></div>
+                        <div class="timeline-item completed"><div class="timeline-icon"></div><div class="timeline-content"><h5>Registrasi Pesanan Terverifikasi</h5><p>Data transaksi terverifikasi oleh sistem.</p></div></div>
                         <div class="timeline-item completed"><div class="timeline-icon"></div><div class="timeline-content"><h5>Tahap Pengemasan & Quality Control</h5><p>Paket lolos uji mutu dan dikemas rapi.</p></div></div>
                         <div class="timeline-item active"><div class="timeline-icon"></div><div class="timeline-content"><h5>Dalam Pengiriman ke Alamat Tujuan</h5><p>Kurir sedang dalam perjalanan menuju lokasi Anda.</p></div></div>
                     </div>
                 `;
             }, 1000);
         }
-
-        function renderCS(t) { toggleFooterUtama(true); document.getElementById('app').innerHTML = `<div class="info-card" style="text-align:center;"><h2>${t}</h2><p>Data inventaris sedang dalam pemutakhiran sistem pusat.</p></div>`; autoClose(); }
 
         function renderInfoPage(judul, kontenHTML) {
             toggleFooterUtama(true); autoClose(); window.scrollTo(0,0);
@@ -830,7 +1019,7 @@
             renderInfoPage("Kebijakan Privasi", konten);
         }
 
-        // LOAD PRODUK DATABASE & PROSES LOGIN
+        // LOAD PRODUK DATABASE
         async function muatProdukDariDatabase() {
             var app = document.getElementById('app');
             app.innerHTML = '<div style="padding:100px 20px; text-align:center;"><i class="fa-solid fa-circle-notch fa-spin" style="font-size:40px; color:#111; margin-bottom:20px;"></i><div style="font-size:14px; color:#555; font-weight:700;">Menghubungkan ke Pangkalan Data...</div></div>';
@@ -847,21 +1036,6 @@
                 } else { products = []; }
             } catch (error) { products = []; }
             renderHome();
-        }
-
-        async function prosesLogin() {
-            var u = document.getElementById('log-user').value.trim();
-            var p = document.getElementById('log-pass').value.trim();
-            var pin = document.getElementById('log-pin').value.trim();
-            var btn = document.querySelector('.modal-login-box .btn-action');
-            if(!u || !p || !pin) { alert("Mohon lengkapi seluruh kredensial otoritas."); return; }
-            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Memeriksa...'; btn.disabled = true;
-            try {
-                const response = await fetch("/api/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ username: u, password: p, pin: pin }) });
-                const hasil = await response.json();
-                if (hasil.sukses) { window.location.href = "manajemen.html"; } else { alert("Akses Ditolak: Kredensial tidak valid."); }
-            } catch (error) { alert("Server Keamanan Tidak Merespon."); }
-            btn.innerHTML = '<i class="fa-solid fa-arrow-right-to-bracket"></i> Login Sekarang'; btn.disabled = false;
         }
 
         window.onload = function() { 
