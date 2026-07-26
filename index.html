@@ -238,29 +238,28 @@
         .copyright { font-size: 12px; color: #9ca3af; border-top: 1px solid #f3f4f6; padding-top: 25px; text-align: left; font-weight: 600; }
         @media(min-width: 768px) { #footer-main-info { display: flex; flex-wrap: wrap; width: 100%; justify-content: space-between; gap: 40px; max-width: 960px; margin: auto; } .footer-profile { flex: 2; min-width: 320px; margin-right: 40px; } .footer-contact-info, .footer-hq { flex: 1; min-width: 250px; } .footer-gov, .copyright { width: 100%; max-width: 960px; margin: 40px auto 0 auto; text-align: center; } }
     </style>
-</head>
+
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
-<script>
-    // MASUKKAN KONFIGURASI FIREBASE LU DI SINI
-    const firebaseConfig = {
-        apiKey: "AIzaSyCbHYQ9WTIScOmW2KJsDqiwyehqdSlaOFE",
-        authDomain: "ousevoid-web.firebaseapp.com",
-        databaseURL: "https://console.firebase.google.com/u/0/project/ousevoid-web/database/ousevoid-web-default-rtdb/data/~2F?hl=id&fb_gclid=CjwKCAjwvZHTBhAlEiwA1ug5P0E-cXyeA1puw2vYI0HzQ0NnvHvB7_IYezwbewLsuV8A9hwRRVPaoBoC_lQQAvD_BwE&fb_utm_campaign=Cloud-SS-DR-Firebase-FY26-global-gsem-1713590&fb_utm_content=text-ad&fb_utm_medium=cpc&fb_utm_source=google&fb_utm_term=KW_firebase",
-        projectId: "ousevoid-web",
-        storageBucket: "ousevoid-web.firebasestorage.app",
-        messagingSenderId: "201671696866",
-        appId: "1:201671696866:web:1a0a2f122f0dcc251899bb"
-    };
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyCbHYQ9WTIScOmW2KJsDqiwyehqdSlaOFE",
+            authDomain: "ousevoid-web.firebaseapp.com",
+            databaseURL: "https://console.firebase.google.com/u/0/project/ousevoid-web/database/ousevoid-web-default-rtdb/data/~2F?hl=id&fb_gclid=CjwKCAjwvZHTBhAlEiwA1ug5P0E-cXyeA1puw2vYI0HzQ0NnvHvB7_IYezwbewLsuV8A9hwRRVPaoBoC_lQQAvD_BwE&fb_utm_campaign=Cloud-SS-DR-Firebase-FY26-global-gsem-1713590&fb_utm_content=text-ad&fb_utm_medium=cpc&fb_utm_source=google&fb_utm_term=KW_firebase",
+            projectId: "ousevoid-web",
+            storageBucket: "ousevoid-web.firebasestorage.app",
+            messagingSenderId: "201671696866",
+            appId: "1:201671696866:web:1a0a2f122f0dcc251899bb"
+        };
 
-    // Inisialisasi
-    firebase.initializeApp(firebaseConfig);
-    const dbRealtime = firebase.database(); // Untuk Chat Real-time
-    const dbFirestore = firebase.firestore(); // Untuk Katalog Produk & Transaksi
-</script>
-
+        // Inisialisasi
+        firebase.initializeApp(firebaseConfig);
+        const dbRealtime = firebase.database(); // Untuk Chat Real-time
+        const dbFirestore = firebase.firestore(); // Untuk Katalog Produk & Transaksi
+    </script>
+</head>
 <body>
 
     <div class="header">
@@ -442,7 +441,7 @@
         function tutupLogin() { document.getElementById('loginModal').classList.remove('show'); switchLogin('pengguna'); }
 
         // =========================================================================
-        // LOGIKA LOGIN PENGGUNA & ADMIN (BARU)
+        // LOGIKA LOGIN PENGGUNA & ADMIN 
         // =========================================================================
         function switchLogin(mode) {
             document.getElementById('tab-pengguna').classList.toggle('active', mode === 'pengguna');
@@ -452,7 +451,7 @@
             document.getElementById('area-admin').style.display = (mode === 'admin') ? 'block' : 'none';
             
             if (mode === 'admin') {
-                kembaliLoginAdmin(); // Reset ke step 1
+                kembaliLoginAdmin(); 
             }
         }
 
@@ -496,7 +495,7 @@
 
 
         // =========================================================================
-        // FILTER KATEGORI SIDEBAR (BUG FIXED)
+        // FILTER KATEGORI SIDEBAR 
         // =========================================================================
         function renderKategoriSidebar(katId) {
             toggleFooterUtama(true); autoClose(); window.scrollTo(0,0);
@@ -504,7 +503,6 @@
             
             let produkKategoriIni = products.filter(p => {
                 let matchCategory = (p.category && p.category.toLowerCase() === katId.toLowerCase());
-                // Optional: tambah keyword search kalo category di db kosong
                 return matchCategory || p.name.toLowerCase().includes(katId.toLowerCase()); 
             });
             
@@ -845,6 +843,11 @@
         // LOGIKA CHATBOT FORMAL ALA BANK (MARSYA BOT -> TIARA SABRINA CS)
         // =========================================================================
         var chatState = 0; 
+        var chatSessionId = localStorage.getItem('ousevoid_chat_session');
+        if (!chatSessionId) {
+            chatSessionId = 'chat_' + new Date().getTime();
+            localStorage.setItem('ousevoid_chat_session', chatSessionId);
+        }
 
         function initChatMarsya() {
             chatState = 0;
@@ -943,11 +946,19 @@
             
             chatState = 2;
             
+            // 🔥 [FIREBASE] KIRIM DATA PROFIL KE SERVER 🔥
+            dbRealtime.ref('chats/' + chatSessionId + '/info').set({
+                nama: nama,
+                invoice: inv,
+                status: 'online',
+                waktuDibuat: Date.now()
+            });
+
             // GANTI AVATAR HEADER KE TIARA SABRINA (AGEN MANUSIA) & STATUS JAM KERJA
             document.getElementById('chatAvatarImg').src = "https://i.ibb.co.com/NgnYF4vP/10852.jpg";
             document.getElementById('chatAgentName').innerText = "Tiara Sabrina (Agent)";
             document.getElementById('cs-status-dot').className = "status-dot"; 
-            document.getElementById('cs-status-text').innerText = "08:00 - 18:00"; // Ubah status Online ke Jam Kerja
+            document.getElementById('cs-status-text').innerText = "08:00 - 18:00"; 
 
             body.innerHTML += `<div class="chat-bubble cs" style="background:#e8f5e9; border-color:#c8e6c9; color:#2e7d32;"><i class="fa-solid fa-circle-check"></i> Sesi beralih. Anda telah terhubung dengan Agent Tiara Sabrina.</div>`;
             
@@ -956,27 +967,40 @@
                 body.innerHTML += `<div class="chat-bubble cs">Selamat ${waktu}, Bapak/Ibu <b>${nama}</b>. Terima kasih telah menghubungi Layanan Pelanggan Resmi Ousevoid. Saya <b>Tiara Sabrina</b>, ada keluhan atau bantuan informasi pesanan yang dapat saya bantu proses hari ini?</div>`;
                 body.scrollTop = body.scrollHeight;
             }, 800);
+
+            // 🔥 [FIREBASE] PANTAU JAWABAN DARI ADMIN 🔥
+            dengarkanBalasanAdmin();
         }
 
         async function tryForwardToAdmin(pesanTeks) {
             var body = document.getElementById('chatBody');
             try {
-                // Meneruskan pesan ke backend manajemen.html
-                await fetch("/api/chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ pesan: pesanTeks }) });
-                setTimeout(() => {
-                    body.innerHTML += `<div class="chat-bubble cs">Baik Bapak/Ibu, pesan Anda telah dicatat oleh sistem pangkalan data kami. Mohon bersenang hati menunggu respons selanjutnya dari tim terkait.</div>`;
-                    body.scrollTop = body.scrollHeight;
-                }, 1200);
+                // 🔥 [FIREBASE] KIRIM TEKS KE SERVER 🔥
+                await dbRealtime.ref('chats/' + chatSessionId + '/messages').push({
+                    pengirim: 'user',
+                    teks: pesanTeks,
+                    timestamp: Date.now()
+                });
             } catch(e) {
-                setTimeout(() => {
-                    body.innerHTML += `<div class="chat-bubble cs" style="color:#e74c3c;">Maaf, terjadi gangguan jaringan ke server manajemen. Mohon kirim ulang pesan Anda.</div>`;
-                    body.scrollTop = body.scrollHeight;
-                }, 800);
+                body.innerHTML += `<div class="chat-bubble cs" style="color:#e74c3c;">Maaf, terjadi gangguan jaringan ke server. Mohon kirim ulang pesan Anda.</div>`;
+                body.scrollTop = body.scrollHeight;
             }
         }
 
+        // 🔥 FUNGSI BARU UNTUK NERIMA CHAT DARI ADMIN 🔥
+        function dengarkanBalasanAdmin() {
+            dbRealtime.ref('chats/' + chatSessionId + '/messages').on('child_added', (snapshot) => {
+                const dataPesan = snapshot.val();
+                if (dataPesan.pengirim === 'admin') {
+                    var body = document.getElementById('chatBody');
+                    body.innerHTML += `<div class="chat-bubble cs" style="border-color:#3b82f6;"><b>Tiara:</b><br>${dataPesan.teks}</div>`;
+                    body.scrollTop = body.scrollHeight;
+                }
+            });
+        }
+
         // =========================================================================
-        // HALAMAN PELACAKAN STATUS & INFO STATIS (TEMA DIPERBAIKI)
+        // HALAMAN PELACAKAN STATUS & INFO STATIS 
         // =========================================================================
         function renderLacakPesanan() {
             toggleFooterUtama(true); autoClose(); window.scrollTo(0,0);
