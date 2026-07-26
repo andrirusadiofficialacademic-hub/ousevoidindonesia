@@ -239,6 +239,28 @@
         @media(min-width: 768px) { #footer-main-info { display: flex; flex-wrap: wrap; width: 100%; justify-content: space-between; gap: 40px; max-width: 960px; margin: auto; } .footer-profile { flex: 2; min-width: 320px; margin-right: 40px; } .footer-contact-info, .footer-hq { flex: 1; min-width: 250px; } .footer-gov, .copyright { width: 100%; max-width: 960px; margin: 40px auto 0 auto; text-align: center; } }
     </style>
 </head>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script>
+    // MASUKKAN KONFIGURASI FIREBASE LU DI SINI
+    const firebaseConfig = {
+        apiKey: "AIzaSyCbHYQ9WTIScOmW2KJsDqiwyehqdSlaOFE",
+        authDomain: "ousevoid-web.firebaseapp.com",
+        databaseURL: "ISI_DENGAN_DATABASE_URL_LU",
+        projectId: "ousevoid-web",
+        storageBucket: "ousevoid-web.firebasestorage.app",
+        messagingSenderId: "201671696866",
+        appId: "1:201671696866:web:1a0a2f122f0dcc251899bb"
+    };
+
+    // Inisialisasi
+    firebase.initializeApp(firebaseConfig);
+    const dbRealtime = firebase.database(); // Untuk Chat Real-time
+    const dbFirestore = firebase.firestore(); // Untuk Katalog Produk & Transaksi
+</script>
+
 <body>
 
     <div class="header">
