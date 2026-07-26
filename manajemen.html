@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Ousevoid | Control Center</title>
+    <title>Ousevoid | Control Center (Firebase)</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -116,7 +116,7 @@
         .chat-admin { background: #111; color: #fff; align-self: flex-end; border-bottom-right-radius: 2px; }
         .chat-user { background: #fff; border: 1px solid #eee; color: #111; align-self: flex-start; border-bottom-left-radius: 2px; }
         
-        /* PRINT LABEL CSS MURNI (Disembunyikan di layar, muncul saat print) */
+        /* PRINT LABEL CSS MURNI */
         #print-area { display: none; background: #fff; width: 100%; min-height: 100vh; flex-direction: column; align-items: center; padding: 20px; }
         .label-container { width: 100%; max-width: 700px; background: #fff; border: 1px solid #eee; border-radius: 16px; padding: 35px; margin-bottom: 20px; }
         .print-header-section { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 20px; margin-bottom: 20px; }
@@ -132,6 +132,26 @@
             .label-container { border: 2px solid #000; box-shadow: none; border-radius: 0; margin: 0; max-width: 100%; padding: 20px; }
         }
     </style>
+
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyCbHYQ9WTIScOmW2KJsDqiwyehqdSlaOFE",
+            authDomain: "ousevoid-web.firebaseapp.com",
+            databaseURL: "https://console.firebase.google.com/u/0/project/ousevoid-web/database/ousevoid-web-default-rtdb/data/~2F?hl=id",
+            projectId: "ousevoid-web",
+            storageBucket: "ousevoid-web.firebasestorage.app",
+            messagingSenderId: "201671696866",
+            appId: "1:201671696866:web:1a0a2f122f0dcc251899bb"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const dbRealtime = firebase.database();
+        const dbFirestore = firebase.firestore();
+    </script>
 </head>
 <body>
 
@@ -155,7 +175,8 @@
             <li><a onclick="bukaHalaman('chat-baru', this)"><i class="fa-solid fa-message"></i> Pesan Masuk</a></li>
             <li><a onclick="bukaHalaman('chat-selesai', this)"><i class="fa-solid fa-clock-rotate-left"></i> Arsip Pesan</a></li>
 
-            <div class="menu-label">Pengaturan</div>
+            <div class="menu-label">Pengaturan & Tampilan</div>
+            <li><a onclick="bukaHalaman('banner', this)"><i class="fa-solid fa-images"></i> Manajemen Banner</a></li>
             <li><a onclick="bukaHalaman('pengaturan', this)"><i class="fa-solid fa-user-shield"></i> Pengaturan Sistem</a></li>
         </ul>
     </aside>
@@ -182,9 +203,9 @@
                 <div class="stat-card"><h3>Unit Terjual</h3><div class="value" id="stat-terjual">0</div></div>
                 <div class="stat-card"><h3>Pesanan Aktif</h3><div class="value" id="stat-pesanan">0</div></div>
             </div>
-            <div class="section-title">Status Sistem Real-Time</div>
+            <div class="section-title">Status Sistem Real-Time (Firebase)</div>
             <div class="invoice-section" style="padding: 30px;">
-                <p style="color: #666; font-size: 14px; margin: 0; line-height: 1.6;">Selamat datang di Control Center Ousevoid. Seluruh data pada panel ini terhubung langsung secara <em>real-time</em> ke pangkalan data produksi melalui API Cloudflare. Gunakan navigasi untuk mengelola operasional e-commerce.</p>
+                <p style="color: #666; font-size: 14px; margin: 0; line-height: 1.6;">Control Center Ousevoid terhubung secara real-time menggunakan Google Firebase Cloud DB.</p>
             </div>
         </div>
 
@@ -192,9 +213,9 @@
             <div class="section-title">Katalog Produk Aktif</div>
             <div class="invoice-section">
                 <table class="invoice-table">
-                    <thead><tr><th style="width:70px;">Gambar</th><th>Info Produk (Kategori)</th><th>Nama & Harga</th><th>Stok</th><th style="text-align:right;">Aksi Manajemen</th></tr></thead>
+                    <thead><tr><th style="width:70px;">Gambar</th><th>Info Kategori</th><th>Nama & Harga</th><th>Stok</th><th style="text-align:right;">Aksi Manajemen</th></tr></thead>
                     <tbody id="tabel-produk-aktif">
-                        <tr><td colspan="5"><div class="empty-state"><i class="fa-solid fa-circle-notch fa-spin"></i> Memuat data dari server produksi...</div></td></tr>
+                        <tr><td colspan="5"><div class="empty-state"><i class="fa-solid fa-circle-notch fa-spin"></i> Memuat data dari Firebase...</div></td></tr>
                     </tbody>
                 </table>
             </div>
@@ -206,7 +227,7 @@
                 <div class="form-grid">
                     <div>
                         <div class="form-group">
-                            <label>Kategori (Info Produk)</label>
+                            <label>Kategori Produk</label>
                             <select id="input-kategori" class="form-control">
                                 <option value="Earbuds">Earbuds</option>
                                 <option value="Smartphone">Smartphone</option>
@@ -223,11 +244,10 @@
                         <div class="form-group"><label>URL Gambar Produk</label><input type="text" id="input-img" class="form-control" placeholder="https://i.ibb.co.com/..."></div>
                         
                         <div style="background: #fdfdfd; border: 1px solid #eee; padding: 20px; border-radius: 12px;">
-                            <label style="font-size:14px; font-weight:800; margin-bottom:15px; display:block;">SKU & Konfigurasi Varian (Maks 7)</label>
-                            <div class="variant-grid" id="container-varian-add">
-                                </div>
+                            <label style="font-size:14px; font-weight:800; margin-bottom:15px; display:block;">SKU & Konfigurasi Varian</label>
+                            <div class="variant-grid" id="container-varian-add"></div>
                         </div>
-                        <button class="btn-submit" onclick="simpanProduk()"><i class="fa-solid fa-cloud-arrow-up"></i> Publikasikan Produk</button>
+                        <button class="btn-submit" onclick="simpanProduk()"><i class="fa-solid fa-cloud-arrow-up"></i> Publikasikan ke Firebase</button>
                     </div>
                 </div>
             </div>
@@ -246,21 +266,21 @@
         </div>
 
         <div id="page-chat-baru" class="page-section">
-            <div class="section-title">Interaksi Live Chat Terbuka</div>
+            <div class="section-title">Interaksi Live Chat Terbuka (Tiara CS)</div>
             <div class="chat-container">
                 <div class="chat-sidebar" id="list-sesi-chat">
                     <div style="padding: 20px; text-align: center; color: #888; font-size:12px;">Memuat sesi obrolan...</div>
                 </div>
                 <div class="chat-main">
                     <div class="chat-header">
-                        <span id="chat-aktif-nama">Pilih Sesi Obrolan</span>
-                        <button class="btn-action btn-success" style="margin:0; font-size:12px; padding:8px 15px;" onclick="selesaikanChat()"><i class="fa-solid fa-check-double"></i> Tandai Selesai</button>
+                        <span id="chat-aktif-nama">Pilih Sesi Obrolan Pelanggan</span>
+                        <button class="btn-action btn-success" style="margin:0; font-size:12px; padding:8px 15px;" onclick="selesaikanChat()"><i class="fa-solid fa-check-double"></i> Selesaikan Sesi</button>
                     </div>
                     <div class="chat-messages" id="area-chat-pesan">
-                        <div style="text-align: center; color: #999; margin-top: auto; margin-bottom: auto; font-size:13px;">Tidak ada obrolan yang dipilih.</div>
+                        <div style="text-align: center; color: #999; margin-top: auto; margin-bottom: auto; font-size:13px;">Pilih percakapan di sebelah kiri.</div>
                     </div>
                     <div class="chat-input">
-                        <input type="text" id="input-balas-chat" class="form-control" placeholder="Ketik balasan untuk pelanggan..." style="margin-bottom:0;" onkeypress="if(event.key === 'Enter') balasChat()">
+                        <input type="text" id="input-balas-chat" class="form-control" placeholder="Ketik balasan sebagai Tiara..." style="margin-bottom:0;" onkeypress="if(event.key === 'Enter') balasChat()">
                         <button class="btn-submit" style="margin:0; width:auto; padding:0 25px;" onclick="balasChat()"><i class="fa-solid fa-paper-plane"></i></button>
                     </div>
                 </div>
@@ -268,17 +288,29 @@
         </div>
 
         <div id="page-chat-selesai" class="page-section">
-            <div class="section-title">
-                Arsip Obrolan Selesai 
-                <span style="font-size: 11px; background: #e74c3c; color: #fff; padding: 4px 10px; border-radius: 12px; font-weight: 700;"><i class="fa-solid fa-trash-can"></i> Terhapus Otomatis dalam 7 Hari</span>
-            </div>
+            <div class="section-title">Arsip Obrolan Selesai</div>
             <div class="invoice-section">
                 <table class="invoice-table">
-                    <thead><tr><th>ID Sesi / Pengguna</th><th>Status Terakhir</th><th>Aksi</th></tr></thead>
+                    <thead><tr><th>ID Sesi / Pengguna</th><th>Status Terakhir</th></tr></thead>
                     <tbody id="tabel-arsip-chat">
-                        <tr><td colspan="3"><div class="empty-state">Menarik arsip...</div></td></tr>
+                        <tr><td colspan="2"><div class="empty-state">Tidak ada arsip.</div></td></tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+
+        <div id="page-banner" class="page-section">
+            <div class="section-title">Manajemen Foto Banner Beranda</div>
+            <div class="form-panel">
+                <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 25px; line-height: 1.6;">Masukkan URL gambar untuk 5 slide banner di beranda. Perubahan akan langsung tersimpan di cloud database.</p>
+                <div class="form-grid" style="grid-template-columns: 1fr; gap: 15px;">
+                    <div class="form-group" style="margin-bottom: 0;"><label>Slide Banner 1</label><input type="text" id="input-banner-1" class="form-control" placeholder="https://i.ibb.co.com/..."></div>
+                    <div class="form-group" style="margin-bottom: 0;"><label>Slide Banner 2</label><input type="text" id="input-banner-2" class="form-control" placeholder="https://i.ibb.co.com/..."></div>
+                    <div class="form-group" style="margin-bottom: 0;"><label>Slide Banner 3</label><input type="text" id="input-banner-3" class="form-control" placeholder="https://i.ibb.co.com/..."></div>
+                    <div class="form-group" style="margin-bottom: 0;"><label>Slide Banner 4</label><input type="text" id="input-banner-4" class="form-control" placeholder="https://i.ibb.co.com/..."></div>
+                    <div class="form-group" style="margin-bottom: 20px;"><label>Slide Banner 5</label><input type="text" id="input-banner-5" class="form-control" placeholder="https://i.ibb.co.com/..."></div>
+                </div>
+                <button class="btn-submit" onclick="simpanBanner()"><i class="fa-solid fa-save"></i> Simpan Pengaturan Banner</button>
             </div>
         </div>
 
@@ -289,7 +321,6 @@
                     <div>
                         <div class="form-group"><label>Nama Administrator Aktif</label><input type="text" id="set-nama" class="form-control"></div>
                         <div class="form-group"><label>Nomor Induk / ID Karyawan</label><input type="text" id="set-nip" class="form-control"></div>
-                        <div style="font-size: 12px; color: #666; margin-top: 15px; line-height: 1.6;">Informasi ini tercatat pada log sistem (Riwayat Perubahan) setiap kali Administrator melakukan penambahan produk atau perubahan status pengiriman pesanan.</div>
                     </div>
                     <div>
                         <div class="form-group"><label>URL Foto Profil Akun</label><input type="text" id="set-foto" class="form-control"></div>
@@ -304,7 +335,7 @@
     <div id="modal-edit-produk" class="modal-overlay">
         <div class="modal-content">
             <span class="modal-close-btn" onclick="tutupModalEdit()">&times;</span>
-            <div style="font-size: 18px; font-weight: 800; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px;">Edit Data Terpusat Produk</div>
+            <div style="font-size: 18px; font-weight: 800; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px;">Edit Data Produk</div>
             
             <input type="hidden" id="edit-id">
             <div class="form-group">
@@ -323,89 +354,42 @@
             <div class="form-group"><label>Deskripsi Produk</label><textarea id="edit-deskripsi" class="form-control" rows="3"></textarea></div>
             
             <div style="border-top:1px dashed #ccc; padding-top:15px; margin-top:15px;">
-                <label style="font-size:13px; font-weight:800; margin-bottom:15px; display:block;">Manajemen Varian (SKU)</label>
-                <div class="variant-grid" id="container-varian-edit">
-                    </div>
+                <label style="font-size:13px; font-weight:800; margin-bottom:15px; display:block;">Manajemen Varian</label>
+                <div class="variant-grid" id="container-varian-edit"></div>
             </div>
             
-            <button class="btn-submit" onclick="simpanHasilEdit()"><i class="fa-solid fa-server"></i> Terapkan Pembaruan ke Server</button>
-        </div>
-    </div>
-</div>
-
-<div id="print-area">
-    <div class="print-controls">
-        <button class="btn-submit" style="width:auto;" onclick="window.print()"><i class="fa-solid fa-print"></i> Cetak Dokumen Resi</button>
-        <button class="btn-submit" style="width:auto; background:var(--danger);" onclick="tutupAreaPrint()"><i class="fa-solid fa-arrow-left"></i> Tutup Mode Cetak</button>
-    </div>
-    <div class="label-container">
-        <div class="print-header-section">
-            <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" style="height: 40px;">
-            <div style="text-align: right;">
-                <div class="print-barcode-svg" id="print-label-barcode">||| 000 |||</div>
-                <div style="font-size: 12px; font-weight: 600; color: #666; margin-top: 4px;" id="print-label-invoice-id">INV</div>
-            </div>
-        </div>
-        <div style="display: flex; gap: 10px; margin-bottom: 25px;">
-            <div style="background: #111; color:#fff; font-size:11px; font-weight:700; padding:6px 14px; border-radius:20px;">ASURANSI: YA</div>
-            <div style="background: #111; color:#fff; font-size:11px; font-weight:700; padding:6px 14px; border-radius:20px;">CASHLESS OJK</div>
-        </div>
-        <div class="print-address-grid">
-            <div>
-                <div style="font-size:11px; font-weight:700; color:#888; margin-bottom:10px;">PENGIRIM:</div>
-                <div class="print-address-content"><strong>PT Gerbang Masa Depan</strong>Jl. K.H. Zainul Arifin No. 71, Gambir, Jakarta Pusat 10140<br>0857 15000 443</div>
-            </div>
-            <div>
-                <div style="font-size:11px; font-weight:700; color:#888; margin-bottom:10px;">PENERIMA:</div>
-                <div class="print-address-content"><strong id="print-dest-nama">-</strong><span id="print-dest-alamat">-</span><br>Telp: <span id="print-dest-telp">-</span></div>
-            </div>
-        </div>
-        <div style="border-top:1px dashed #ccc; margin:20px 0;"></div>
-        <div style="font-size:12px; line-height:1.6; border:1px solid #e74c3c; background:#fff5f5; color:#e74c3c; padding:15px; border-radius:10px;">
-            <strong>HUKUM PIDANA:</strong> Paket dilindungi oleh hukum. Dilarang merusak segel pengiriman di luar hak milik penerima sah.
+            <button class="btn-submit" onclick="simpanHasilEdit()"><i class="fa-solid fa-server"></i> Simpan Perubahan</button>
         </div>
     </div>
 </div>
 
 <script>
-    // URL WORKER CLOUDFLARE (HARUS SAMA DENGAN INDEX)
-    const WORKER_URL = "https://ousevoid.biz.id";
-    
     let globalProducts = [];
     let activeChatSession = null;
 
-    // OTENTIKASI SEDERHANA
     window.onload = function() {
-        if(!localStorage.getItem('admin_nama')) { 
-            // Opsional: Redirect jika belum login. Disini dibiarkan akses untuk demo logic.
-            // window.location.href = "/";
-        }
         muatProfilAdmin();
+        muatBanner();
         generateVarianInputs('container-varian-add', 'add');
         generateVarianInputs('container-varian-edit', 'edit');
         muatDaftarProduk(); 
         muatPesanan();
         muatListChat();
-        setInterval(muatListChat, 5000); // Polling chat live
     };
 
-    // GENERATOR VARIAN MAKS 7 SKU
     function generateVarianInputs(containerId, prefix) {
         let html = '';
-        for(let i = 1; i <= 7; i++) {
-            let req = i === 1 ? '(Wajib)' : '(Opsional)';
+        for(let i = 1; i <= 3; i++) {
             html += `
             <div class="variant-box">
-                <label>SKU/Varian ${i} ${req}</label>
-                <input type="text" id="${prefix}-var${i}-sku" class="form-control" placeholder="Kode SKU" style="padding:8px;">
-                <input type="text" id="${prefix}-var${i}-nama" class="form-control" placeholder="Nama Varian" style="padding:8px;">
-                <input type="number" id="${prefix}-var${i}-harga" class="form-control" placeholder="Harga Jual" style="padding:8px;">
+                <label>Varian ${i}</label>
+                <input type="text" id="${prefix}-var${i}-nama" class="form-control" placeholder="Nama Varian (Contoh: Hitam)" style="padding:8px;">
+                <input type="number" id="${prefix}-var${i}-harga" class="form-control" placeholder="Harga Varian" style="padding:8px;">
             </div>`;
         }
         document.getElementById(containerId).innerHTML = html;
     }
 
-    // --- PROFIL ---
     window.muatProfilAdmin = function() {
         var nama = localStorage.getItem('admin_nama') || 'Administrator Utama';
         var nip = localStorage.getItem('admin_nip') || 'NIP-00001';
@@ -423,7 +407,37 @@
         localStorage.setItem('admin_nama', document.getElementById('set-nama').value);
         localStorage.setItem('admin_nip', document.getElementById('set-nip').value);
         localStorage.setItem('admin_foto', document.getElementById('set-foto').value);
-        muatProfilAdmin(); alert("Konfigurasi Profil berhasil disimpan di sistem lokal.");
+        muatProfilAdmin(); alert("Profil berhasil diperbarui!");
+    };
+
+    // --- MANAJEMEN BANNER (FIREBASE) ---
+    window.muatBanner = async function() {
+        dbFirestore.collection('pengaturan').doc('banner').get().then(doc => {
+            if(doc.exists) {
+                let data = doc.data();
+                for(let i = 1; i <= 5; i++) {
+                    if(data['banner' + i]) {
+                        document.getElementById('input-banner-' + i).value = data['banner' + i];
+                    }
+                }
+            }
+        });
+    };
+
+    window.simpanBanner = async function() {
+        let bannerData = {
+            banner1: document.getElementById('input-banner-1').value,
+            banner2: document.getElementById('input-banner-2').value,
+            banner3: document.getElementById('input-banner-3').value,
+            banner4: document.getElementById('input-banner-4').value,
+            banner5: document.getElementById('input-banner-5').value
+        };
+
+        dbFirestore.collection('pengaturan').doc('banner').set(bannerData).then(() => {
+            alert("Banner berhasil diperbarui di Cloud Firebase!");
+        }).catch(err => {
+            alert("Gagal menyimpan banner: " + err.message);
+        });
     };
 
     // --- NAVIGASI SPA ---
@@ -433,7 +447,7 @@
         
         var titles = {
             'dashboard': 'Dashboard Sistem', 'daftar-produk': 'Katalog Produk', 'tambah-produk': 'Penambahan Entri Produk',
-            'pesanan-masuk': 'Manajemen Pesanan Logistik', 'chat-baru': 'Bantuan Pelanggan (Live)', 'chat-selesai': 'Arsip Sesi Obrolan', 'pengaturan': 'Pengaturan Keamanan'
+            'pesanan-masuk': 'Manajemen Pesanan Logistik', 'chat-baru': 'Bantuan Pelanggan (Live)', 'chat-selesai': 'Arsip Sesi Obrolan', 'pengaturan': 'Pengaturan Keamanan', 'banner': 'Manajemen Foto Banner'
         };
         document.getElementById('header-title').innerText = titles[pageId] || 'Control Center';
         
@@ -445,49 +459,49 @@
         if(pageId === 'daftar-produk') muatDaftarProduk();
         if(pageId === 'pesanan-masuk') muatPesanan();
     };
-    window.logout = function() { if(confirm("Otorisasi akan dicabut. Keluar?")) { window.location.href = "/"; } };
+    window.logout = function() { if(confirm("Keluar dari sesi admin?")) { window.location.href = "index.html"; } };
 
-    // ==========================================
-    // 1. MANAJEMEN API PRODUK (REAL FETCH)
-    // ==========================================
+    // --- 1. PRODUK (FIRESTORE) ---
     window.muatDaftarProduk = async function() {
         var tbody = document.getElementById('tabel-produk-aktif');
-        try {
-            const res = await fetch(WORKER_URL + "/api/produk");
-            globalProducts = await res.json();
-            if(globalProducts && globalProducts.length > 0) {
-                let html = '';
-                globalProducts.forEach(p => {
+        dbFirestore.collection('produk').get().then(snapshot => {
+            globalProducts = [];
+            let html = '';
+            if(!snapshot.empty) {
+                snapshot.forEach(doc => {
+                    let p = doc.data();
+                    p.id = doc.id;
+                    globalProducts.push(p);
                     let totalVarian = 0; try { totalVarian = JSON.parse(p.variants).length; } catch(e){}
                     html += `<tr>
                         <td><img src="${p.img_url}" style="width:50px; height:50px; object-fit:cover; border-radius:8px;"></td>
-                        <td><span style="background:#111; color:#fff; padding:2px 8px; border-radius:4px; font-size:10px; font-weight:bold;">${p.kategori || 'Uncategorized'}</span><br><span style="font-size:11px; color:#666;">${totalVarian} SKU Varian</span></td>
+                        <td><span style="background:#111; color:#fff; padding:2px 8px; border-radius:4px; font-size:10px; font-weight:bold;">${p.kategori || 'Earbuds'}</span><br><span style="font-size:11px; color:#666;">${totalVarian} SKU Varian</span></td>
                         <td><strong>${p.nama}</strong><br><span style="color:#e74c3c; font-weight:700;">Rp ${p.harga.toLocaleString('id-ID')}</span></td>
                         <td>${p.stok} Unit</td>
                         <td style="text-align:right;">
-                            <button class="btn-action btn-edit" onclick="bukaModalEdit(${p.id})"><i class="fa-solid fa-pen"></i></button>
-                            <button class="btn-action btn-delete" onclick="hapusProduk(${p.id})"><i class="fa-solid fa-trash"></i></button>
+                            <button class="btn-action btn-edit" onclick="bukaModalEdit('${p.id}')"><i class="fa-solid fa-pen"></i></button>
+                            <button class="btn-action btn-delete" onclick="hapusProduk('${p.id}')"><i class="fa-solid fa-trash"></i></button>
                         </td>
                     </tr>`;
                 });
                 tbody.innerHTML = html;
-            } else { tbody.innerHTML = '<tr><td colspan="5"><div class="empty-state">Pangkalan data produk kosong.</div></td></tr>'; }
-        } catch(e) { tbody.innerHTML = '<tr><td colspan="5"><div class="empty-state" style="color:var(--danger);">Koneksi Worker Terputus. Pastikan Endpoint API aktif.</div></td></tr>'; }
+            } else {
+                tbody.innerHTML = '<tr><td colspan="5"><div class="empty-state">Belum ada produk tersimpan di Firestore.</div></td></tr>';
+            }
+        });
     };
 
     function ambilDataVarian(prefix) {
         let vars = [];
-        for(let i=1; i<=7; i++) {
-            let sku = document.getElementById(`${prefix}-var${i}-sku`).value;
+        for(let i=1; i<=3; i++) {
             let n = document.getElementById(`${prefix}-var${i}-nama`).value;
             let h = document.getElementById(`${prefix}-var${i}-harga`).value;
-            if(n && h) vars.push({ sku: sku, nama: n, harga: parseInt(h) });
+            if(n && h) vars.push({ nama: n, harga: parseInt(h) });
         }
         return vars;
     }
 
     window.simpanProduk = async function() {
-        var btn = document.querySelector('#page-tambah-produk .btn-submit'); 
         var payload = {
             kategori: document.getElementById('input-kategori').value,
             nama: document.getElementById('input-nama').value,
@@ -497,24 +511,17 @@
             img_url: document.getElementById('input-img').value,
             variants: JSON.stringify(ambilDataVarian('add'))
         };
-        if (!payload.nama || !payload.harga || !payload.img_url) { alert("Sistem menolak: Field Esensial (Nama, Harga, URL Gambar) tidak boleh kosong."); return; }
+        if (!payload.nama || !payload.harga || !payload.img_url) { alert("Nama, Harga, dan Gambar wajib diisi!"); return; }
         
-        btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Memproses Injeksi Database...'; btn.disabled = true;
-        try {
-            const res = await fetch(WORKER_URL + "/api/produk", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
-            const data = await res.json();
-            if (data.sukses) { alert("Produk berhasil masuk ke pangkalan data aktif."); bukaHalaman('daftar-produk', document.querySelector('.sidebar-menu a[onclick*="daftar-produk"]')); } 
-            else { alert("Penolakan Server: " + data.error); }
-        } catch (e) { alert("Kegagalan transmisi jaringan ke Cloudflare."); }
-        btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Publikasikan Produk'; btn.disabled = false;
+        dbFirestore.collection('produk').add(payload).then(() => {
+            alert("Produk berhasil ditambahkan!");
+            bukaHalaman('daftar-produk', document.querySelector('.sidebar-menu a[onclick*="daftar-produk"]'));
+        }).catch(err => alert("Gagal: " + err.message));
     };
 
     window.hapusProduk = async function(id) {
-        if(confirm("Tindakan ini bersifat ireversibel. Yakin menghapus entri katalog ini?")) {
-            try {
-                await fetch(WORKER_URL + "/api/produk?id=" + id, { method: "DELETE" });
-                muatDaftarProduk();
-            } catch (e) { alert("Gagal memproses penghapusan."); }
+        if(confirm("Yakin ingin menghapus produk ini?")) {
+            dbFirestore.collection('produk').doc(id).delete().then(() => muatDaftarProduk());
         }
     };
 
@@ -529,8 +536,7 @@
         document.getElementById('edit-img').value = p.img_url;
 
         let vars = []; try { vars = JSON.parse(p.variants); } catch(e) {}
-        for(let i=1; i<=7; i++) {
-            document.getElementById(`edit-var${i}-sku`).value = (vars[i-1] ? (vars[i-1].sku||'') : '');
+        for(let i=1; i<=3; i++) {
             document.getElementById(`edit-var${i}-nama`).value = (vars[i-1] ? vars[i-1].nama : '');
             document.getElementById(`edit-var${i}-harga`).value = (vars[i-1] ? vars[i-1].harga : '');
         }
@@ -541,7 +547,6 @@
     window.simpanHasilEdit = async function() {
         var id = document.getElementById('edit-id').value;
         var payload = {
-            id: id,
             kategori: document.getElementById('edit-kategori').value,
             nama: document.getElementById('edit-nama').value,
             harga: parseInt(document.getElementById('edit-harga').value),
@@ -550,145 +555,97 @@
             img_url: document.getElementById('edit-img').value,
             variants: JSON.stringify(ambilDataVarian('edit'))
         };
-        try {
-            await fetch(WORKER_URL + "/api/produk", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+        dbFirestore.collection('produk').doc(id).update(payload).then(() => {
             tutupModalEdit(); muatDaftarProduk();
-        } catch (e) { alert("Kegagalan modifikasi data server."); }
+        });
     };
 
-    // ==========================================
-    // 2. MANAJEMEN API PESANAN
-    // ==========================================
+    // --- 2. PESANAN (FIRESTORE) ---
     window.muatPesanan = async function() {
         var tbody = document.getElementById('tabel-pesanan');
-        try {
-            const res = await fetch(WORKER_URL + "/api/pesanan");
-            const pesananArr = await res.json();
-            if(pesananArr && pesananArr.length > 0) {
-                let html = '';
-                pesananArr.forEach(ps => {
-                    let btnAksi = ''; let statusBadge = '';
-                    if(ps.status === 1) { 
-                        statusBadge = '<span style="background:#f39c12; color:#fff; padding:4px 8px; border-radius:4px; font-size:11px; font-weight:bold;">Terkonfirmasi OJK</span>';
-                        btnAksi = `<button class="btn-action btn-status" onclick="ubahStatusPesanan('${ps.id}', 2)"><i class="fa-solid fa-truck"></i> Masuk Logistik</button>`;
-                    }
-                    else if(ps.status === 2) { 
-                        statusBadge = '<span style="background:#9b59b6; color:#fff; padding:4px 8px; border-radius:4px; font-size:11px; font-weight:bold;">Sedang Dikirim</span>';
-                        btnAksi = `<button class="btn-action btn-status" onclick="ubahStatusPesanan('${ps.id}', 3)"><i class="fa-solid fa-check"></i> Selesai Terkirim</button>`;
-                    }
-                    else { statusBadge = '<span style="background:#2ecc71; color:#fff; padding:4px 8px; border-radius:4px; font-size:11px; font-weight:bold;">Diserahkan</span>'; }
-
+        dbFirestore.collection('pesanan').get().then(snapshot => {
+            let html = '';
+            if(!snapshot.empty) {
+                snapshot.forEach(doc => {
+                    let ps = doc.data(); ps.id = doc.id;
                     html += `<tr>
                         <td><strong>${ps.id_trx}</strong><br><span style="color:#666; font-size:11px;">Penerima: ${ps.nama}</span></td>
-                        <td style="font-size:12px; max-width:200px;">${ps.barang}</td>
+                        <td style="font-size:12px; max-width:200px;">${ps.barang || 'Produk Pembelian'}</td>
                         <td style="color:#e74c3c; font-weight:800;">Rp ${ps.total.toLocaleString('id-ID')}</td>
-                        <td>${statusBadge}</td>
-                        <td>
-                            ${btnAksi}
-                            <button class="btn-action btn-print" onclick="prepareLabel('${ps.id_trx}', '${ps.nama}', '${ps.alamat}', '${ps.wa}')"><i class="fa-solid fa-print"></i> Cetak Label</button>
-                        </td>
+                        <td><span style="background:#2ecc71; color:#fff; padding:4px 8px; border-radius:4px; font-size:11px; font-weight:bold;">Aktif</span></td>
+                        <td><button class="btn-action btn-status" onclick="alert('Pesanan diproses')">Detail</button></td>
                     </tr>`;
                 });
                 tbody.innerHTML = html;
-            } else { tbody.innerHTML = '<tr><td colspan="5"><div class="empty-state">Belum ada transaksi logistik baru.</div></td></tr>'; }
-        } catch(e) { tbody.innerHTML = '<tr><td colspan="5"><div class="empty-state" style="color:var(--danger);">Sistem gagal menarik log transaksi.</div></td></tr>'; }
+            } else { tbody.innerHTML = '<tr><td colspan="5"><div class="empty-state">Belum ada pesanan masuk.</div></td></tr>'; }
+        });
     };
 
-    window.ubahStatusPesanan = async function(id_db, statusBaru) {
-        try {
-            await fetch(WORKER_URL + "/api/pesanan/status", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id: id_db, status: statusBaru, admin_oleh: localStorage.getItem('admin_nama') }) });
-            muatPesanan();
-        } catch (e) { alert("Kesalahan pembaruan status logistik."); }
+    // --- 3. LIVE CHAT (REALTIME DATABASE) ---
+    window.muatListChat = function() {
+        dbRealtime.ref('chats').on('value', (snapshot) => {
+            const dataChats = snapshot.val();
+            let htmlAktif = '';
+            if(!dataChats) {
+                document.getElementById('list-sesi-chat').innerHTML = '<div style="padding:20px; text-align:center; color:#999; font-size:12px;">Belum ada chat masuk.</div>';
+                return;
+            }
+
+            for (let sessionId in dataChats) {
+                let info = dataChats[sessionId].info || { nama: "Pelanggan" };
+                htmlAktif += `<div class="chat-list-item ${activeChatSession === sessionId ? 'active':''}" onclick="bukaSesiChat('${sessionId}', '${info.nama}')">
+                    <div style="font-weight:700; font-size:12px;">${info.nama}</div>
+                    <div style="font-size:10px; color:#888;">ID: ${sessionId.substring(0,8)}</div>
+                </div>`;
+            }
+            document.getElementById('list-sesi-chat').innerHTML = htmlAktif;
+        });
     };
 
-    // ==========================================
-    // 3. CETAK RESI (PRINT LABEL)
-    // ==========================================
-    window.prepareLabel = function(invoice, nama, alamat, telp) {
-        document.getElementById('main-dashboard-area').style.display = 'none';
-        document.getElementById('print-dest-nama').innerText = nama;
-        document.getElementById('print-dest-alamat').innerText = alamat;
-        document.getElementById('print-dest-telp').innerText = telp;
-        document.getElementById('print-label-invoice-id').innerText = invoice;
-        document.getElementById('print-label-barcode').innerText = '||| ' + invoice.split('/').join(' ') + ' |||';
-        document.getElementById('print-area').style.display = 'flex';
-    };
-    window.tutupAreaPrint = function() {
-        document.getElementById('print-area').style.display = 'none';
-        document.getElementById('main-dashboard-area').style.display = 'grid'; 
-    };
-
-    // ==========================================
-    // 4. API LIVE CHAT
-    // ==========================================
-    window.muatListChat = async function() {
-        try {
-            const res = await fetch(WORKER_URL + "/api/chat/sessions");
-            const sessions = await res.json();
-            let htmlAktif = ''; let htmlArsip = '';
-            
-            sessions.forEach(s => {
-                if(s.status === 'aktif') {
-                    htmlAktif += `<div class="chat-list-item ${activeChatSession === s.session_id ? 'active':''}" onclick="bukaSesiChat('${s.session_id}')">
-                        <div style="font-weight:700; font-size:12px;">ID: ${s.session_id.substring(0,8)}...</div>
-                        <div style="font-size:10px; color:#888;">Klik untuk merespon</div>
-                    </div>`;
-                } else {
-                    htmlArsip += `<tr>
-                        <td><strong>${s.session_id}</strong></td>
-                        <td style="color:#888; font-size:12px; font-style:italic;">Arsip ditutup. Menunggu siklus hapus otomatis.</td>
-                        <td><span style="color:var(--success); font-weight:800;"><i class="fa-solid fa-check"></i> Selesai</span></td>
-                    </tr>`;
-                }
-            });
-            document.getElementById('list-sesi-chat').innerHTML = htmlAktif || '<div style="padding:20px; text-align:center; color:#999; font-size:12px;">Tidak ada sesi aktif.</div>';
-            document.getElementById('tabel-arsip-chat').innerHTML = htmlArsip || '<tr><td colspan="3"><div class="empty-state">Pangkalan data arsip kosong.</div></td></tr>';
-            
-            if(activeChatSession) muatIsiPesan(activeChatSession);
-        } catch(e) { console.log("Silent fail chat pull"); }
-    };
-
-    window.bukaSesiChat = function(sessId) {
+    window.bukaSesiChat = function(sessId, nama) {
         activeChatSession = sessId;
-        document.getElementById('chat-aktif-nama').innerText = "Otoritas Chat ID: " + sessId.substring(0,8);
-        muatListChat(); // Update visual active
+        document.getElementById('chat-aktif-nama').innerText = "Chat dengan: " + nama;
+        muatIsiPesan(sessId);
     };
 
-    window.muatIsiPesan = async function(sessId) {
-        try {
-            const res = await fetch(WORKER_URL + "/api/chat?session_id=" + sessId);
-            const pesans = await res.json();
+    window.muatIsiPesan = function(sessId) {
+        const area = document.getElementById('area-chat-pesan');
+        dbRealtime.ref('chats/' + sessId + '/messages').on('value', (snapshot) => {
+            const msgs = snapshot.val();
             let html = '';
-            pesans.forEach(p => {
-                html += `<div class="chat-bubble ${p.is_admin == 1 ? 'chat-admin' : 'chat-user'}">${p.pesan}</div>`;
-            });
-            var area = document.getElementById('area-chat-pesan');
-            area.innerHTML = html;
+            if(msgs) {
+                for(let key in msgs) {
+                    let p = msgs[key];
+                    let bubbleClass = (p.pengirim === 'admin') ? 'chat-admin' : 'chat-user';
+                    html += `<div class="chat-bubble ${bubbleClass}"><b>${p.pengirim === 'admin' ? 'Tiara' : 'Pelanggan'}:</b><br>${p.teks}</div>`;
+                }
+            }
+            area.innerHTML = html || '<div style="text-align:center; color:#999; margin:auto;">Belum ada pesan.</div>';
             area.scrollTop = area.scrollHeight;
-        } catch(e) {}
+        });
     };
 
-    window.balasChat = async function() {
-        if(!activeChatSession) { alert("Pilih sesi obrolan di bilah kiri terlebih dahulu."); return; }
-        var input = document.getElementById('input-balas-chat'); var teks = input.value.trim();
-        if(!teks) return; input.value = '';
-        
-        try {
-            await fetch(WORKER_URL + "/api/chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ session_id: activeChatSession, pesan: teks, is_admin: 1 }) });
-            muatIsiPesan(activeChatSession);
-        } catch(e) { alert("Kegagalan transmisi pesan."); }
+    window.balasChat = function() {
+        if(!activeChatSession) { alert("Pilih sesi obrolan terlebih dahulu."); return; }
+        var input = document.getElementById('input-balas-chat');
+        var teks = input.value.trim();
+        if(!teks) return;
+        input.value = '';
+
+        dbRealtime.ref('chats/' + activeChatSession + '/messages').push({
+            pengirim: 'admin',
+            teks: teks,
+            timestamp: Date.now()
+        });
     };
 
-    window.selesaikanChat = async function() {
+    window.selesaikanChat = function() {
         if(!activeChatSession) return;
-        if(confirm("Tandai sesi ini selesai? Data akan diarsipkan dan terhapus permanen sistem dalam 7 hari.")) {
-            try {
-                await fetch(WORKER_URL + "/api/chat/selesai", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ session_id: activeChatSession }) });
-                activeChatSession = null;
-                document.getElementById('chat-aktif-nama').innerText = "Pilih Sesi Obrolan";
-                document.getElementById('area-chat-pesan').innerHTML = '<div style="text-align:center; color:#999; margin-top:auto; margin-bottom:auto;">Sesi telah ditutup.</div>';
-                muatListChat();
-            } catch(e) { alert("Gagal memperbarui status arsip."); }
+        if(confirm("Tutup dan hapus sesi chat ini?")) {
+            dbRealtime.ref('chats/' + activeChatSession).remove();
+            activeChatSession = null;
+            document.getElementById('chat-aktif-nama').innerText = "Pilih Sesi Obrolan Pelanggan";
+            document.getElementById('area-chat-pesan').innerHTML = '<div style="text-align:center; color:#999; margin:auto;">Sesi telah ditutup.</div>';
         }
     };
 </script>
