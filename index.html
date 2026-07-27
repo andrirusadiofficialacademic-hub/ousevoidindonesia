@@ -241,7 +241,6 @@
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
     <script>
-        // Kofigurasi Firebase (DATABASE URL UDAH DIBENERIN BIAR GAK ERROR)
         const firebaseConfig = {
             apiKey: "AIzaSyCbHYQ9WTIScOmW2KJsDqiwyehqdSlaOFE",
             authDomain: "ousevoid-web.firebaseapp.com",
@@ -320,7 +319,7 @@
     <div class="chat-window" id="chatWindow">
         <div class="chat-header">
             <div class="chat-header-info">
-                <img src="https://i.ibb.co.com/NgnYF4vP/10852.jpg" id="chatAvatarImg" alt="Bot Chat" class="chat-avatar">
+                <img src="uploaded:10685.jpg-840c644b-ea44-451f-b6af-9acc5d41cfcb" id="chatAvatarImg" alt="Bot Chat" class="chat-avatar">
                 <div class="chat-name-status">
                     <span class="chat-name" id="chatAgentName">Marsya (Bot Chat)</span>
                     <div class="chat-status-wrap">
@@ -474,7 +473,6 @@
             if(!pin || pin.length < 6) { alert("PIN harus 6 digit."); return; }
             window.location.href = "manajemen.html";
         }
-
 
         // =========================================================================
         // FILTER KATEGORI SIDEBAR 
@@ -639,7 +637,6 @@
 
         function ubahQty(idx, delta) { keranjang[idx].qty += delta; if(keranjang[idx].qty <= 0) keranjang.splice(idx, 1); renderKeranjang(); updateCartBadge(); }
 
-
         // =========================================================================
         // CHECKOUT & SIMPAN KE FIREBASE
         // =========================================================================
@@ -796,7 +793,6 @@
             `;
         }
 
-
         // =========================================================================
         // LOGIKA CHATBOT
         // =========================================================================
@@ -809,7 +805,7 @@
 
         function initChatMarsya() {
             chatState = 0;
-            document.getElementById('chatAvatarImg').src = "https://i.ibb.co.com/NgnYF4vP/10852.jpg";
+            document.getElementById('chatAvatarImg').src = "uploaded:10685.jpg-840c644b-ea44-451f-b6af-9acc5d41cfcb";
             document.getElementById('chatAgentName').innerText = "Marsya (Bot Chat)";
             document.getElementById('cs-status-dot').className = "status-dot bot";
             document.getElementById('cs-status-text').innerText = "Bot";
@@ -823,7 +819,7 @@
                         <div class="qna-bar-item" onclick="pilihQnA(2)">2. Metode Pembayaran <i class="fa-solid fa-chevron-right"></i></div>
                         <div class="qna-bar-item" onclick="pilihQnA(3)">3. Kebijakan Garansi <i class="fa-solid fa-chevron-right"></i></div>
                         <div class="qna-bar-item" onclick="pilihQnA(4)">4. Tentang Ousevoid <i class="fa-solid fa-chevron-right"></i></div>
-                        <div class="qna-bar-item" style="background:#111827; color:#fff;" onclick="pilihQnA(5)">5. Hubungi CS (Manusia) <i class="fa-solid fa-headset"></i></div>
+                        <div class="qna-bar-item" style="background:#111827; color:#fff;" onclick="pilihQnA(5)">5. Hubungi Customer Service <i class="fa-solid fa-headset"></i></div>
                     </div>
                 </div>
             `;
@@ -862,24 +858,24 @@
         function prosesOpsiQnA(opsi) {
             var body = document.getElementById('chatBody');
             setTimeout(() => {
-                if (opsi === '1') body.innerHTML += `<div class="chat-bubble cs">Seluruh produk Ousevoid terjamin 100% Original dengan standar mutakhir audio nirkabel dan garansi resmi.</div>`;
-                else if (opsi === '2') body.innerHTML += `<div class="chat-bubble cs">Kami menerima pembayaran E-Wallet (GoPay, DANA, ShopeePay) serta Bank Virtual Account.</div>`;
-                else if (opsi === '3') body.innerHTML += `<div class="chat-bubble cs">Setiap pembelian dilindungi Garansi Resmi 3 Bulan untuk kerusakan bawaan pabrik.</div>`;
-                else if (opsi === '4') body.innerHTML += `<div class="chat-bubble cs">Ousevoid adalah merek resmi di bawah PT Gerbang Masa Depan.</div>`;
+                if (opsi === '1') body.innerHTML += `<div class="chat-bubble cs">Seluruh produk Ousevoid terjamin 100% Original dengan standar mutakhir audio nirkabel dan garansi resmi. Anda dapat melihat spesifikasi lengkap pada katalog di halaman beranda.</div>`;
+                else if (opsi === '2') body.innerHTML += `<div class="chat-bubble cs">Kami menerima pembayaran digital aman melalui E-Wallet (GoPay, DANA, ShopeePay) serta Bank Virtual Account (BCA, BRI, BNI, Mandiri, BTN) yang terverifikasi otomatis.</div>`;
+                else if (opsi === '3') body.innerHTML += `<div class="chat-bubble cs">Setiap pembelian dilindungi Garansi Resmi 3 Bulan untuk kerusakan bawaan pabrik. Klaim wajib menyertakan bukti invoice dan video unboxing yang valid.</div>`;
+                else if (opsi === '4') body.innerHTML += `<div class="chat-bubble cs">Ousevoid adalah merek resmi di bawah PT Gerbang Masa Depan (Gambir, Jakarta Pusat) yang berkomitmen pada inovasi teknologi perangkat audio nirkabel Indonesia.</div>`;
                 else if (opsi === '5') {
                     chatState = 1;
                     body.innerHTML += `
                         <div class="chat-bubble cs">
-                            Untuk terhubung dengan Agent Tiara, mohon melengkapi identitas:
+                            Untuk terhubung dengan Petugas Layanan Pelanggan (Human Agent), mohon melengkapi formulir identitas singkat di bawah ini:
                             <div class="chat-form-box">
                                 <label style="font-size:10px; font-weight:800; color:#6b7280; text-transform:uppercase;">Nama Lengkap:</label>
                                 <input type="text" id="chatFormNama" class="chat-form-input" placeholder="Contoh: Budi Santoso">
-                                <label style="font-size:10px; font-weight:800; color:#6b7280; text-transform:uppercase;">No. Invoice (Jika ada):</label>
+                                <label style="font-size:10px; font-weight:800; color:#6b7280; text-transform:uppercase;">Nomor Invoice / Pesanan (Jika ada):</label>
                                 <input type="text" id="chatFormInv" class="chat-form-input" placeholder="Contoh: 2026/OUSEVOID/123456">
                                 <button class="chat-form-btn" onclick="submitChatForm()"><i class="fa-solid fa-paper-plane"></i> Hubungkan ke Agent Tiara</button>
                             </div>
                         </div>`;
-                } else body.innerHTML += `<div class="chat-bubble cs">Pilihan tidak valid. Silakan ketik angka 1 - 5.</div>`;
+                } else body.innerHTML += `<div class="chat-bubble cs">Pilihan tidak valid. Silakan pilih angka <b>1 - 5</b> sesuai dengan menu yang tersedia.</div>`;
                 body.scrollTop = body.scrollHeight;
             }, 400);
         }
@@ -890,17 +886,17 @@
             var body = document.getElementById('chatBody');
             chatState = 2;
             
-            // KIRIM DATA KE FIREBASE
             dbRealtime.ref('chats/' + chatSessionId + '/info').set({ nama: nama, invoice: inv, status: 'online', waktuDibuat: Date.now() });
 
             document.getElementById('chatAvatarImg').src = "https://i.ibb.co.com/NgnYF4vP/10852.jpg";
             document.getElementById('chatAgentName').innerText = "Tiara Sabrina (Agent)";
             document.getElementById('cs-status-dot').className = "status-dot"; 
-            document.getElementById('cs-status-text').innerText = "Online"; 
+            document.getElementById('cs-status-text').innerText = "08:00 - 18:00"; 
 
-            body.innerHTML += `<div class="chat-bubble cs" style="background:#e8f5e9; border-color:#c8e6c9; color:#2e7d32;"><i class="fa-solid fa-circle-check"></i> Sesi beralih. Terhubung dengan Tiara Sabrina.</div>`;
+            body.innerHTML += `<div class="chat-bubble cs" style="background:#e8f5e9; border-color:#c8e6c9; color:#2e7d32;"><i class="fa-solid fa-circle-check"></i> Sesi beralih. Anda telah terhubung dengan Agent Tiara Sabrina.</div>`;
             setTimeout(() => {
-                body.innerHTML += `<div class="chat-bubble cs">Halo Bapak/Ibu <b>${nama}</b>. Saya <b>Tiara Sabrina</b>, ada yang bisa saya bantu hari ini?</div>`;
+                var waktu = new Date().getHours() < 12 ? "Pagi" : (new Date().getHours() < 15 ? "Siang" : (new Date().getHours() < 18 ? "Sore" : "Malam"));
+                body.innerHTML += `<div class="chat-bubble cs">Selamat ${waktu}, Bapak/Ibu <b>${nama}</b>. Terima kasih telah menghubungi Layanan Pelanggan Resmi Ousevoid. Saya <b>Tiara Sabrina</b>, ada keluhan atau bantuan informasi pesanan yang dapat saya bantu proses hari ini?</div>`;
                 body.scrollTop = body.scrollHeight;
             }, 800);
 
@@ -912,7 +908,8 @@
             try {
                 await dbRealtime.ref('chats/' + chatSessionId + '/messages').push({ pengirim: 'user', teks: pesanTeks, timestamp: Date.now() });
             } catch(e) {
-                body.innerHTML += `<div class="chat-bubble cs" style="color:#e74c3c;">Maaf, gagal koneksi ke server.</div>`;
+                body.innerHTML += `<div class="chat-bubble cs" style="color:#e74c3c;">Maaf, terjadi gangguan jaringan ke server. Mohon kirim ulang pesan Anda.</div>`;
+                body.scrollTop = body.scrollHeight;
             }
         }
 
@@ -928,41 +925,70 @@
         }
 
         // =========================================================================
-        // HALAMAN INFO STATIS 
+        // HALAMAN INFO STATIS (FULL TEKS DIKEMBALIKAN)
         // =========================================================================
         function renderLacakPesanan() {
             toggleFooterUtama(true); autoClose(); window.scrollTo(0,0);
             var app = document.getElementById('app');
             app.innerHTML = `
                 <div class="track-box">
-                    <h2 style="font-size:20px; font-weight:800; margin-top:0; text-align:center;">Pelacakan Status Pengiriman</h2>
-                    <p style="font-size:12px; color:#6b7280; text-align:center; margin-bottom:20px;">Masukkan Nomor Invoice Ousevoid Anda.</p>
+                    <h2 style="font-size:20px; font-weight:800; margin-top:0; text-align:center;">Pelacakan Status Pengiriman Pesanan</h2>
+                    <p style="font-size:12px; color:#6b7280; text-align:center; margin-bottom:20px;">Masukkan Nomor Resi / Invoice resmi Ousevoid Anda untuk memeriksa status logistik.</p>
                     <div class="track-input-group">
                         <input type="text" id="input-resi" class="track-input" placeholder="Contoh: 2026/OUSEVOID/84920">
-                        <button class="btn-action" style="padding:14px;" onclick="prosesLacak(this)"><i class="fa-solid fa-magnifying-glass"></i> Periksa Status</button>
-                    </div><div id="hasil-tracking"></div>
-                </div>`;
+                        <button class="btn-action" style="padding:14px;" onclick="prosesLacak(this)"><i class="fa-solid fa-magnifying-glass"></i> Periksa Status Logistik</button>
+                    </div>
+                    <div id="hasil-tracking"></div>
+                </div>
+            `;
         }
+        
         function prosesLacak(btn) {
             var resiInput = document.getElementById('input-resi').value.trim();
-            if(!resiInput) return;
-            btn.innerHTML = 'Memvalidasi...'; btn.disabled = true;
-            setTimeout(() => {
-                btn.innerHTML = 'Periksa Status'; btn.disabled = false;
-                document.getElementById('hasil-tracking').innerHTML = `
+            if(!resiInput) { alert("Harap masukkan nomor resi yang sah!"); return; }
+            var areaHasil = document.getElementById('hasil-tracking');
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Memvalidasi Logistik...'; btn.disabled = true;
+            setTimeout(function() {
+                btn.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> Periksa Status Logistik'; btn.disabled = false;
+                areaHasil.innerHTML = `
                     <div class="status-terakhir-card">
-                        <div class="status-badge"><i class="fa-solid fa-clock"></i> STATUS</div>
-                        <h3 class="status-title">Pesanan Diverifikasi</h3>
-                        <div style="font-size:12px; color:#6b7280;">Resi: <strong style="color:#111;">${resiInput}</strong></div>
-                    </div>`;
+                        <div class="status-badge"><i class="fa-solid fa-clock"></i> STATUS TERAKHIR</div>
+                        <h3 class="status-title">Dalam Pengiriman Kurir Logistik</h3>
+                        <div style="font-size:12px; color:#6b7280;">Nomor Resi: <strong style="color:#111;">${resiInput}</strong></div>
+                    </div>
+                    <div class="timeline-wrapper">
+                        <div class="timeline-item completed"><div class="timeline-icon"></div><div class="timeline-content"><h5>Registrasi Pesanan Terverifikasi</h5><p>Data transaksi terverifikasi oleh sistem.</p></div></div>
+                        <div class="timeline-item completed"><div class="timeline-icon"></div><div class="timeline-content"><h5>Tahap Pengemasan & Quality Control</h5><p>Paket lolos uji mutu dan dikemas rapi.</p></div></div>
+                        <div class="timeline-item active"><div class="timeline-icon"></div><div class="timeline-content"><h5>Dalam Pengiriman ke Alamat Tujuan</h5><p>Kurir sedang dalam perjalanan menuju lokasi Anda.</p></div></div>
+                    </div>
+                `;
             }, 1000);
         }
 
-        function renderInfoPage(judul, kontenHTML) { toggleFooterUtama(true); autoClose(); window.scrollTo(0,0); document.getElementById('app').innerHTML = `<div class="info-card"><h2>${judul}</h2>${kontenHTML}</div>`; }
-        function renderGaransi() { renderInfoPage("Kebijakan Garansi Resmi", "<p>Masa garansi aktif selama 3 (tiga) bulan sejak pembelian.</p>"); }
-        function renderPengiriman() { renderInfoPage("Ketentuan Pengiriman", "<p>Kami bekerjasama dengan Gamoon e-Package untuk pengiriman sameday.</p>"); }
-        function renderPembayaran() { renderInfoPage("Pembayaran", "<p>Pembayaran diproses dengan gerbang pembayaran berlisensi OJK.</p>"); }
-        function renderPrivasi() { renderInfoPage("Kebijakan Privasi", "<p>Data pribadi Anda dilindungi sesuai standar keamanan.</p>"); }
+        function renderInfoPage(judul, kontenHTML) {
+            toggleFooterUtama(true); autoClose(); window.scrollTo(0,0);
+            document.getElementById('app').innerHTML = `<div class="info-card"><h2>${judul}</h2>${kontenHTML}</div>`;
+        }
+
+        function renderGaransi() {
+            let konten = `<p>Sebagai bentuk komitmen PT Gerbang Masa Depan terhadap mutu dan kepuasan pelanggan, kami menetapkan regulasi perlindungan purnajual melalui Kebijakan Garansi Resmi. Seluruh konsumen berhak mendapatkan perlindungan dengan ketentuan sebagai berikut:</p><ol style="padding-left: 18px; margin-top: 15px;"><li style="margin-bottom: 10px;"><strong>Status Barang:</strong> Garansi berlaku eksklusif untuk barang original yang didistribusikan melalui jalur resmi Ousevoid.</li><li style="margin-bottom: 10px;"><strong>Masa Berlaku:</strong> Masa garansi aktif selama 3 (tiga) bulan, dihitung secara presisi sejak tanggal cetak bukti transaksi/invoice pembelian.</li><li style="margin-bottom: 10px;"><strong>Cakupan Insiden:</strong> Garansi secara sah hanya menanggung kerusakan fisik berupa cacat bawaan pabrik <em>(manufacturing defect)</em> atau malfungsi sistem yang bukan disebabkan oleh kelalaian manusia.</li><li style="margin-bottom: 10px;"><strong>Pengecualian Mutlak:</strong> Kerusakan akibat cairan <em>(water damage)</em>, korsleting arus eksternal, benturan keras, maupun modifikasi oleh teknisi tidak resmi tidak termasuk dalam perlindungan ini.</li><li style="margin-bottom: 10px;"><strong>Prosedur Pelaporan:</strong> Klaim harus diajukan melalui portal komunikasi resmi perusahaan dalam batas waktu masa aktif garansi.</li><li style="margin-bottom: 10px;"><strong>Dokumen Wajib:</strong> Pemohon wajib melampirkan invoice asli dan video <em>unboxing</em> tanpa manipulasi penyuntingan.</li><li style="margin-bottom: 10px;"><strong>Validasi Fisik:</strong> Produk yang diklaim harus dikirim kembali ke pusat inspeksi Ousevoid untuk tahapan verifikasi teknis secara mendalam.</li><li style="margin-bottom: 10px;"><strong>Estimasi Waktu:</strong> Evaluasi teknis dan perbaikan memakan waktu 7 hingga 14 hari kerja operasional.</li><li style="margin-bottom: 10px;"><strong>Penggantian Unit:</strong> Jika unit dipastikan cacat produksi massal dan tidak dapat direparasi, perusahaan akan mengganti dengan unit baru dengan spesifikasi setara.</li><li style="margin-bottom: 10px;"><strong>Ketentuan Akhir:</strong> Hasil audit dari teknisi in-house PT Gerbang Masa Depan bersifat mengikat dan menjadi keputusan mutlak (final).</li></ol>`;
+            renderInfoPage("Kebijakan Garansi Resmi", konten);
+        }
+
+        function renderPengiriman() {
+            let konten = `<p>Kami menyadari bahwa kecepatan distribusi adalah kunci integritas e-commerce. Berikut adalah ketentuan mutlak operasional logistik dan pengiriman di Ousevoid:</p><ol style="padding-left: 18px; margin-top: 15px;"><li style="margin-bottom: 10px;"><strong>Mitra Logistik Utama:</strong> Ousevoid menunjuk Gamoon e-Package sebagai garda depan pengiriman prioritas kami, didukung oleh jasa ekspedisi konvensional berskala nasional.</li><li style="margin-bottom: 10px;"><strong>Layanan Prioritas Sameday:</strong> Tersedia fasilitas tiba maksimal 8 jam operasional, berlaku secara eksklusif untuk wilayah yurisdiksi Jakarta dan Bodetabek.</li><li style="margin-bottom: 10px;"><strong>Layanan Ekspedisi Nasional:</strong> Pengiriman reguler antar-provinsi memakan waktu 2 hingga 5 hari kerja, mengacu pada SLA dari kurir masing-masing.</li><li style="margin-bottom: 10px;"><strong>Waktu Pemrosesan Gudang:</strong> Transaksi yang terkonfirmasi pembayarannya sebelum pukul 15.00 WIB akan dikemas dan diserahkan ke pihak logistik pada hari yang sama (H+0).</li><li style="margin-bottom: 10px;"><strong>Kewajiban Alamat:</strong> Pengguna layanan memikul tanggung jawab penuh terhadap kebenaran dan presisi penulisan alamat domisili.</li><li style="margin-bottom: 10px;"><strong>Asuransi Muatan:</strong> Setiap produk yang memiliki nilai tinggi (High Value Goods) secara otomatis akan diproteksi oleh asuransi pengiriman terintegrasi.</li><li style="margin-bottom: 10px;"><strong>Pemantauan Real-time:</strong> Pelanggan diberikan otorisasi penuh untuk melacak pergerakan paket menggunakan Nomor Resi melalui portal situs web kami.</li><li style="margin-bottom: 10px;"><strong>Kebijakan Keterlambatan:</strong> Segala bentuk keterlambatan di luar SLA normal akan kami bantu mediasi (eskalasi) ke pihak manajemen kurir.</li><li style="margin-bottom: 10px;"><strong>Syarat Penerimaan Barang:</strong> Penerima disarankan melakukan dokumentasi visual saat serah terima barang sebagai bukti sah terhindar dari penyusutan logistik.</li><li style="margin-bottom: 10px;"><strong>Force Majeure:</strong> Durasi pengiriman bisa tertangguhkan akibat keadaan kahar (bencana alam, huru-hara, atau gangguan sistem lalu lintas nasional).</li></ol>`;
+            renderInfoPage("Ketentuan Pengiriman", konten);
+        }
+
+        function renderPembayaran() {
+            let konten = `<p>Ekosistem finansial pada platform Ousevoid diproteksi secara siber untuk mencegah adanya rekayasa transaksi. Hal ini tertuang dalam poin Regulasi Pembayaran berikut:</p><ol style="padding-left: 18px; margin-top: 15px;"><li style="margin-bottom: 10px;"><strong>Otoritas Pengawasan:</strong> Semua transaksi yang masuk diproses dengan gerbang pembayaran berlisensi yang diawasi penuh oleh Otoritas Jasa Keuangan (OJK).</li><li style="margin-bottom: 10px;"><strong>Enkripsi Siber:</strong> Platform menggunakan Secure Socket Layer (SSL) 256-bit guna menjamin perlindungan peretasan terhadap data perbankan Pengguna.</li><li style="margin-bottom: 10px;"><strong>Metode E-Wallet:</strong> Dukungan penuh untuk pembayaran dompet digital (GoPay, DANA, ShopeePay) dengan proses validasi <em>real-time</em> milidetik.</li><li style="margin-bottom: 10px;"><strong>Metode Virtual Account:</strong> Dukungan setoran bank konvensional melalui nomor seri unik (BCA, Mandiri, BNI, BRI) yang dihasilkan otomatis.</li><li style="margin-bottom: 10px;"><strong>Integrasi QRIS Nasional:</strong> Transaksi lintas platform didukung melalui standarisasi kode respon cepat Bank Indonesia.</li><li style="margin-bottom: 10px;"><strong>Batas Kedaluwarsa Tagihan:</strong> Pengguna diwajibkan menyelesaikan pembayaran maksimal 24 jam setelah invoice diterbitkan. Lewat dari itu, status pemesanan digugurkan secara sistem (auto-cancel).</li><li style="margin-bottom: 10px;"><strong>Otomasi Verifikasi:</strong> Konfirmasi penyelesaian transaksi akan masuk secara otomatis tanpa perlu mengunggah struk/bukti transfer manual.</li><li style="margin-bottom: 10px;"><strong>Bukti Legal:</strong> Struk digital / e-Invoice yang diterbitkan sistem adalah sah di mata hukum perniagaan nasional sebagai alat tukar garansi.</li><li style="margin-bottom: 10px;"><strong>Kebijakan Pengembalian Dana (Refund):</strong> Proses pencairan ulang hanya dapat ditindaklanjuti apabila status ketersediaan barang di gudang kosong pasca-pembayaran berhasil.</li><li style="margin-bottom: 10px;"><strong>Anti Fraud:</strong> Kami menggunakan kecerdasan sistem (AI risk scoring) yang dapat membatalkan sepihak jika terdeteksi aktivitas kartu kredit / transaksi mencurigakan.</li></ol>`;
+            renderInfoPage("Pembayaran", konten);
+        }
+
+        function renderPrivasi() {
+            let konten = `<p>Data pribadi Anda merupakan komoditas yang wajib dilindungi. PT Gerbang Masa Depan berkomitmen menegakkan integritas berdasarkan klausul kebijakan berikut:</p><ol style="padding-left: 18px; margin-top: 15px;"><li style="margin-bottom: 10px;"><strong>Kepatuhan Hukum:</strong> Pedoman manajemen data kami berjalan 100% selaras dengan Undang-Undang Perlindungan Data Pribadi (UU PDP) Republik Indonesia.</li><li style="margin-bottom: 10px;"><strong>Klasifikasi Data Terkumpul:</strong> Perusahaan hanya akan memproses nama sah, alamat rumah/domisili, kontak handphone, serta surel pembeli.</li><li style="margin-bottom: 10px;"><strong>Tujuan Pengolahan:</strong> Eksploitasi data sangat dibatasi semata-mata untuk verifikasi pembayaran, pencetakan resi kurir logistik, dan administrasi pasca-jual.</li><li style="margin-bottom: 10px;"><strong>Larangan Komersialisasi:</strong> Dengan tegas dinyatakan bahwa kami tidak memperjualbelikan, menukar, maupun menyewakan data Anda ke entitas bisnis pihak ketiga (Third Party).</li><li style="margin-bottom: 10px;"><strong>Pengamanan Pangkalan Data:</strong> Infrastruktur Cloudflare digunakan untuk melindungi sistem database dari serangan injeksi dan pencurian data masif (DDoS protection).</li><li style="margin-bottom: 10px;"><strong>Isolasi Hak Akses:</strong> Hanya staf berotoritas tingkat tinggi dalam divisi <em>Customer Support</em> yang dapat mengakses kredensial pesanan Anda.</li><li style="margin-bottom: 10px;"><strong>Transparansi Finansial:</strong> Perusahaan tidak memiliki kewenangan teknis maupun akses untuk menahan atau membaca rincian pin/CVV perbankan pelanggan.</li><li style="margin-bottom: 10px;"><strong>Prosedur Pemusnahan Data:</strong> Setelah kurun waktu kewajiban audit pajak selesai, metadata spesifik identitas pengguna akan dianonimkan dari server primer.</li><li style="margin-bottom: 10px;"><strong>Pelacakan Cookies:</strong> Kami hanya menyematkan 'Essential Cookies' guna mempertahankan sesi keranjang belanja (Cart Session) pada peramban web Pengguna.</li><li style="margin-bottom: 10px;"><strong>Hak Pengguna:</strong> Anda memegang kedaulatan mutlak untuk memohon koreksi kesalahan data cetak sebelum resi logistik dicetak oleh gudang pengemasan.</li></ol>`;
+            renderInfoPage("Kebijakan Privasi", konten);
+        }
 
         // =========================================================================
         // LOAD PRODUK DARI FIREBASE FIRESTORE 
@@ -980,14 +1006,21 @@
                         let parsedVariants = []; 
                         try { parsedVariants = p.variants ? JSON.parse(p.variants) : []; } catch(e) {}
                         products.push({ 
-                            id: doc.id, name: p.nama, priceValue: p.harga, 
-                            price: 'Rp ' + p.harga.toLocaleString('id-ID'), 
-                            img: p.img_url, category: p.kategori || "Earbuds", 
-                            specs: { deskripsi: p.deskripsi }, variants: parsedVariants 
+                            id: doc.id, name: p.nama || "Tanpa Nama", priceValue: p.harga || 0, 
+                            price: 'Rp ' + (p.harga || 0).toLocaleString('id-ID'), 
+                            img: p.img_url || "https://via.placeholder.com/150", category: p.kategori || "Earbuds", 
+                            specs: { deskripsi: p.deskripsi || "" }, variants: parsedVariants 
                         });
                     });
                 }
-            } catch (error) { products = []; }
+            } catch (error) { 
+                console.error("Gagal menarik data dari Firestore: ", error);
+                // Munculkan notif kalau Rules Firebase belum diatur
+                if(error.message && error.message.includes("permissions")) {
+                    alert("Gagal memuat produk. Pastikan FIRESTORE DATABASE sudah dibuat di Console Firebase dan RULES di-set ke: allow read, write: if true;");
+                }
+                products = []; 
+            }
             renderHome();
         }
 
