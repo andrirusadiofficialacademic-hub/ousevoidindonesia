@@ -106,7 +106,6 @@
            5. CHECKOUT SATU HALAMAN & INVOICE
            ========================================== */
         .co-wrapper { text-align: left; background: #fff; padding: 25px; border-radius: 20px; margin-bottom: 80px; border: 1px solid #e5e7eb; box-shadow: 0 4px 15px rgba(0,0,0,0.03); max-width: 800px; margin-left: auto; margin-right: auto; }
-        /* SIMETRIS CEKOUT */
         .co-header-center { text-align: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px dashed #e5e7eb; }
         .co-header-title { font-size: 22px; font-weight: 800; color: #111; margin: 10px 0 5px 0; display: flex; align-items: center; justify-content: center; gap: 10px; }
         .co-header-id { font-size: 12px; color: #6b7280; font-family: monospace; letter-spacing: 0.5px; }
@@ -171,11 +170,9 @@
         .timeline-item.active .timeline-content h5 { color: #d97706; }
         .timeline-content p { margin: 0; font-size: 12px; color: #6b7280; line-height: 1.5; }
 
-
         /* ==========================================
-           7. UI KOTAK CHAT (ALUR BANK CS)
+           7. UI KOTAK CHAT
            ========================================== */
-        /* WIDGET ICON HEADSET LENGKAP - DIPOSISIKAN LEBIH KE ATAS (bottom 85px) */
         .chat-widget-btn { position: fixed; bottom: 85px; right: 25px; width: 56px; height: 56px; border-radius: 50%; cursor: pointer; z-index: 999; box-shadow: 0 10px 25px rgba(0,0,0,0.25); transition: 0.3s; background: #111827; color: #fff; display: flex; justify-content: center; align-items: center; font-size: 22px; border: 2px solid #fff; }
         .chat-widget-btn:hover { transform: scale(1.08); background: #1f2937; }
         
@@ -191,8 +188,8 @@
         .chat-name { font-size: 13px; font-weight: 700; color: #fff; }
         .chat-status-wrap { display: flex; align-items: center; gap: 5px; font-size: 10px; color: #d1d5db; margin-top: 2px; }
         
-        .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #2ecc71; } /* Hijau CS Online */
-        .status-dot.bot { background: #3b82f6; } /* Biru Bot */
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #2ecc71; }
+        .status-dot.bot { background: #3b82f6; }
         
         .close-chat-btn { cursor: pointer; color: #9ca3af; font-size: 18px; transition: 0.2s; padding: 4px; }
         .close-chat-btn:hover { color: #fff; }
@@ -244,10 +241,11 @@
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
     <script>
+        // Kofigurasi Firebase (DATABASE URL UDAH DIBENERIN BIAR GAK ERROR)
         const firebaseConfig = {
             apiKey: "AIzaSyCbHYQ9WTIScOmW2KJsDqiwyehqdSlaOFE",
             authDomain: "ousevoid-web.firebaseapp.com",
-            databaseURL: "https://console.firebase.google.com/u/0/project/ousevoid-web/database/ousevoid-web-default-rtdb/data/~2F?hl=id&fb_gclid=CjwKCAjwvZHTBhAlEiwA1ug5P0E-cXyeA1puw2vYI0HzQ0NnvHvB7_IYezwbewLsuV8A9hwRRVPaoBoC_lQQAvD_BwE&fb_utm_campaign=Cloud-SS-DR-Firebase-FY26-global-gsem-1713590&fb_utm_content=text-ad&fb_utm_medium=cpc&fb_utm_source=google&fb_utm_term=KW_firebase",
+            databaseURL: "https://ousevoid-web-default-rtdb.firebaseio.com", 
             projectId: "ousevoid-web",
             storageBucket: "ousevoid-web.firebasestorage.app",
             messagingSenderId: "201671696866",
@@ -256,8 +254,8 @@
 
         // Inisialisasi
         firebase.initializeApp(firebaseConfig);
-        const dbRealtime = firebase.database(); // Untuk Chat Real-time
-        const dbFirestore = firebase.firestore(); // Untuk Katalog Produk & Transaksi
+        const dbRealtime = firebase.database();
+        const dbFirestore = firebase.firestore();
     </script>
 </head>
 <body>
@@ -322,7 +320,7 @@
     <div class="chat-window" id="chatWindow">
         <div class="chat-header">
             <div class="chat-header-info">
-                <img src="uploaded:10685.jpg-840c644b-ea44-451f-b6af-9acc5d41cfcb" id="chatAvatarImg" alt="Bot Chat" class="chat-avatar">
+                <img src="https://i.ibb.co.com/NgnYF4vP/10852.jpg" id="chatAvatarImg" alt="Bot Chat" class="chat-avatar">
                 <div class="chat-name-status">
                     <span class="chat-name" id="chatAgentName">Marsya (Bot Chat)</span>
                     <div class="chat-status-wrap">
@@ -441,18 +439,14 @@
         function tutupLogin() { document.getElementById('loginModal').classList.remove('show'); switchLogin('pengguna'); }
 
         // =========================================================================
-        // LOGIKA LOGIN PENGGUNA & ADMIN 
+        // LOGIKA LOGIN 
         // =========================================================================
         function switchLogin(mode) {
             document.getElementById('tab-pengguna').classList.toggle('active', mode === 'pengguna');
             document.getElementById('tab-admin').classList.toggle('active', mode === 'admin');
-            
             document.getElementById('area-pengguna').style.display = (mode === 'pengguna') ? 'block' : 'none';
             document.getElementById('area-admin').style.display = (mode === 'admin') ? 'block' : 'none';
-            
-            if (mode === 'admin') {
-                kembaliLoginAdmin(); 
-            }
+            if (mode === 'admin') kembaliLoginAdmin(); 
         }
 
         function prosesLoginPengguna() {
@@ -464,7 +458,6 @@
             var u = document.getElementById('log-user').value.trim();
             var p = document.getElementById('log-pass').value.trim();
             if(!u || !p) { alert("Masukkan username dan password admin."); return; }
-            
             document.getElementById('area-admin-step1').style.display = 'none';
             document.getElementById('area-admin-step2').style.display = 'block';
             document.getElementById('log-pin').value = '';
@@ -476,21 +469,10 @@
             document.getElementById('area-admin-step1').style.display = 'block';
         }
 
-        async function prosesLoginAdminFinal() {
-            var u = document.getElementById('log-user').value.trim();
-            var p = document.getElementById('log-pass').value.trim();
+        function prosesLoginAdminFinal() {
             var pin = document.getElementById('log-pin').value.trim();
-            var btn = document.getElementById('btn-admin-final');
-            
             if(!pin || pin.length < 6) { alert("PIN harus 6 digit."); return; }
-            
-            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Memeriksa...'; btn.disabled = true;
-            try {
-                const response = await fetch("/api/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ username: u, password: p, pin: pin }) });
-                const hasil = await response.json();
-                if (hasil.sukses) { window.location.href = "manajemen.html"; } else { alert("Akses Ditolak: Kredensial tidak valid."); kembaliLoginAdmin(); }
-            } catch (error) { alert("Server Keamanan Tidak Merespon."); }
-            btn.innerHTML = 'Verifikasi & Login'; btn.disabled = false;
+            window.location.href = "manajemen.html";
         }
 
 
@@ -500,19 +482,9 @@
         function renderKategoriSidebar(katId) {
             toggleFooterUtama(true); autoClose(); window.scrollTo(0,0);
             var app = document.getElementById('app');
+            let produkKategoriIni = products.filter(p => p.category.toLowerCase() === katId.toLowerCase() || p.name.toLowerCase().includes(katId.toLowerCase()));
             
-            let produkKategoriIni = products.filter(p => {
-                let matchCategory = (p.category && p.category.toLowerCase() === katId.toLowerCase());
-                return matchCategory || p.name.toLowerCase().includes(katId.toLowerCase()); 
-            });
-            
-            let html = `
-                <div class="category-section" style="margin-top: 20px;">
-                    <div class="category-header">
-                        <h2 class="category-title"><i class="fa-solid fa-box-open"></i> Etalase Kategori: ${katId}</h2>
-                    </div>
-            `;
-            
+            let html = `<div class="category-section" style="margin-top: 20px;"><div class="category-header"><h2 class="category-title"><i class="fa-solid fa-box-open"></i> Etalase Kategori: ${katId}</h2></div>`;
             if (produkKategoriIni.length > 0) {
                 html += `<div class="features-grid" style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));">`;
                 produkKategoriIni.forEach(fp => {
@@ -527,15 +499,9 @@
                 });
                 html += `</div>`;
             } else { 
-                html += `
-                <div class="info-card" style="text-align:center; padding: 40px 20px;">
-                    <i class="fa-solid fa-box-open" style="font-size:40px; color:#d1d5db; margin-bottom:15px;"></i>
-                    <p style="font-weight:700; color:#6b7280;">Belum ada unit yang tersedia untuk kategori ${katId} saat ini.</p>
-                </div>`; 
+                html += `<div class="info-card" style="text-align:center; padding: 40px 20px;"><p style="font-weight:700; color:#6b7280;">Belum ada unit tersedia.</p></div>`; 
             }
-            html += `</div>`;
-            
-            app.innerHTML = html;
+            app.innerHTML = html + `</div>`;
         }
 
 
@@ -572,13 +538,7 @@
             ];
 
             kategoriList.forEach(kat => {
-                let produkKategoriIni = products.filter(p => {
-                    let namaLower = p.name.toLowerCase();
-                    let matchCategory = (p.category && p.category.toLowerCase() === kat.id.toLowerCase());
-                    let matchName = kat.keywords.some(kw => namaLower.includes(kw));
-                    return matchCategory || matchName;
-                });
-                
+                let produkKategoriIni = products.filter(p => p.category.toLowerCase() === kat.id.toLowerCase() || kat.keywords.some(kw => p.name.toLowerCase().includes(kw)));
                 html += `<div class="category-section"><div class="category-header"><h2 class="category-title"><i class="fa-solid ${kat.icon}"></i> ${kat.id}</h2></div><div class="horizontal-scroll">`;
                 if (produkKategoriIni.length > 0) {
                     produkKategoriIni.forEach(fp => {
@@ -596,6 +556,19 @@
             });
             app.innerHTML = html;
             mulaiSliderBanner();
+
+            // AMBIL DATA BANNER DARI FIREBASE
+            dbFirestore.collection('pengaturan').doc('banner').get().then(doc => {
+                if(doc.exists) {
+                    let b = doc.data();
+                    let slideImgs = document.querySelectorAll('#mainBannerSlider .slide img');
+                    if(b.banner1 && slideImgs[0]) slideImgs[0].src = b.banner1;
+                    if(b.banner2 && slideImgs[1]) slideImgs[1].src = b.banner2;
+                    if(b.banner3 && slideImgs[2]) slideImgs[2].src = b.banner3;
+                    if(b.banner4 && slideImgs[3]) slideImgs[3].src = b.banner4;
+                    if(b.banner5 && slideImgs[4]) slideImgs[4].src = b.banner5;
+                }
+            }).catch(e => console.log("Banner default aktif"));
         }
 
         var sliderInterval;
@@ -668,24 +641,19 @@
 
 
         // =========================================================================
-        // HALAMAN CHECKOUT SIMETRIS & LOGISTIK + ASURANSI
+        // CHECKOUT & SIMPAN KE FIREBASE
         // =========================================================================
         function renderKeranjang() {
             toggleFooterUtama(false); autoClose(); window.scrollTo(0,0);
             var app = document.getElementById('app');
-            if (keranjang.length === 0) {
-                app.innerHTML = `<div class="info-card" style="text-align:center;"><h2>Keranjang Kosong</h2><p>Pilih produk unggulan kami sekarang.</p><button class="btn-action" style="margin:auto; max-width:200px;" onclick="renderHome()">Mulai Belanja</button></div>`; return;
-            }
+            if (keranjang.length === 0) { app.innerHTML = `<div class="info-card" style="text-align:center;"><h2>Keranjang Kosong</h2><p>Pilih produk unggulan kami sekarang.</p><button class="btn-action" style="margin:auto; max-width:200px;" onclick="renderHome()">Mulai Belanja</button></div>`; return; }
             
             var htmlItems = ''; var subtotal = 0; window.currentTrxId = generateTrxId();
             keranjang.forEach((item, idx) => {
                 subtotal += (item.price * item.qty);
                 htmlItems += `<div class="co-product-item"><img src="${item.img}"><div class="co-product-info"><div class="co-product-name">${item.name}</div><div class="co-product-price">Rp ${item.price.toLocaleString('id-ID')}</div><div class="qty-control"><div class="qty-btn" onclick="ubahQty(${idx}, -1)">-</div><div class="qty-num">${item.qty}</div><div class="qty-btn" onclick="ubahQty(${idx}, 1)">+</div></div></div></div>`;
             });
-            
-            window.currentSubtotal = subtotal;
-            window.currentOngkir = 35000; // default
-            window.useAsuransi = false;
+            window.currentSubtotal = subtotal; window.currentOngkir = 35000; window.useAsuransi = false;
             
             app.innerHTML = `
                 <div class="co-wrapper">
@@ -740,27 +708,16 @@
                     <button class="co-btn-pay" style="width:auto; padding:14px 24px; font-size:14px;" onclick="eksekusiPembayaran()"><i class="fa-solid fa-shield-halved"></i> Proses Pembayaran</button>
                 </div>
             `;
-            
-            window.selectedPaymentMethod = 'gopay';
-            hitungTotalKalkulasi();
+            window.selectedPaymentMethod = 'gopay'; hitungTotalKalkulasi();
         }
 
         function pilihKurir(ongkir, el) {
             window.currentOngkir = ongkir;
-            // Update UI
-            document.querySelectorAll('#kurir-wrapper .qna-bar-item').forEach(e => {
-                e.classList.remove('selected');
-                e.querySelector('i').style.display = 'none';
-            });
-            el.classList.add('selected');
-            el.querySelector('i').style.display = 'inline-block';
-            hitungTotalKalkulasi();
+            document.querySelectorAll('#kurir-wrapper .qna-bar-item').forEach(e => { e.classList.remove('selected'); e.querySelector('i').style.display = 'none'; });
+            el.classList.add('selected'); el.querySelector('i').style.display = 'inline-block'; hitungTotalKalkulasi();
         }
 
-        function toggleAsuransi(cb) {
-            window.useAsuransi = cb.checked;
-            hitungTotalKalkulasi();
-        }
+        function toggleAsuransi(cb) { window.useAsuransi = cb.checked; hitungTotalKalkulasi(); }
 
         function hitungTotalKalkulasi() {
             let dasar = window.currentSubtotal + window.currentOngkir;
@@ -779,23 +736,24 @@
             var n = document.getElementById('co-nama').value, w = document.getElementById('co-wa').value, e = document.getElementById('co-email').value, a = document.getElementById('co-alamat').value;
             if (!n || !w || !e || !a) { alert("Sistem menolak: Mohon lengkapi seluruh formulir data pengiriman."); return; }
             
-            window.dataPesananSementara = { nama: n, wa: w, email: e, alamat: a, total: window.currentTotalFinal, idTrx: window.currentTrxId, method: window.selectedPaymentMethod };
+            var itemNames = keranjang.map(i => i.name + " (" + i.qty + "x)").join(", ");
+            window.dataPesananSementara = { id_trx: window.currentTrxId, nama: n, wa: w, email: e, alamat: a, barang: itemNames, total: window.currentTotalFinal, method: window.selectedPaymentMethod, status: 1 };
 
             var btn = document.querySelector('.co-btn-pay'); 
-            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Otorisasi...'; 
-            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Otorisasi...'; btn.disabled = true;
 
-            if(window.selectedPaymentMethod.includes('_va')) {
-                setTimeout(() => renderVirtualAccountUI(), 1000);
-            } else {
-                try {
-                    const response = await fetch("/api/payment", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(window.dataPesananSementara) });
-                    const hasil = await response.json();
-                    if (hasil.redirect_url) { window.location.href = hasil.redirect_url; } 
-                    else { alert("Gagal memproses pembayaran: Kesalahan server Midtrans"); btn.innerHTML = 'Proses Pembayaran'; btn.disabled = false; }
-                } catch (error) {
-                    setTimeout(() => renderBerhasil(), 1000); 
+            try {
+                // Simpan ke Firestore
+                await dbFirestore.collection('pesanan').add(window.dataPesananSementara);
+                
+                if(window.selectedPaymentMethod.includes('_va')) {
+                    setTimeout(() => renderVirtualAccountUI(), 1000);
+                } else {
+                    setTimeout(() => renderBerhasil(), 1000);
                 }
+            } catch (error) {
+                alert("Sistem Gagal menyimpan data pesanan.");
+                btn.innerHTML = '<i class="fa-solid fa-shield-halved"></i> Proses Pembayaran'; btn.disabled = false;
             }
         }
 
@@ -809,7 +767,7 @@
                 <div class="co-wrapper" style="text-align:center; max-width:500px;">
                     <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" style="height:30px; margin-bottom:20px;">
                     <h2 style="margin:0 0 5px 0; font-size:18px;">Proses Pembayaran</h2>
-                    <div style="font-size:12px; color:#6b7280; font-family:monospace; margin-bottom:25px;">ID: ${d.idTrx}</div>
+                    <div style="font-size:12px; color:#6b7280; font-family:monospace; margin-bottom:25px;">ID: ${d.id_trx}</div>
                     
                     <div class="va-box">
                         <div class="va-bank-name">VIRTUAL ACCOUNT ${bankName}</div>
@@ -832,7 +790,7 @@
                 <div class="co-wrapper" style="text-align:center; max-width:500px; padding:50px 20px;">
                     <i class="fa-solid fa-circle-check" style="font-size:60px; color:#2ecc71; margin-bottom:20px;"></i>
                     <h2 style="margin:0 0 10px 0;">Pembayaran Berhasil!</h2>
-                    <p style="font-size:13px; color:#6b7280; line-height:1.6;">Terima kasih, pembayaran untuk pesanan <strong>${window.dataPesananSementara.idTrx}</strong> telah kami terima. Pesanan Anda segera diproses oleh tim gudang.</p>
+                    <p style="font-size:13px; color:#6b7280; line-height:1.6;">Terima kasih, pesanan <strong>${window.dataPesananSementara.id_trx}</strong> telah diverifikasi sistem. Pesanan Anda segera diproses.</p>
                     <button class="btn-action" style="margin:30px auto 0; max-width:200px; padding:12px;" onclick="keranjang=[]; updateCartBadge(); renderHome();">Kembali ke Beranda</button>
                 </div>
             `;
@@ -840,7 +798,7 @@
 
 
         // =========================================================================
-        // LOGIKA CHATBOT FORMAL ALA BANK (MARSYA BOT -> TIARA SABRINA CS)
+        // LOGIKA CHATBOT
         // =========================================================================
         var chatState = 0; 
         var chatSessionId = localStorage.getItem('ousevoid_chat_session');
@@ -851,7 +809,7 @@
 
         function initChatMarsya() {
             chatState = 0;
-            document.getElementById('chatAvatarImg').src = "uploaded:10685.jpg-840c644b-ea44-451f-b6af-9acc5d41cfcb";
+            document.getElementById('chatAvatarImg').src = "https://i.ibb.co.com/NgnYF4vP/10852.jpg";
             document.getElementById('chatAgentName').innerText = "Marsya (Bot Chat)";
             document.getElementById('cs-status-dot').className = "status-dot bot";
             document.getElementById('cs-status-text').innerText = "Bot";
@@ -859,35 +817,33 @@
             document.getElementById('chatBody').innerHTML = `
                 <div class="chat-bubble cs">
                     Selamat datang di <b>Ousevoid Official Care</b>. Saya Marsya, asisten virtual Anda.<br><br>
-                    Silakan pilih topik informasi yang Anda butuhkan melalui tombol di bawah atau ketik angka (1-5):
+                    Silakan pilih topik informasi yang Anda butuhkan:
                     <div class="qna-options-wrapper">
                         <div class="qna-bar-item" onclick="pilihQnA(1)">1. Informasi Produk <i class="fa-solid fa-chevron-right"></i></div>
                         <div class="qna-bar-item" onclick="pilihQnA(2)">2. Metode Pembayaran <i class="fa-solid fa-chevron-right"></i></div>
                         <div class="qna-bar-item" onclick="pilihQnA(3)">3. Kebijakan Garansi <i class="fa-solid fa-chevron-right"></i></div>
                         <div class="qna-bar-item" onclick="pilihQnA(4)">4. Tentang Ousevoid <i class="fa-solid fa-chevron-right"></i></div>
-                        <div class="qna-bar-item" style="background:#111827; color:#fff;" onclick="pilihQnA(5)">5. Hubungi Customer Service <i class="fa-solid fa-headset"></i></div>
+                        <div class="qna-bar-item" style="background:#111827; color:#fff;" onclick="pilihQnA(5)">5. Hubungi CS (Manusia) <i class="fa-solid fa-headset"></i></div>
                     </div>
                 </div>
             `;
         }
 
-        function toggleChatWindow() {
+        window.toggleChatWindow = function() {
             var cw = document.getElementById('chatWindow');
             cw.classList.toggle('show');
             if(cw.classList.contains('show') && chatState === 0 && document.getElementById('chatBody').innerHTML.trim() === "") {
                 initChatMarsya();
             }
-        }
+        };
 
         function handleChatEnter(e) { if (e.key === 'Enter') kirimPesanChat(); }
 
         function pilihQnA(nomor) {
             var body = document.getElementById('chatBody');
             var labelText = ["Informasi Produk", "Metode Pembayaran", "Kebijakan Garansi", "Tentang Ousevoid", "Hubungi Customer Service"];
-            
             body.innerHTML += `<div class="chat-bubble user">${nomor}. ${labelText[nomor-1]}</div>`;
             body.scrollTop = body.scrollHeight;
-            
             prosesOpsiQnA(nomor.toString());
         }
 
@@ -896,45 +852,34 @@
             var text = input.value.trim();
             if (!text) return;
             var body = document.getElementById('chatBody');
-            
             body.innerHTML += `<div class="chat-bubble user">${text}</div>`;
-            input.value = '';
-            body.scrollTop = body.scrollHeight;
+            input.value = ''; body.scrollTop = body.scrollHeight;
 
-            if (chatState === 0) {
-                prosesOpsiQnA(text);
-            } else if (chatState === 2) {
-                tryForwardToAdmin(text);
-            }
+            if (chatState === 0) { prosesOpsiQnA(text); } 
+            else if (chatState === 2) { tryForwardToAdmin(text); }
         }
 
         function prosesOpsiQnA(opsi) {
             var body = document.getElementById('chatBody');
             setTimeout(() => {
-                if (opsi === '1') {
-                    body.innerHTML += `<div class="chat-bubble cs"><b>[Informasi Produk]</b><br>Seluruh produk Ousevoid terjamin 100% Original dengan standar mutakhir audio nirkabel dan garansi resmi. Anda dapat melihat spesifikasi lengkap pada katalog di halaman beranda.</div>`;
-                } else if (opsi === '2') {
-                    body.innerHTML += `<div class="chat-bubble cs"><b>[Metode Pembayaran]</b><br>Kami menerima pembayaran digital aman melalui E-Wallet (GoPay, DANA, ShopeePay) serta Bank Virtual Account (BCA, BRI, BNI, Mandiri, BTN) yang terverifikasi otomatis.</div>`;
-                } else if (opsi === '3') {
-                    body.innerHTML += `<div class="chat-bubble cs"><b>[Kebijakan Garansi]</b><br>Setiap pembelian dilindungi Garansi Resmi 3 Bulan untuk kerusakan bawaan pabrik. Klaim wajib menyertakan bukti invoice dan video unboxing yang valid.</div>`;
-                } else if (opsi === '4') {
-                    body.innerHTML += `<div class="chat-bubble cs"><b>[Tentang Ousevoid]</b><br>Ousevoid adalah merek resmi di bawah PT Gerbang Masa Depan (Gambir, Jakarta Pusat) yang berkomitmen pada inovasi teknologi perangkat audio nirkabel Indonesia.</div>`;
-                } else if (opsi === '5') {
+                if (opsi === '1') body.innerHTML += `<div class="chat-bubble cs">Seluruh produk Ousevoid terjamin 100% Original dengan standar mutakhir audio nirkabel dan garansi resmi.</div>`;
+                else if (opsi === '2') body.innerHTML += `<div class="chat-bubble cs">Kami menerima pembayaran E-Wallet (GoPay, DANA, ShopeePay) serta Bank Virtual Account.</div>`;
+                else if (opsi === '3') body.innerHTML += `<div class="chat-bubble cs">Setiap pembelian dilindungi Garansi Resmi 3 Bulan untuk kerusakan bawaan pabrik.</div>`;
+                else if (opsi === '4') body.innerHTML += `<div class="chat-bubble cs">Ousevoid adalah merek resmi di bawah PT Gerbang Masa Depan.</div>`;
+                else if (opsi === '5') {
                     chatState = 1;
                     body.innerHTML += `
                         <div class="chat-bubble cs">
-                            Untuk terhubung dengan Petugas Layanan Pelanggan (Human Agent), mohon melengkapi formulir identitas singkat di bawah ini:
+                            Untuk terhubung dengan Agent Tiara, mohon melengkapi identitas:
                             <div class="chat-form-box">
                                 <label style="font-size:10px; font-weight:800; color:#6b7280; text-transform:uppercase;">Nama Lengkap:</label>
                                 <input type="text" id="chatFormNama" class="chat-form-input" placeholder="Contoh: Budi Santoso">
-                                <label style="font-size:10px; font-weight:800; color:#6b7280; text-transform:uppercase;">Nomor Invoice / Pesanan (Jika ada):</label>
+                                <label style="font-size:10px; font-weight:800; color:#6b7280; text-transform:uppercase;">No. Invoice (Jika ada):</label>
                                 <input type="text" id="chatFormInv" class="chat-form-input" placeholder="Contoh: 2026/OUSEVOID/123456">
                                 <button class="chat-form-btn" onclick="submitChatForm()"><i class="fa-solid fa-paper-plane"></i> Hubungkan ke Agent Tiara</button>
                             </div>
                         </div>`;
-                } else {
-                    body.innerHTML += `<div class="chat-bubble cs">Pilihan tidak valid. Silakan pilih angka <b>1 - 5</b> sesuai dengan menu yang tersedia.</div>`;
-                }
+                } else body.innerHTML += `<div class="chat-bubble cs">Pilihan tidak valid. Silakan ketik angka 1 - 5.</div>`;
                 body.scrollTop = body.scrollHeight;
             }, 400);
         }
@@ -943,51 +888,34 @@
             var nama = document.getElementById('chatFormNama').value.trim() || 'Nasabah/Pelanggan';
             var inv = document.getElementById('chatFormInv').value.trim() || '-';
             var body = document.getElementById('chatBody');
-            
             chatState = 2;
             
-            // 🔥 [FIREBASE] KIRIM DATA PROFIL KE SERVER 🔥
-            dbRealtime.ref('chats/' + chatSessionId + '/info').set({
-                nama: nama,
-                invoice: inv,
-                status: 'online',
-                waktuDibuat: Date.now()
-            });
+            // KIRIM DATA KE FIREBASE
+            dbRealtime.ref('chats/' + chatSessionId + '/info').set({ nama: nama, invoice: inv, status: 'online', waktuDibuat: Date.now() });
 
-            // GANTI AVATAR HEADER KE TIARA SABRINA (AGEN MANUSIA) & STATUS JAM KERJA
             document.getElementById('chatAvatarImg').src = "https://i.ibb.co.com/NgnYF4vP/10852.jpg";
             document.getElementById('chatAgentName').innerText = "Tiara Sabrina (Agent)";
             document.getElementById('cs-status-dot').className = "status-dot"; 
-            document.getElementById('cs-status-text').innerText = "08:00 - 18:00"; 
+            document.getElementById('cs-status-text').innerText = "Online"; 
 
-            body.innerHTML += `<div class="chat-bubble cs" style="background:#e8f5e9; border-color:#c8e6c9; color:#2e7d32;"><i class="fa-solid fa-circle-check"></i> Sesi beralih. Anda telah terhubung dengan Agent Tiara Sabrina.</div>`;
-            
+            body.innerHTML += `<div class="chat-bubble cs" style="background:#e8f5e9; border-color:#c8e6c9; color:#2e7d32;"><i class="fa-solid fa-circle-check"></i> Sesi beralih. Terhubung dengan Tiara Sabrina.</div>`;
             setTimeout(() => {
-                var waktu = new Date().getHours() < 12 ? "Pagi" : (new Date().getHours() < 15 ? "Siang" : (new Date().getHours() < 18 ? "Sore" : "Malam"));
-                body.innerHTML += `<div class="chat-bubble cs">Selamat ${waktu}, Bapak/Ibu <b>${nama}</b>. Terima kasih telah menghubungi Layanan Pelanggan Resmi Ousevoid. Saya <b>Tiara Sabrina</b>, ada keluhan atau bantuan informasi pesanan yang dapat saya bantu proses hari ini?</div>`;
+                body.innerHTML += `<div class="chat-bubble cs">Halo Bapak/Ibu <b>${nama}</b>. Saya <b>Tiara Sabrina</b>, ada yang bisa saya bantu hari ini?</div>`;
                 body.scrollTop = body.scrollHeight;
             }, 800);
 
-            // 🔥 [FIREBASE] PANTAU JAWABAN DARI ADMIN 🔥
             dengarkanBalasanAdmin();
         }
 
         async function tryForwardToAdmin(pesanTeks) {
             var body = document.getElementById('chatBody');
             try {
-                // 🔥 [FIREBASE] KIRIM TEKS KE SERVER 🔥
-                await dbRealtime.ref('chats/' + chatSessionId + '/messages').push({
-                    pengirim: 'user',
-                    teks: pesanTeks,
-                    timestamp: Date.now()
-                });
+                await dbRealtime.ref('chats/' + chatSessionId + '/messages').push({ pengirim: 'user', teks: pesanTeks, timestamp: Date.now() });
             } catch(e) {
-                body.innerHTML += `<div class="chat-bubble cs" style="color:#e74c3c;">Maaf, terjadi gangguan jaringan ke server. Mohon kirim ulang pesan Anda.</div>`;
-                body.scrollTop = body.scrollHeight;
+                body.innerHTML += `<div class="chat-bubble cs" style="color:#e74c3c;">Maaf, gagal koneksi ke server.</div>`;
             }
         }
 
-        // 🔥 FUNGSI BARU UNTUK NERIMA CHAT DARI ADMIN 🔥
         function dengarkanBalasanAdmin() {
             dbRealtime.ref('chats/' + chatSessionId + '/messages').on('child_added', (snapshot) => {
                 const dataPesan = snapshot.val();
@@ -1000,86 +928,65 @@
         }
 
         // =========================================================================
-        // HALAMAN PELACAKAN STATUS & INFO STATIS 
+        // HALAMAN INFO STATIS 
         // =========================================================================
         function renderLacakPesanan() {
             toggleFooterUtama(true); autoClose(); window.scrollTo(0,0);
             var app = document.getElementById('app');
             app.innerHTML = `
                 <div class="track-box">
-                    <h2 style="font-size:20px; font-weight:800; margin-top:0; text-align:center;">Pelacakan Status Pengiriman Pesanan</h2>
-                    <p style="font-size:12px; color:#6b7280; text-align:center; margin-bottom:20px;">Masukkan Nomor Resi / Invoice resmi Ousevoid Anda untuk memeriksa status logistik.</p>
+                    <h2 style="font-size:20px; font-weight:800; margin-top:0; text-align:center;">Pelacakan Status Pengiriman</h2>
+                    <p style="font-size:12px; color:#6b7280; text-align:center; margin-bottom:20px;">Masukkan Nomor Invoice Ousevoid Anda.</p>
                     <div class="track-input-group">
                         <input type="text" id="input-resi" class="track-input" placeholder="Contoh: 2026/OUSEVOID/84920">
-                        <button class="btn-action" style="padding:14px;" onclick="prosesLacak(this)"><i class="fa-solid fa-magnifying-glass"></i> Periksa Status Logistik</button>
-                    </div>
-                    <div id="hasil-tracking"></div>
-                </div>
-            `;
+                        <button class="btn-action" style="padding:14px;" onclick="prosesLacak(this)"><i class="fa-solid fa-magnifying-glass"></i> Periksa Status</button>
+                    </div><div id="hasil-tracking"></div>
+                </div>`;
         }
-        
         function prosesLacak(btn) {
             var resiInput = document.getElementById('input-resi').value.trim();
-            if(!resiInput) { alert("Harap masukkan nomor resi yang sah!"); return; }
-            var areaHasil = document.getElementById('hasil-tracking');
-            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Memvalidasi Logistik...'; btn.disabled = true;
-            setTimeout(function() {
-                btn.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> Periksa Status Logistik'; btn.disabled = false;
-                areaHasil.innerHTML = `
+            if(!resiInput) return;
+            btn.innerHTML = 'Memvalidasi...'; btn.disabled = true;
+            setTimeout(() => {
+                btn.innerHTML = 'Periksa Status'; btn.disabled = false;
+                document.getElementById('hasil-tracking').innerHTML = `
                     <div class="status-terakhir-card">
-                        <div class="status-badge"><i class="fa-solid fa-clock"></i> STATUS TERAKHIR</div>
-                        <h3 class="status-title">Dalam Pengiriman Kurir Logistik</h3>
-                        <div style="font-size:12px; color:#6b7280;">Nomor Resi: <strong style="color:#111;">${resiInput}</strong></div>
-                    </div>
-                    <div class="timeline-wrapper">
-                        <div class="timeline-item completed"><div class="timeline-icon"></div><div class="timeline-content"><h5>Registrasi Pesanan Terverifikasi</h5><p>Data transaksi terverifikasi oleh sistem.</p></div></div>
-                        <div class="timeline-item completed"><div class="timeline-icon"></div><div class="timeline-content"><h5>Tahap Pengemasan & Quality Control</h5><p>Paket lolos uji mutu dan dikemas rapi.</p></div></div>
-                        <div class="timeline-item active"><div class="timeline-icon"></div><div class="timeline-content"><h5>Dalam Pengiriman ke Alamat Tujuan</h5><p>Kurir sedang dalam perjalanan menuju lokasi Anda.</p></div></div>
-                    </div>
-                `;
+                        <div class="status-badge"><i class="fa-solid fa-clock"></i> STATUS</div>
+                        <h3 class="status-title">Pesanan Diverifikasi</h3>
+                        <div style="font-size:12px; color:#6b7280;">Resi: <strong style="color:#111;">${resiInput}</strong></div>
+                    </div>`;
             }, 1000);
         }
 
-        function renderInfoPage(judul, kontenHTML) {
-            toggleFooterUtama(true); autoClose(); window.scrollTo(0,0);
-            document.getElementById('app').innerHTML = `<div class="info-card"><h2>${judul}</h2>${kontenHTML}</div>`;
-        }
+        function renderInfoPage(judul, kontenHTML) { toggleFooterUtama(true); autoClose(); window.scrollTo(0,0); document.getElementById('app').innerHTML = `<div class="info-card"><h2>${judul}</h2>${kontenHTML}</div>`; }
+        function renderGaransi() { renderInfoPage("Kebijakan Garansi Resmi", "<p>Masa garansi aktif selama 3 (tiga) bulan sejak pembelian.</p>"); }
+        function renderPengiriman() { renderInfoPage("Ketentuan Pengiriman", "<p>Kami bekerjasama dengan Gamoon e-Package untuk pengiriman sameday.</p>"); }
+        function renderPembayaran() { renderInfoPage("Pembayaran", "<p>Pembayaran diproses dengan gerbang pembayaran berlisensi OJK.</p>"); }
+        function renderPrivasi() { renderInfoPage("Kebijakan Privasi", "<p>Data pribadi Anda dilindungi sesuai standar keamanan.</p>"); }
 
-        function renderGaransi() {
-            let konten = `<p>Sebagai bentuk komitmen PT Gerbang Masa Depan terhadap mutu dan kepuasan pelanggan, kami menetapkan regulasi perlindungan purnajual melalui Kebijakan Garansi Resmi. Seluruh konsumen berhak mendapatkan perlindungan dengan ketentuan sebagai berikut:</p><ol style="padding-left: 18px; margin-top: 15px;"><li style="margin-bottom: 10px;"><strong>Status Barang:</strong> Garansi berlaku eksklusif untuk barang original yang didistribusikan melalui jalur resmi Ousevoid.</li><li style="margin-bottom: 10px;"><strong>Masa Berlaku:</strong> Masa garansi aktif selama 3 (tiga) bulan, dihitung secara presisi sejak tanggal cetak bukti transaksi/invoice pembelian.</li><li style="margin-bottom: 10px;"><strong>Cakupan Insiden:</strong> Garansi secara sah hanya menanggung kerusakan fisik berupa cacat bawaan pabrik <em>(manufacturing defect)</em> atau malfungsi sistem yang bukan disebabkan oleh kelalaian manusia.</li><li style="margin-bottom: 10px;"><strong>Pengecualian Mutlak:</strong> Kerusakan akibat cairan <em>(water damage)</em>, korsleting arus eksternal, benturan keras, maupun modifikasi oleh teknisi tidak resmi tidak termasuk dalam perlindungan ini.</li><li style="margin-bottom: 10px;"><strong>Prosedur Pelaporan:</strong> Klaim harus diajukan melalui portal komunikasi resmi perusahaan dalam batas waktu masa aktif garansi.</li><li style="margin-bottom: 10px;"><strong>Dokumen Wajib:</strong> Pemohon wajib melampirkan invoice asli dan video <em>unboxing</em> tanpa manipulasi penyuntingan.</li><li style="margin-bottom: 10px;"><strong>Validasi Fisik:</strong> Produk yang diklaim harus dikirim kembali ke pusat inspeksi Ousevoid untuk tahapan verifikasi teknis secara mendalam.</li><li style="margin-bottom: 10px;"><strong>Estimasi Waktu:</strong> Evaluasi teknis dan perbaikan memakan waktu 7 hingga 14 hari kerja operasional.</li><li style="margin-bottom: 10px;"><strong>Penggantian Unit:</strong> Jika unit dipastikan cacat produksi massal dan tidak dapat direparasi, perusahaan akan mengganti dengan unit baru dengan spesifikasi setara.</li><li style="margin-bottom: 10px;"><strong>Ketentuan Akhir:</strong> Hasil audit dari teknisi in-house PT Gerbang Masa Depan bersifat mengikat dan menjadi keputusan mutlak (final).</li></ol>`;
-            renderInfoPage("Kebijakan Garansi Resmi", konten);
-        }
-
-        function renderPengiriman() {
-            let konten = `<p>Kami menyadari bahwa kecepatan distribusi adalah kunci integritas e-commerce. Berikut adalah ketentuan mutlak operasional logistik dan pengiriman di Ousevoid:</p><ol style="padding-left: 18px; margin-top: 15px;"><li style="margin-bottom: 10px;"><strong>Mitra Logistik Utama:</strong> Ousevoid menunjuk Gamoon e-Package sebagai garda depan pengiriman prioritas kami, didukung oleh jasa ekspedisi konvensional berskala nasional.</li><li style="margin-bottom: 10px;"><strong>Layanan Prioritas Sameday:</strong> Tersedia fasilitas tiba maksimal 8 jam operasional, berlaku secara eksklusif untuk wilayah yurisdiksi Jakarta dan Bodetabek.</li><li style="margin-bottom: 10px;"><strong>Layanan Ekspedisi Nasional:</strong> Pengiriman reguler antar-provinsi memakan waktu 2 hingga 5 hari kerja, mengacu pada SLA dari kurir masing-masing.</li><li style="margin-bottom: 10px;"><strong>Waktu Pemrosesan Gudang:</strong> Transaksi yang terkonfirmasi pembayarannya sebelum pukul 15.00 WIB akan dikemas dan diserahkan ke pihak logistik pada hari yang sama (H+0).</li><li style="margin-bottom: 10px;"><strong>Kewajiban Alamat:</strong> Pengguna layanan memikul tanggung jawab penuh terhadap kebenaran dan presisi penulisan alamat domisili.</li><li style="margin-bottom: 10px;"><strong>Asuransi Muatan:</strong> Setiap produk yang memiliki nilai tinggi (High Value Goods) secara otomatis akan diproteksi oleh asuransi pengiriman terintegrasi.</li><li style="margin-bottom: 10px;"><strong>Pemantauan Real-time:</strong> Pelanggan diberikan otorisasi penuh untuk melacak pergerakan paket menggunakan Nomor Resi melalui portal situs web kami.</li><li style="margin-bottom: 10px;"><strong>Kebijakan Keterlambatan:</strong> Segala bentuk keterlambatan di luar SLA normal akan kami bantu mediasi (eskalasi) ke pihak manajemen kurir.</li><li style="margin-bottom: 10px;"><strong>Syarat Penerimaan Barang:</strong> Penerima disarankan melakukan dokumentasi visual saat serah terima barang sebagai bukti sah terhindar dari penyusutan logistik.</li><li style="margin-bottom: 10px;"><strong>Force Majeure:</strong> Durasi pengiriman bisa tertangguhkan akibat keadaan kahar (bencana alam, huru-hara, atau gangguan sistem lalu lintas nasional).</li></ol>`;
-            renderInfoPage("Ketentuan Pengiriman", konten);
-        }
-
-        function renderPembayaran() {
-            let konten = `<p>Ekosistem finansial pada platform Ousevoid diproteksi secara siber untuk mencegah adanya rekayasa transaksi. Hal ini tertuang dalam poin Regulasi Pembayaran berikut:</p><ol style="padding-left: 18px; margin-top: 15px;"><li style="margin-bottom: 10px;"><strong>Otoritas Pengawasan:</strong> Semua transaksi yang masuk diproses dengan gerbang pembayaran berlisensi yang diawasi penuh oleh Otoritas Jasa Keuangan (OJK).</li><li style="margin-bottom: 10px;"><strong>Enkripsi Siber:</strong> Platform menggunakan Secure Socket Layer (SSL) 256-bit guna menjamin perlindungan peretasan terhadap data perbankan Pengguna.</li><li style="margin-bottom: 10px;"><strong>Metode E-Wallet:</strong> Dukungan penuh untuk pembayaran dompet digital (GoPay, DANA, ShopeePay) dengan proses validasi <em>real-time</em> milidetik.</li><li style="margin-bottom: 10px;"><strong>Metode Virtual Account:</strong> Dukungan setoran bank konvensional melalui nomor seri unik (BCA, Mandiri, BNI, BRI) yang dihasilkan otomatis.</li><li style="margin-bottom: 10px;"><strong>Integrasi QRIS Nasional:</strong> Transaksi lintas platform didukung melalui standarisasi kode respon cepat Bank Indonesia.</li><li style="margin-bottom: 10px;"><strong>Batas Kedaluwarsa Tagihan:</strong> Pengguna diwajibkan menyelesaikan pembayaran maksimal 24 jam setelah invoice diterbitkan. Lewat dari itu, status pemesanan digugurkan secara sistem (auto-cancel).</li><li style="margin-bottom: 10px;"><strong>Otomasi Verifikasi:</strong> Konfirmasi penyelesaian transaksi akan masuk secara otomatis tanpa perlu mengunggah struk/bukti transfer manual.</li><li style="margin-bottom: 10px;"><strong>Bukti Legal:</strong> Struk digital / e-Invoice yang diterbitkan sistem adalah sah di mata hukum perniagaan nasional sebagai alat tukar garansi.</li><li style="margin-bottom: 10px;"><strong>Kebijakan Pengembalian Dana (Refund):</strong> Proses pencairan ulang hanya dapat ditindaklanjuti apabila status ketersediaan barang di gudang kosong pasca-pembayaran berhasil.</li><li style="margin-bottom: 10px;"><strong>Anti Fraud:</strong> Kami menggunakan kecerdasan sistem (AI risk scoring) yang dapat membatalkan sepihak jika terdeteksi aktivitas kartu kredit / transaksi mencurigakan.</li></ol>`;
-            renderInfoPage("Pembayaran", konten);
-        }
-
-        function renderPrivasi() {
-            let konten = `<p>Data pribadi Anda merupakan komoditas yang wajib dilindungi. PT Gerbang Masa Depan berkomitmen menegakkan integritas berdasarkan klausul kebijakan berikut:</p><ol style="padding-left: 18px; margin-top: 15px;"><li style="margin-bottom: 10px;"><strong>Kepatuhan Hukum:</strong> Pedoman manajemen data kami berjalan 100% selaras dengan Undang-Undang Perlindungan Data Pribadi (UU PDP) Republik Indonesia.</li><li style="margin-bottom: 10px;"><strong>Klasifikasi Data Terkumpul:</strong> Perusahaan hanya akan memproses nama sah, alamat rumah/domisili, kontak handphone, serta surel pembeli.</li><li style="margin-bottom: 10px;"><strong>Tujuan Pengolahan:</strong> Eksploitasi data sangat dibatasi semata-mata untuk verifikasi pembayaran, pencetakan resi kurir logistik, dan administrasi pasca-jual.</li><li style="margin-bottom: 10px;"><strong>Larangan Komersialisasi:</strong> Dengan tegas dinyatakan bahwa kami tidak memperjualbelikan, menukar, maupun menyewakan data Anda ke entitas bisnis pihak ketiga (Third Party).</li><li style="margin-bottom: 10px;"><strong>Pengamanan Pangkalan Data:</strong> Infrastruktur Cloudflare digunakan untuk melindungi sistem database dari serangan injeksi dan pencurian data masif (DDoS protection).</li><li style="margin-bottom: 10px;"><strong>Isolasi Hak Akses:</strong> Hanya staf berotoritas tingkat tinggi dalam divisi <em>Customer Support</em> yang dapat mengakses kredensial pesanan Anda.</li><li style="margin-bottom: 10px;"><strong>Transparansi Finansial:</strong> Perusahaan tidak memiliki kewenangan teknis maupun akses untuk menahan atau membaca rincian pin/CVV perbankan pelanggan.</li><li style="margin-bottom: 10px;"><strong>Prosedur Pemusnahan Data:</strong> Setelah kurun waktu kewajiban audit pajak selesai, metadata spesifik identitas pengguna akan dianonimkan dari server primer.</li><li style="margin-bottom: 10px;"><strong>Pelacakan Cookies:</strong> Kami hanya menyematkan 'Essential Cookies' guna mempertahankan sesi keranjang belanja (Cart Session) pada peramban web Pengguna.</li><li style="margin-bottom: 10px;"><strong>Hak Pengguna:</strong> Anda memegang kedaulatan mutlak untuk memohon koreksi kesalahan data cetak sebelum resi logistik dicetak oleh gudang pengemasan.</li></ol>`;
-            renderInfoPage("Kebijakan Privasi", konten);
-        }
-
-        // LOAD PRODUK DATABASE
+        // =========================================================================
+        // LOAD PRODUK DARI FIREBASE FIRESTORE 
+        // =========================================================================
         async function muatProdukDariDatabase() {
             var app = document.getElementById('app');
             app.innerHTML = '<div style="padding:100px 20px; text-align:center;"><i class="fa-solid fa-circle-notch fa-spin" style="font-size:40px; color:#111; margin-bottom:20px;"></i><div style="font-size:14px; color:#555; font-weight:700;">Menghubungkan ke Pangkalan Data...</div></div>';
+            
             try {
-                const response = await fetch("/api/produk"); 
-                const dataProdukApi = await response.json();
-                
-                if (dataProdukApi && dataProdukApi.length > 0) {
-                    products = dataProdukApi.map(p => {
+                const snapshot = await dbFirestore.collection('produk').get();
+                products = [];
+                if (!snapshot.empty) {
+                    snapshot.forEach(doc => {
+                        let p = doc.data();
                         let parsedVariants = []; 
                         try { parsedVariants = p.variants ? JSON.parse(p.variants) : []; } catch(e) {}
-                        return { id: p.id, name: p.nama, priceValue: p.harga, price: 'Rp ' + p.harga.toLocaleString('id-ID'), img: p.img_url, category: p.kategori || "Earbuds", specs: { deskripsi: p.deskripsi }, variants: parsedVariants };
+                        products.push({ 
+                            id: doc.id, name: p.nama, priceValue: p.harga, 
+                            price: 'Rp ' + p.harga.toLocaleString('id-ID'), 
+                            img: p.img_url, category: p.kategori || "Earbuds", 
+                            specs: { deskripsi: p.deskripsi }, variants: parsedVariants 
+                        });
                     });
-                } else { products = []; }
+                }
             } catch (error) { products = []; }
             renderHome();
         }
@@ -1087,7 +994,6 @@
         window.onload = function() { 
             muatProdukDariDatabase(); 
         };
-
     </script>
 </body>
 </html>
