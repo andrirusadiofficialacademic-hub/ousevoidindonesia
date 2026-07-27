@@ -149,7 +149,7 @@
         @media(min-width: 768px) { .co-bottom-bar { padding: 15px 40px; } }
 
         /* ==========================================
-           6. HALAMAN PELACAKAN (TRACKING) UI FIX
+           6. HALAMAN PELACAKAN (TRACKING)
            ========================================== */
         .track-box { background: #fff; border: 1px solid #e5e7eb; border-radius: 24px; padding: 30px 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); max-width: 600px; margin: 40px auto; }
         .track-input-group { display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; }
@@ -227,7 +227,11 @@
         .login-input:focus { border-color: #111; background: #fff; }
         .login-link { font-size: 11px; color: #3b82f6; font-weight: 600; cursor: pointer; margin-top: 15px; display: block; text-decoration: underline; }
         
-        .info-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 20px; padding: 30px; text-align: left; line-height: 1.8; font-size: 13px; color: #374151; margin-bottom: 20px; }
+        .info-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 20px; padding: 40px; text-align: left; line-height: 1.8; font-size: 14px; color: #374151; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
+        .info-card h2 { font-size: 24px; font-weight: 800; color: #111; margin-bottom: 25px; border-bottom: 2px solid #f3f4f6; padding-bottom: 15px; }
+        .info-card ol { padding-left: 20px; margin-top: 15px; }
+        .info-card li { margin-bottom: 15px; text-align: justify; }
+        .info-card li strong { color: #111; font-weight: 800; display: inline-block; margin-bottom: 5px; }
         
         .footer { padding: 60px 20px 30px 20px; background: #fff; text-align: left; font-size: 13px; color: #555; border-top: 1px solid #eee; }
         .footer-profile-title { font-weight: 800; color: #111; margin-bottom: 15px; font-size: 16px; }
@@ -301,6 +305,7 @@
                 <div class="nav-item" onclick="renderPengiriman()"><i class="fa-solid fa-truck-fast"></i> Pengiriman</div>
                 <div class="nav-item" onclick="renderPembayaran()"><i class="fa-solid fa-credit-card"></i> Pembayaran</div>
                 <div class="nav-item" onclick="renderPrivasi()"><i class="fa-solid fa-lock"></i> Kebijakan Privasi</div>
+                <div class="nav-item" onclick="renderSyaratKetentuan()"><i class="fa-solid fa-file-contract"></i> Syarat & Ketentuan</div>
             </div>
         </div>
         <div style="padding-top:15px; border-top:1px solid #f3f4f6;">
@@ -319,7 +324,7 @@
     <div class="chat-window" id="chatWindow">
         <div class="chat-header">
             <div class="chat-header-info">
-                <img src="uploaded:10685.jpg-840c644b-ea44-451f-b6af-9acc5d41cfcb" id="chatAvatarImg" alt="Bot Chat" class="chat-avatar">
+                <img src="https://i.ibb.co.com/NgnYF4vP/10852.jpg" id="chatAvatarImg" alt="Bot Chat" class="chat-avatar">
                 <div class="chat-name-status">
                     <span class="chat-name" id="chatAgentName">Marsya (Bot Chat)</span>
                     <div class="chat-status-wrap">
@@ -502,7 +507,6 @@
             app.innerHTML = html + `</div>`;
         }
 
-
         // RENDER BERANDA
         function renderHome() {
             toggleFooterUtama(true);
@@ -555,7 +559,6 @@
             app.innerHTML = html;
             mulaiSliderBanner();
 
-            // AMBIL DATA BANNER DARI FIREBASE
             dbFirestore.collection('pengaturan').doc('banner').get().then(doc => {
                 if(doc.exists) {
                     let b = doc.data();
@@ -805,7 +808,7 @@
 
         function initChatMarsya() {
             chatState = 0;
-            document.getElementById('chatAvatarImg').src = "uploaded:10685.jpg-840c644b-ea44-451f-b6af-9acc5d41cfcb";
+            document.getElementById('chatAvatarImg').src = "https://i.ibb.co.com/NgnYF4vP/10852.jpg";
             document.getElementById('chatAgentName').innerText = "Marsya (Bot Chat)";
             document.getElementById('cs-status-dot').className = "status-dot bot";
             document.getElementById('cs-status-text').innerText = "Bot";
@@ -925,7 +928,7 @@
         }
 
         // =========================================================================
-        // HALAMAN INFO STATIS (FULL TEKS DIKEMBALIKAN)
+        // HALAMAN INFO STATIS (FULL TEKS & DASAR HUKUM 20 POIN)
         // =========================================================================
         function renderLacakPesanan() {
             toggleFooterUtama(true); autoClose(); window.scrollTo(0,0);
@@ -967,27 +970,122 @@
 
         function renderInfoPage(judul, kontenHTML) {
             toggleFooterUtama(true); autoClose(); window.scrollTo(0,0);
-            document.getElementById('app').innerHTML = `<div class="info-card"><h2>${judul}</h2>${kontenHTML}</div>`;
+            document.getElementById('app').innerHTML = `
+                <div class="info-card">
+                    <h2>${judul}</h2>
+                    ${kontenHTML}
+                </div>
+            `;
         }
 
         function renderGaransi() {
-            let konten = `<p>Sebagai bentuk komitmen PT Gerbang Masa Depan terhadap mutu dan kepuasan pelanggan, kami menetapkan regulasi perlindungan purnajual melalui Kebijakan Garansi Resmi. Seluruh konsumen berhak mendapatkan perlindungan dengan ketentuan sebagai berikut:</p><ol style="padding-left: 18px; margin-top: 15px;"><li style="margin-bottom: 10px;"><strong>Status Barang:</strong> Garansi berlaku eksklusif untuk barang original yang didistribusikan melalui jalur resmi Ousevoid.</li><li style="margin-bottom: 10px;"><strong>Masa Berlaku:</strong> Masa garansi aktif selama 3 (tiga) bulan, dihitung secara presisi sejak tanggal cetak bukti transaksi/invoice pembelian.</li><li style="margin-bottom: 10px;"><strong>Cakupan Insiden:</strong> Garansi secara sah hanya menanggung kerusakan fisik berupa cacat bawaan pabrik <em>(manufacturing defect)</em> atau malfungsi sistem yang bukan disebabkan oleh kelalaian manusia.</li><li style="margin-bottom: 10px;"><strong>Pengecualian Mutlak:</strong> Kerusakan akibat cairan <em>(water damage)</em>, korsleting arus eksternal, benturan keras, maupun modifikasi oleh teknisi tidak resmi tidak termasuk dalam perlindungan ini.</li><li style="margin-bottom: 10px;"><strong>Prosedur Pelaporan:</strong> Klaim harus diajukan melalui portal komunikasi resmi perusahaan dalam batas waktu masa aktif garansi.</li><li style="margin-bottom: 10px;"><strong>Dokumen Wajib:</strong> Pemohon wajib melampirkan invoice asli dan video <em>unboxing</em> tanpa manipulasi penyuntingan.</li><li style="margin-bottom: 10px;"><strong>Validasi Fisik:</strong> Produk yang diklaim harus dikirim kembali ke pusat inspeksi Ousevoid untuk tahapan verifikasi teknis secara mendalam.</li><li style="margin-bottom: 10px;"><strong>Estimasi Waktu:</strong> Evaluasi teknis dan perbaikan memakan waktu 7 hingga 14 hari kerja operasional.</li><li style="margin-bottom: 10px;"><strong>Penggantian Unit:</strong> Jika unit dipastikan cacat produksi massal dan tidak dapat direparasi, perusahaan akan mengganti dengan unit baru dengan spesifikasi setara.</li><li style="margin-bottom: 10px;"><strong>Ketentuan Akhir:</strong> Hasil audit dari teknisi in-house PT Gerbang Masa Depan bersifat mengikat dan menjadi keputusan mutlak (final).</li></ol>`;
+            let konten = `
+                <p>Sebagai bentuk komitmen PT Gerbang Masa Depan terhadap mutu dan kepuasan pelanggan, kami menetapkan regulasi perlindungan purnajual melalui Kebijakan Garansi Resmi. Seluruh konsumen berhak mendapatkan perlindungan dengan ketentuan mutlak sebagai berikut:</p>
+                <ol>
+                    <li><strong>Status Distribusi Barang:</strong> Garansi berlaku eksklusif untuk barang original yang didistribusikan secara sah melalui platform dan jalur distribusi resmi Ousevoid.</li>
+                    <li><strong>Masa Berlaku Garansi:</strong> Masa garansi sistem dan perangkat keras aktif selama 3 (tiga) bulan penuh, dihitung secara presisi sejak tanggal cetak bukti transaksi (invoice) pembelian.</li>
+                    <li><strong>Cakupan Insiden:</strong> Garansi secara sah hanya menanggung kerusakan fisik berupa cacat bawaan pabrik <em>(manufacturing defect)</em> atau malfungsi sistem perangkat lunak yang bukan disebabkan oleh kelalaian manusia <em>(human error)</em>.</li>
+                    <li><strong>Pengecualian Mutlak:</strong> Kerusakan akibat cairan <em>(water damage/liquid exposure)</em>, korsleting arus eksternal <em>(overcharge/electrical surge)</em>, benturan keras <em>(physical drop)</em>, maupun modifikasi oleh teknisi pihak ketiga yang tidak resmi, tidak termasuk dalam perlindungan asuransi garansi ini.</li>
+                    <li><strong>Prosedur Pelaporan Klaim:</strong> Proses pengajuan klaim garansi harus diajukan melalui portal komunikasi resmi perusahaan atau layanan pelanggan kami dalam batas waktu masa aktif garansi yang telah ditentukan.</li>
+                    <li><strong>Dokumen Wajib Verifikasi:</strong> Pemohon wajib melampirkan invoice elektronik asli dan bukti video <em>unboxing</em> (buka kemasan) sejak awal paket diterima tanpa manipulasi, pemotongan, atau penyuntingan visual.</li>
+                    <li><strong>Validasi Fisik:</strong> Produk yang diklaim harus dikirim kembali ke pusat inspeksi teknis Ousevoid untuk tahapan verifikasi <em>Quality Control</em> secara mendalam. Biaya pengiriman retur ditanggung secara mandiri oleh pihak pembeli.</li>
+                    <li><strong>Estimasi Waktu Reparasi:</strong> Proses evaluasi teknis dan perbaikan (reparasi) perangkat memakan waktu 7 hingga 14 hari kerja operasional (tidak termasuk akhir pekan dan hari libur nasional).</li>
+                    <li><strong>Penggantian Unit Baru:</strong> Apabila unit dipastikan mengalami cacat produksi massal (cacat pabrik) secara total dan tidak dapat direparasi oleh teknisi kami, maka perusahaan akan mengganti dengan unit produk baru (Replace) yang memiliki spesifikasi setara.</li>
+                    <li><strong>Keputusan Akhir (Final):</strong> Hasil audit dari tim teknisi <em>in-house</em> PT Gerbang Masa Depan bersifat mengikat, absolut, dan menjadi keputusan mutlak (final) yang tidak dapat diganggu gugat secara hukum.</li>
+                </ol>`;
             renderInfoPage("Kebijakan Garansi Resmi", konten);
         }
 
         function renderPengiriman() {
-            let konten = `<p>Kami menyadari bahwa kecepatan distribusi adalah kunci integritas e-commerce. Berikut adalah ketentuan mutlak operasional logistik dan pengiriman di Ousevoid:</p><ol style="padding-left: 18px; margin-top: 15px;"><li style="margin-bottom: 10px;"><strong>Mitra Logistik Utama:</strong> Ousevoid menunjuk Gamoon e-Package sebagai garda depan pengiriman prioritas kami, didukung oleh jasa ekspedisi konvensional berskala nasional.</li><li style="margin-bottom: 10px;"><strong>Layanan Prioritas Sameday:</strong> Tersedia fasilitas tiba maksimal 8 jam operasional, berlaku secara eksklusif untuk wilayah yurisdiksi Jakarta dan Bodetabek.</li><li style="margin-bottom: 10px;"><strong>Layanan Ekspedisi Nasional:</strong> Pengiriman reguler antar-provinsi memakan waktu 2 hingga 5 hari kerja, mengacu pada SLA dari kurir masing-masing.</li><li style="margin-bottom: 10px;"><strong>Waktu Pemrosesan Gudang:</strong> Transaksi yang terkonfirmasi pembayarannya sebelum pukul 15.00 WIB akan dikemas dan diserahkan ke pihak logistik pada hari yang sama (H+0).</li><li style="margin-bottom: 10px;"><strong>Kewajiban Alamat:</strong> Pengguna layanan memikul tanggung jawab penuh terhadap kebenaran dan presisi penulisan alamat domisili.</li><li style="margin-bottom: 10px;"><strong>Asuransi Muatan:</strong> Setiap produk yang memiliki nilai tinggi (High Value Goods) secara otomatis akan diproteksi oleh asuransi pengiriman terintegrasi.</li><li style="margin-bottom: 10px;"><strong>Pemantauan Real-time:</strong> Pelanggan diberikan otorisasi penuh untuk melacak pergerakan paket menggunakan Nomor Resi melalui portal situs web kami.</li><li style="margin-bottom: 10px;"><strong>Kebijakan Keterlambatan:</strong> Segala bentuk keterlambatan di luar SLA normal akan kami bantu mediasi (eskalasi) ke pihak manajemen kurir.</li><li style="margin-bottom: 10px;"><strong>Syarat Penerimaan Barang:</strong> Penerima disarankan melakukan dokumentasi visual saat serah terima barang sebagai bukti sah terhindar dari penyusutan logistik.</li><li style="margin-bottom: 10px;"><strong>Force Majeure:</strong> Durasi pengiriman bisa tertangguhkan akibat keadaan kahar (bencana alam, huru-hara, atau gangguan sistem lalu lintas nasional).</li></ol>`;
-            renderInfoPage("Ketentuan Pengiriman", konten);
+            let konten = `
+                <p>Kami menyadari bahwa kecepatan dan keamanan distribusi adalah kunci dari integritas layanan e-commerce kami. Berikut adalah ketentuan mutlak operasional logistik dan pengiriman di Ousevoid:</p>
+                <ol>
+                    <li><strong>Mitra Logistik Utama:</strong> Ousevoid menunjuk Gamoon e-Package sebagai garda depan pengiriman prioritas kami, didukung oleh jaringan jasa ekspedisi konvensional berskala nasional (SiCepat, J&T, JNE).</li>
+                    <li><strong>Layanan Prioritas Sameday:</strong> Tersedia fasilitas pengiriman tiba di hari yang sama maksimal 8 jam operasional, berlaku secara eksklusif untuk wilayah yurisdiksi cakupan Jakarta Raya dan Bodetabek.</li>
+                    <li><strong>Layanan Ekspedisi Nasional (Reguler):</strong> Pengiriman reguler antar-provinsi memakan waktu estimasi 2 hingga 5 hari kerja, sangat bergantung pada <em>Service Level Agreement</em> (SLA) dari mitra kurir masing-masing area.</li>
+                    <li><strong>Batas Waktu Pemrosesan Gudang (Cut-Off):</strong> Seluruh transaksi yang terkonfirmasi lunas pembayarannya sebelum pukul 15.00 WIB akan langsung dikemas dan diserahkan ke pihak logistik pada hari yang sama (H+0). Transaksi melewati batas waktu akan diproses di hari kerja berikutnya.</li>
+                    <li><strong>Kewajiban Alamat:</strong> Pengguna layanan memikul tanggung jawab penuh secara hukum terhadap kebenaran, kelengkapan, dan presisi penulisan titik alamat domisili untuk menghindari kegagalan pengantaran.</li>
+                    <li><strong>Asuransi Muatan Pengiriman:</strong> Setiap produk yang memiliki nilai tinggi (High Value Goods) dan telah ditambahkan opsi asuransi pada saat *checkout* akan diproteksi penuh jika terjadi kehilangan atau kerusakan struktural di jalan oleh kurir.</li>
+                    <li><strong>Pemantauan Real-time (Tracking):</strong> Pelanggan diberikan otorisasi penuh untuk melacak pergerakan paket secara langsung menggunakan Nomor Resi Logistik atau Nomor Invoice melalui portal sistem pelacakan (Tracking) di situs web kami.</li>
+                    <li><strong>Kebijakan Keterlambatan Pengiriman:</strong> Segala bentuk keterlambatan penerimaan barang di luar masa SLA normal akibat kelalaian kurir akan kami bantu mediasi atau eskalasi ke pihak manajemen pusat penyedia logistik terkait.</li>
+                    <li><strong>Syarat Penerimaan Barang (Bukti Sah):</strong> Pihak penerima disarankan dan diwajibkan melakukan dokumentasi visual saat serah terima barang dari kurir sebagai bukti sah untuk menghindar dari penyusutan logistik atau tindak pencurian isi paket.</li>
+                    <li><strong>Keadaan Kahar (Force Majeure):</strong> Durasi pengiriman bisa tertangguhkan akibat keadaan kahar yang di luar kendali manusia seperti bencana alam berskala besar, huru-hara, kebijakan karantina, atau gangguan sistem lalu lintas logistik nasional.</li>
+                </ol>`;
+            renderInfoPage("Ketentuan Pengiriman & Logistik", konten);
         }
 
         function renderPembayaran() {
-            let konten = `<p>Ekosistem finansial pada platform Ousevoid diproteksi secara siber untuk mencegah adanya rekayasa transaksi. Hal ini tertuang dalam poin Regulasi Pembayaran berikut:</p><ol style="padding-left: 18px; margin-top: 15px;"><li style="margin-bottom: 10px;"><strong>Otoritas Pengawasan:</strong> Semua transaksi yang masuk diproses dengan gerbang pembayaran berlisensi yang diawasi penuh oleh Otoritas Jasa Keuangan (OJK).</li><li style="margin-bottom: 10px;"><strong>Enkripsi Siber:</strong> Platform menggunakan Secure Socket Layer (SSL) 256-bit guna menjamin perlindungan peretasan terhadap data perbankan Pengguna.</li><li style="margin-bottom: 10px;"><strong>Metode E-Wallet:</strong> Dukungan penuh untuk pembayaran dompet digital (GoPay, DANA, ShopeePay) dengan proses validasi <em>real-time</em> milidetik.</li><li style="margin-bottom: 10px;"><strong>Metode Virtual Account:</strong> Dukungan setoran bank konvensional melalui nomor seri unik (BCA, Mandiri, BNI, BRI) yang dihasilkan otomatis.</li><li style="margin-bottom: 10px;"><strong>Integrasi QRIS Nasional:</strong> Transaksi lintas platform didukung melalui standarisasi kode respon cepat Bank Indonesia.</li><li style="margin-bottom: 10px;"><strong>Batas Kedaluwarsa Tagihan:</strong> Pengguna diwajibkan menyelesaikan pembayaran maksimal 24 jam setelah invoice diterbitkan. Lewat dari itu, status pemesanan digugurkan secara sistem (auto-cancel).</li><li style="margin-bottom: 10px;"><strong>Otomasi Verifikasi:</strong> Konfirmasi penyelesaian transaksi akan masuk secara otomatis tanpa perlu mengunggah struk/bukti transfer manual.</li><li style="margin-bottom: 10px;"><strong>Bukti Legal:</strong> Struk digital / e-Invoice yang diterbitkan sistem adalah sah di mata hukum perniagaan nasional sebagai alat tukar garansi.</li><li style="margin-bottom: 10px;"><strong>Kebijakan Pengembalian Dana (Refund):</strong> Proses pencairan ulang hanya dapat ditindaklanjuti apabila status ketersediaan barang di gudang kosong pasca-pembayaran berhasil.</li><li style="margin-bottom: 10px;"><strong>Anti Fraud:</strong> Kami menggunakan kecerdasan sistem (AI risk scoring) yang dapat membatalkan sepihak jika terdeteksi aktivitas kartu kredit / transaksi mencurigakan.</li></ol>`;
-            renderInfoPage("Pembayaran", konten);
+            let konten = `
+                <p>Ekosistem finansial pada platform Ousevoid diproteksi secara ketat oleh infrastruktur siber mutakhir untuk mencegah adanya peretasan atau rekayasa transaksi perbankan. Hal ini tertuang tegas dalam poin Regulasi Pembayaran berikut:</p>
+                <ol>
+                    <li><strong>Otoritas Pengawasan:</strong> Semua lalu lintas transaksi uang yang masuk diproses menggunakan gerbang pembayaran berlisensi (Payment Gateway) yang diawasi penuh oleh Bank Indonesia (BI) dan Otoritas Jasa Keuangan (OJK).</li>
+                    <li><strong>Enkripsi Siber (Keamanan Data):</strong> Platform Ousevoid menggunakan protokol keamanan <em>Secure Socket Layer</em> (SSL) 256-bit guna menjamin perlindungan peretasan terhadap intersepsi data perbankan Pengguna saat transaksi.</li>
+                    <li><strong>Metode Dompet Digital (E-Wallet):</strong> Sistem memberikan dukungan penuh untuk metode pembayaran dompet digital populer (GoPay, DANA, ShopeePay) dengan proses validasi <em>real-time</em> dalam hitungan milidetik.</li>
+                    <li><strong>Metode Virtual Account (VA):</strong> Dukungan setoran perbankan konvensional dan <em>mobile banking</em> melalui nomor seri unik (BCA, Mandiri, BNI, BRI, BTN) yang dihasilkan otomatis oleh sistem untuk setiap pengguna secara independen.</li>
+                    <li><strong>Batas Waktu Kedaluwarsa Tagihan:</strong> Pengguna diwajibkan menyelesaikan instruksi pembayaran maksimal 24 jam setelah invoice tagihan diterbitkan oleh sistem. Lewat dari kurun waktu tersebut, status pemesanan akan digugurkan secara otomatis (auto-cancel).</li>
+                    <li><strong>Otomasi Verifikasi Pembayaran:</strong> Konfirmasi penyelesaian transaksi Anda akan diproses dan masuk secara otomatis oleh robot server kami tanpa perlu Pengguna mengunggah gambar struk/bukti transfer manual ke pihak CS.</li>
+                    <li><strong>Bukti Legal Faktur (Invoice):</strong> Struk digital atau e-Invoice yang diterbitkan sistem adalah dokumen yang sah di mata hukum perniagaan nasional Republik Indonesia dan berfungsi sebagai alat tukar sah untuk mengklaim garansi.</li>
+                    <li><strong>Kebijakan Pengembalian Dana (Refund):</strong> Proses pencairan ulang atau pengembalian dana ke rekening pengguna hanya dapat ditindaklanjuti apabila status ketersediaan stok fisik barang di gudang kami kosong sesaat pasca-pembayaran berhasil.</li>
+                    <li><strong>Sistem Anti Penipuan (Anti-Fraud):</strong> Kami menggunakan kecerdasan buatan (AI risk scoring) yang berhak membatalkan transaksi sepihak dan memblokir akun jika terdeteksi adanya aktivitas kartu kredit / transaksi curian (carding).</li>
+                    <li><strong>Mata Uang Transaksi:</strong> Seluruh nilai transaksi, penagihan, dan pengembalian dana pada sistem Ousevoid menggunakan mata uang Rupiah (IDR), terlepas dari lokasi geografis pengguna.</li>
+                </ol>`;
+            renderInfoPage("Regulasi Metode Pembayaran", konten);
         }
 
         function renderPrivasi() {
-            let konten = `<p>Data pribadi Anda merupakan komoditas yang wajib dilindungi. PT Gerbang Masa Depan berkomitmen menegakkan integritas berdasarkan klausul kebijakan berikut:</p><ol style="padding-left: 18px; margin-top: 15px;"><li style="margin-bottom: 10px;"><strong>Kepatuhan Hukum:</strong> Pedoman manajemen data kami berjalan 100% selaras dengan Undang-Undang Perlindungan Data Pribadi (UU PDP) Republik Indonesia.</li><li style="margin-bottom: 10px;"><strong>Klasifikasi Data Terkumpul:</strong> Perusahaan hanya akan memproses nama sah, alamat rumah/domisili, kontak handphone, serta surel pembeli.</li><li style="margin-bottom: 10px;"><strong>Tujuan Pengolahan:</strong> Eksploitasi data sangat dibatasi semata-mata untuk verifikasi pembayaran, pencetakan resi kurir logistik, dan administrasi pasca-jual.</li><li style="margin-bottom: 10px;"><strong>Larangan Komersialisasi:</strong> Dengan tegas dinyatakan bahwa kami tidak memperjualbelikan, menukar, maupun menyewakan data Anda ke entitas bisnis pihak ketiga (Third Party).</li><li style="margin-bottom: 10px;"><strong>Pengamanan Pangkalan Data:</strong> Infrastruktur Cloudflare digunakan untuk melindungi sistem database dari serangan injeksi dan pencurian data masif (DDoS protection).</li><li style="margin-bottom: 10px;"><strong>Isolasi Hak Akses:</strong> Hanya staf berotoritas tingkat tinggi dalam divisi <em>Customer Support</em> yang dapat mengakses kredensial pesanan Anda.</li><li style="margin-bottom: 10px;"><strong>Transparansi Finansial:</strong> Perusahaan tidak memiliki kewenangan teknis maupun akses untuk menahan atau membaca rincian pin/CVV perbankan pelanggan.</li><li style="margin-bottom: 10px;"><strong>Prosedur Pemusnahan Data:</strong> Setelah kurun waktu kewajiban audit pajak selesai, metadata spesifik identitas pengguna akan dianonimkan dari server primer.</li><li style="margin-bottom: 10px;"><strong>Pelacakan Cookies:</strong> Kami hanya menyematkan 'Essential Cookies' guna mempertahankan sesi keranjang belanja (Cart Session) pada peramban web Pengguna.</li><li style="margin-bottom: 10px;"><strong>Hak Pengguna:</strong> Anda memegang kedaulatan mutlak untuk memohon koreksi kesalahan data cetak sebelum resi logistik dicetak oleh gudang pengemasan.</li></ol>`;
-            renderInfoPage("Kebijakan Privasi", konten);
+            let konten = `
+                <p>Data pribadi Anda merupakan komoditas digital yang sangat rahasia dan wajib dilindungi oleh hukum. PT Gerbang Masa Depan (Ousevoid) berkomitmen mutlak menegakkan integritas keamanan privasi konsumen berdasarkan 20 klausul fundamental berikut:</p>
+                <ol>
+                    <li><strong>Landasan dan Kepatuhan Hukum:</strong> Pedoman manajemen data kami berjalan 100% selaras dengan Undang-Undang Perlindungan Data Pribadi (UU PDP) No. 27 Tahun 2022 Republik Indonesia, serta undang-undang ITE.</li>
+                    <li><strong>Klasifikasi Data Terkumpul:</strong> Perusahaan hanya akan memproses data yang relevan dengan transaksi, yaitu: nama identitas sah, alamat domisili pengiriman, nomor telepon/WhatsApp, alamat surel (email), dan riwayat pembelian.</li>
+                    <li><strong>Pengumpulan Data Otomatis:</strong> Saat Pengguna mengakses situs web, sistem kami secara otomatis mencatat data teknis pasif berupa alamat Protokol Internet (IP Address), jenis peramban web, waktu akses, dan resolusi layar perangkat.</li>
+                    <li><strong>Tujuan Utama Pengolahan Data:</strong> Eksploitasi dan pengolahan data sangat dibatasi semata-mata untuk verifikasi metode pembayaran, pencetakan resi kurir logistik, administrasi pasca-jual, dan verifikasi garansi produk.</li>
+                    <li><strong>Privasi Transaksi Finansial:</strong> Perusahaan menyatakan bahwa kami tidak memiliki kewenangan teknis, infrastruktur, maupun akses untuk menahan, membaca, atau menyimpan rincian PIN, Password Bank, maupun CVV kartu kredit pelanggan.</li>
+                    <li><strong>Pengungkapan Pihak Ketiga (Third-Party):</strong> Kami tidak akan pernah membagikan data identitas pribadi Anda kepada pihak ketiga mana pun, kecuali kepada vendor pengiriman/logistik resmi demi keperluan kelancaran pengantaran pesanan Anda.</li>
+                    <li><strong>Larangan Komersialisasi Data:</strong> Dengan tegas dan mengikat dinyatakan bahwa PT Gerbang Masa Depan tidak akan pernah memperjualbelikan, menukar, maupun menyewakan data base pengguna ke entitas bisnis eksternal atau broker data.</li>
+                    <li><strong>Arsitektur Keamanan Server:</strong> Infrastruktur Cloudflare tingkat *Enterprise* dan *Google Cloud Firebase* digunakan untuk melindungi lalu lintas sistem database dari serangan injeksi (SQL Injection) dan peretasan masif (DDoS protection).</li>
+                    <li><strong>Enkripsi Data (Cryptography):</strong> Semua paket data dari peramban pengguna menuju ke server utama kami disandikan secara *End-to-End Encryption* guna mencegah penyadapan *Man-In-The-Middle* (MITM).</li>
+                    <li><strong>Retensi (Penyimpanan) Data Berjangka:</strong> Data histori transaksi Anda akan disimpan dalam pangkalan data kami selama minimal 5 tahun kerja sesuai dengan kewajiban audit pajak dan pelaporan hukum akuntansi di Indonesia.</li>
+                    <li><strong>Penggunaan Pelacakan Cookies:</strong> Kami hanya menyematkan <em>'Essential Cookies'</em> guna mengingat preferensi Pengguna, memelihara sesi keranjang belanja (Cart Session), serta mencegah penipuan berulang. Cookies tidak memuat kode pelacak aktivitas pribadi luar sistem.</li>
+                    <li><strong>Hak Akses dan Transparansi Pengguna:</strong> Anda memegang kedaulatan mutlak untuk memohon salinan riwayat data pribadi apa saja yang sedang disimpan oleh server perusahaan kami, melalui permintaan tertulis kepada pihak layanan pelanggan.</li>
+                    <li><strong>Hak Koreksi dan Pembaruan Data:</strong> Pengguna memiliki wewenang untuk meminta perbaikan, koreksi, atau modifikasi terhadap kesalahan ketik data diri sebelum resi logistik dicetak secara permanen oleh departemen gudang.</li>
+                    <li><strong>Hak Penghapusan (Right to be Forgotten):</strong> Setelah kewajiban transaksi perniagaan dan klaim asuransi selesai, Pengguna berhak mengajukan permohonan penghapusan seluruh riwayat akun dan jejak identitas dari *database* (server primer) kami.</li>
+                    <li><strong>Kebijakan Pemasaran Langsung (Direct Marketing):</strong> Kami tidak akan menggunakan alamat email atau nomor telepon Anda untuk mengirimkan pesan promosi berbentuk *spam*, buletin (newsletter), atau penawaran produk tanpa adanya persetujuan berlangganan secara sadar (Opt-in).</li>
+                    <li><strong>Transfer Data Lintas Negara:</strong> Secara prinsip seluruh data disimpan dalam batas server berpusat di wilayah Asia Tenggara/Indonesia. Jika ada data operasional yang perlu dialihkan ke luar negeri, akan tunduk pada standar proteksi keamanan global yang setara.</li>
+                    <li><strong>Perlindungan Privasi Anak-Anak (Underage):</strong> Layanan dan sistem transaksi Ousevoid ini tidak dirancang atau ditargetkan untuk anak-anak di bawah umur 18 tahun tanpa adanya pendampingan ketat atau persetujuan mutlak wali yang sah/orang tua.</li>
+                    <li><strong>Tindakan Insiden Pelanggaran Data (Data Breach):</strong> Apabila terjadi insiden peretasan paksa yang menyebabkan kebocoran data di luar kendali, kami berkomitmen akan menginformasikan notifikasi insiden ini kepada Pengguna yang terdampak paling lambat dalam 3x24 jam operasional.</li>
+                    <li><strong>Perubahan dan Amandemen Kebijakan:</strong> PT Gerbang Masa Depan memegang hak penuh untuk melakukan modifikasi, menambah, atau mengubah poin-poin Kebijakan Privasi ini sewaktu-waktu guna menyelaraskan dengan pembaruan hukum, tanpa adanya keharusan pemberitahuan pra-ubah.</li>
+                    <li><strong>Klausul Persetujuan Pengguna:</strong> Dengan mengakses fitur penelusuran, melakukan transaksi <em>checkout</em>, hingga berkomunikasi dengan sistem percakapan asisten virtual (Bot) kami, Anda dianggap secara sah telah membaca, memahami, dan menyetujui seluruh aspek pada dokumen Kebijakan Privasi ini tanpa paksaan.</li>
+                </ol>`;
+            renderInfoPage("Kebijakan Privasi Pengguna (Privacy Policy)", konten);
+        }
+
+        function renderSyaratKetentuan() {
+            let konten = `
+                <p>Dokumen Syarat dan Ketentuan (Terms of Service) ini adalah perjanjian mengikat antara PT Gerbang Masa Depan (Ousevoid) dengan Anda selaku Pengguna. Harap membaca ke-20 pasal krusial berikut sebelum menggunakan layanan situs kami:</p>
+                <ol>
+                    <li><strong>Definisi Umum Platform:</strong> "Ousevoid" atau "Kami" merujuk pada PT Gerbang Masa Depan, sedangkan "Pengguna" atau "Anda" adalah entitas pribadi/hukum yang mengakses platform situs web resmi kami dan seluruh fitur di dalamnya.</li>
+                    <li><strong>Penerimaan Syarat dan Konsekuensi:</strong> Dengan tetap melakukan penjelajahan katalog, membuka *window chat*, maupun menekan tombol '*Proses Pembayaran*', Pengguna dianggap sepakat dan terikat secara legal dengan seluruh pasal dalam dokumen ini.</li>
+                    <li><strong>Kapasitas Hukum Transaksional:</strong> Pengguna wajib berusia minimal 18 tahun penuh atau memiliki kapasitas hukum yang diakui oleh undang-undang Republik Indonesia untuk dapat mengesahkan sebuah perjanjian transaksi elektronik secara sadar.</li>
+                    <li><strong>Lisensi Penggunaan Platform:</strong> Kami memberikan Anda lisensi hak akses yang sangat terbatas, tidak dapat dialihkan (non-transferable), dan dapat dicabut kapan saja, khusus untuk kepentingan berbelanja barang keperluan pribadi secara wajar, bukan kepentingan pengecer paksa.</li>
+                    <li><strong>Hak Kekayaan Intelektual (HAKI):</strong> Seluruh material teks situs, kode sumber <em>(source code)</em>, desain grafis (UI/UX), aset logo *Ousevoid*, dan basis data (database) diklaim sah sebagai hak paten perusahaan yang dilindungi rezim hukum kekayaan intelektual nasional dan internasional.</li>
+                    <li><strong>Pembatasan dan Penggunaan yang Dilarang:</strong> Pengguna dilarang keras melakukan rekayasa balik <em>(reverse engineering)</em>, mengirim *botnet*, menyebarkan virus <em>malware</em>, atau melakukan aksi ekstraksi data <em>(web scraping)</em> pada kerangka sistem situs web e-commerce Ousevoid.</li>
+                    <li><strong>Tanggung Jawab Pembuatan Akun:</strong> Apabila sistem registrasi diaktifkan, Pengguna wajib memberikan keakuratan identitas saat pendaftaran. Akun bersifat privat dan dilarang keras untuk diperjualbelikan, digadaikan, atau disewakan kepada individu lain.</li>
+                    <li><strong>Keamanan Akun Pengguna:</strong> Segala bentuk insiden penyalahgunaan akun, transaksi tidak wajar, hingga kebocoran kata sandi yang disebabkan karena keteledoran (phising) secara mandiri dari pihak Pengguna, adalah sepenuhnya di luar tanggung jawab asuransi perusahaan kami.</li>
+                    <li><strong>Kebijakan Penetapan Harga:</strong> Kami memegang kebebasan absolut untuk melakukan revisi penurunan atau eskalasi harga produk (Pricing) pada laman katalog kapan saja untuk beradaptasi dengan fluktuasi nilai tukar kurs rupiah, tanpa kewajiban pemberitahuan sebelumnya.</li>
+                    <li><strong>Pajak dan Biaya Tambahan:</strong> Kecuali ditentukan secara jelas, seluruh angka harga barang yang tertulis pada laman produk sudah memuat Pajak Pertambahan Nilai (PPN) sesuai instrumen tarif resmi pemerintah RI, namun tidak mencakup tarif biaya kirim logistik.</li>
+                    <li><strong>Ketidaksesuaian Visual dan Spesifikasi:</strong> Meskipun tim kami telah bekerja maksimal untuk menampilkan representasi gambar beresolusi tinggi, tetap ada kemungkinan deviasi warna piksel pada layar perangkat (display) yang berbeda; komplain sekadar pada alasan perbedaan estetika layar tidak sah.</li>
+                    <li><strong>Ketentuan Ketersediaan Produk (Stok):</strong> Status kuantitas barang bisa mengalami fluktuasi detik per detik. Jika terjadi kondisi langka yakni (oversold) setelah Anda membayar, kami memiliki hak untuk segera membatalkan transaksi dan memproses <em>refund</em> 100% lunas.</li>
+                    <li><strong>Ketentuan Validasi Transaksi Final:</strong> Setiap transaksi akan dinyatakan SAH dan MENGALAMI PROSES apabila server bank memvalidasi kecocokan total nominal rupiah yang dikirim dengan <em>invoice</em>. Transfer manual dengan nominal keliru yang tidak terbaca mesin adalah kelalaian murni Pengguna.</li>
+                    <li><strong>Kebijakan Retur dan Pengembalian (Refund):</strong> Tidak diperkenankan melakukan pembatalan uang (refund) atas alasan 'berubah pikiran' <em>(change of mind)</em> usai transaksi dikunci sistem. Pengembalian hanya sah jika paket salah spesifikasi tipe dari pihak gudang pengepakan kami.</li>
+                    <li><strong>Batasan Kewajiban Medis/Keamanan (Liability):</strong> Ousevoid tidak bertanggung jawab atas segala cedera, gangguan pendengaran akibat volume berlebih, atau kerugian material/non-material yang timbul dari penyalahgunaan fungsi teknis produk audio elektronik oleh kelalaian Konsumen.</li>
+                    <li><strong>Klausul Keadaan Memaksa (Force Majeure):</strong> Pihak perusahaan dibebaskan dari tuntutan wanprestasi operasional apabila terjadi musibah kelumpuhan massal, kerusuhan, pandemi, *server downtime* internet global, kebakaran gudang, atau perubahan drastis hukum regulasi nasional.</li>
+                    <li><strong>Ganti Rugi (Indemnifikasi):</strong> Anda setuju untuk melepaskan, melindungi, dan membebaskan Ousevoid, seluruh jajaran direksi, staf <em>engineer</em>, dan mitra afiliasinya dari segala klaim hukum, tuntutan finansial ganti rugi pihak luar akibat pelanggaran Syarat Ketentuan yang Anda timbulkan.</li>
+                    <li><strong>Tautan Pihak Ketiga (Outbound Links):</strong> Laman situs ini sewaktu-waktu mungkin memuat pintasan (hyperlink) ke domain lain. Perusahaan kami tidak mengendorse serta lepas tangan dari resiko privasi yang terjadi jika Anda menavigasikan *browser* keluar menuju tautan eksternal tersebut.</li>
+                    <li><strong>Tindakan Penghentian Hak Akses (Banning):</strong> Sistem keamanan jaringan (Web Application Firewall) kami memegang otoritas tunggal untuk memblokir IP, menangguhkan akses alamat email, serta membekukan keranjang belanja Pengguna yang terindikasi kuat melakukan *fraud* (penipuan) secara permanen.</li>
+                    <li><strong>Yurisdiksi dan Penyelesaian Sengketa:</strong> Semua perjanjian dalam dokumen ini ditafsirkan mutlak di bawah landasan hukum negara Republik Indonesia. Jika terjadi sengketa, kedua belah pihak diwajibkan menyelesaikannya lewat proses musyawarah tertutup mufakat sebelum menempuh jalur pengadilan negeri di area Jakarta Pusat.</li>
+                </ol>`;
+            renderInfoPage("Syarat dan Ketentuan Layanan (T&C)", konten);
         }
 
         // =========================================================================
@@ -1015,7 +1113,6 @@
                 }
             } catch (error) { 
                 console.error("Gagal menarik data dari Firestore: ", error);
-                // Munculkan notif kalau Rules Firebase belum diatur
                 if(error.message && error.message.includes("permissions")) {
                     alert("Gagal memuat produk. Pastikan FIRESTORE DATABASE sudah dibuat di Console Firebase dan RULES di-set ke: allow read, write: if true;");
                 }
