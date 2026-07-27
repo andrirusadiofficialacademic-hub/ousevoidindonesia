@@ -207,6 +207,8 @@
         .chat-input-area { padding: 12px; background: #fff; border-top: 1px solid #e5e7eb; display: flex; gap: 8px; align-items: center; }
         .chat-input { flex: 1; padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 20px; font-size: 12px; outline: none; font-family: 'Inter'; background: #f9fafb; }
         .chat-send-btn { background: #111; color: #fff; border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.2s; }
+        
+        .chat-powered { font-size: 9px; text-align: center; padding: 6px; background: #f3f4f6; color: #9ca3af; font-weight: 600; border-top: 1px solid #e5e7eb; letter-spacing: 0.5px; }
 
         /* TOAST NOTIF & MODAL LOGIN BARU */
         .toast-notif { position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-50px); background: #111; color: #fff; padding: 12px 24px; border-radius: 30px; font-size: 12px; font-weight: 700; opacity: 0; transition: 0.3s; z-index: 9999; }
@@ -324,7 +326,7 @@
     <div class="chat-window" id="chatWindow">
         <div class="chat-header">
             <div class="chat-header-info">
-                <img src="https://i.ibb.co.com/NgnYF4vP/10852.jpg" id="chatAvatarImg" alt="Bot Chat" class="chat-avatar">
+                <img src="https://i.ibb.co.com/8T7bCWv/images.jpg" id="chatAvatarImg" alt="Bot Chat" class="chat-avatar">
                 <div class="chat-name-status">
                     <span class="chat-name" id="chatAgentName">Marsya (Bot Chat)</span>
                     <div class="chat-status-wrap">
@@ -340,6 +342,7 @@
             <input type="text" id="chat-input-teks" class="chat-input" placeholder="Ketik nomor pilihan (1-5)..." onkeypress="handleChatEnter(event)">
             <button class="chat-send-btn" onclick="kirimPesanChat()"><i class="fa-solid fa-paper-plane"></i></button>
         </div>
+        <div class="chat-powered">Powered by PT Gerbang Masa Depan</div>
     </div>
 
     <div id="loginModal" class="modal-login-overlay">
@@ -808,7 +811,8 @@
 
         function initChatMarsya() {
             chatState = 0;
-            document.getElementById('chatAvatarImg').src = "https://i.ibb.co.com/NgnYF4vP/10852.jpg";
+            // Foto Chat Bot Diganti ke images.jpg
+            document.getElementById('chatAvatarImg').src = "https://i.ibb.co.com/8T7bCWv/images.jpg";
             document.getElementById('chatAgentName').innerText = "Marsya (Bot Chat)";
             document.getElementById('cs-status-dot').className = "status-dot bot";
             document.getElementById('cs-status-text').innerText = "Bot";
@@ -891,7 +895,8 @@
             
             dbRealtime.ref('chats/' + chatSessionId + '/info').set({ nama: nama, invoice: inv, status: 'online', waktuDibuat: Date.now() });
 
-            document.getElementById('chatAvatarImg').src = "https://i.ibb.co.com/NgnYF4vP/10852.jpg";
+            // Foto Agent Tiara Diganti ke IMG-20260724
+            document.getElementById('chatAvatarImg').src = "https://i.ibb.co.com/kVYkRpnc/IMG-20260724-002919-468-2.jpg";
             document.getElementById('chatAgentName').innerText = "Tiara Sabrina (Agent)";
             document.getElementById('cs-status-dot').className = "status-dot"; 
             document.getElementById('cs-status-text').innerText = "08:00 - 18:00"; 
