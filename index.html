@@ -78,7 +78,7 @@
         .feature-card h4 { font-size: 13px; font-weight: 800; margin: 0 0 6px 0; color: #111; }
         .feature-card p { font-size: 11px; color: #4b5563; margin: 0; line-height: 1.5; }
 
-        /* KATEGORI HORIZONTAL & UKURAN GAMBAR */
+        /* KATEGORI HORIZONTAL & UKURAN GAMBAR (NORMAL SERAGAM ANTI-ZOOM) */
         .category-section { margin-bottom: 40px; }
         .category-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 2px solid #f3f4f6; padding-bottom: 10px; }
         .category-title { font-size: 18px; font-weight: 800; color: #111; margin: 0; display: flex; align-items: center; gap: 8px; }
@@ -88,7 +88,7 @@
         
         .horizontal-card { min-width: 180px; max-width: 180px; background: #fff; border: 1px solid #e5e7eb; padding: 14px; border-radius: 18px; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; scroll-snap-align: start; }
         
-        .horizontal-card img { width: 100%; height: 140px; object-fit: cover; border-radius: 12px; margin-bottom: 12px; cursor: pointer; transition: 0.3s; }
+        .horizontal-card img { width: 100%; height: 140px; object-fit: contain; border-radius: 12px; margin-bottom: 12px; cursor: pointer; transition: 0.3s; background: #fff; }
         @media(min-width: 768px) {
             .horizontal-card { min-width: 220px; max-width: 220px; }
             .horizontal-card img { height: 180px; }
@@ -103,17 +103,17 @@
         .btn-action:disabled, .co-btn-pay:disabled { background: #9ca3af; cursor: not-allowed; }
 
         /* ==========================================
-           4. DETAIL PRODUK TANPA BOX PEMISAH
+           4. DETAIL PRODUK E-COMMERCE (TANPA BOX LINE & NORMAL IMAGE)
            ========================================== */
         .tipe-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; }
         .tipe-box { border: 1px solid #d1d5db; padding: 8px 14px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; transition: 0.2s; background: #fff; }
         .tipe-box.selected { background: #111827; color: #fff; border-color: #111827; }
         
-        /* Tanpa box pemisah di deskripsi & spesifikasi */
-        .deskripsi-box { font-size: 13px; line-height: 1.8; color: #374151; white-space: pre-wrap; word-wrap: break-word; background: transparent; padding: 10px 0; border: none; }
-        .specs-grid-clean { display: grid; grid-template-columns: 130px 1fr; gap: 8px 15px; font-size: 13px; margin: 15px 0 20px 0; padding-bottom: 15px; border-bottom: 1px solid #f3f4f6; }
+        /* Tanpa box line: Deskripsi menyatu dengan spesifikasi */
+        .specs-grid-clean { display: grid; grid-template-columns: 130px 1fr; gap: 8px 15px; font-size: 13px; margin: 15px 0 10px 0; }
         .specs-label { color: #6b7280; font-weight: 600; }
         .specs-value { color: #111827; font-weight: 700; }
+        .deskripsi-box { font-size: 13px; line-height: 1.8; color: #374151; white-space: pre-wrap; word-wrap: break-word; background: transparent; padding: 5px 0 10px 0; border: none; }
 
         /* ULASAN & RATING UI */
         .review-section { margin-top: 30px; border-top: 1px solid #f3f4f6; padding-top: 25px; }
@@ -131,9 +131,9 @@
         .star-select .fa-star.active { color: #f59e0b; }
 
         /* ==========================================
-           5. CHECKOUT SATU HALAMAN & INVOICE
+           5. CHECKOUT SATU HALAMAN & INVOICE (GABUNG TOTAL BAYAR)
            ========================================== */
-        .co-wrapper { text-align: left; background: #fff; padding: 25px; border-radius: 20px; margin-bottom: 80px; border: 1px solid #e5e7eb; box-shadow: 0 4px 15px rgba(0,0,0,0.03); max-width: 800px; margin-left: auto; margin-right: auto; }
+        .co-wrapper { text-align: left; background: #fff; padding: 25px; border-radius: 20px; margin-bottom: 40px; border: 1px solid #e5e7eb; box-shadow: 0 4px 15px rgba(0,0,0,0.03); max-width: 800px; margin-left: auto; margin-right: auto; }
         .co-header-center { text-align: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px dashed #e5e7eb; }
         .co-header-title { font-size: 22px; font-weight: 800; color: #111; margin: 10px 0 5px 0; display: flex; align-items: center; justify-content: center; gap: 10px; }
         .co-header-id { font-size: 13px; font-weight: 800; color: #111; font-family: monospace; letter-spacing: 1px; }
@@ -143,7 +143,7 @@
         .co-input-modern:focus { border-color: #111; background: #fff; }
         
         .co-product-item { display: flex; gap: 15px; align-items: center; padding-bottom: 15px; border-bottom: 1px dashed #e5e7eb; margin-bottom: 15px; }
-        .co-product-item img { width: 80px; height: 80px; object-fit: cover; border-radius: 12px; border: 1px solid #f3f4f6; }
+        .co-product-item img { width: 80px; height: 80px; object-fit: contain; border-radius: 12px; border: 1px solid #f3f4f6; }
         .co-product-info { flex: 1; }
         .co-product-name { font-size: 13px; font-weight: 700; color: #111; margin-bottom: 6px; }
         .co-product-price { font-size: 14px; font-weight: 800; color: #e11d48; }
@@ -177,8 +177,9 @@
         .va-number { font-size: 28px; font-weight: 800; color: #111; letter-spacing: 2px; margin-bottom: 15px; user-select: all; }
         .va-amount { font-size: 20px; font-weight: 800; color: #e11d48; margin-bottom: 10px; }
 
-        .co-bottom-bar { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); padding: 15px 20px; box-sizing: border-box; display: flex; justify-content: space-between; align-items: center; z-index: 1000; border-top: 1px solid #f3f4f6; }
-        @media(min-width: 768px) { .co-bottom-bar { padding: 15px 40px; } }
+        /* AREA BAYAR GABUNG DI CHECKOUT */
+        .co-summary-pay { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 16px; padding: 20px; margin-top: 25px; display: flex; flex-direction: column; gap: 15px; }
+        .co-summary-row { display: flex; justify-content: space-between; align-items: center; }
 
         /* ==========================================
            6. HALAMAN PELACAKAN (TRACKING)
@@ -258,7 +259,6 @@
         .login-input { width: 100%; padding: 14px 16px; border: 1px solid #d1d5db; border-radius: 12px; font-family: 'Inter', sans-serif; font-size: 13px; outline: none; background: #f9fafb; margin-bottom: 5px; box-sizing: border-box; transition: 0.3s; }
         .login-input:focus { border-color: #111; background: #fff; }
         
-        /* Ubah tautan buat akun jadi HITAM TEBAL sesuai tema */
         .login-link { font-size: 12px; color: #111827; font-weight: 800; cursor: pointer; margin-top: 15px; display: block; text-decoration: underline; }
         
         .info-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 20px; padding: 40px; text-align: left; line-height: 1.8; font-size: 14px; color: #374151; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
@@ -527,7 +527,7 @@
         function tutupLogin() { document.getElementById('loginModal').classList.remove('show'); switchLogin('pengguna'); }
 
         // =========================================================================
-        // LOGIKA LOGIN & PENDAFTARAN AKUN
+        // LOGIKA LOGIN & PENDAFTARAN AKUN (DENGAN NOTIF SPAM EMAIL OTP)
         // =========================================================================
         function switchLogin(mode) {
             document.getElementById('tab-pengguna').classList.toggle('active', mode === 'pengguna' || mode === 'daftar');
@@ -546,11 +546,8 @@
         }
 
         function prosesDaftarAkun() {
-            var n = document.getElementById('reg-nama').value.trim();
-            var e = document.getElementById('reg-email').value.trim();
-            var p = document.getElementById('reg-pass').value.trim();
-            if(!n || !e || !p) { bukaCustomPopup("Lengkapi Nama, Email, dan Kata Sandi Anda.", "Form Belum Lengkap"); return; }
-            bukaCustomPopup("Terima kasih, pendaftaran akun Anda berhasil dicatat! Silakan lanjutkan penjelajahan katalog produk kami.", "Akun Dibuat");
+            // Sesuai permintaan untuk mencegah spam akun via OTP email sementara
+            bukaCustomPopup("Saat ini fitur 'Buat Akun' beserta proteksi verifikasi OTP Email sedang dalam tahap pengembangan sistem untuk mengamankan platform dari spam.", "Pemberitahuan");
             tutupLogin();
         }
 
@@ -576,31 +573,29 @@
         }
 
         // =========================================================================
-        // FILTER KATEGORI SIDEBAR 
+        // FILTER KATEGORI SIDEBAR (PERBAIKAN ZOOM FOTO PRODUK SIDEBAR)
         // =========================================================================
         function renderKategoriSidebar(katId) {
             toggleFooterUtama(true); autoClose(); window.scrollTo(0,0);
             var app = document.getElementById('app');
             let produkKategoriIni = products.filter(p => p.category.toLowerCase() === katId.toLowerCase() || p.name.toLowerCase().includes(katId.toLowerCase()));
             
-            let html = `<div class="category-section" style="margin-top: 20px;"><div class="category-header"><h2 class="category-title"><i class="fa-solid fa-box-open"></i> Etalase Kategori: ${katId}</h2></div>`;
+            let html = `<div class="category-section" style="margin-top: 20px;"><div class="category-header"><h2 class="category-title"><i class="fa-solid fa-box-open"></i> Etalase Kategori: ${katId}</h2></div><div class="horizontal-scroll">`;
             if (produkKategoriIni.length > 0) {
-                html += `<div class="features-grid" style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));">`;
                 produkKategoriIni.forEach(fp => {
                     let originalIndex = products.findIndex(op => op.id === fp.id);
                     html += `
-                    <div class="horizontal-card" style="width: 100%; max-width: 100%;">
-                        <img src="${fp.img}" style="height: 160px;" onclick="renderProdukDetail(${originalIndex})">
+                    <div class="horizontal-card">
+                        <img src="${fp.img}" onclick="renderProdukDetail(${originalIndex})">
                         <h3 onclick="renderProdukDetail(${originalIndex})">${fp.name}</h3>
                         <div class="harga">${fp.price}</div>
                         <button class="btn-action" onclick="renderProdukDetail(${originalIndex})"><i class="fa-solid fa-eye"></i> Detail</button>
                     </div>`;
                 });
-                html += `</div>`;
             } else { 
-                html += `<div class="info-card" style="text-align:center; padding: 40px 20px;"><p style="font-weight:700; color:#6b7280;">Belum ada unit tersedia.</p></div>`; 
+                html += `<div style="padding: 20px; font-size:12px; color:#9ca3af;">Belum ada unit tersedia.</div>`; 
             }
-            app.innerHTML = html + `</div>`;
+            app.innerHTML = html + `</div></div>`;
         }
 
         // RENDER BERANDA
@@ -608,7 +603,6 @@
             toggleFooterUtama(true);
             var app = document.getElementById('app');
             
-            // TULISAN FITUR DIGANTI & TANPA BOX PEMISAH (TRANSPARAN)
             var html = `
                 <div class="slider-container" id="mainBannerSlider">
                     <div class="slide active"><img src="https://i.ibb.co.com/pjhVC7S6/SOUND-Without-20260714-173950-0000.png" alt="Banner 1"></div>
@@ -692,7 +686,7 @@
         }
 
         // =========================================================================
-        // HALAMAN DETAIL PRODUK (TANPA BOX PEMISAH + SPEK GABUNG)
+        // HALAMAN DETAIL PRODUK E-COMMERCE (FOTO NORMAL TANPA BOX LINE)
         // =========================================================================
         function renderProdukDetail(index) {
             toggleFooterUtama(false); autoClose(); window.scrollTo(0,0);
@@ -718,7 +712,9 @@
 
             document.getElementById('app').innerHTML = `
                 <div class="co-wrapper" style="border:none; box-shadow:none; padding:10px 0;">
-                    <div style="text-align:center; margin-bottom:20px;"><img src="${p.img}" style="width:100%; max-width:400px; border-radius:20px; box-shadow: 0 10px 20px rgba(0,0,0,0.08);"></div>
+                    <div style="text-align:center; margin-bottom:20px;">
+                        <img src="${p.img}" style="width:100%; max-width:320px; height:auto; object-fit:contain; border-radius:16px;">
+                    </div>
                     <div style="font-size:22px; font-weight:800; color:#111;">${p.name}</div>
                     <div style="font-size:20px; font-weight:800; color:#e11d48; margin-top:5px;" id="display-product-price">Rp ${window.currentBasePrice.toLocaleString('id-ID')}</div>
                     ${varianHtml}
@@ -761,8 +757,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="co-bottom-bar" style="justify-content:center;">
-                    <button class="co-btn-pay" style="padding:15px; font-size:14px; max-width:600px;" onclick="tambahKeKeranjang()"><i class="fa-solid fa-cart-plus"></i> Tambahkan ke Keranjang</button>
+                <div style="margin-top: 20px; text-align:center;">
+                    <button class="co-btn-pay" style="padding:15px; font-size:14px; max-width:600px; margin:auto;" onclick="tambahKeKeranjang()"><i class="fa-solid fa-cart-plus"></i> Tambahkan ke Keranjang</button>
                 </div>
             `;
 
@@ -886,7 +882,7 @@
         function ubahQty(idx, delta) { keranjang[idx].qty += delta; if(keranjang[idx].qty <= 0) keranjang.splice(idx, 1); renderKeranjang(); updateCartBadge(); }
 
         // =========================================================================
-        // CHECKOUT & KODE PROMO / VOUCHER
+        // CHECKOUT E-COMMERCE (TANPA TANDA * & GABUNG TOTAL BAYAR)
         // =========================================================================
         function renderKeranjang() {
             toggleFooterUtama(false); autoClose(); window.scrollTo(0,0);
@@ -925,7 +921,7 @@
                     <div id="voucher-status" style="font-size:12px; margin-top:-10px; margin-bottom:15px;"></div>
 
                     <div class="co-section-title" style="margin-top:20px;"><i class="fa-solid fa-truck-fast"></i> Logistik Pengiriman</div>
-                    <div style="font-size:12px; color:#6b7280; margin-bottom:12px;">*Terintegrasi API RajaOngkir (Estimasi Berat Total: 500gr)</div>
+                    <div style="font-size:12px; color:#6b7280; margin-bottom:12px;">Terintegrasi API RajaOngkir (Estimasi Berat Total: 500gr)</div>
                     
                     <div class="qna-options-wrapper" id="kurir-wrapper">
                         <div class="qna-bar-item selected" onclick="pilihKurir(35000, this)">Gamoon e-Package Prioritas - Rp 35.000 <i class="fa-solid fa-circle-check"></i></div>
@@ -950,14 +946,14 @@
                         <div class="payment-box" onclick="pilihPayment(this, 'mandiri_va')"><img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/Bank_Mandiri_logo_2016.svg"><span>Mandiri VA</span></div>
                         <div class="payment-box" onclick="pilihPayment(this, 'btn_va')"><img src="https://upload.wikimedia.org/wikipedia/commons/2/25/Bank_BTN_logo.svg"><span>BTN VA</span></div>
                     </div>
-                </div>
-                
-                <div class="co-bottom-bar">
-                    <div>
-                        <div style="font-size:10px; font-weight:700; color:#6b7280;">Total Tagihan</div>
-                        <div style="font-size:18px; font-weight:800; color:#111;" id="co-display-total">Rp 0</div>
+
+                    <div class="co-summary-pay">
+                        <div class="co-summary-row">
+                            <span style="font-size:13px; font-weight:700; color:#4b5563;">Total Pembayaran:</span>
+                            <span style="font-size:20px; font-weight:800; color:#111;" id="co-display-total">Rp 0</span>
+                        </div>
+                        <button class="co-btn-pay" id="btn-proses-bayar" style="padding:15px; font-size:14px; width:100%;" onclick="eksekusiPembayaran()"><i class="fa-solid fa-shield-halved"></i> Proses Pembayaran</button>
                     </div>
-                    <button class="co-btn-pay" id="btn-proses-bayar" style="width:auto; padding:14px 24px; font-size:14px;" onclick="eksekusiPembayaran()"><i class="fa-solid fa-shield-halved"></i> Proses Pembayaran</button>
                 </div>
             `;
             window.selectedPaymentMethod = 'gopay'; hitungTotalKalkulasi();
@@ -1020,7 +1016,6 @@
             btn.disabled = true; // KUNCI TOMBOL SUPAYA HANYA BISA DIKLIK 1X
 
             try {
-                // HANYA minta link/token dari Vercel API, TIDAK langsung record ke Firestore pesanan
                 const response = await fetch('/api/payment', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -1032,7 +1027,6 @@
                 if(midtransData.redirect_url) {
                     window.location.href = midtransData.redirect_url;
                 } else if(window.selectedPaymentMethod.includes('_va')) {
-                    // Fallback VA tampilan lokal kalau redirect tidak dipakai
                     renderVirtualAccountUI();
                 } else {
                     bukaCustomPopup("Gagal mendapatkan instruksi pembayaran dari server Midtrans.", "Kesalahan");
@@ -1068,7 +1062,6 @@
                     <button class="co-btn-pay" style="padding:15px; font-size:14px;" onclick="renderBerhasil()"><i class="fa-solid fa-check-circle"></i> Cek Status Pembayaran</button>
                 </div>
             `;
-            document.querySelector('.co-bottom-bar').style.display = 'none';
         }
 
         function renderBerhasil() {
@@ -1084,7 +1077,7 @@
         }
 
         // =========================================================================
-        // LOGIKA CHATBOT & HUMAN CS (ID UNIK ANTI-TIMPA + INTEGRASI MANAJEMEN)
+        // LOGIKA CHATBOT & HUMAN CS (DENGAN PENGECEKAN JAM KERJA NYATA 08:00 - 18:00)
         // =========================================================================
         var chatState = 0; 
         var chatSessionId = localStorage.getItem('ousevoid_chat_unique_id');
@@ -1148,7 +1141,7 @@
         async function prosesOpsiQnA(opsi) {
             var body = document.getElementById('chatBody');
             
-            // Tarik jawaban kustom dari Firestore jika ada yang diatur di manajemen.html
+            // Sub produk dikembalikan seperti semula dengan info produk & tipe
             let cQ1 = "Merek: <b>Ousevoid</b><br>Diproduksi oleh: <b>PT Gerbang Masa Depan</b><br><br><b>Pilihan Kategori & Tipe:</b><br>- Earbuds (TWS Audio)<br>- Smartphone<br>- Speaker Bluetooth<br>- Sparepart Original<br><br>Semua unit terjamin 100% Original bergaransi resmi.";
             let cQ2 = "Kami menerima pembayaran digital aman melalui E-Wallet (GoPay, DANA, ShopeePay) serta Bank Virtual Account (BCA, BRI, BNI, Mandiri, BTN) yang terverifikasi otomatis.";
             let cQ3 = "Setiap pembelian dilindungi Garansi Resmi hingga 3 Tahun (untuk kategori tertentu). Klaim wajib menyertakan bukti invoice dan video unboxing yang valid.";
@@ -1202,9 +1195,23 @@
             document.getElementById('cs-status-text').innerText = "08:00 - 18:00"; 
 
             body.innerHTML += `<div class="chat-bubble cs" style="background:#e8f5e9; border-color:#c8e6c9; color:#2e7d32;"><i class="fa-solid fa-circle-check"></i> Sesi beralih. Anda telah terhubung dengan Agent Tiara Sabrina.</div>`;
+            
             setTimeout(() => {
-                var waktu = new Date().getHours() < 12 ? "Pagi" : (new Date().getHours() < 15 ? "Siang" : (new Date().getHours() < 18 ? "Sore" : "Malam"));
-                body.innerHTML += `<div class="chat-bubble cs">Selamat ${waktu}, Bapak/Ibu <b>${nama}</b>. Terima kasih telah menghubungi Layanan Pelanggan Resmi Ousevoid. Saya <b>Tiara Sabrina</b>, ada keluhan atau bantuan informasi pesanan yang dapat saya bantu proses hari ini?</div>`;
+                // Pengecekan real-time di HP/Dunia Nyata diluar jam kerja (08:00 - 18:00)
+                let currentHour = new Date().getHours();
+                if (currentHour < 8 || currentHour >= 18) {
+                    body.innerHTML += `
+                        <div class="chat-bubble cs" style="line-height:1.6;">
+                            <b>[Sistem Otomatis - Ousevoid Official Care]</b><br><br>
+                            Yth. Bapak/Ibu <b>${nama}</b>,<br><br>
+                            Mohon maaf, saat ini Anda menghubungi kami di luar batas waktu operasional layanan Customer Service. Jam operasional resmi kami berlangsung pada pukul <b>08:00 – 18:00 WIB</b>.<br><br>
+                            Kendati demikian, pesan Anda beserta Nomor Invoice <b>${inv}</b> telah tercatat di dalam antrean sistem kami. Tim Layanan Pelanggan kami akan segera meninjau dan merespons keluhan Anda pada hari kerja berikutnya.<br><br>
+                            Atas perhatian dan pengertiannya, kami ucapkan terima kasih.
+                        </div>`;
+                } else {
+                    var waktu = currentHour < 12 ? "Pagi" : (currentHour < 15 ? "Siang" : "Sore");
+                    body.innerHTML += `<div class="chat-bubble cs">Selamat ${waktu}, Bapak/Ibu <b>${nama}</b>. Terima kasih telah menghubungi Layanan Pelanggan Resmi Ousevoid. Saya <b>Tiara Sabrina</b>, ada keluhan atau bantuan informasi pesanan yang dapat saya bantu proses hari ini?</div>`;
+                }
                 body.scrollTop = body.scrollHeight;
             }, 800);
 
@@ -1222,7 +1229,6 @@
         }
 
         function dengarkanBalasanAdmin() {
-            // Dengarkan pesan masuk dari admin
             dbRealtime.ref('chats/' + chatSessionId + '/messages').on('child_added', (snapshot) => {
                 const dataPesan = snapshot.val();
                 if (dataPesan.pengirim === 'admin') {
@@ -1232,7 +1238,6 @@
                 }
             });
 
-            // Jika admin menyelesaikan sesi / menghapus node chat, kembalikan user ke form awal
             dbRealtime.ref('chats/' + chatSessionId).on('value', (snap) => {
                 if(!snap.exists() && chatState === 2) {
                     var body = document.getElementById('chatBody');
@@ -1297,16 +1302,21 @@
                         </div>`;
                 } else {
                     let d = checkSnap.docs[0].data();
+                    let st = d.status_logistik || 'Menunggu Konfirmasi';
+                    let isKirim = (st === 'Di Kirim' || st === 'Tiba di Tujuan');
+                    let isTiba = (st === 'Tiba di Tujuan');
+
                     areaHasil.innerHTML = `
                         <div class="status-terakhir-card">
                             <div class="status-badge"><i class="fa-solid fa-clock"></i> STATUS TERAKHIR</div>
-                            <h3 class="status-title">Dalam Pengiriman Kurir Logistik</h3>
+                            <h3 class="status-title">${st}</h3>
                             <div style="font-size:12px; color:#6b7280;">Nomor Resi: <strong style="color:#111;">${d.id_trx}</strong> | Penerima: <strong style="color:#111;">${d.nama}</strong></div>
                         </div>
                         <div class="timeline-wrapper">
                             <div class="timeline-item completed"><div class="timeline-icon"></div><div class="timeline-content"><h5>Registrasi Pesanan Terverifikasi</h5><p>Data transaksi terverifikasi oleh sistem.</p></div></div>
                             <div class="timeline-item completed"><div class="timeline-icon"></div><div class="timeline-content"><h5>Tahap Pengemasan & Quality Control</h5><p>Paket lolos uji mutu dan dikemas rapi.</p></div></div>
-                            <div class="timeline-item active"><div class="timeline-icon"></div><div class="timeline-content"><h5>Dalam Pengiriman ke Alamat Tujuan</h5><p>Kurir sedang dalam perjalanan menuju lokasi Anda.</p></div></div>
+                            <div class="timeline-item ${isKirim ? (isTiba ? 'completed' : 'active') : ''}"><div class="timeline-icon"></div><div class="timeline-content"><h5>Dalam Pengiriman ke Alamat Tujuan</h5><p>Kurir sedang dalam perjalanan menuju lokasi Anda.</p></div></div>
+                            <div class="timeline-item ${isTiba ? 'active' : ''}"><div class="timeline-icon"></div><div class="timeline-content"><h5>Tiba di Tujuan</h5><p>Paket telah sampai di alamat penerima dengan selamat.</p></div></div>
                         </div>
                     `;
                 }
@@ -1353,7 +1363,7 @@
                     <li><strong>Layanan Ekspedisi Nasional (Reguler):</strong> Pengiriman reguler antar-provinsi memakan waktu estimasi 2 hingga 5 hari kerja, sangat bergantung pada <em>Service Level Agreement</em> (SLA) dari mitra kurir masing-masing area.</li>
                     <li><strong>Batas Waktu Pemrosesan Gudang (Cut-Off):</strong> Seluruh transaksi yang terkonfirmasi lunas pembayarannya sebelum pukul 15.00 WIB akan langsung dikemas dan diserahkan ke pihak logistik pada hari yang sama (H+0). Transaksi melewati batas waktu akan diproses di hari kerja berikutnya.</li>
                     <li><strong>Kewajiban Alamat:</strong> Pengguna layanan memikul tanggung jawab penuh secara hukum terhadap kebenaran, kelengkapan, dan presisi penulisan titik alamat domisili untuk menghindari kegagalan pengantaran.</li>
-                    <li><strong>Asuransi Muatan Pengiriman:</strong> Setiap produk yang memiliki nilai tinggi (High Value Goods) dan telah ditambahkan opsi asuransi pada saat *checkout* akan diproteksi penuh jika terjadi kehilangan atau kerusakan struktural di jalan oleh kurir.</li>
+                    <li><strong>Asuransi Muatan Pengiriman:</strong> Setiap produk yang memiliki nilai tinggi (High Value Goods) dan telah ditambahkan opsi asuransi pada saat checkout akan diproteksi penuh jika terjadi kehilangan atau kerusakan struktural di jalan oleh kurir.</li>
                     <li><strong>Pemantauan Real-time (Tracking):</strong> Pelanggan diberikan otorisasi penuh untuk melacak pergerakan paket secara langsung menggunakan Nomor Resi Logistik atau Nomor Invoice melalui portal sistem pelacakan (Tracking) di situs web kami.</li>
                     <li><strong>Kebijakan Keterlambatan Pengiriman:</strong> Segala bentuk keterlambatan penerimaan barang di luar masa SLA normal akibat kelalaian kurir akan kami bantu mediasi atau eskalasi ke pihak manajemen pusat penyedia logistik terkait.</li>
                     <li><strong>Syarat Penerimaan Barang (Bukti Sah):</strong> Pihak penerima disarankan dan diwajibkan melakukan dokumentasi visual saat serah terima barang dari kurir sebagai bukti sah untuk menghindar dari penyusutan logistik atau tindak pencurian isi paket.</li>
@@ -1391,19 +1401,19 @@
                     <li><strong>Privasi Transaksi Finansial:</strong> Perusahaan menyatakan bahwa kami tidak memiliki kewenangan teknis, infrastruktur, maupun akses untuk menahan, membaca, atau menyimpan rincian PIN, Password Bank, maupun CVV kartu kredit pelanggan.</li>
                     <li><strong>Pengungkapan Pihak Ketiga (Third-Party):</strong> Kami tidak akan pernah membagikan data identitas pribadi Anda kepada pihak ketiga mana pun, kecuali kepada vendor pengiriman/logistik resmi demi keperluan kelancaran pengantaran pesanan Anda.</li>
                     <li><strong>Larangan Komersialisasi Data:</strong> Dengan tegas dan mengikat dinyatakan bahwa PT Gerbang Masa Depan tidak akan pernah memperjualbelikan, menukar, maupun menyewakan data base pengguna ke entitas bisnis eksternal atau broker data.</li>
-                    <li><strong>Arsitektur Keamanan Server:</strong> Infrastruktur Cloudflare tingkat *Enterprise* dan *Google Cloud Firebase* digunakan untuk melindungi lalu lintas sistem database dari serangan injeksi (SQL Injection) dan peretasan masif (DDoS protection).</li>
-                    <li><strong>Enkripsi Data (Cryptography):</strong> Semua paket data dari peramban pengguna menuju ke server utama kami disandikan secara *End-to-End Encryption* guna mencegah penyadapan *Man-In-The-Middle* (MITM).</li>
+                    <li><strong>Arsitektur Keamanan Server:</strong> Infrastruktur Cloudflare tingkat Enterprise dan Google Cloud Firebase digunakan untuk melindungi lalu lintas sistem database dari serangan injeksi (SQL Injection) dan peretasan masif (DDoS protection).</li>
+                    <li><strong>Enkripsi Data (Cryptography):</strong> Semua paket data dari peramban pengguna menuju ke server utama kami disandikan secara End-to-End Encryption guna mencegah penyadapan Man-In-The-Middle (MITM).</li>
                     <li><strong>Retensi (Penyimpanan) Data Berjangka:</strong> Data histori transaksi Anda akan disimpan dalam pangkalan data kami selama minimal 5 tahun kerja sesuai dengan kewajiban audit pajak dan pelaporan hukum akuntansi di Indonesia.</li>
                     <li><strong>Penggunaan Pelacakan Cookies:</strong> Kami only menyematkan <em>'Essential Cookies'</em> guna mengingat preferensi Pengguna, memelihara sesi keranjang belanja (Cart Session), serta mencegah penipuan berulang. Cookies tidak memuat kode pelacak aktivitas pribadi luar sistem.</li>
                     <li><strong>Hak Akses dan Transparansi Pengguna:</strong> Anda memegang kedaulatan mutlak untuk memohon salinan riwayat data pribadi apa saja yang sedang disimpan oleh server perusahaan kami, melalui permintaan tertulis kepada pihak layanan pelanggan.</li>
                     <li><strong>Hak Koreksi dan Pembaruan Data:</strong> Pengguna memiliki wewenang untuk meminta perbaikan, koreksi, atau modifikasi terhadap kesalahan ketik data diri sebelum resi logistik dicetak secara permanen oleh departemen gudang.</li>
-                    <li><strong>Hak Penghapusan (Right to be Forgotten):</strong> Setelah kewajiban transaksi perniagaan dan klaim asuransi selesai, Pengguna berhak mengajukan permohonan penghapusan seluruh riwayat akun dan jejak identitas dari *database* (server primer) kami.</li>
-                    <li><strong>Kebijakan Pemasaran Langsung (Direct Marketing):</strong> Kami tidak akan menggunakan alamat email atau nomor telepon Anda untuk mengirimkan pesan promosi berbentuk *spam*, buletin (newsletter), atau penawaran produk tanpa adanya persetujuan berlangganan secara sadar (Opt-in).</li>
+                    <li><strong>Hak Penghapusan (Right to be Forgotten):</strong> Setelah kewajiban transaksi perniagaan dan klaim asuransi selesai, Pengguna berhak mengajukan permohonan penghapusan seluruh riwayat akun dan jejak identitas dari database (server primer) kami.</li>
+                    <li><strong>Kebijakan Pemasaran Langsung (Direct Marketing):</strong> Kami tidak akan menggunakan alamat email atau nomor telepon Anda untuk mengirimkan pesan promosi berbentuk spam, buletin (newsletter), atau penawaran produk tanpa adanya persetujuan berlangganan secara sadar (Opt-in).</li>
                     <li><strong>Transfer Data Lintas Negara:</strong> Secara prinsip seluruh data disimpan dalam batas server berpusat di wilayah Asia Tenggara/Indonesia. Jika ada data operasional yang perlu dialihkan ke luar negeri, akan tunduk pada standar proteksi keamanan global yang setara.</li>
                     <li><strong>Perlindungan Privasi Anak-Anak (Underage):</strong> Layanan dan sistem transaksi Ousevoid ini tidak dirancang atau ditargetkan untuk anak-anak di bawah umur 18 tahun tanpa adanya pendampingan ketat atau persetujuan mutlak wali yang sah/orang tua.</li>
                     <li><strong>Tindakan Insiden Pelanggaran Data (Data Breach):</strong> Apabila terjadi insiden peretasan paksa yang menyebabkan kebocoran data di luar kendali, kami berkomitmen akan menginformasikan notifikasi insiden ini kepada Pengguna yang terdampak paling lambat dalam 3x24 jam operasional.</li>
                     <li><strong>Perubahan dan Amandemen Kebijakan:</strong> PT Gerbang Masa Depan memegang hak penuh untuk melakukan modifikasi, menambah, atau mengubah poin-poin Kebijakan Privasi ini sewaktu-waktu guna menyelaraskan dengan pembaruan hukum, tanpa adanya keharusan pemberitahuan pra-ubah.</li>
-                    <li><strong>Klausul Persetujuan Pengguna:</strong> Dengan mengakses fitur penelusuran, melakukan transaksi <em>checkout</em>, hingga berkomunikasi dengan sistem percakapan asisten virtual (Bot) kami, Anda dianggap secara sah telah membaca, memahami, dan menyetujui seluruh aspek pada dokumen Kebijakan Privasi ini tanpa paksaan.</li>
+                    <li><strong>Klausul Persetujuan Pengguna:</strong> Dengan mengakses fitur penelusuran, melakukan transaksi checkout, hingga berkomunikasi dengan sistem percakapan asisten virtual (Bot) kami, Anda dianggap secara sah telah membaca, memahami, dan menyetujui seluruh aspek pada dokumen Kebijakan Privasi ini tanpa paksaan.</li>
                 </ol>`;
             renderInfoPage("Kebijakan Privasi Pengguna (Privacy Policy)", konten);
         }
@@ -1413,24 +1423,24 @@
                 <p>Dokumen Syarat dan Ketentuan (Terms of Service) ini adalah perjanjian mengikat antara PT Gerbang Masa Depan (Ousevoid) dengan Anda selaku Pengguna. Harap membaca ke-20 pasal krusial berikut sebelum menggunakan layanan situs kami:</p>
                 <ol>
                     <li><strong>Definisi Umum Platform:</strong> "Ousevoid" atau "Kami" merujuk pada PT Gerbang Masa Depan, sedangkan "Pengguna" atau "Anda" adalah entitas pribadi/hukum yang mengakses platform situs web resmi kami dan seluruh fitur di dalamnya.</li>
-                    <li><strong>Penerimaan Syarat dan Konsekuensi:</strong> Dengan tetap melakukan penjelajahan katalog, membuka *window chat*, maupun menekan tombol '*Proses Pembayaran*', Pengguna dianggap sepakat dan terikat secara legal dengan seluruh pasal dalam dokumen ini.</li>
+                    <li><strong>Penerimaan Syarat dan Konsekuensi:</strong> Dengan tetap melakukan penjelajahan katalog, membuka window chat, maupun menekan tombol 'Proses Pembayaran', Pengguna dianggap sepakat dan terikat secara legal dengan seluruh pasal dalam dokumen ini.</li>
                     <li><strong>Kapasitas Hukum Transaksional:</strong> Pengguna wajib berusia minimal 18 tahun penuh atau memiliki kapasitas hukum yang diakui oleh undang-undang Republik Indonesia untuk dapat mengesahkan sebuah perjanjian transaksi elektronik secara sadar.</li>
                     <li><strong>Lisensi Penggunaan Platform:</strong> Kami memberikan Anda lisensi hak akses yang sangat terbatas, tidak dapat dialihkan (non-transferable), dan dapat dicabut kapan saja, khusus untuk kepentingan berbelanja barang keperluan pribadi secara wajar, bukan kepentingan pengecer paksa.</li>
-                    <li><strong>Hak Kekayaan Intelektual (HAKI):</strong> Seluruh material teks situs, kode sumber <em>(source code)</em>, desain grafis (UI/UX), aset logo *Ousevoid*, dan basis data (database) diklaim sah sebagai hak paten perusahaan yang dilindungi rezim hukum kekayaan intelektual nasional dan internasional.</li>
-                    <li><strong>Pembatasan dan Penggunaan yang Dilarang:</strong> Pengguna dilarang keras melakukan rekayasa balik <em>(reverse engineering)</em>, mengirim *botnet*, menyebarkan virus <em>malware</em>, atau melakukan aksi ekstraksi data <em>(web scraping)</em> pada kerangka sistem situs web e-commerce Ousevoid.</li>
+                    <li><strong>Hak Kekayaan Intelektual (HAKI):</strong> Seluruh material teks situs, kode sumber <em>(source code)</em>, desain grafis (UI/UX), aset logo Ousevoid, dan basis data (database) diklaim sah sebagai hak paten perusahaan yang dilindungi rezim hukum kekayaan intelektual nasional dan internasional.</li>
+                    <li><strong>Pembatasan dan Penggunaan yang Dilarang:</strong> Pengguna dilarang keras melakukan rekayasa balik <em>(reverse engineering)</em>, mengirim botnet, menyebarkan virus <em>malware</em>, atau melakukan aksi ekstraksi data <em>(web scraping)</em> pada kerangka sistem situs web e-commerce Ousevoid.</li>
                     <li><strong>Tanggung Jawab Pembuatan Akun:</strong> Apabila sistem registrasi diaktifkan, Pengguna wajib memberikan keakuratan identitas saat pendaftaran. Akun bersifat privat dan dilarang keras untuk diperjualbelikan, digadaikan, atau disewakan kepada individu lain.</li>
                     <li><strong>Keamanan Akun Pengguna:</strong> Segala bentuk insiden penyalahgunaan akun, transaksi tidak wajar, hingga kebocoran kata sandi yang disebabkan karena keteledoran (phising) secara mandiri dari pihak Pengguna, adalah sepenuhnya di luar tanggung jawab asuransi perusahaan kami.</li>
                     <li><strong>Kebijakan Penetapan Harga:</strong> Kami memegang kebebasan absolut untuk melakukan revisi penurunan atau eskalasi harga produk (Pricing) pada laman katalog kapan saja untuk beradaptasi dengan fluktuasi nilai tukar kurs rupiah, tanpa kewajiban pemberitahuan sebelumnya.</li>
                     <li><strong>Pajak dan Biaya Tambahan:</strong> Kecuali ditentukan secara jelas, seluruh angka harga barang yang tertulis pada laman produk sudah memuat Pajak Pertambahan Nilai (PPN) sesuai instrumen tarif resmi pemerintah RI, namun tidak mencakup tarif biaya kirim logistik.</li>
                     <li><strong>Ketidaksesuaian Visual dan Spesifikasi:</strong> Meskipun tim kami telah bekerja maksimal untuk menampilkan representasi gambar beresolusi tinggi, tetap ada kemungkinan deviasi warna piksel pada layar perangkat (display) yang berbeda; komplain sekadar pada alasan perbedaan estetika layar tidak sah.</li>
                     <li><strong>Ketentuan Ketersediaan Produk (Stok):</strong> Status kuantitas barang bisa mengalami fluktuasi detik per detik. Jika terjadi kondisi langka yakni (oversold) setelah Anda membayar, kami memiliki hak untuk segera membatalkan transaksi dan memproses <em>refund</em> 100% lunas.</li>
-                    <li><strong>Ketentuan Validasi Transaksi Final:</strong> Setiap transaksi akan dinyatakan SAH dan MENGALAMI PROSES apabila server bank memvalidasi kecocokan total nominal rupiah yang dikirim dengan <em>invoice</em>. Transfer manual dengan nominal keliru yang tidak terbaca mesin adalah kelalaian murni Pengguna.</li>
+                    <li><strong>Ketentuan Validasi Transaksi Final:</strong> Setiap transaksi akan dinyatakan SAH dan MENGALAMI PROSES apabila server bank memvalidasi kecocokan total nominal rupiah yang dikirim dengan invoice. Transfer manual dengan nominal keliru yang tidak terbaca mesin adalah kelalaian murni Pengguna.</li>
                     <li><strong>Kebijakan Retur dan Pengembalian (Refund):</strong> Tidak diperkenankan melakukan pembatalan uang (refund) atas alasan 'berubah pikiran' <em>(change of mind)</em> usai transaksi dikunci sistem. Pengembalian hanya sah jika paket salah spesifikasi tipe dari pihak gudang pengepakan kami.</li>
                     <li><strong>Batasan Kewajiban Medis/Keamanan (Liability):</strong> Ousevoid tidak bertanggung jawab atas segala cedera, gangguan pendengaran akibat volume berlebih, atau kerugian material/non-material yang timbul dari penyalahgunaan fungsi teknis produk audio elektronik oleh kelalaian Konsumen.</li>
-                    <li><strong>Klausul Keadaan Memaksa (Force Majeure):</strong> Pihak perusahaan dibebaskan dari tuntutan wanprestasi operasional apabila terjadi musibah kelumpuhan massal, kerusuhan, pandemi, *server downtime* internet global, kebakaran gudang, atau perubahan drastis hukum regulasi nasional.</li>
+                    <li><strong>Klausul Keadaan Memaksa (Force Majeure):</strong> Pihak perusahaan dibebaskan dari tuntutan wanprestasi operasional apabila terjadi musibah kelumpuhan massal, kerusuhan, pandemi, server downtime internet global, kebakaran gudang, atau perubahan drastis hukum regulasi nasional.</li>
                     <li><strong>Ganti Rugi (Indemnifikasi):</strong> Anda setuju untuk melepaskan, melindungi, dan membebaskan Ousevoid, seluruh jajaran direksi, staf <em>engineer</em>, dan mitra afiliasinya dari segala klaim hukum, tuntutan finansial ganti rugi pihak luar akibat pelanggaran Syarat Ketentuan yang Anda timbulkan.</li>
-                    <li><strong>Tautan Pihak Ketiga (Outbound Links):</strong> Laman situs ini sewaktu-waktu mungkin memuat pintasan (hyperlink) ke domain lain. Perusahaan kami tidak mengendorse serta lepas tangan dari resiko privasi yang terjadi jika Anda menavigasikan *browser* keluar menuju tautan eksternal tersebut.</li>
-                    <li><strong>Tindakan Penghentian Hak Akses (Banning):</strong> Sistem keamanan jaringan (Web Application Firewall) kami memegang otoritas tunggal untuk memblokir IP, menangguhkan akses alamat email, serta membekukan keranjang belanja Pengguna yang terindikasi kuat melakukan *fraud* (penipuan) secara permanen.</li>
+                    <li><strong>Tautan Pihak Ketiga (Outbound Links):</strong> Laman situs ini sewaktu-waktu mungkin memuat pintasan (hyperlink) ke domain lain. Perusahaan kami tidak mengendorse serta lepas tangan dari resiko privasi yang terjadi jika Anda menavigasikan browser keluar menuju tautan eksternal tersebut.</li>
+                    <li><strong>Tindakan Penghentian Hak Akses (Banning):</strong> Sistem keamanan jaringan (Web Application Firewall) kami memegang otoritas tunggal untuk memblokir IP, menangguhkan akses alamat email, serta membekukan keranjang belanja Pengguna yang terindikasi kuat melakukan fraud (penipuan) secara permanen.</li>
                     <li><strong>Yurisdiksi dan Penyelesaian Sengketa:</strong> Semua perjanjian dalam dokumen ini ditafsirkan mutlak di bawah landasan hukum negara Republik Indonesia. Jika terjadi sengketa, kedua belah pihak diwajibkan menyelesaikannya lewat proses musyawarah tertutup mufakat sebelum menempuh jalur pengadilan negeri di area Jakarta Pusat.</li>
                 </ol>`;
             renderInfoPage("Syarat dan Ketentuan Layanan (T&C)", konten);
@@ -1468,9 +1478,6 @@
                 }
             } catch (error) { 
                 console.error("Gagal menarik data dari Firestore: ", error);
-                if(error.message && error.message.includes("permissions")) {
-                    bukaCustomPopup("Gagal memuat produk. Pastikan FIRESTORE DATABASE sudah dibuat di Console Firebase dan RULES di-set ke allow read, write: if true;", "Pangkalan Data Error");
-                }
                 products = []; 
             }
             renderHome();
