@@ -116,7 +116,7 @@
         .chat-admin { background: #111; color: #fff; align-self: flex-end; border-bottom-right-radius: 2px; }
         .chat-user { background: #fff; border: 1px solid #eee; color: #111; align-self: flex-start; border-bottom-left-radius: 2px; }
 
-        /* SOP MANAJEMEN & FOOTER DASHBOARD (BARU) */
+        /* SOP MANAJEMEN & FOOTER DASHBOARD */
         .sop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 25px; margin-bottom: 30px; }
         .sop-card { background: var(--surface); border: 1px solid var(--border-color); border-radius: 12px; padding: 22px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); transition: 0.3s; }
         .sop-card:hover { transform: translateY(-3px); border-color: var(--primary-color); }
@@ -177,6 +177,7 @@
             <div class="menu-label">Pengaturan & Tampilan</div>
             <li><a onclick="bukaHalaman('voucher', this)"><i class="fa-solid fa-ticket"></i> Kode Voucher Promo</a></li>
             <li><a onclick="bukaHalaman('banner', this)"><i class="fa-solid fa-images"></i> Manajemen Banner</a></li>
+            <li><a onclick="bukaHalaman('botchat', this)"><i class="fa-solid fa-robot"></i> Pengaturan Bot Chat</a></li>
             <li><a onclick="bukaHalaman('pengaturan', this)"><i class="fa-solid fa-user-shield"></i> Pengaturan Sistem</a></li>
         </ul>
     </aside>
@@ -371,6 +372,32 @@
             </div>
         </div>
 
+        <div id="page-botchat" class="page-section">
+            <div class="section-title">Pengaturan Isi Konten Bot Chat (Marsya Care)</div>
+            <div class="form-panel">
+                <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 25px; line-height: 1.6;">Atur teks jawaban otomatis yang akan dibalas oleh Bot Chat Care di halaman utama toko saat pelanggan memilih opsi 1 sampai 4. Mendukung tag HTML seperti <code>&lt;b&gt;</code> dan <code>&lt;br&gt;</code>.</p>
+                <div class="form-grid" style="grid-template-columns: 1fr; gap: 20px;">
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label>1. Jawaban Informasi Produk (Merek & Tipe)</label>
+                        <textarea id="input-bot-q1" class="form-control" rows="4" placeholder="Contoh: Merek: Ousevoid..."></textarea>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label>2. Jawaban Metode Pembayaran</label>
+                        <textarea id="input-bot-q2" class="form-control" rows="3" placeholder="Contoh: Kami menerima pembayaran digital..."></textarea>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label>3. Jawaban Kebijakan Garansi</label>
+                        <textarea id="input-bot-q3" class="form-control" rows="3" placeholder="Contoh: Setiap pembelian dilindungi..."></textarea>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label>4. Jawaban Tentang Ousevoid</label>
+                        <textarea id="input-bot-q4" class="form-control" rows="3" placeholder="Contoh: Ousevoid adalah merek resmi..."></textarea>
+                    </div>
+                </div>
+                <button class="btn-submit" onclick="simpanPengaturanBotChat()"><i class="fa-solid fa-robot"></i> Simpan Konten Bot Chat</button>
+            </div>
+        </div>
+
         <div id="page-pengaturan" class="page-section">
             <div class="section-title">Pengaturan Sistem & Profil Pengelola</div>
             <div class="form-panel">
@@ -427,6 +454,7 @@
     window.onload = function() {
         muatProfilAdmin();
         muatBanner();
+        muatPengaturanBotChat();
         generateVarianInputs('container-varian-add', 'add');
         generateVarianInputs('container-varian-edit', 'edit');
         muatDaftarProduk(); 
@@ -498,6 +526,34 @@
         });
     };
 
+    // --- PENGATURAN BOT CHAT (FIREBASE) ---
+    window.muatPengaturanBotChat = async function() {
+        dbFirestore.collection('pengaturan').doc('chatbot').get().then(doc => {
+            if(doc.exists) {
+                let d = doc.data();
+                if(d.q1 && document.getElementById('input-bot-q1')) document.getElementById('input-bot-q1').value = d.q1;
+                if(d.q2 && document.getElementById('input-bot-q2')) document.getElementById('input-bot-q2').value = d.q2;
+                if(d.q3 && document.getElementById('input-bot-q3')) document.getElementById('input-bot-q3').value = d.q3;
+                if(d.q4 && document.getElementById('input-bot-q4')) document.getElementById('input-bot-q4').value = d.q4;
+            }
+        });
+    };
+
+    window.simpanPengaturanBotChat = async function() {
+        let botData = {
+            q1: document.getElementById('input-bot-q1').value,
+            q2: document.getElementById('input-bot-q2').value,
+            q3: document.getElementById('input-bot-q3').value,
+            q4: document.getElementById('input-bot-q4').value
+        };
+
+        dbFirestore.collection('pengaturan').doc('chatbot').set(botData).then(() => {
+            alert("Konten Bot Chat berhasil diperbarui di Cloud Firebase!");
+        }).catch(err => {
+            alert("Gagal menyimpan pengaturan bot: " + err.message);
+        });
+    };
+
     // --- NAVIGASI SPA ---
     window.bukaHalaman = function(pageId, element = null) {
         document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
@@ -505,7 +561,7 @@
         
         var titles = {
             'dashboard': 'Dashboard Sistem', 'daftar-produk': 'Katalog Produk', 'tambah-produk': 'Penambahan Entri Produk',
-            'pesanan-masuk': 'Manajemen Pesanan Logistik', 'chat-baru': 'Bantuan Pelanggan (Live)', 'chat-selesai': 'Arsip Sesi Obrolan', 'voucher': 'Kode Voucher Promo', 'pengaturan': 'Pengaturan Keamanan', 'banner': 'Manajemen Foto Banner'
+            'pesanan-masuk': 'Manajemen Pesanan Logistik', 'chat-baru': 'Bantuan Pelanggan (Live)', 'chat-selesai': 'Arsip Sesi Obrolan', 'voucher': 'Kode Voucher Promo', 'botchat': 'Pengaturan Bot Chat Care', 'pengaturan': 'Pengaturan Keamanan', 'banner': 'Manajemen Foto Banner'
         };
         document.getElementById('header-title').innerText = titles[pageId] || 'Control Center';
         
@@ -517,6 +573,7 @@
         if(pageId === 'daftar-produk') muatDaftarProduk();
         if(pageId === 'pesanan-masuk') muatPesanan();
         if(pageId === 'voucher') muatVoucher();
+        if(pageId === 'botchat') muatPengaturanBotChat();
     };
     window.logout = function() { if(confirm("Keluar dari sesi admin?")) { window.location.href = "index.html"; } };
 
@@ -619,7 +676,7 @@
         });
     };
 
-    // --- 2. PESANAN (FIRESTORE) & STATISTIK DASHBOARD ---
+    // --- 2. PESANAN (FIRESTORE) + STATUS OPERASIONAL ---
     window.muatPesanan = async function() {
         var tbody = document.getElementById('tabel-pesanan');
         dbFirestore.collection('pesanan').get().then(snapshot => {
@@ -635,12 +692,25 @@
                     totalTerjual += 1;
                     totalPesananAktif += 1;
 
+                    let statusLogistik = ps.status_logistik || 'Menunggu Konfirmasi';
+                    let badgeColor = '#f39c12';
+                    if (statusLogistik === 'Di Kemas') badgeColor = '#3498db';
+                    else if (statusLogistik === 'Di Kirim') badgeColor = '#111111';
+                    else if (statusLogistik === 'Tiba di Tujuan') badgeColor = '#2ecc71';
+
                     html += `<tr>
                         <td><strong>${ps.id_trx}</strong><br><span style="color:#666; font-size:11px;">Penerima: ${ps.nama}</span></td>
                         <td style="font-size:12px; max-width:200px;">${ps.barang || 'Produk Pembelian'}</td>
                         <td style="color:#e74c3c; font-weight:800;">Rp ${ps.total.toLocaleString('id-ID')}</td>
-                        <td><span style="background:#2ecc71; color:#fff; padding:4px 8px; border-radius:4px; font-size:11px; font-weight:bold;">Aktif</span></td>
-                        <td><button class="btn-action btn-status" onclick="alert('Pesanan diproses')">Detail</button></td>
+                        <td><span style="background:${badgeColor}; color:#fff; padding:4px 8px; border-radius:4px; font-size:11px; font-weight:bold;">${statusLogistik}</span></td>
+                        <td>
+                            <div style="display:flex; flex-wrap:wrap; gap:4px;">
+                                <button class="btn-action btn-edit" style="margin:0;" onclick="updateStatusPesanan('${ps.id}', 'Menunggu Konfirmasi')" title="Set Menunggu"><i class="fa-solid fa-clock"></i></button>
+                                <button class="btn-action btn-print" style="margin:0;" onclick="updateStatusPesanan('${ps.id}', 'Di Kemas')" title="Set Di Kemas"><i class="fa-solid fa-box"></i></button>
+                                <button class="btn-action btn-status" style="margin:0;" onclick="updateStatusPesanan('${ps.id}', 'Di Kirim')" title="Set Di Kirim"><i class="fa-solid fa-truck"></i></button>
+                                <button class="btn-action btn-success" style="margin:0;" onclick="updateStatusPesanan('${ps.id}', 'Tiba di Tujuan')" title="Set Tiba"><i class="fa-solid fa-check"></i></button>
+                            </div>
+                        </td>
                     </tr>`;
                 });
                 tbody.innerHTML = html;
@@ -653,6 +723,14 @@
             if(document.getElementById('stat-terjual')) document.getElementById('stat-terjual').innerText = totalTerjual;
             if(document.getElementById('stat-pesanan')) document.getElementById('stat-pesanan').innerText = totalPesananAktif;
         });
+    };
+
+    window.updateStatusPesanan = async function(docId, statusTeks) {
+        if(confirm("Ubah status pengiriman menjadi: " + statusTeks + "?")) {
+            await dbFirestore.collection('pesanan').doc(docId).update({ status_logistik: statusTeks });
+            muatPesanan();
+            alert("Status berhasil diperbarui! Perubahan ini akan langsung terbaca pada tracking resi di index utama.");
+        }
     };
 
     // --- 3. LIVE CHAT (REALTIME DATABASE) ---
