@@ -133,7 +133,6 @@
            ========================================== */
         .co-wrapper { text-align: left; background: #ffffff; padding: 25px; border-radius: 20px; margin-bottom: 40px; border: 1px solid #cbd5e1; box-shadow: 0 4px 15px rgba(0,0,0,0.04); max-width: 800px; margin-left: auto; margin-right: auto; }
         
-        /* HEADER CHECKOUT LOGO TENGAH & JUDUL PINGGIR */
         .co-logo-center { text-align: center; margin-bottom: 18px; }
         .co-logo-center img { height: 36px; }
         .co-top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; padding-bottom: 14px; border-bottom: 1px dashed #cbd5e1; }
@@ -165,15 +164,12 @@
         .qna-bar-item:hover { background: #111827; color: #fff; border-color: #111827; }
         .qna-bar-item.selected { background: #111827; color: #fff; border-color: #111827; }
         
-        /* ASURANSI OTOMATIS IKUT NOMINAL */
         .asuransi-box { display: flex; align-items: center; gap: 10px; background: #fefce8; border: 1px solid #fef08a; padding: 12px 16px; border-radius: 12px; margin-bottom: 20px; cursor: pointer; }
         .asuransi-box label { font-size: 11px; font-weight: 600; color: #854d0e; cursor: pointer; flex: 1; }
         
-        /* VOUCHER UI (DI BAWAH LOGISTIK) */
         .voucher-box { display: flex; gap: 8px; margin-bottom: 20px; }
         .voucher-input { flex: 1; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 12px; outline: none; font-family: 'Inter'; text-transform: uppercase; font-weight: 700; }
         
-        /* METODE BAYAR TOMBOL PROPORSIONAL */
         .payment-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 25px; }
         @media(min-width: 600px) { .payment-grid { grid-template-columns: repeat(4, 1fr); } }
         .payment-box { border: 1px solid #cbd5e1; border-radius: 10px; padding: 10px 8px; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; transition: 0.2s; background: #fff; gap: 6px; min-height: 55px; }
@@ -190,7 +186,6 @@
         .co-summary-row { display: flex; justify-content: space-between; align-items: center; }
         .co-discount-label { font-size: 11px; font-weight: 700; color: #047857; }
 
-        /* STRUK INVOICE PEMBELIAN TERSTRUKTUR */
         .struk-card { background: #fff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 25px 20px; max-width: 440px; margin: 20px auto; font-family: monospace; font-size: 12px; color: #111; line-height: 1.6; box-shadow: 0 10px 25px rgba(0,0,0,0.06); }
         .struk-header { text-align: center; border-bottom: 1px dashed #94a3b8; padding-bottom: 12px; margin-bottom: 12px; }
         .struk-line { border-top: 1px dashed #94a3b8; margin: 12px 0; }
@@ -312,7 +307,8 @@
         const dbRealtime = firebase.database();
         const dbFirestore = firebase.firestore();
         
-        try { emailjs.init("YOUR_PUBLIC_KEY_EMAILJS"); } catch(e) {}
+        // EMAILJS PUBLIC KEY RESMI DARI USER
+        try { emailjs.init("xSulAZbFnyN8v9BoF"); } catch(e) {}
     </script>
 </head>
 <body>
@@ -595,16 +591,14 @@
             btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Mengirim OTP...';
             btn.disabled = true;
 
-            // Pengiriman via EmailJS / Fallback Otomatis
             if (typeof emailjs !== 'undefined') {
-                emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+                emailjs.send("service_ousevoid", "template_otp88", {
                     nama_pengguna: n,
                     email_tujuan: e,
                     kode_otp: window.tempOTP
                 }).then(() => {
                     lanjutKeStepOTP();
                 }).catch(() => {
-                    // Fallback aman agar tetap bisa diuji langsung
                     lanjutKeStepOTP(true);
                 });
             } else {
@@ -623,7 +617,7 @@
             document.getElementById('reg-otp-input').focus();
 
             if (isFallback) {
-                bukaCustomPopup("Kode OTP simulasi Anda: " + window.tempOTP + "\n\n(Catatan: Untuk mengaktifkan kiriman email nyata gerbangmasadepanid@gmail.com, masukkan Service ID & Template ID EmailJS Anda pada skrip).", "OTP Terkirim");
+                bukaCustomPopup("Kode OTP simulasi Anda: " + window.tempOTP + "\n\n(Catatan: Pastikan Service ID & Template ID EmailJS Anda sudah dikonfigurasi di dasbor).", "OTP Terkirim");
             } else {
                 bukaCustomPopup("Kode verifikasi OTP 6-digit telah dikirimkan ke email Anda.", "Cek Inbox Email");
             }
@@ -779,7 +773,7 @@
         }
 
         // =========================================================================
-        // HALAMAN DETAIL PRODUK
+        // HALAMAN DETAIL PRODUK E-COMMERCE
         // =========================================================================
         function renderProdukDetail(index) {
             toggleFooterUtama(false); autoClose(); window.scrollTo(0,0);
@@ -1004,7 +998,6 @@
             });
             window.currentSubtotal = subtotal; window.currentOngkir = 35000; window.useAsuransi = false; window.currentDiskonPromo = 0;
             
-            // Hitung persentase asuransi otomatis
             let rateAsuransi = 0;
             if (subtotal >= 1000000) rateAsuransi = 0.08;
             else if (subtotal >= 499000) rateAsuransi = 0.05;
@@ -1048,7 +1041,7 @@
                             <span><b>Instan</b> : Grab, Gojek dan Paxel</span>
                             <span style="font-weight:800;">Rp 30.000</span>
                         </div>
-                        <div class="qna-bar-item" onclick="22000, 'Sameday : Grab, Gojek dan Paxel', this)">
+                        <div class="qna-bar-item" onclick="pilihKurir(22000, 'Sameday : Grab, Gojek dan Paxel', this)">
                             <span><b>Sameday</b> : Grab, Gojek dan Paxel</span>
                             <span style="font-weight:800;">Rp 22.000</span>
                         </div>
@@ -1155,7 +1148,6 @@
             el.classList.add('selected'); window.selectedPaymentMethod = method; 
         }
 
-        // --- SISTEM PEMBAYARAN: HANYA 1X KLIK & TIDAK MASUK PESANAN SEBELUM CALLBACK/LUNAS ---
         async function eksekusiPembayaran() {
             var n = document.getElementById('co-nama').value, w = document.getElementById('co-wa').value, e = document.getElementById('co-email').value, a = document.getElementById('co-alamat').value;
             if (!n || !w || !e || !a) { bukaCustomPopup("Sistem menolak: Mohon lengkapi seluruh formulir data pengiriman.", "Peringatan"); return; }
@@ -1195,7 +1187,6 @@
                     btn.innerHTML = '<i class="fa-solid fa-shield-halved"></i> Proses Pembayaran'; btn.disabled = false;
                 }
             } catch (error) {
-                // Tetap aktifkan alur pengujian offline jika fetch API belum tersedia di lingkungan lu
                 renderBerhasil();
             }
         }
@@ -1239,7 +1230,6 @@
                 total: window.currentTotalFinal || 534000
             };
 
-            // Format tanggal waktu real-time
             var now = new Date();
             var bulanStr = ["JAN", "FEB", "MAR", "APR", "MEI", "JUN", "JUL", "AGU", "SEP", "OKT", "NOV", "DES"];
             var tglStr = now.getDate() + " " + bulanStr[now.getMonth()] + " " + now.getFullYear() + " " + ("0"+now.getHours()).slice(-2) + ":" + ("0"+now.getMinutes()).slice(-2);
@@ -1425,7 +1415,6 @@
             
             dbRealtime.ref('chats/' + chatSessionId + '/info').set({ nama: nama, invoice: inv, status: 'online', waktuDibuat: Date.now() });
 
-            // Menampilkan Foto Asli dan Jam Waktu Nyata di Header
             document.getElementById('chatAvatarImg').src = "https://i.ibb.co.com/kVYkRpnc/IMG-20260724-002919-468-2.jpg";
             document.getElementById('chatAgentName').innerText = "Tiara Sabrina (Agent)";
             document.getElementById('cs-status-dot').className = "status-dot"; 
