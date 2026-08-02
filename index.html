@@ -155,7 +155,6 @@
         .qty-btn { cursor: pointer; font-weight: 800; color: #4b5563; width: 18px; text-align: center; font-size: 12px; }
         .qty-num { font-size: 12px; font-weight: 700; width: 18px; text-align: center; color: #111; }
         
-        /* LOGISTIK UI MODEL ACCORDION RINGKAS */
         .logistik-accordion-btn { background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px 16px; border-radius: 12px; font-size: 12px; font-weight: 700; color: #111; cursor: pointer; display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
         .logistik-accordion-btn:hover { background: #f1f5f9; }
         .logistik-options { display: none; flex-direction: column; gap: 8px; margin-bottom: 15px; }
@@ -274,6 +273,21 @@
         
         .login-link { font-size: 12px; color: #111827; font-weight: 800; cursor: pointer; margin-top: 15px; display: block; text-decoration: underline; }
         
+        /* DASHBOARD AKUN PENGGUNA UI SELARAS TEMA UTAMA */
+        .user-dash-wrapper { background: #ffffff; border: 1px solid #cbd5e1; border-radius: 24px; padding: 30px 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); max-width: 760px; margin: 30px auto; text-align: left; }
+        .user-dash-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #e2e8f0; padding-bottom: 20px; margin-bottom: 25px; }
+        .user-dash-profile { display: flex; align-items: center; gap: 16px; }
+        .user-dash-avatar { width: 60px; height: 60px; border-radius: 50%; background: #111827; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 800; border: 3px solid #cbd5e1; }
+        .user-dash-name { font-size: 18px; font-weight: 800; color: #111; margin: 0 0 4px 0; }
+        .user-dash-email { font-size: 13px; color: #64748b; margin: 0; }
+        .badge-member { background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 800; display: inline-flex; align-items: center; gap: 6px; }
+        
+        .user-dash-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 25px; }
+        @media(min-width: 600px) { .user-dash-grid { grid-template-columns: repeat(3, 1fr); } }
+        .user-stat-card { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 16px; padding: 18px; text-align: center; }
+        .user-stat-title { font-size: 11px; font-weight: 800; color: #64748b; text-transform: uppercase; margin-bottom: 8px; }
+        .user-stat-val { font-size: 22px; font-weight: 800; color: #111; }
+        
         .info-card { background: #fff; border: 1px solid #cbd5e1; border-radius: 20px; padding: 40px; text-align: left; line-height: 1.8; font-size: 14px; color: #374151; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
         .info-card h2 { font-size: 24px; font-weight: 800; color: #111; margin-bottom: 25px; border-bottom: 2px solid #cbd5e1; padding-bottom: 15px; }
         .info-card ol { padding-left: 20px; margin-top: 15px; }
@@ -326,7 +340,7 @@
                 <i class="fa-solid fa-bag-shopping"></i>
                 <span class="cart-badge" id="cart-badge" style="display: none;">0</span>
             </div>
-            <button class="btn-login-nav" onclick="bukaLogin()"><i class="fa-solid fa-user"></i> Login</button>
+            <button class="btn-login-nav" id="btn-nav-auth" onclick="bukaAuthAtauDashboard()"><i class="fa-solid fa-user"></i> Login</button>
         </div>
     </div>
 
@@ -359,7 +373,7 @@
             </div>
         </div>
         <div style="padding-top:15px; border-top:1px solid #cbd5e1;">
-            <button class="btn-action" onclick="bukaLogin()"><i class="fa-solid fa-right-to-bracket"></i> Login / Daftar</button>
+            <button class="btn-action" id="btn-sidebar-auth" onclick="bukaAuthAtauDashboard()"><i class="fa-solid fa-right-to-bracket"></i> Login / Daftar</button>
         </div>
     </div>
 
@@ -397,7 +411,7 @@
         <div class="custom-popup-box">
             <div style="font-size:24px; margin-bottom:10px; color:#111827;"><i class="fa-solid fa-circle-info"></i></div>
             <div id="customPopupTitle" style="font-size:16px; font-weight:800; color:#111; margin-bottom:8px;">Pemberitahuan</div>
-            <div id="customPopupText" style="font-size:13px; color:#4b5563; line-height:1.5; margin-bottom:20px;"></div>
+            <div id="customPopupText" style="font-size:13px; color:#4b5563; line-height:1.5; margin-bottom:20px; white-space: pre-line;"></div>
             <button class="btn-action" style="padding:12px;" onclick="tutupCustomPopup()">Mengerti</button>
         </div>
     </div>
@@ -415,14 +429,14 @@
             <div id="area-pengguna">
                 <h3 style="font-size:16px; margin:0 0 15px 0; font-weight:800;">Login Pengguna</h3>
                 <div class="login-input-wrapper">
-                    <label class="login-label">Username / Email</label>
-                    <input type="text" id="user-pengguna" class="login-input" placeholder="Username Anda">
+                    <label class="login-label">Alamat Email / Username</label>
+                    <input type="text" id="user-pengguna" class="login-input" placeholder="email@domain.com">
                 </div>
                 <div class="login-input-wrapper">
                     <label class="login-label">Kata Sandi</label>
-                    <input type="password" id="pass-pengguna" class="login-input" placeholder="Kata sandi">
+                    <input type="password" id="pass-pengguna" class="login-input" placeholder="Kata sandi akun">
                 </div>
-                <button class="btn-action" style="margin-top:10px; padding:12px;" onclick="prosesLoginPengguna()">Login</button>
+                <button class="btn-action" style="margin-top:10px; padding:12px;" onclick="prosesLoginPengguna()">Login ke Dashboard</button>
                 <span class="login-link" onclick="switchLogin('daftar')">Belum punya akun? Daftar sekarang!</span>
             </div>
 
@@ -524,6 +538,7 @@
         window.currentDiskonPromo = 0;
         window.currentReviewStar = 5;
         window.tempOTP = "";
+        window.tempUserData = {};
         
         // FORMAT PENOMORAN INVOICE: OUSE2026XXXXXX (huruf dan angka kapital besar)
         function generateTrxId() {
@@ -559,7 +574,32 @@
         function tutupLogin() { document.getElementById('loginModal').classList.remove('show'); switchLogin('pengguna'); }
 
         // =========================================================================
-        // LOGIKA LOGIN & PENDAFTARAN AKUN DENGAN OTP EMAIL
+        // CEK STATUS LOGIN & TOMBOL AUTH NAVBAR
+        // =========================================================================
+        function updateTampilanLoginNav() {
+            var userAktif = JSON.parse(localStorage.getItem('ousevoid_logged_in') || 'null');
+            var btnNav = document.getElementById('btn-nav-auth');
+            var btnSide = document.getElementById('btn-sidebar-auth');
+            if (userAktif) {
+                if (btnNav) btnNav.innerHTML = `<i class="fa-solid fa-user-check"></i> Akun Saya`;
+                if (btnSide) btnSide.innerHTML = `<i class="fa-solid fa-user-check"></i> Dashboard Akun (${userAktif.nama.split(' ')[0]})`;
+            } else {
+                if (btnNav) btnNav.innerHTML = `<i class="fa-solid fa-user"></i> Login`;
+                if (btnSide) btnSide.innerHTML = `<i class="fa-solid fa-right-to-bracket"></i> Login / Daftar`;
+            }
+        }
+
+        function bukaAuthAtauDashboard() {
+            var userAktif = JSON.parse(localStorage.getItem('ousevoid_logged_in') || 'null');
+            if (userAktif) {
+                renderDashboardPengguna();
+            } else {
+                bukaLogin();
+            }
+        }
+
+        // =========================================================================
+        // LOGIKA LOGIN & PENDAFTARAN AKUN DENGAN OTP EMAIL + ERROR ALERT
         // =========================================================================
         function switchLogin(mode) {
             document.getElementById('tab-pengguna').classList.toggle('active', mode === 'pengguna' || mode === 'daftar');
@@ -574,8 +614,19 @@
         }
 
         function prosesLoginPengguna() {
-            bukaCustomPopup("Fitur pendaftaran dan login pengguna sedang dalam pemeliharaan. Anda tetap bisa berbelanja tanpa login.", "Info Layanan");
-            tutupLogin();
+            var u = document.getElementById('user-pengguna').value.trim();
+            var p = document.getElementById('pass-pengguna').value.trim();
+            if(!u || !p) { bukaCustomPopup("Mohon lengkapi email/username dan kata sandi Anda.", "Login Gagal"); return; }
+            
+            var userTersimpan = JSON.parse(localStorage.getItem('ousevoid_user_data') || 'null');
+            if (userTersimpan && (userTersimpan.email.toLowerCase() === u.toLowerCase() || userTersimpan.nama.toLowerCase() === u.toLowerCase()) && userTersimpan.pass === p) {
+                localStorage.setItem('ousevoid_logged_in', JSON.stringify(userTersimpan));
+                updateTampilanLoginNav();
+                tutupLogin();
+                renderDashboardPengguna();
+            } else {
+                bukaCustomPopup("Email/Username atau Kata Sandi yang Anda masukkan tidak cocok dengan akun yang terdaftar.", "Kredensial Tidak Sah");
+            }
         }
 
         function prosesDaftarKirimOTP() {
@@ -584,7 +635,7 @@
             var p = document.getElementById('reg-pass').value.trim();
             if(!n || !e || !p) { bukaCustomPopup("Lengkapi Nama Lengkap, Email, dan Kata Sandi Anda.", "Formulir Belum Lengkap"); return; }
             
-            // Generate OTP 6 angka
+            window.tempUserData = { nama: n, email: e, pass: p };
             window.tempOTP = Math.floor(100000 + Math.random() * 900000).toString();
             
             var btn = document.getElementById('btn-kirim-otp');
@@ -592,21 +643,24 @@
             btn.disabled = true;
 
             if (typeof emailjs !== 'undefined') {
+                // MENGGUNAKAN SERVICE ID: service_ousevoid DAN TEMPLATE ID BAWAAN EMAILJS
                 emailjs.send("service_ousevoid", "template_otp88", {
                     nama_pengguna: n,
                     email_tujuan: e,
                     kode_otp: window.tempOTP
                 }).then(() => {
-                    lanjutKeStepOTP();
-                }).catch(() => {
-                    lanjutKeStepOTP(true);
+                    lanjutKeStepOTP(false);
+                }).catch((error) => {
+                    // MEMUNCULKAN PESAN ERROR ASLI DARI SERVER SUPAYA USER TAHU KELIRUNYA DI MANA
+                    let infoErr = error && error.text ? error.text : "Template ID atau Gmail belum terkoneksi";
+                    lanjutKeStepOTP(true, infoErr);
                 });
             } else {
-                setTimeout(() => { lanjutKeStepOTP(true); }, 1000);
+                setTimeout(() => { lanjutKeStepOTP(true, "SDK EmailJS tidak terbaca"); }, 1000);
             }
         }
 
-        function lanjutKeStepOTP(isFallback = false) {
+        function lanjutKeStepOTP(isFallback = false, detailError = "") {
             var btn = document.getElementById('btn-kirim-otp');
             btn.innerHTML = 'Kirim OTP ke Email';
             btn.disabled = false;
@@ -617,7 +671,7 @@
             document.getElementById('reg-otp-input').focus();
 
             if (isFallback) {
-                bukaCustomPopup("Kode OTP simulasi Anda: " + window.tempOTP + "\n\n(Catatan: Pastikan Service ID & Template ID EmailJS Anda sudah dikonfigurasi di dasbor).", "OTP Terkirim");
+                bukaCustomPopup("Pengiriman EmailJS ditolak server (" + detailError + ").\n\nUntuk tes, kode OTP simulasi Anda: " + window.tempOTP, "OTP Cadangan");
             } else {
                 bukaCustomPopup("Kode verifikasi OTP 6-digit telah dikirimkan ke email Anda.", "Cek Inbox Email");
             }
@@ -629,8 +683,15 @@
                 bukaCustomPopup("Kode OTP yang Anda masukkan keliru. Silakan periksa kembali email Anda.", "Verifikasi Gagal");
                 return;
             }
-            bukaCustomPopup("Selamat! Akun Ousevoid Anda berhasil diverifikasi melalui Email OTP dan aktif.", "Akun Berhasil Dibuat");
+            
+            // SIMPAN DATA AKUN PENGGUNA YANG SAH
+            localStorage.setItem('ousevoid_user_data', JSON.stringify(window.tempUserData));
+            localStorage.setItem('ousevoid_logged_in', JSON.stringify(window.tempUserData));
+            updateTampilanLoginNav();
             tutupLogin();
+            
+            // LANGSUNG MASUK KE DASHBOARD AKUN PENGGUNA
+            renderDashboardPengguna();
         }
 
         function kembaliDaftarStep1() {
@@ -657,6 +718,67 @@
             var pin = document.getElementById('log-pin').value.trim();
             if(!pin || pin.length < 6) { bukaCustomPopup("PIN harus 6 digit.", "Keamanan"); return; }
             window.location.href = "manajemen.html";
+        }
+
+        // =========================================================================
+        // DASHBOARD AKUN PENGGUNA (SELARAS TEMA UI UTAMA ABU-ABU 20%)
+        // =========================================================================
+        function renderDashboardPengguna() {
+            toggleFooterUtama(true); autoClose(); window.scrollTo(0,0);
+            var u = JSON.parse(localStorage.getItem('ousevoid_logged_in') || 'null');
+            if (!u) { bukaLogin(); return; }
+            
+            var inisial = u.nama ? u.nama.charAt(0).toUpperCase() : "U";
+            var totalOrder = keranjang.length > 0 ? "1 (Aktif)" : "0";
+
+            document.getElementById('app').innerHTML = `
+                <div class="user-dash-wrapper">
+                    <div class="user-dash-header">
+                        <div class="user-dash-profile">
+                            <div class="user-dash-avatar">${inisial}</div>
+                            <div>
+                                <h2 class="user-dash-name">${u.nama}</h2>
+                                <p class="user-dash-email">${u.email}</p>
+                                <div style="margin-top: 8px;">
+                                    <span class="badge-member"><i class="fa-solid fa-circle-check"></i> Member Resmi Ousevoid</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-action" style="width: auto; padding: 10px 18px; background: #e11d48;" onclick="logoutPengguna()"><i class="fa-solid fa-right-from-bracket"></i> Keluar</button>
+                    </div>
+
+                    <div class="user-dash-grid">
+                        <div class="user-stat-card">
+                            <div class="user-stat-title">Pesanan Anda</div>
+                            <div class="user-stat-val">${totalOrder}</div>
+                        </div>
+                        <div class="user-stat-card">
+                            <div class="user-stat-title">Voucher Aktif</div>
+                            <div class="user-stat-val">3 Kupon</div>
+                        </div>
+                        <div class="user-stat-card">
+                            <div class="user-stat-title">Status Garansi</div>
+                            <div class="user-stat-val" style="color: #047857; font-size:16px;">Terproteksi</div>
+                        </div>
+                    </div>
+
+                    <div style="border-top: 1px dashed #cbd5e1; padding-top: 20px; margin-top: 20px;">
+                        <h3 style="font-size: 15px; font-weight: 800; margin: 0 0 12px 0;">Menu Cepat Layanan Pelanggan</h3>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <button class="btn-action" style="flex: 1; min-width: 180px; background: #1f2937;" onclick="renderLacakPesanan()"><i class="fa-solid fa-truck-fast"></i> Lacak Pengiriman</button>
+                            <button class="btn-action" style="flex: 1; min-width: 180px; background: #1f2937;" onclick="renderGaransi()"><i class="fa-solid fa-shield-halved"></i> Klaim Garansi</button>
+                            <button class="btn-action" style="flex: 1; min-width: 180px; background: #1f2937;" onclick="renderHome()"><i class="fa-solid fa-bag-shopping"></i> Belanja Lagi</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function logoutPengguna() {
+            localStorage.removeItem('ousevoid_logged_in');
+            updateTampilanLoginNav();
+            bukaCustomPopup("Anda telah berhasil keluar dari sesi akun.", "Logout Sukses");
+            renderHome();
         }
 
         // =========================================================================
@@ -968,7 +1090,7 @@
         function ubahQty(idx, delta) { keranjang[idx].qty += delta; if(keranjang[idx].qty <= 0) keranjang.splice(idx, 1); renderKeranjang(); updateCartBadge(); }
 
         // =========================================================================
-        // CHECKOUT E-COMMERCE (LOGO TENGAH, LOGISTIK ACCORDION, IKON PENGEMBALIAN)
+        // CHECKOUT E-COMMERCE
         // =========================================================================
         function renderKeranjang() {
             toggleFooterUtama(false); autoClose(); window.scrollTo(0,0);
@@ -1708,6 +1830,7 @@
                 console.error("Gagal menarik data dari Firestore: ", error);
                 products = []; 
             }
+            updateTampilanLoginNav();
             renderHome();
         }
 
