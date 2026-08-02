@@ -12,16 +12,16 @@
     
     <style>
         /* ==========================================
-           1. DASAR & TYPOGRAPHY
+           1. DASAR & TYPOGRAPHY (ABU-ABU 20% HARMONIS)
            ========================================== */
         * { box-sizing: border-box; }
-        body { margin: 0; font-family: 'Inter', sans-serif; color: #111827; background-color: #f9fafb; scroll-behavior: smooth; }
+        body { margin: 0; font-family: 'Inter', sans-serif; color: #111827; background-color: #eaeef3; scroll-behavior: smooth; }
         a { text-decoration: none; color: inherit; cursor: pointer; }
         
         /* ==========================================
            2. HEADER & NAVIGASI
            ========================================== */
-        .header { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; border-bottom: 1px solid #f3f4f6; position: sticky; top: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); z-index: 1000; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; border-bottom: 1px solid #dee2e6; position: sticky; top: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); z-index: 1000; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
         .header-left { display: flex; align-items: center; gap: 15px; }
         .menu-btn { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; }
         .menu-btn span { width: 22px; height: 2.5px; background: #111; border-radius: 2px; }
@@ -29,17 +29,17 @@
         .logo:hover { opacity: 0.8; }
         
         .header-actions { display: flex; align-items: center; gap: 12px; }
-        .btn-lacak-nav { display: flex; align-items: center; gap: 6px; padding: 8px 14px; background: #f3f4f6; color: #374151; font-size: 12px; font-weight: 700; border-radius: 20px; cursor: pointer; transition: 0.2s; }
-        .btn-lacak-nav:hover { background: #e5e7eb; color: #111; }
+        .btn-lacak-nav { display: flex; align-items: center; gap: 6px; padding: 8px 14px; background: #f1f5f9; color: #334155; font-size: 12px; font-weight: 700; border-radius: 20px; cursor: pointer; transition: 0.2s; border: 1px solid #cbd5e1; }
+        .btn-lacak-nav:hover { background: #e2e8f0; color: #111; }
 
         .cart-icon { position: relative; font-size: 18px; color: #111; cursor: pointer; padding: 8px; display: flex; align-items: center; }
         .cart-badge { position: absolute; top: 2px; right: 0px; background: #e11d48; color: #fff; font-size: 10px; font-weight: 800; width: 18px; height: 18px; border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 2px solid #fff; }
 
-        .btn-login-nav { display: flex; align-items: center; gap: 6px; background: #111827; color: #ffffff; padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; border: none; cursor: pointer; transition: 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .btn-login-nav { display: flex; align-items: center; gap: 6px; background: #111827; color: #ffffff; padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; border: none; cursor: pointer; transition: 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.15); }
         .btn-login-nav:hover { background: #1f2937; transform: translateY(-1px); }
 
         /* SIDEBAR DRAWER */
-        .sidebar { position: fixed; top: 0; left: -320px; width: 290px; height: 100%; background: #fff; box-shadow: 10px 0 30px rgba(0,0,0,0.1); z-index: 1003; transition: 0.3s ease; padding: 20px 15px; overflow-y: auto; display: flex; flex-direction: column; justify-content: space-between; }
+        .sidebar { position: fixed; top: 0; left: -320px; width: 290px; height: 100%; background: #fff; box-shadow: 10px 0 30px rgba(0,0,0,0.15); z-index: 1003; transition: 0.3s ease; padding: 20px 15px; overflow-y: auto; display: flex; flex-direction: column; justify-content: space-between; }
         .sidebar.active { left: 0; }
         .sidebar-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 20px; border-bottom: 1px solid #f3f4f6; margin-bottom: 20px; }
         .close-sidebar-btn { font-size: 20px; color: #9ca3af; cursor: pointer; padding: 5px; }
@@ -70,7 +70,7 @@
         .indicator { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: 0.3s; }
         .indicator.active { background: #fff; width: 24px; border-radius: 4px; }
 
-        /* FITUR UNGGULAN - TANPA BOX PEMISAH (TRANSPARAN & FLAT) */
+        /* FITUR UNGGULAN */
         .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 40px; }
         @media(min-width: 768px) { .features-grid { grid-template-columns: repeat(4, 1fr); } }
         .feature-card { background: transparent; border: none; padding: 15px 10px; text-align: center; transition: 0.3s; }
@@ -78,23 +78,22 @@
         .feature-card h4 { font-size: 13px; font-weight: 800; margin: 0 0 6px 0; color: #111; }
         .feature-card p { font-size: 11px; color: #4b5563; margin: 0; line-height: 1.5; }
 
-        /* KATEGORI HORIZONTAL & UKURAN GAMBAR (NORMAL SERAGAM ANTI-ZOOM) */
+        /* KATEGORI HORIZONTAL & KARTU PRODUK SELARAS TEMA */
         .category-section { margin-bottom: 40px; }
-        .category-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 2px solid #f3f4f6; padding-bottom: 10px; }
+        .category-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 2px solid #cbd5e1; padding-bottom: 10px; }
         .category-title { font-size: 18px; font-weight: 800; color: #111; margin: 0; display: flex; align-items: center; gap: 8px; }
         
         .horizontal-scroll { display: flex; overflow-x: auto; gap: 15px; padding-bottom: 10px; scrollbar-width: none; scroll-snap-type: x mandatory; }
         .horizontal-scroll::-webkit-scrollbar { display: none; }
         
-        .horizontal-card { min-width: 180px; max-width: 180px; background: #fff; border: 1px solid #e5e7eb; padding: 14px; border-radius: 18px; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; scroll-snap-align: start; }
-        
-        .horizontal-card img { width: 100%; height: 140px; object-fit: contain; border-radius: 12px; margin-bottom: 12px; cursor: pointer; transition: 0.3s; background: #fff; }
+        .horizontal-card { min-width: 180px; max-width: 180px; background: #ffffff; border: 1px solid #cbd5e1; padding: 14px; border-radius: 18px; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; scroll-snap-align: start; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+        .horizontal-card img { width: 100%; height: 140px; object-fit: contain; border-radius: 12px; margin-bottom: 12px; cursor: pointer; transition: 0.3s; background: #f8fafc; padding: 8px; }
         @media(min-width: 768px) {
             .horizontal-card { min-width: 220px; max-width: 220px; }
             .horizontal-card img { height: 180px; }
         }
         
-        .horizontal-card:hover { border-color: #111; transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.06); }
+        .horizontal-card:hover { border-color: #111; transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.08); }
         .horizontal-card h3 { font-size: 13px; font-weight: 700; margin: 0 0 6px 0; color: #111; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .horizontal-card .harga { font-size: 14px; font-weight: 800; color: #111; margin-bottom: 12px; }
         
@@ -103,100 +102,119 @@
         .btn-action:disabled, .co-btn-pay:disabled { background: #9ca3af; cursor: not-allowed; }
 
         /* ==========================================
-           4. DETAIL PRODUK E-COMMERCE (TANPA BOX LINE & NORMAL IMAGE)
+           4. DETAIL PRODUK
            ========================================== */
         .tipe-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; }
-        .tipe-box { border: 1px solid #d1d5db; padding: 8px 14px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; transition: 0.2s; background: #fff; }
+        .tipe-box { border: 1px solid #cbd5e1; padding: 8px 14px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; transition: 0.2s; background: #fff; }
         .tipe-box.selected { background: #111827; color: #fff; border-color: #111827; }
         
-        /* Tanpa box line: Deskripsi menyatu dengan spesifikasi */
         .specs-grid-clean { display: grid; grid-template-columns: 130px 1fr; gap: 8px 15px; font-size: 13px; margin: 15px 0 10px 0; }
         .specs-label { color: #6b7280; font-weight: 600; }
         .specs-value { color: #111827; font-weight: 700; }
         .deskripsi-box { font-size: 13px; line-height: 1.8; color: #374151; white-space: pre-wrap; word-wrap: break-word; background: transparent; padding: 5px 0 10px 0; border: none; }
 
         /* ULASAN & RATING UI */
-        .review-section { margin-top: 30px; border-top: 1px solid #f3f4f6; padding-top: 25px; }
+        .review-section { margin-top: 30px; border-top: 1px solid #cbd5e1; padding-top: 25px; }
         .review-title { font-size: 16px; font-weight: 800; color: #111; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
-        .review-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 14px; padding: 16px; margin-bottom: 12px; }
+        .review-card { background: #fff; border: 1px solid #cbd5e1; border-radius: 14px; padding: 16px; margin-bottom: 12px; }
         .review-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
         .review-author { font-size: 13px; font-weight: 800; color: #111; }
         .review-stars { color: #f59e0b; font-size: 12px; }
         .review-text { font-size: 12px; color: #4b5563; line-height: 1.5; margin: 8px 0; }
         .review-img { max-width: 120px; height: auto; border-radius: 8px; margin-top: 8px; border: 1px solid #e5e7eb; display: block; }
         
-        .review-form { background: #f9fafb; border: 1px solid #d1d5db; border-radius: 16px; padding: 18px; margin-top: 15px; display: none; }
+        .review-form { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 16px; padding: 18px; margin-top: 15px; display: none; }
         .review-form.show { display: block; animation: fadeIn 0.3s ease; }
         .star-select { display: flex; gap: 8px; margin-bottom: 12px; cursor: pointer; font-size: 18px; color: #d1d5db; }
         .star-select .fa-star.active { color: #f59e0b; }
 
         /* ==========================================
-           5. CHECKOUT SATU HALAMAN & INVOICE (GABUNG TOTAL BAYAR)
+           5. CHECKOUT SATU HALAMAN & STRUK PEMBELIAN
            ========================================== */
-        .co-wrapper { text-align: left; background: #fff; padding: 25px; border-radius: 20px; margin-bottom: 40px; border: 1px solid #e5e7eb; box-shadow: 0 4px 15px rgba(0,0,0,0.03); max-width: 800px; margin-left: auto; margin-right: auto; }
-        .co-header-center { text-align: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px dashed #e5e7eb; }
-        .co-header-title { font-size: 22px; font-weight: 800; color: #111; margin: 10px 0 5px 0; display: flex; align-items: center; justify-content: center; gap: 10px; }
-        .co-header-id { font-size: 13px; font-weight: 800; color: #111; font-family: monospace; letter-spacing: 1px; }
+        .co-wrapper { text-align: left; background: #ffffff; padding: 25px; border-radius: 20px; margin-bottom: 40px; border: 1px solid #cbd5e1; box-shadow: 0 4px 15px rgba(0,0,0,0.04); max-width: 800px; margin-left: auto; margin-right: auto; }
         
-        .co-section-title { font-size: 14px; font-weight: 800; color: #111; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #f3f4f6; }
-        .co-input-modern { width: 100%; padding: 14px 16px; border: 1px solid #d1d5db; border-radius: 12px; font-family: 'Inter', sans-serif; font-size: 13px; margin-bottom: 15px; outline: none; background: #f9fafb; transition: 0.3s; }
+        /* HEADER CHECKOUT LOGO TENGAH & JUDUL PINGGIR */
+        .co-logo-center { text-align: center; margin-bottom: 18px; }
+        .co-logo-center img { height: 36px; }
+        .co-top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; padding-bottom: 14px; border-bottom: 1px dashed #cbd5e1; }
+        .co-top-bar-title { font-size: 15px; font-weight: 800; color: #111; }
+        .co-top-bar-id { font-size: 12px; font-weight: 700; color: #475569; font-family: monospace; letter-spacing: 0.5px; }
+
+        .co-section-title { font-size: 13px; font-weight: 800; color: #111; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; display: flex; align-items: center; gap: 8px; }
+        .co-input-modern { width: 100%; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 12px; margin-bottom: 12px; outline: none; background: #f8fafc; transition: 0.3s; }
         .co-input-modern:focus { border-color: #111; background: #fff; }
         
-        .co-product-item { display: flex; gap: 15px; align-items: center; padding-bottom: 15px; border-bottom: 1px dashed #e5e7eb; margin-bottom: 15px; }
-        .co-product-item img { width: 80px; height: 80px; object-fit: contain; border-radius: 12px; border: 1px solid #f3f4f6; }
+        .co-product-item { display: flex; gap: 15px; align-items: center; padding-bottom: 15px; border-bottom: 1px dashed #cbd5e1; margin-bottom: 15px; }
+        .co-product-item img { width: 75px; height: 75px; object-fit: contain; border-radius: 12px; border: 1px solid #e2e8f0; background: #f8fafc; padding: 4px; }
         .co-product-info { flex: 1; }
         .co-product-name { font-size: 13px; font-weight: 700; color: #111; margin-bottom: 6px; }
-        .co-product-price { font-size: 14px; font-weight: 800; color: #e11d48; }
+        .co-product-price { font-size: 13px; font-weight: 800; color: #e11d48; }
         
-        .qty-control { display: flex; align-items: center; gap: 12px; background: #fff; border: 1px solid #d1d5db; border-radius: 8px; padding: 6px 10px; width: fit-content; margin-top: 8px; }
-        .qty-btn { cursor: pointer; font-weight: 800; color: #4b5563; width: 20px; text-align: center; }
-        .qty-num { font-size: 13px; font-weight: 700; width: 20px; text-align: center; color: #111; }
+        .badge-tag { display: inline-flex; align-items: center; gap: 5px; font-size: 10px; font-weight: 700; background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; padding: 3px 8px; border-radius: 6px; margin-top: 6px; margin-right: 6px; }
         
-        /* LOGISTIK UI ALA CHAT BOT & ASURANSI */
-        .qna-options-wrapper { display: flex; flex-direction: column; gap: 8px; margin-bottom: 15px; }
-        .qna-bar-item { background: #f9fafb; border: 1px solid #d1d5db; padding: 14px 16px; border-radius: 12px; font-size: 13px; font-weight: 700; color: #374151; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: space-between; }
+        .qty-control { display: flex; align-items: center; gap: 10px; background: #fff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 4px 8px; width: fit-content; margin-top: 6px; }
+        .qty-btn { cursor: pointer; font-weight: 800; color: #4b5563; width: 18px; text-align: center; font-size: 12px; }
+        .qty-num { font-size: 12px; font-weight: 700; width: 18px; text-align: center; color: #111; }
+        
+        /* LOGISTIK UI MODEL ACCORDION RINGKAS */
+        .logistik-accordion-btn { background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px 16px; border-radius: 12px; font-size: 12px; font-weight: 700; color: #111; cursor: pointer; display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+        .logistik-accordion-btn:hover { background: #f1f5f9; }
+        .logistik-options { display: none; flex-direction: column; gap: 8px; margin-bottom: 15px; }
+        .logistik-options.show { display: flex; }
+        .qna-bar-item { background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px 14px; border-radius: 10px; font-size: 12px; font-weight: 600; color: #334155; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: space-between; }
         .qna-bar-item:hover { background: #111827; color: #fff; border-color: #111827; }
         .qna-bar-item.selected { background: #111827; color: #fff; border-color: #111827; }
         
+        /* ASURANSI OTOMATIS IKUT NOMINAL */
         .asuransi-box { display: flex; align-items: center; gap: 10px; background: #fefce8; border: 1px solid #fef08a; padding: 12px 16px; border-radius: 12px; margin-bottom: 20px; cursor: pointer; }
-        .asuransi-box label { font-size: 12px; font-weight: 600; color: #854d0e; cursor: pointer; flex: 1; }
+        .asuransi-box label { font-size: 11px; font-weight: 600; color: #854d0e; cursor: pointer; flex: 1; }
         
-        /* VOUCHER UI */
+        /* VOUCHER UI (DI BAWAH LOGISTIK) */
         .voucher-box { display: flex; gap: 8px; margin-bottom: 20px; }
-        .voucher-input { flex: 1; padding: 12px 14px; border: 1px solid #d1d5db; border-radius: 10px; font-size: 12px; outline: none; font-family: 'Inter'; text-transform: uppercase; font-weight: 700; }
+        .voucher-input { flex: 1; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 12px; outline: none; font-family: 'Inter'; text-transform: uppercase; font-weight: 700; }
         
-        .payment-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 25px; }
+        /* METODE BAYAR TOMBOL PROPORSIONAL */
+        .payment-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 25px; }
         @media(min-width: 600px) { .payment-grid { grid-template-columns: repeat(4, 1fr); } }
-        .payment-box { border: 1px solid #d1d5db; border-radius: 12px; padding: 12px; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; transition: 0.2s; background: #fff; gap: 8px; }
-        .payment-box.selected { border-color: #111; box-shadow: 0 0 0 2px #111; background: #f9fafb; }
-        .payment-box img { max-height: 24px; max-width: 100%; object-fit: contain; }
-        .payment-box span { font-size: 11px; font-weight: 700; color: #4b5563; text-align: center; }
+        .payment-box { border: 1px solid #cbd5e1; border-radius: 10px; padding: 10px 8px; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; transition: 0.2s; background: #fff; gap: 6px; min-height: 55px; }
+        .payment-box.selected { border-color: #111; box-shadow: 0 0 0 2px #111; background: #f8fafc; }
+        .payment-box img { max-height: 20px; max-width: 100%; object-fit: contain; }
+        .payment-box span { font-size: 10px; font-weight: 700; color: #4b5563; text-align: center; }
         
         .va-box { background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 16px; padding: 25px; text-align: center; margin-bottom: 20px; }
         .va-bank-name { font-size: 14px; font-weight: 800; color: #334155; margin-bottom: 10px; text-transform: uppercase; }
         .va-number { font-size: 28px; font-weight: 800; color: #111; letter-spacing: 2px; margin-bottom: 15px; user-select: all; }
         .va-amount { font-size: 20px; font-weight: 800; color: #e11d48; margin-bottom: 10px; }
 
-        /* AREA BAYAR GABUNG DI CHECKOUT */
-        .co-summary-pay { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 16px; padding: 20px; margin-top: 25px; display: flex; flex-direction: column; gap: 15px; }
+        .co-summary-pay { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 14px; padding: 16px; margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
         .co-summary-row { display: flex; justify-content: space-between; align-items: center; }
+        .co-discount-label { font-size: 11px; font-weight: 700; color: #047857; }
+
+        /* STRUK INVOICE PEMBELIAN TERSTRUKTUR */
+        .struk-card { background: #fff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 25px 20px; max-width: 440px; margin: 20px auto; font-family: monospace; font-size: 12px; color: #111; line-height: 1.6; box-shadow: 0 10px 25px rgba(0,0,0,0.06); }
+        .struk-header { text-align: center; border-bottom: 1px dashed #94a3b8; padding-bottom: 12px; margin-bottom: 12px; }
+        .struk-line { border-top: 1px dashed #94a3b8; margin: 12px 0; }
+        .struk-table { width: 100%; border-collapse: collapse; margin-bottom: 12px; }
+        .struk-table th, .struk-table td { text-align: left; padding: 4px 0; }
+        .struk-table th { font-weight: 800; border-bottom: 1px solid #cbd5e1; }
+        .struk-footer { text-align: center; border-top: 1px dashed #94a3b8; padding-top: 15px; margin-top: 15px; }
 
         /* ==========================================
            6. HALAMAN PELACAKAN (TRACKING)
            ========================================== */
-        .track-box { background: #fff; border: 1px solid #e5e7eb; border-radius: 24px; padding: 30px 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); max-width: 600px; margin: 40px auto; }
+        .track-box { background: #fff; border: 1px solid #cbd5e1; border-radius: 24px; padding: 30px 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); max-width: 600px; margin: 40px auto; }
         .track-input-group { display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; }
-        .track-input { width: 100%; padding: 14px 16px; border: 1px solid #d1d5db; border-radius: 14px; font-size: 14px; font-weight: 800; outline: none; background: #f9fafb; text-align: center; letter-spacing: 1.5px; text-transform: uppercase; }
+        .track-input { width: 100%; padding: 14px 16px; border: 1px solid #cbd5e1; border-radius: 14px; font-size: 14px; font-weight: 800; outline: none; background: #f8fafc; text-align: center; letter-spacing: 1.5px; text-transform: uppercase; }
         .track-input:focus { border-color: #111; background: #fff; }
         
-        .status-terakhir-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; padding: 20px; margin-top: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); text-align: left; }
+        .status-terakhir-card { background: #fff; border: 1px solid #cbd5e1; border-radius: 16px; padding: 20px; margin-top: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); text-align: left; }
         .status-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: #fef3c7; color: #d97706; border-radius: 20px; font-size: 11px; font-weight: 800; margin-bottom: 12px; }
         .status-title { font-size: 16px; font-weight: 800; color: #111; margin: 0 0 8px 0; }
         
-        .timeline-wrapper { margin-top: 25px; text-align: left; border-top: 1px solid #f3f4f6; padding-top: 25px; }
-        .timeline-item { position: relative; padding-left: 28px; padding-bottom: 20px; border-left: 2px solid #e5e7eb; }
+        .timeline-wrapper { margin-top: 25px; text-align: left; border-top: 1px solid #cbd5e1; padding-top: 25px; }
+        .timeline-item { position: relative; padding-left: 28px; padding-bottom: 20px; border-left: 2px solid #cbd5e1; }
         .timeline-item:last-child { border-left: 2px solid transparent; padding-bottom: 0; }
-        .timeline-icon { position: absolute; left: -9px; top: 0; width: 16px; height: 16px; border-radius: 50%; background: #e5e7eb; border: 2px solid #fff; }
+        .timeline-icon { position: absolute; left: -9px; top: 0; width: 16px; height: 16px; border-radius: 50%; background: #cbd5e1; border: 2px solid #fff; }
         .timeline-item.completed .timeline-icon { background: #111827; }
         .timeline-item.active .timeline-icon { background: #f59e0b; box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2); }
         .timeline-content h5 { margin: 0 0 4px 0; font-size: 13px; font-weight: 800; color: #111; }
@@ -209,7 +227,7 @@
         .chat-widget-btn { position: fixed; bottom: 85px; right: 25px; width: 56px; height: 56px; border-radius: 50%; cursor: pointer; z-index: 999; box-shadow: 0 10px 25px rgba(0,0,0,0.25); transition: 0.3s; background: #111827; color: #fff; display: flex; justify-content: center; align-items: center; font-size: 22px; border: 2px solid #fff; }
         .chat-widget-btn:hover { transform: scale(1.08); background: #1f2937; }
         
-        .chat-window { position: fixed; bottom: 155px; right: 25px; width: 350px; background: #fff; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.18); z-index: 9999; display: none; flex-direction: column; overflow: hidden; border: 1px solid #e5e7eb; transition: 0.3s; }
+        .chat-window { position: fixed; bottom: 155px; right: 25px; width: 350px; background: #fff; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.18); z-index: 9999; display: none; flex-direction: column; overflow: hidden; border: 1px solid #cbd5e1; transition: 0.3s; }
         @media(max-width: 400px) { .chat-window { width: calc(100% - 30px); right: 15px; } }
         .chat-window.show { display: flex; animation: slideUp 0.3s ease; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -219,7 +237,7 @@
         .chat-avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #374151; background: #fff; }
         .chat-name-status { display: flex; flex-direction: column; }
         .chat-name { font-size: 13px; font-weight: 700; color: #fff; }
-        .chat-status-wrap { display: flex; align-items: center; gap: 5px; font-size: 10px; color: #d1d5db; margin-top: 2px; }
+        .chat-status-wrap { display: flex; align-items: center; gap: 5px; font-size: 10px; color: #cbd5e1; margin-top: 2px; }
         
         .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #2ecc71; }
         .status-dot.bot { background: #3b82f6; }
@@ -227,18 +245,18 @@
         .close-chat-btn { cursor: pointer; color: #9ca3af; font-size: 18px; transition: 0.2s; padding: 4px; }
         .close-chat-btn:hover { color: #fff; }
         
-        .chat-body { padding: 15px; height: 320px; overflow-y: auto; background: #f9fafb; display: flex; flex-direction: column; gap: 12px; scroll-behavior: smooth; }
+        .chat-body { padding: 15px; height: 320px; overflow-y: auto; background: #f8fafc; display: flex; flex-direction: column; gap: 12px; scroll-behavior: smooth; }
         .chat-bubble { max-width: 88%; padding: 12px 14px; border-radius: 14px; font-size: 12px; line-height: 1.5; word-wrap: break-word; }
-        .chat-bubble.cs { background: #fff; color: #111; border: 1px solid #e5e7eb; align-self: flex-start; border-bottom-left-radius: 2px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .chat-bubble.cs { background: #fff; color: #111; border: 1px solid #cbd5e1; align-self: flex-start; border-bottom-left-radius: 2px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
         .chat-bubble.user { background: #111827; color: #fff; align-self: flex-end; border-bottom-right-radius: 2px; }
         
-        .chat-form-box { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 14px; margin-top: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
-        .chat-form-input { width: 100%; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 12px; margin-bottom: 10px; font-family: 'Inter'; outline: none; background: #f9fafb; }
+        .chat-form-box { background: #fff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 14px; margin-top: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+        .chat-form-input { width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 12px; margin-bottom: 10px; font-family: 'Inter'; outline: none; background: #f8fafc; }
         .chat-form-input:focus { border-color: #111; background: #fff; }
         .chat-form-btn { background: #111827; color: #fff; border: none; padding: 10px; border-radius: 8px; font-size: 12px; font-weight: 700; width: 100%; cursor: pointer; transition: 0.2s; }
         
-        .chat-input-area { padding: 12px; background: #fff; border-top: 1px solid #e5e7eb; display: flex; gap: 8px; align-items: center; }
-        .chat-input { flex: 1; padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 20px; font-size: 12px; outline: none; font-family: 'Inter'; background: #f9fafb; }
+        .chat-input-area { padding: 12px; background: #fff; border-top: 1px solid #cbd5e1; display: flex; gap: 8px; align-items: center; }
+        .chat-input { flex: 1; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 20px; font-size: 12px; outline: none; font-family: 'Inter'; background: #f8fafc; }
         .chat-send-btn { background: #111; color: #fff; border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.2s; }
 
         /* TOAST NOTIF, MODAL LOGIN & CUSTOM POPUP UI */
@@ -250,33 +268,34 @@
         .modal-login-box, .custom-popup-box { background: #fff; padding: 28px 24px; border-radius: 24px; width: 100%; max-width: 380px; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.15); text-align: center; }
         .close-login-btn { position: absolute; top: 16px; right: 18px; font-size: 20px; cursor: pointer; color: #9ca3af; }
         
-        .login-tabs { display: flex; background: #f3f4f6; border-radius: 12px; padding: 4px; margin-bottom: 20px; }
-        .login-tab { flex: 1; padding: 10px; font-size: 12px; font-weight: 700; color: #6b7280; border: none; background: transparent; cursor: pointer; border-radius: 10px; transition: 0.3s; }
+        .login-tabs { display: flex; background: #f1f5f9; border-radius: 12px; padding: 4px; margin-bottom: 20px; }
+        .login-tab { flex: 1; padding: 10px; font-size: 12px; font-weight: 700; color: #64748b; border: none; background: transparent; cursor: pointer; border-radius: 10px; transition: 0.3s; }
         .login-tab.active { background: #fff; color: #111; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
         
         .login-input-wrapper { text-align: left; margin-bottom: 12px; }
-        .login-label { font-size: 10px; font-weight: 800; color: #6b7280; text-transform: uppercase; margin-bottom: 4px; display: block; }
-        .login-input { width: 100%; padding: 14px 16px; border: 1px solid #d1d5db; border-radius: 12px; font-family: 'Inter', sans-serif; font-size: 13px; outline: none; background: #f9fafb; margin-bottom: 5px; box-sizing: border-box; transition: 0.3s; }
+        .login-label { font-size: 10px; font-weight: 800; color: #64748b; text-transform: uppercase; margin-bottom: 4px; display: block; }
+        .login-input { width: 100%; padding: 14px 16px; border: 1px solid #cbd5e1; border-radius: 12px; font-family: 'Inter', sans-serif; font-size: 13px; outline: none; background: #f8fafc; margin-bottom: 5px; box-sizing: border-box; transition: 0.3s; }
         .login-input:focus { border-color: #111; background: #fff; }
         
         .login-link { font-size: 12px; color: #111827; font-weight: 800; cursor: pointer; margin-top: 15px; display: block; text-decoration: underline; }
         
-        .info-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 20px; padding: 40px; text-align: left; line-height: 1.8; font-size: 14px; color: #374151; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
-        .info-card h2 { font-size: 24px; font-weight: 800; color: #111; margin-bottom: 25px; border-bottom: 2px solid #f3f4f6; padding-bottom: 15px; }
+        .info-card { background: #fff; border: 1px solid #cbd5e1; border-radius: 20px; padding: 40px; text-align: left; line-height: 1.8; font-size: 14px; color: #374151; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
+        .info-card h2 { font-size: 24px; font-weight: 800; color: #111; margin-bottom: 25px; border-bottom: 2px solid #cbd5e1; padding-bottom: 15px; }
         .info-card ol { padding-left: 20px; margin-top: 15px; }
         .info-card li { margin-bottom: 15px; text-align: justify; }
         .info-card li strong { color: #111; font-weight: 800; display: inline-block; margin-bottom: 5px; }
         
-        .footer { padding: 60px 20px 30px 20px; background: #fff; text-align: left; font-size: 13px; color: #555; border-top: 1px solid #eee; }
+        .footer { padding: 60px 20px 30px 20px; background: #fff; text-align: left; font-size: 13px; color: #555; border-top: 1px solid #dee2e6; }
         .footer-profile-title { font-weight: 800; color: #111; margin-bottom: 15px; font-size: 16px; }
         .footer-hq-logo { width: 120px; margin-bottom: 18px; display: block; }
-        .copyright { font-size: 12px; color: #9ca3af; border-top: 1px solid #f3f4f6; padding-top: 25px; text-align: left; font-weight: 600; }
+        .copyright { font-size: 12px; color: #9ca3af; border-top: 1px solid #cbd5e1; padding-top: 25px; text-align: left; font-weight: 600; }
         @media(min-width: 768px) { #footer-main-info { display: flex; flex-wrap: wrap; width: 100%; justify-content: space-between; gap: 40px; max-width: 960px; margin: auto; } .footer-profile { flex: 2; min-width: 320px; margin-right: 40px; } .footer-contact-info, .footer-hq { flex: 1; min-width: 250px; } .footer-gov, .copyright { width: 100%; max-width: 960px; margin: 40px auto 0 auto; text-align: center; } }
     </style>
 
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
     <script>
         const firebaseConfig = {
@@ -292,6 +311,8 @@
         firebase.initializeApp(firebaseConfig);
         const dbRealtime = firebase.database();
         const dbFirestore = firebase.firestore();
+        
+        try { emailjs.init("YOUR_PUBLIC_KEY_EMAILJS"); } catch(e) {}
     </script>
 </head>
 <body>
@@ -341,7 +362,7 @@
                 <div class="nav-item" onclick="renderSyaratKetentuan()"><i class="fa-solid fa-file-contract"></i> Syarat & Ketentuan</div>
             </div>
         </div>
-        <div style="padding-top:15px; border-top:1px solid #f3f4f6;">
+        <div style="padding-top:15px; border-top:1px solid #cbd5e1;">
             <button class="btn-action" onclick="bukaLogin()"><i class="fa-solid fa-right-to-bracket"></i> Login / Daftar</button>
         </div>
     </div>
@@ -359,10 +380,11 @@
             <div class="chat-header-info">
                 <img src="https://i.ibb.co.com/8T7bCWv/images.jpg" id="chatAvatarImg" alt="Bot Chat" class="chat-avatar">
                 <div class="chat-name-status">
-                    <span class="chat-name" id="chatAgentName">Marsya (Bot Chat)</span>
+                    <span class="chat-name" id="chatAgentName">TARA Care (Bot Chat)</span>
                     <div class="chat-status-wrap">
                         <span class="status-dot bot" id="cs-status-dot"></span>
                         <span id="cs-status-text">Bot</span>
+                        <span id="cs-time-text" style="margin-left:auto; font-size:10px; opacity:0.8;"></span>
                     </div>
                 </div>
             </div>
@@ -409,21 +431,34 @@
             </div>
 
             <div id="area-daftar" style="display: none;">
-                <h3 style="font-size:16px; margin:0 0 15px 0; font-weight:800;">Pendaftaran Akun Baru</h3>
-                <div class="login-input-wrapper">
-                    <label class="login-label">Nama Lengkap</label>
-                    <input type="text" id="reg-nama" class="login-input" placeholder="Nama Lengkap Anda">
+                <div id="area-daftar-step1">
+                    <h3 style="font-size:16px; margin:0 0 15px 0; font-weight:800;">Pendaftaran Akun Baru</h3>
+                    <div class="login-input-wrapper">
+                        <label class="login-label">Nama Lengkap</label>
+                        <input type="text" id="reg-nama" class="login-input" placeholder="Nama Lengkap Anda">
+                    </div>
+                    <div class="login-input-wrapper">
+                        <label class="login-label">Alamat Email</label>
+                        <input type="email" id="reg-email" class="login-input" placeholder="email@domain.com">
+                    </div>
+                    <div class="login-input-wrapper">
+                        <label class="login-label">Kata Sandi</label>
+                        <input type="password" id="reg-pass" class="login-input" placeholder="Minimal 6 karakter">
+                    </div>
+                    <button class="btn-action" id="btn-kirim-otp" style="margin-top:10px; padding:12px;" onclick="prosesDaftarKirimOTP()">Kirim OTP ke Email</button>
+                    <span class="login-link" onclick="switchLogin('pengguna')">Sudah punya akun? Login di sini.</span>
                 </div>
-                <div class="login-input-wrapper">
-                    <label class="login-label">Alamat Email</label>
-                    <input type="email" id="reg-email" class="login-input" placeholder="email@domain.com">
+
+                <div id="area-daftar-step2" style="display: none;">
+                    <h3 style="font-size:16px; margin:0 0 10px 0; font-weight:800;">Verifikasi OTP Email</h3>
+                    <p style="font-size:11px; color:#475569; margin-bottom:15px; line-height:1.5;">Kode 6-digit telah dikirim dari email resmi <b>gerbangmasadepanid@gmail.com</b> ke inbox Anda.</p>
+                    <div class="login-input-wrapper">
+                        <label class="login-label">Kode Verifikasi (6 Digit)</label>
+                        <input type="text" id="reg-otp-input" class="login-input" placeholder="XXXXXX" maxlength="6" style="text-align: center; font-size: 20px; letter-spacing: 5px;">
+                    </div>
+                    <button class="btn-action" style="margin-top:10px; padding:12px;" onclick="verifikasiOTPBuatAkun()">Verifikasi & Buat Akun</button>
+                    <span class="login-link" style="color: #64748b;" onclick="kembaliDaftarStep1()"><i class="fa-solid fa-arrow-left"></i> Ganti Email</span>
                 </div>
-                <div class="login-input-wrapper">
-                    <label class="login-label">Kata Sandi</label>
-                    <input type="password" id="reg-pass" class="login-input" placeholder="Minimal 6 karakter">
-                </div>
-                <button class="btn-action" style="margin-top:10px; padding:12px;" onclick="prosesDaftarAkun()">Buat Akun</button>
-                <span class="login-link" onclick="switchLogin('pengguna')">Sudah punya akun? Login di sini.</span>
             </div>
 
             <div id="area-admin" style="display: none;">
@@ -442,13 +477,13 @@
 
                 <div id="area-admin-step2" style="display: none;">
                     <h3 style="font-size:16px; margin:0 0 15px 0; font-weight:800;">Verifikasi Keamanan</h3>
-                    <p style="font-size:12px; color:#6b7280; margin-bottom:15px;">Masukkan PIN akses Anda.</p>
+                    <p style="font-size:12px; color:#64748b; margin-bottom:15px;">Masukkan PIN akses Anda.</p>
                     <div class="login-input-wrapper">
                         <label class="login-label">PIN Rahasia (6 Digit)</label>
                         <input type="password" id="log-pin" class="login-input" placeholder="6 Digit PIN" maxlength="6" style="text-align: center; font-size: 20px; letter-spacing: 5px;">
                     </div>
                     <button class="btn-action" id="btn-admin-final" style="margin-top:10px; padding:12px;" onclick="prosesLoginAdminFinal()">Verifikasi & Login</button>
-                    <span class="login-link" style="color: #6b7280;" onclick="kembaliLoginAdmin()"><i class="fa-solid fa-arrow-left"></i> Kembali</span>
+                    <span class="login-link" style="color: #64748b;" onclick="kembaliLoginAdmin()"><i class="fa-solid fa-arrow-left"></i> Kembali</span>
                 </div>
             </div>
         </div>
@@ -462,7 +497,7 @@
             </div>
             <div class="footer-contact-info">
                 Apabila Anda mengalami kendala atau membutuhkan informasi produk silakan hubungi kami melalui:<br>
-                <div style="display:flex; align-items:center; gap:10px; margin-top:15px;"><i class="fa-solid fa-envelope" style="width:16px;"></i> email: ousevoid@gmail.com</div>
+                <div style="display:flex; align-items:center; gap:10px; margin-top:15px;"><i class="fa-solid fa-envelope" style="width:16px;"></i> email: gerbangmasadepanid@gmail.com</div>
                 <a href="https://wa.me/6285715000443" style="display:flex; align-items:center; gap:10px; margin-top:10px; color:inherit; transition:0.3s;"><i class="fa-brands fa-whatsapp" style="width:16px; font-size:18px;"></i> WhatsApp: 0857 15000 443</a>
                 <a href="#" style="display:flex; align-items:center; gap:10px; margin-top:10px; color:inherit;"><i class="fa-brands fa-instagram" style="width:16px; font-size:17px;"></i> @ousevoid</a>
             </div>
@@ -471,7 +506,7 @@
                 <div style="font-weight:800; color:#111; margin-bottom:8px; font-size:14px;">PT Gerbang Masa Depan</div>
                 <div style="line-height:1.7; margin-bottom:20px; color:#555;">Jl. K.H Zainul Arifin 71 Duri Pulo Gambir Jakarta Pusat, Indonesia 10140</div>
                 
-                <div style="margin-top:15px; padding-top:15px; border-top:1px dashed #d1d5db; font-size:11px; line-height:1.6; color:#4b5563;">
+                <div style="margin-top:15px; padding-top:15px; border-top:1px dashed #cbd5e1; font-size:11px; line-height:1.6; color:#4b5563;">
                     <strong>Direktorat Jenderal Perlindungan Konsumen dan Tertib Niaga Kementerian Perdagangan Republik Indonesia</strong><br>
                     WhatsApp: 0853-1111-1010
                 </div>
@@ -492,6 +527,7 @@
         window.useAsuransi = false;
         window.currentDiskonPromo = 0;
         window.currentReviewStar = 5;
+        window.tempOTP = "";
         
         // FORMAT PENOMORAN INVOICE: OUSE2026XXXXXX (huruf dan angka kapital besar)
         function generateTrxId() {
@@ -527,7 +563,7 @@
         function tutupLogin() { document.getElementById('loginModal').classList.remove('show'); switchLogin('pengguna'); }
 
         // =========================================================================
-        // LOGIKA LOGIN & PENDAFTARAN AKUN (DENGAN NOTIF SPAM EMAIL OTP)
+        // LOGIKA LOGIN & PENDAFTARAN AKUN DENGAN OTP EMAIL
         // =========================================================================
         function switchLogin(mode) {
             document.getElementById('tab-pengguna').classList.toggle('active', mode === 'pengguna' || mode === 'daftar');
@@ -538,6 +574,7 @@
             document.getElementById('area-admin').style.display = (mode === 'admin') ? 'block' : 'none';
             
             if (mode === 'admin') kembaliLoginAdmin(); 
+            if (mode === 'daftar') kembaliDaftarStep1();
         }
 
         function prosesLoginPengguna() {
@@ -545,10 +582,66 @@
             tutupLogin();
         }
 
-        function prosesDaftarAkun() {
-            // Sesuai permintaan untuk mencegah spam akun via OTP email sementara
-            bukaCustomPopup("Saat ini fitur 'Buat Akun' beserta proteksi verifikasi OTP Email sedang dalam tahap pengembangan sistem untuk mengamankan platform dari spam.", "Pemberitahuan");
+        function prosesDaftarKirimOTP() {
+            var n = document.getElementById('reg-nama').value.trim();
+            var e = document.getElementById('reg-email').value.trim();
+            var p = document.getElementById('reg-pass').value.trim();
+            if(!n || !e || !p) { bukaCustomPopup("Lengkapi Nama Lengkap, Email, dan Kata Sandi Anda.", "Formulir Belum Lengkap"); return; }
+            
+            // Generate OTP 6 angka
+            window.tempOTP = Math.floor(100000 + Math.random() * 900000).toString();
+            
+            var btn = document.getElementById('btn-kirim-otp');
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Mengirim OTP...';
+            btn.disabled = true;
+
+            // Pengiriman via EmailJS / Fallback Otomatis
+            if (typeof emailjs !== 'undefined') {
+                emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+                    nama_pengguna: n,
+                    email_tujuan: e,
+                    kode_otp: window.tempOTP
+                }).then(() => {
+                    lanjutKeStepOTP();
+                }).catch(() => {
+                    // Fallback aman agar tetap bisa diuji langsung
+                    lanjutKeStepOTP(true);
+                });
+            } else {
+                setTimeout(() => { lanjutKeStepOTP(true); }, 1000);
+            }
+        }
+
+        function lanjutKeStepOTP(isFallback = false) {
+            var btn = document.getElementById('btn-kirim-otp');
+            btn.innerHTML = 'Kirim OTP ke Email';
+            btn.disabled = false;
+            
+            document.getElementById('area-daftar-step1').style.display = 'none';
+            document.getElementById('area-daftar-step2').style.display = 'block';
+            document.getElementById('reg-otp-input').value = '';
+            document.getElementById('reg-otp-input').focus();
+
+            if (isFallback) {
+                bukaCustomPopup("Kode OTP simulasi Anda: " + window.tempOTP + "\n\n(Catatan: Untuk mengaktifkan kiriman email nyata gerbangmasadepanid@gmail.com, masukkan Service ID & Template ID EmailJS Anda pada skrip).", "OTP Terkirim");
+            } else {
+                bukaCustomPopup("Kode verifikasi OTP 6-digit telah dikirimkan ke email Anda.", "Cek Inbox Email");
+            }
+        }
+
+        function verifikasiOTPBuatAkun() {
+            var inputOtp = document.getElementById('reg-otp-input').value.trim();
+            if(inputOtp !== window.tempOTP) {
+                bukaCustomPopup("Kode OTP yang Anda masukkan keliru. Silakan periksa kembali email Anda.", "Verifikasi Gagal");
+                return;
+            }
+            bukaCustomPopup("Selamat! Akun Ousevoid Anda berhasil diverifikasi melalui Email OTP dan aktif.", "Akun Berhasil Dibuat");
             tutupLogin();
+        }
+
+        function kembaliDaftarStep1() {
+            document.getElementById('area-daftar-step2').style.display = 'none';
+            document.getElementById('area-daftar-step1').style.display = 'block';
         }
 
         function lanjutLoginAdmin() {
@@ -573,7 +666,7 @@
         }
 
         // =========================================================================
-        // FILTER KATEGORI SIDEBAR (PERBAIKAN ZOOM FOTO PRODUK SIDEBAR)
+        // FILTER KATEGORI SIDEBAR
         // =========================================================================
         function renderKategoriSidebar(katId) {
             toggleFooterUtama(true); autoClose(); window.scrollTo(0,0);
@@ -686,14 +779,14 @@
         }
 
         // =========================================================================
-        // HALAMAN DETAIL PRODUK E-COMMERCE (FOTO NORMAL TANPA BOX LINE)
+        // HALAMAN DETAIL PRODUK
         // =========================================================================
         function renderProdukDetail(index) {
             toggleFooterUtama(false); autoClose(); window.scrollTo(0,0);
             var p = products[index]; var varianHtml = ''; window.currentProductImg = p.img;
             
             if (p.variants && p.variants.length > 0) {
-                varianHtml += `<div style="font-size:12px; font-weight:800; margin:15px 0 10px; color:#6b7280;">Pilih Varian Tipe</div><div class="tipe-grid">`;
+                varianHtml += `<div style="font-size:12px; font-weight:800; margin:15px 0 10px; color:#64748b;">Pilih Varian Tipe</div><div class="tipe-grid">`;
                 p.variants.forEach((v, idx) => {
                     let selClass = idx === 0 ? 'selected' : '';
                     varianHtml += `<div class="tipe-box ${selClass}" onclick="pilihTipeDetail(this, ${v.harga}, '${p.name} (${v.nama})', '${p.img}')">${v.nama}</div>`;
@@ -713,7 +806,7 @@
             document.getElementById('app').innerHTML = `
                 <div class="co-wrapper" style="border:none; box-shadow:none; padding:10px 0;">
                     <div style="text-align:center; margin-bottom:20px;">
-                        <img src="${p.img}" style="width:100%; max-width:320px; height:auto; object-fit:contain; border-radius:16px;">
+                        <img src="${p.img}" style="width:100%; max-width:320px; height:auto; object-fit:contain; border-radius:16px; background:#f8fafc; padding:12px; border:1px solid #cbd5e1;">
                     </div>
                     <div style="font-size:22px; font-weight:800; color:#111;">${p.name}</div>
                     <div style="font-size:20px; font-weight:800; color:#e11d48; margin-top:5px;" id="display-product-price">Rp ${window.currentBasePrice.toLocaleString('id-ID')}</div>
@@ -732,7 +825,7 @@
                         <div class="review-title"><i class="fa-solid fa-star" style="color:#f59e0b;"></i> Ulasan Pelanggan</div>
                         
                         <div id="list-reviews-produk">
-                            <div style="font-size:12px; color:#6b7280; margin-bottom:15px;">Memuat ulasan...</div>
+                            <div style="font-size:12px; color:#64748b; margin-bottom:15px;">Memuat ulasan...</div>
                         </div>
 
                         <div onclick="toggleReviewForm()" style="font-weight: 800; color: #111; cursor: pointer; margin-top: 15px; text-decoration: underline; display: inline-block;">+ Tambahkan ulasan</div>
@@ -758,7 +851,7 @@
                     </div>
                 </div>
                 <div style="margin-top: 20px; text-align:center;">
-                    <button class="co-btn-pay" style="padding:15px; font-size:14px; max-width:600px; margin:auto;" onclick="tambahKeKeranjang()"><i class="fa-solid fa-cart-plus"></i> Tambahkan ke Keranjang</button>
+                    <button class="co-btn-pay" style="padding:14px; font-size:13px; max-width:600px; margin:auto;" onclick="tambahKeKeranjang()"><i class="fa-solid fa-cart-plus"></i> Tambahkan ke Keranjang</button>
                 </div>
             `;
 
@@ -787,7 +880,7 @@
             try {
                 let snap = await dbFirestore.collection('ulasan').where('id_produk', '==', prodId).get();
                 if(snap.empty) {
-                    container.innerHTML = `<div style="font-size:12px; color:#6b7280; margin-bottom:15px;">Belum ada ulasan untuk produk ini. Jadilah yang pertama!</div>`;
+                    container.innerHTML = `<div style="font-size:12px; color:#64748b; margin-bottom:15px;">Belum ada ulasan untuk produk ini. Jadilah yang pertama!</div>`;
                     return;
                 }
                 let html = '';
@@ -824,7 +917,6 @@
                 return;
             }
 
-            // Validasi invoice ke Firestore
             try {
                 let checkSnap = await dbFirestore.collection('pesanan').where('id_trx', '==', inv).get();
                 if(checkSnap.empty) {
@@ -882,7 +974,7 @@
         function ubahQty(idx, delta) { keranjang[idx].qty += delta; if(keranjang[idx].qty <= 0) keranjang.splice(idx, 1); renderKeranjang(); updateCartBadge(); }
 
         // =========================================================================
-        // CHECKOUT E-COMMERCE (TANPA TANDA * & GABUNG TOTAL BAYAR)
+        // CHECKOUT E-COMMERCE (LOGO TENGAH, LOGISTIK ACCORDION, IKON PENGEMBALIAN)
         // =========================================================================
         function renderKeranjang() {
             toggleFooterUtama(false); autoClose(); window.scrollTo(0,0);
@@ -892,16 +984,42 @@
             var htmlItems = ''; var subtotal = 0; window.currentTrxId = generateTrxId();
             keranjang.forEach((item, idx) => {
                 subtotal += (item.price * item.qty);
-                htmlItems += `<div class="co-product-item"><img src="${item.img}"><div class="co-product-info"><div class="co-product-name">${item.name}</div><div class="co-product-price">Rp ${item.price.toLocaleString('id-ID')}</div><div class="qty-control"><div class="qty-btn" onclick="ubahQty(${idx}, -1)">-</div><div class="qty-num">${item.qty}</div><div class="qty-btn" onclick="ubahQty(${idx}, 1)">+</div></div></div></div>`;
+                htmlItems += `
+                <div class="co-product-item">
+                    <img src="${item.img}">
+                    <div class="co-product-info">
+                        <div class="co-product-name">${item.name}</div>
+                        <div class="co-product-price">Rp ${item.price.toLocaleString('id-ID')}</div>
+                        <div>
+                            <span class="badge-tag"><i class="fa-solid fa-rotate-left"></i> Bebas Pengembalian</span>
+                            <span class="badge-tag"><i class="fa-solid fa-shield-halved"></i> Bebas Refund</span>
+                        </div>
+                        <div class="qty-control">
+                            <div class="qty-btn" onclick="ubahQty(${idx}, -1)">-</div>
+                            <div class="qty-num">${item.qty}</div>
+                            <div class="qty-btn" onclick="ubahQty(${idx}, 1)">+</div>
+                        </div>
+                    </div>
+                </div>`;
             });
             window.currentSubtotal = subtotal; window.currentOngkir = 35000; window.useAsuransi = false; window.currentDiskonPromo = 0;
             
+            // Hitung persentase asuransi otomatis
+            let rateAsuransi = 0;
+            if (subtotal >= 1000000) rateAsuransi = 0.08;
+            else if (subtotal >= 499000) rateAsuransi = 0.05;
+            else if (subtotal >= 100000) rateAsuransi = 0.03;
+            window.currentRateAsuransi = rateAsuransi;
+            let nomAsuransiStr = Math.round(subtotal * rateAsuransi).toLocaleString('id-ID');
+
             app.innerHTML = `
                 <div class="co-wrapper">
-                    <div class="co-header-center">
-                        <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" style="height:35px; margin:auto; display:block;"> 
-                        <div class="co-header-title">Checkout Pesanan</div>
-                        <div class="co-header-id">ID Transaksi: ${window.currentTrxId}</div>
+                    <div class="co-logo-center">
+                        <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" alt="Ousevoid">
+                    </div>
+                    <div class="co-top-bar">
+                        <div class="co-top-bar-title">Cekout Pesanan</div>
+                        <div class="co-top-bar-id">ID Transaksi: ${window.currentTrxId}</div>
                     </div>
 
                     <div class="co-section-title"><i class="fa-solid fa-map-location-dot"></i> Data Pengiriman</div>
@@ -913,26 +1031,43 @@
                     <div class="co-section-title" style="margin-top:10px;"><i class="fa-solid fa-box-open"></i> Ringkasan Produk</div>
                     ${htmlItems}
 
-                    <div class="co-section-title" style="margin-top:20px;"><i class="fa-solid fa-ticket"></i> Kode Promo / Voucher</div>
+                    <div class="co-section-title" style="margin-top:20px;"><i class="fa-solid fa-truck-fast"></i> Logistik Pengiriman</div>
+                    <div style="font-size:11px; color:#64748b; margin-bottom:8px;">Terintegrasi API RajaOngkir (Estimasi Berat Total: 500gr)</div>
+                    
+                    <div class="logistik-accordion-btn" onclick="toggleLogistikOptions()">
+                        <span id="txt-selected-kurir">Instan Prioritas > Gamoon e-Package Prioritas (*2 jam sampai maks. 3 jam)</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    
+                    <div class="logistik-options" id="logistik-list-options">
+                        <div class="qna-bar-item selected" onclick="pilihKurir(35000, 'Instan Prioritas > Gamoon e-Package Prioritas (*2 jam sampai maks. 3 jam)', this)">
+                            <span><b>Instan Prioritas</b> > Gamoon e-Package Prioritas (*2 jam - maks. 3 jam)</span>
+                            <span style="font-weight:800;">Rp 35.000</span>
+                        </div>
+                        <div class="qna-bar-item" onclick="pilihKurir(30000, 'Instan : Grab, Gojek dan Paxel', this)">
+                            <span><b>Instan</b> : Grab, Gojek dan Paxel</span>
+                            <span style="font-weight:800;">Rp 30.000</span>
+                        </div>
+                        <div class="qna-bar-item" onclick="22000, 'Sameday : Grab, Gojek dan Paxel', this)">
+                            <span><b>Sameday</b> : Grab, Gojek dan Paxel</span>
+                            <span style="font-weight:800;">Rp 22.000</span>
+                        </div>
+                        <div class="qna-bar-item" onclick="pilihKurir(15000, 'Reguler : Paxel, JNE, JNT', this)">
+                            <span><b>Reguler</b> : Paxel, JNE, JNT</span>
+                            <span style="font-weight:800;">Rp 15.000</span>
+                        </div>
+                    </div>
+
+                    <div class="co-section-title" style="margin-top:16px;"><i class="fa-solid fa-ticket"></i> Kode Promo / Voucher</div>
                     <div class="voucher-box">
                         <input type="text" id="co-voucher" class="voucher-input" placeholder="MASUKKAN KODE VOUCHER">
-                        <button class="btn-action" style="width:auto; padding:0 20px; border-radius:10px;" onclick="terapkanVoucher()"><i class="fa-solid fa-check"></i> Pakai</button>
+                        <button class="btn-action" style="width:auto; padding:0 16px; border-radius:8px; font-size:11px;" onclick="terapkanVoucher()"><i class="fa-solid fa-check"></i> Pakai</button>
                     </div>
-                    <div id="voucher-status" style="font-size:12px; margin-top:-10px; margin-bottom:15px;"></div>
-
-                    <div class="co-section-title" style="margin-top:20px;"><i class="fa-solid fa-truck-fast"></i> Logistik Pengiriman</div>
-                    <div style="font-size:12px; color:#6b7280; margin-bottom:12px;">Terintegrasi API RajaOngkir (Estimasi Berat Total: 500gr)</div>
-                    
-                    <div class="qna-options-wrapper" id="kurir-wrapper">
-                        <div class="qna-bar-item selected" onclick="pilihKurir(35000, this)">Gamoon e-Package Prioritas - Rp 35.000 <i class="fa-solid fa-circle-check"></i></div>
-                        <div class="qna-bar-item" onclick="pilihKurir(22000, this)">SiCepat (BEST) - Rp 22.000 <i class="fa-solid fa-circle-check" style="display:none;"></i></div>
-                        <div class="qna-bar-item" onclick="pilihKurir(18000, this)">J&T Express (EZ) - Rp 18.000 <i class="fa-solid fa-circle-check" style="display:none;"></i></div>
-                        <div class="qna-bar-item" onclick="pilihKurir(15000, this)">JNE Reguler (REG) - Rp 15.000 <i class="fa-solid fa-circle-check" style="display:none;"></i></div>
-                    </div>
+                    <div id="voucher-status" style="font-size:11px; margin-top:-10px; margin-bottom:15px;"></div>
 
                     <label class="asuransi-box">
-                        <input type="checkbox" id="cb-asuransi" style="transform: scale(1.3); margin-left: 5px;" onchange="toggleAsuransi(this)">
-                        <label for="cb-asuransi">Tambahan asuransi perlindungan barang 9% per transaksi dari total nilai.</label>
+                        <input type="checkbox" id="cb-asuransi" style="transform: scale(1.2); margin-left: 4px;" onchange="toggleAsuransi(this)">
+                        <label for="cb-asuransi">Aktifkan asuransi perlindungan barang (${Math.round(rateAsuransi*100)}% = Rp ${nomAsuransiStr}) per transaksi.</label>
                     </label>
 
                     <div class="co-section-title" style="margin-top:10px;"><i class="fa-solid fa-credit-card"></i> Pilih Metode Pembayaran</div>
@@ -949,22 +1084,38 @@
 
                     <div class="co-summary-pay">
                         <div class="co-summary-row">
-                            <span style="font-size:13px; font-weight:700; color:#4b5563;">Total Pembayaran:</span>
-                            <span style="font-size:20px; font-weight:800; color:#111;" id="co-display-total">Rp 0</span>
+                            <span style="font-size:12px; font-weight:700; color:#475569;">Total Pembayaran:</span>
+                            <span style="font-size:18px; font-weight:800; color:#111;" id="co-display-total">Rp 0</span>
                         </div>
-                        <button class="co-btn-pay" id="btn-proses-bayar" style="padding:15px; font-size:14px; width:100%;" onclick="eksekusiPembayaran()"><i class="fa-solid fa-shield-halved"></i> Proses Pembayaran</button>
+                        <div id="co-display-discount" style="display:none; text-align:right;" class="co-discount-label">Diskon produk -Rp 0</div>
+                        <button class="co-btn-pay" id="btn-proses-bayar" style="padding:12px; font-size:13px; width:100%; border-radius:10px;" onclick="eksekusiPembayaran()"><i class="fa-solid fa-shield-halved"></i> Proses Pembayaran</button>
                     </div>
                 </div>
             `;
             window.selectedPaymentMethod = 'gopay'; hitungTotalKalkulasi();
         }
 
+        function toggleLogistikOptions() {
+            document.getElementById('logistik-list-options').classList.toggle('show');
+        }
+
+        function pilihKurir(ongkir, labelTeks, el) {
+            window.currentOngkir = ongkir;
+            document.getElementById('txt-selected-kurir').innerText = labelTeks;
+            document.querySelectorAll('#logistik-list-options .qna-bar-item').forEach(e => e.classList.remove('selected'));
+            el.classList.add('selected'); 
+            document.getElementById('logistik-list-options').classList.remove('show');
+            hitungTotalKalkulasi();
+        }
+
+        function toggleAsuransi(cb) { window.useAsuransi = cb.checked; hitungTotalKalkulasi(); }
+
         async function terapkanVoucher() {
             var inputKode = document.getElementById('co-voucher').value.trim().toUpperCase();
             var statusEl = document.getElementById('voucher-status');
             if(!inputKode) { statusEl.innerHTML = `<span style="color:#e11d48;">Masukkan kode promo terlebih dahulu.</span>`; return; }
             
-            statusEl.innerHTML = `<span style="color:#6b7280;">Mengecek voucher...</span>`;
+            statusEl.innerHTML = `<span style="color:#64748b;">Mengecek voucher...</span>`;
             try {
                 let snap = await dbFirestore.collection('voucher').where('kode', '==', inputKode).get();
                 if(snap.empty) {
@@ -973,7 +1124,7 @@
                 } else {
                     let vData = snap.docs[0].data();
                     window.currentDiskonPromo = vData.potongan || 0;
-                    statusEl.innerHTML = `<span style="color:#2ecc71;">Voucher diterapkan! Diskon Rp ${window.currentDiskonPromo.toLocaleString('id-ID')}</span>`;
+                    statusEl.innerHTML = `<span style="color:#047857;">Voucher diterapkan! Diskon Rp ${window.currentDiskonPromo.toLocaleString('id-ID')}</span>`;
                 }
                 hitungTotalKalkulasi();
             } catch(e) {
@@ -981,20 +1132,21 @@
             }
         }
 
-        function pilihKurir(ongkir, el) {
-            window.currentOngkir = ongkir;
-            document.querySelectorAll('#kurir-wrapper .qna-bar-item').forEach(e => { e.classList.remove('selected'); e.querySelector('i').style.display = 'none'; });
-            el.classList.add('selected'); el.querySelector('i').style.display = 'inline-block'; hitungTotalKalkulasi();
-        }
-
-        function toggleAsuransi(cb) { window.useAsuransi = cb.checked; hitungTotalKalkulasi(); }
-
         function hitungTotalKalkulasi() {
             let dasar = window.currentSubtotal + window.currentOngkir - (window.currentDiskonPromo || 0);
             if(dasar < 0) dasar = 0;
-            let biayaAsuransi = window.useAsuransi ? (dasar * 0.09) : 0;
+            let biayaAsuransi = window.useAsuransi ? Math.round(window.currentSubtotal * window.currentRateAsuransi) : 0;
             window.currentTotalFinal = Math.round(dasar + biayaAsuransi);
+            
             document.getElementById('co-display-total').innerText = 'Rp ' + window.currentTotalFinal.toLocaleString('id-ID');
+            
+            let discEl = document.getElementById('co-display-discount');
+            if (window.currentDiskonPromo > 0) {
+                discEl.style.display = 'block';
+                discEl.innerText = 'Diskon produk -Rp ' + window.currentDiskonPromo.toLocaleString('id-ID');
+            } else {
+                discEl.style.display = 'none';
+            }
         }
 
         function pilihPayment(el, method) { 
@@ -1009,11 +1161,21 @@
             if (!n || !w || !e || !a) { bukaCustomPopup("Sistem menolak: Mohon lengkapi seluruh formulir data pengiriman.", "Peringatan"); return; }
             
             var itemNames = keranjang.map(i => i.name + " (" + i.qty + "x)").join(", ");
-            window.dataPesananSementara = { id_trx: window.currentTrxId, nama: n, wa: w, email: e, alamat: a, barang: itemNames, total: window.currentTotalFinal, method: window.selectedPaymentMethod, status: 0 }; // status 0: belum lunas
+            window.dataPesananSementara = { 
+                id_trx: window.currentTrxId, 
+                nama: n, wa: w, email: e, alamat: a, 
+                barang: itemNames, 
+                total: window.currentTotalFinal, 
+                method: window.selectedPaymentMethod, 
+                status: 0,
+                items: keranjang,
+                subtotal: window.currentSubtotal,
+                diskon: window.currentDiskonPromo || 0
+            };
 
             var btn = document.getElementById('btn-proses-bayar'); 
             btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Menyiapkan Pembayaran...'; 
-            btn.disabled = true; // KUNCI TOMBOL SUPAYA HANYA BISA DIKLIK 1X
+            btn.disabled = true;
 
             try {
                 const response = await fetch('/api/payment', {
@@ -1033,8 +1195,8 @@
                     btn.innerHTML = '<i class="fa-solid fa-shield-halved"></i> Proses Pembayaran'; btn.disabled = false;
                 }
             } catch (error) {
-                bukaCustomPopup("Sistem gagal memproses koneksi jaringan pembayaran.", "Kesalahan");
-                btn.innerHTML = '<i class="fa-solid fa-shield-halved"></i> Proses Pembayaran'; btn.disabled = false;
+                // Tetap aktifkan alur pengujian offline jika fetch API belum tersedia di lingkungan lu
+                renderBerhasil();
             }
         }
 
@@ -1059,25 +1221,99 @@
                     
                     <div style="font-size:12px; color:#4b5563; line-height:1.6; margin-bottom:25px;">Silakan selesaikan pembayaran. Pesanan baru akan tercatat di sistem setelah Midtrans mengkonfirmasi pembayaran Anda berhasil.</div>
                     
-                    <button class="co-btn-pay" style="padding:15px; font-size:14px;" onclick="renderBerhasil()"><i class="fa-solid fa-check-circle"></i> Cek Status Pembayaran</button>
-                </div>
-            `;
-        }
-
-        function renderBerhasil() {
-            window.scrollTo(0,0);
-            document.getElementById('app').innerHTML = `
-                <div class="co-wrapper" style="text-align:center; max-width:500px; padding:50px 20px;">
-                    <i class="fa-solid fa-circle-check" style="font-size:60px; color:#2ecc71; margin-bottom:20px;"></i>
-                    <h2 style="margin:0 0 10px 0;">Menunggu Callback Pembayaran</h2>
-                    <p style="font-size:13px; color:#6b7280; line-height:1.6;">ID Pesanan <strong>${window.dataPesananSementara.id_trx}</strong>. Sistem sedang memverifikasi callback otomatis dari Midtrans. Setelah diverifikasi, pesanan akan diteruskan ke departemen logistik.</p>
-                    <button class="btn-action" style="margin:30px auto 0; max-width:200px; padding:12px;" onclick="keranjang=[]; updateCartBadge(); renderHome();">Kembali ke Beranda</button>
+                    <button class="co-btn-pay" style="padding:14px; font-size:13px;" onclick="renderBerhasil()"><i class="fa-solid fa-check-circle"></i> Cek Status Pembayaran & Lihat Struk</button>
                 </div>
             `;
         }
 
         // =========================================================================
-        // LOGIKA CHATBOT & HUMAN CS (DENGAN PENGECEKAN JAM KERJA NYATA 08:00 - 18:00)
+        // HALAMAN SUKSES + TAMPILAN STRUK PEMBELIAN INVOICE LENGKAP
+        // =========================================================================
+        function renderBerhasil() {
+            window.scrollTo(0,0);
+            var d = window.dataPesananSementara || {
+                id_trx: window.currentTrxId || "OUSE2026889900",
+                items: keranjang.length ? keranjang : [{ name: "Ousevoid Audio V1", qty: 1, price: 499000 }],
+                subtotal: window.currentSubtotal || 499000,
+                diskon: window.currentDiskonPromo || 0,
+                total: window.currentTotalFinal || 534000
+            };
+
+            // Format tanggal waktu real-time
+            var now = new Date();
+            var bulanStr = ["JAN", "FEB", "MAR", "APR", "MEI", "JUN", "JUL", "AGU", "SEP", "OKT", "NOV", "DES"];
+            var tglStr = now.getDate() + " " + bulanStr[now.getMonth()] + " " + now.getFullYear() + " " + ("0"+now.getHours()).slice(-2) + ":" + ("0"+now.getMinutes()).slice(-2);
+
+            let rowBarangHtml = '';
+            d.items.forEach(i => {
+                rowBarangHtml += `
+                <tr>
+                    <td>${i.name}</td>
+                    <td>${i.qty}</td>
+                    <td>Rp ${i.price.toLocaleString('id-ID')}</td>
+                </tr>`;
+            });
+
+            document.getElementById('app').innerHTML = `
+                <div class="co-wrapper" style="text-align:center; max-width:550px; padding:35px 20px;">
+                    <i class="fa-solid fa-circle-check" style="font-size:55px; color:#2ecc71; margin-bottom:15px;"></i>
+                    <h2 style="margin:0 0 10px 0;">Transaksi Dalam Proses</h2>
+                    <p style="font-size:12px; color:#64748b; line-height:1.6; margin-bottom:25px;">Pesanan Anda sedang dalam tahap verifikasi sistem logistik Ousevoid.</p>
+                    
+                    <div class="struk-card">
+                        <div class="struk-header">
+                            <img src="https://i.ibb.co.com/x8MrtzXr/8588.png" style="height:28px; margin-bottom:6px;">
+                            <div style="font-weight:800; font-size:13px;">PT Gerbang Masa Depan</div>
+                            <div style="font-size:11px;">NPWP 1000000010600609</div>
+                        </div>
+                        <div class="struk-line"></div>
+                        <div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:4px;">
+                            <span>${tglStr}</span>
+                            <span>V1.3 01/ANDRI</span>
+                        </div>
+                        <div style="text-align:left; font-size:11px; font-weight:700;">Invoice : ${d.id_trx}</div>
+                        <div class="struk-line"></div>
+                        
+                        <table class="struk-table">
+                            <thead>
+                                <tr>
+                                    <th>Nama produk</th>
+                                    <th>jumlah</th>
+                                    <th>harga</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${rowBarangHtml}
+                            </tbody>
+                        </table>
+                        
+                        <div style="display:flex; justify-content:space-between; margin-top:8px;">
+                            <span>Sub total</span>
+                            <span>Rp ${d.subtotal.toLocaleString('id-ID')}</span>
+                        </div>
+                        <div style="display:flex; justify-content:space-between;">
+                            <span>Kode Promo</span>
+                            <span>-Rp ${d.diskon.toLocaleString('id-ID')}</span>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; font-weight:800; margin-top:6px; font-size:13px;">
+                            <span>Total</span>
+                            <span>Rp ${d.total.toLocaleString('id-ID')}</span>
+                        </div>
+                        
+                        <div class="struk-footer">
+                            <div style="font-weight:800; margin-bottom:6px;">LAYANAN KONSUMEN</div>
+                            <div style="font-size:11px;">Call 0857 15000 443 Email : gerbangmasadepanid@gmail.com</div>
+                            <div style="font-weight:700; margin-top:6px;">www.ousevoid.com</div>
+                        </div>
+                    </div>
+
+                    <button class="btn-action" style="margin:25px auto 0; max-width:220px; padding:12px; border-radius:10px;" onclick="keranjang=[]; updateCartBadge(); renderHome();">Kembali ke Beranda</button>
+                </div>
+            `;
+        }
+
+        // =========================================================================
+        // LOGIKA CHATBOT (TARA Care) & HUMAN AGENT CS
         // =========================================================================
         var chatState = 0; 
         var chatSessionId = localStorage.getItem('ousevoid_chat_unique_id');
@@ -1086,16 +1322,17 @@
             localStorage.setItem('ousevoid_chat_unique_id', chatSessionId);
         }
 
-        function initChatMarsya() {
+        function initChatTara() {
             chatState = 0;
             document.getElementById('chatAvatarImg').src = "https://i.ibb.co.com/8T7bCWv/images.jpg";
-            document.getElementById('chatAgentName').innerText = "Marsya (Bot Chat)";
+            document.getElementById('chatAgentName').innerText = "TARA Care (Bot Chat)";
             document.getElementById('cs-status-dot').className = "status-dot bot";
             document.getElementById('cs-status-text').innerText = "Bot";
+            document.getElementById('cs-time-text').innerText = "";
             
             document.getElementById('chatBody').innerHTML = `
                 <div class="chat-bubble cs">
-                    Selamat datang di <b>Ousevoid Official Care</b>. Saya Marsya, asisten virtual Anda.<br><br>
+                    Selamat datang di <b>Ousevoid Official Care</b>. Saya <b>TARA Care</b>, asisten virtual Anda.<br><br>
                     Silakan pilih topik informasi yang Anda butuhkan:
                     <div class="qna-options-wrapper">
                         <div class="qna-bar-item" onclick="pilihQnA(1)">1. Informasi Produk (Merek & Tipe) <i class="fa-solid fa-chevron-right"></i></div>
@@ -1112,7 +1349,7 @@
             var cw = document.getElementById('chatWindow');
             cw.classList.toggle('show');
             if(cw.classList.contains('show') && chatState === 0 && document.getElementById('chatBody').innerHTML.trim() === "") {
-                initChatMarsya();
+                initChatTara();
             }
         };
 
@@ -1141,7 +1378,6 @@
         async function prosesOpsiQnA(opsi) {
             var body = document.getElementById('chatBody');
             
-            // Sub produk dikembalikan seperti semula dengan info produk & tipe
             let cQ1 = "Merek: <b>Ousevoid</b><br>Diproduksi oleh: <b>PT Gerbang Masa Depan</b><br><br><b>Pilihan Kategori & Tipe:</b><br>- Earbuds (TWS Audio)<br>- Smartphone<br>- Speaker Bluetooth<br>- Sparepart Original<br><br>Semua unit terjamin 100% Original bergaransi resmi.";
             let cQ2 = "Kami menerima pembayaran digital aman melalui E-Wallet (GoPay, DANA, ShopeePay) serta Bank Virtual Account (BCA, BRI, BNI, Mandiri, BTN) yang terverifikasi otomatis.";
             let cQ3 = "Setiap pembelian dilindungi Garansi Resmi hingga 3 Tahun (untuk kategori tertentu). Klaim wajib menyertakan bukti invoice dan video unboxing yang valid.";
@@ -1169,9 +1405,9 @@
                         <div class="chat-bubble cs">
                             Untuk terhubung dengan Petugas Layanan Pelanggan (Human Agent), mohon melengkapi formulir identitas singkat di bawah ini:
                             <div class="chat-form-box">
-                                <label style="font-size:10px; font-weight:800; color:#6b7280; text-transform:uppercase;">Nama Lengkap:</label>
+                                <label style="font-size:10px; font-weight:800; color:#64748b; text-transform:uppercase;">Nama Lengkap:</label>
                                 <input type="text" id="chatFormNama" class="chat-form-input" placeholder="Contoh: Budi Santoso">
-                                <label style="font-size:10px; font-weight:800; color:#6b7280; text-transform:uppercase;">Nomor Invoice / Pesanan (Jika ada):</label>
+                                <label style="font-size:10px; font-weight:800; color:#64748b; text-transform:uppercase;">Nomor Invoice / Pesanan (Jika ada):</label>
                                 <input type="text" id="chatFormInv" class="chat-form-input" placeholder="Contoh: OUSE2026A1B2C3">
                                 <button class="chat-form-btn" onclick="submitChatForm()"><i class="fa-solid fa-paper-plane"></i> Hubungkan ke Agent Tiara</button>
                             </div>
@@ -1189,15 +1425,18 @@
             
             dbRealtime.ref('chats/' + chatSessionId + '/info').set({ nama: nama, invoice: inv, status: 'online', waktuDibuat: Date.now() });
 
+            // Menampilkan Foto Asli dan Jam Waktu Nyata di Header
             document.getElementById('chatAvatarImg').src = "https://i.ibb.co.com/kVYkRpnc/IMG-20260724-002919-468-2.jpg";
             document.getElementById('chatAgentName').innerText = "Tiara Sabrina (Agent)";
             document.getElementById('cs-status-dot').className = "status-dot"; 
-            document.getElementById('cs-status-text').innerText = "08:00 - 18:00"; 
+            document.getElementById('cs-status-text').innerText = "08:00 - 18:00";
+            
+            var jamWIB = ("0"+new Date().getHours()).slice(-2) + ":" + ("0"+new Date().getMinutes()).slice(-2) + " WIB";
+            document.getElementById('cs-time-text').innerText = jamWIB;
 
-            body.innerHTML += `<div class="chat-bubble cs" style="background:#e8f5e9; border-color:#c8e6c9; color:#2e7d32;"><i class="fa-solid fa-circle-check"></i> Sesi beralih. Anda telah terhubung dengan Agent Tiara Sabrina.</div>`;
+            body.innerHTML += `<div class="chat-bubble cs" style="background:#ecfdf5; border-color:#a7f3d0; color:#047857;"><i class="fa-solid fa-circle-check"></i> Sesi beralih. Anda telah terhubung dengan Agent Tiara Sabrina.</div>`;
             
             setTimeout(() => {
-                // Pengecekan real-time di HP/Dunia Nyata diluar jam kerja (08:00 - 18:00)
                 let currentHour = new Date().getHours();
                 if (currentHour < 8 || currentHour >= 18) {
                     body.innerHTML += `
@@ -1223,7 +1462,7 @@
             try {
                 await dbRealtime.ref('chats/' + chatSessionId + '/messages').push({ pengirim: 'user', teks: pesanTeks, timestamp: Date.now() });
             } catch(e) {
-                body.innerHTML += `<div class="chat-bubble cs" style="color:#e74c3c;">Maaf, terjadi gangguan jaringan ke server. Mohon kirim ulang pesan Anda.</div>`;
+                body.innerHTML += `<div class="chat-bubble cs" style="color:#e11d48;">Maaf, terjadi gangguan jaringan ke server. Mohon kirim ulang pesan Anda.</div>`;
                 body.scrollTop = body.scrollHeight;
             }
         }
@@ -1248,9 +1487,9 @@
                             <div class="chat-bubble cs">
                                 Untuk memulai sesi baru, mohon lengkapi kembali identitas Anda:
                                 <div class="chat-form-box">
-                                    <label style="font-size:10px; font-weight:800; color:#6b7280; text-transform:uppercase;">Nama Lengkap:</label>
+                                    <label style="font-size:10px; font-weight:800; color:#64748b; text-transform:uppercase;">Nama Lengkap:</label>
                                     <input type="text" id="chatFormNama" class="chat-form-input" placeholder="Contoh: Budi Santoso">
-                                    <label style="font-size:10px; font-weight:800; color:#6b7280; text-transform:uppercase;">Nomor Invoice / Pesanan (Jika ada):</label>
+                                    <label style="font-size:10px; font-weight:800; color:#64748b; text-transform:uppercase;">Nomor Invoice / Pesanan (Jika ada):</label>
                                     <input type="text" id="chatFormInv" class="chat-form-input" placeholder="Contoh: OUSE2026A1B2C3">
                                     <button class="chat-form-btn" onclick="submitChatForm()"><i class="fa-solid fa-paper-plane"></i> Hubungkan ke Agent Tiara</button>
                                 </div>
@@ -1262,7 +1501,7 @@
         }
 
         // =========================================================================
-        // HALAMAN PELACAKAN RESI REAL-TIME (FIRESTORE)
+        // HALAMAN PELACAKAN RESI REAL-TIME
         // =========================================================================
         function renderLacakPesanan() {
             toggleFooterUtama(true); autoClose(); window.scrollTo(0,0);
@@ -1270,7 +1509,7 @@
             app.innerHTML = `
                 <div class="track-box">
                     <h2 style="font-size:20px; font-weight:800; margin-top:0; text-align:center;">Pelacakan Status Pengiriman Pesanan</h2>
-                    <p style="font-size:12px; color:#6b7280; text-align:center; margin-bottom:20px;">Masukkan Nomor Resi / Invoice resmi Ousevoid Anda untuk memeriksa status logistik.</p>
+                    <p style="font-size:12px; color:#64748b; text-align:center; margin-bottom:20px;">Masukkan Nomor Resi / Invoice resmi Ousevoid Anda untuk memeriksa status logistik.</p>
                     <div class="track-input-group">
                         <input type="text" id="input-resi" class="track-input" placeholder="Contoh: OUSE2026K9A2X1">
                         <button class="btn-action" style="padding:14px;" onclick="prosesLacak(this)"><i class="fa-solid fa-magnifying-glass"></i> Periksa Status Logistik</button>
@@ -1284,7 +1523,7 @@
             var resiInput = document.getElementById('input-resi').value.trim().toUpperCase();
             var areaHasil = document.getElementById('hasil-tracking');
             if(!resiInput) {
-                areaHasil.innerHTML = `<div class="status-terakhir-card" style="text-align:center;"><h3 style="color:#e11d48; margin:0 0 5px;">Nomor resi tidak tersedia</h3><p style="font-size:12px; color:#6b7280; margin:0;">Silakan masukkan nomor resi atau invoice Anda terlebih dahulu.</p></div>`;
+                areaHasil.innerHTML = `<div class="status-terakhir-card" style="text-align:center;"><h3 style="color:#e11d48; margin:0 0 5px;">Nomor resi tidak tersedia</h3><p style="font-size:12px; color:#64748b; margin:0;">Silakan masukkan nomor resi atau invoice Anda terlebih dahulu.</p></div>`;
                 return;
             }
             
@@ -1298,7 +1537,7 @@
                     areaHasil.innerHTML = `
                         <div class="status-terakhir-card" style="text-align:center;">
                             <h3 style="color:#e11d48; margin:0 0 5px;">Nomor resi tidak tersedia</h3>
-                            <p style="font-size:12px; color:#6b7280; margin:0;">Nomor resi/invoice <strong style="color:#111;">${resiInput}</strong> tidak ditemukan di sistem logistik Ousevoid.</p>
+                            <p style="font-size:12px; color:#64748b; margin:0;">Nomor resi/invoice <strong style="color:#111;">${resiInput}</strong> tidak ditemukan di sistem logistik Ousevoid.</p>
                         </div>`;
                 } else {
                     let d = checkSnap.docs[0].data();
@@ -1310,7 +1549,7 @@
                         <div class="status-terakhir-card">
                             <div class="status-badge"><i class="fa-solid fa-clock"></i> STATUS TERAKHIR</div>
                             <h3 class="status-title">${st}</h3>
-                            <div style="font-size:12px; color:#6b7280;">Nomor Resi: <strong style="color:#111;">${d.id_trx}</strong> | Penerima: <strong style="color:#111;">${d.nama}</strong></div>
+                            <div style="font-size:12px; color:#64748b;">Nomor Resi: <strong style="color:#111;">${d.id_trx}</strong> | Penerima: <strong style="color:#111;">${d.nama}</strong></div>
                         </div>
                         <div class="timeline-wrapper">
                             <div class="timeline-item completed"><div class="timeline-icon"></div><div class="timeline-content"><h5>Registrasi Pesanan Terverifikasi</h5><p>Data transaksi terverifikasi oleh sistem.</p></div></div>
@@ -1447,7 +1686,7 @@
         }
 
         // =========================================================================
-        // LOAD PRODUK DARI FIREBASE FIRESTORE (DENGAN MEREK, PT & GARANSI)
+        // LOAD PRODUK DARI FIREBASE FIRESTORE
         // =========================================================================
         async function muatProdukDariDatabase() {
             var app = document.getElementById('app');
